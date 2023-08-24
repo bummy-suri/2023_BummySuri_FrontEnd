@@ -6,7 +6,7 @@ const AbtKlip = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 52px;
+  margin-top: 60px;
   font-size: 22px;
 `;
 
@@ -17,7 +17,6 @@ const ToggleButton = styled.button`
   border: none;
   cursor: pointer;
   font-size: 22px;
-  margin-top: 60px;
 `;
 
 const AboutText = styled.div`

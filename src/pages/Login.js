@@ -4,6 +4,7 @@ import Bummisuri from "../components/Login/Bummisuri";
 import Logo from "../components/Logo";
 import AboutKlip from "../components/Login/AboutKlip";
 
+
 const Total = styled.div`
   width: 100%;
   min-height: 100vh;
@@ -18,7 +19,7 @@ const Total = styled.div`
 const Intro = styled.div`
   text-align : center;
   font-size: 25px;
-  margin-top: 75px;
+  margin-top: 79px;
 `
 
 const Red = styled.span`

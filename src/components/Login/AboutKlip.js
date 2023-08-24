@@ -11,7 +11,6 @@ const AbtKlip = styled.div`
   font-size: 22px;
 `;
 
-// 수정된 부분: ToggleButton 스타일 변경
 const ToggleButton = styled.button`
   background-color: transparent;
   color: white; 
@@ -19,15 +18,21 @@ const ToggleButton = styled.button`
   cursor: pointer;
   font-size: 22px;
   font-weight: 800;
+  display: flex;
+  align-items: center;
 `;
 
 const DownBtn = styled.img`
   width: 16px;
   height: 8px; 
-`
+  transition: transform 0.3s;
+`;
 
 const AboutText = styled.div`
   margin-top: 10px;
+  overflow: hidden;
+  max-height: ${props => (props.showContent ? "700px" : "0")};
+  transition: max-height 0.3s ease-in-out;
 `;
 
 const AboutKlip = () => {
@@ -39,15 +44,14 @@ const AboutKlip = () => {
 
   return (
     <AbtKlip>
-      <ToggleButton onClick={toggleContent}>About Klip
-        <span style={{marginRight:"20px"}}> </span>
-        {showContent ? <DownBtn src={downBtn} style={{transform:"rotate(180deg)"}}/> : <DownBtn src={downBtn}/>}
+      <ToggleButton onClick={toggleContent}>
+        About Klip
+        <span style={{ marginRight: "20px" }}> </span>
+        <DownBtn src={downBtn} style={{ transform: showContent ? "rotate(180deg)" : "rotate(0)" }} />
       </ToggleButton>
-      {showContent && (
-        <AboutText>
-          <KlipIntro/>
-        </AboutText>
-      )}
+      <AboutText showContent={showContent}>
+        {showContent && <KlipIntro />}
+      </AboutText>
     </AbtKlip>
   );
 };

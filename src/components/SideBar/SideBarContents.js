@@ -41,8 +41,9 @@ const GoAnother = styled.button`
 `
 
 const MiniGameContent = styled.div`
-    display: ${props => props.show ? 'block' : 'none'};
-    margin-top: 20px;
+    overflow: hidden;
+    max-height: ${props => (props.show ? '1000px' : '0')};
+    transition: max-height 0.3s ease-in-out; /* Adjust the transition duration as needed */
     font-size: 18px;
     color: #FFFFFF;
 `

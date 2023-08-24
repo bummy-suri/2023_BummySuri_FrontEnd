@@ -1,11 +1,12 @@
 import React from "react";
 import styled from 'styled-components';
 
+//Bummi&Suri 공통 로고 컴포넌트
 const MainLogo = styled.div`
   font-size: 25px;
   color: white;
-  border: 1px solid white; /* 테두리 설정 */
-  border-radius: 70%; /* 타원 형태로 테두리 설정 */
+  border: 1px solid white;
+  border-radius: 70%;
   width: 242px;
   height: 67px;
   display: flex;

@@ -20,6 +20,7 @@ const Intro = styled.div`
   text-align : center;
   font-size: 25px;
   margin-top: 79px;
+  font-weight: 600;
 `
 
 const Red = styled.span`
@@ -61,7 +62,7 @@ const Login = () => {
     <Total style={{ minHeight: `${totalHeight}px` }}>
       <Logo/>
       <Intro>
-        <Red>Bummi</Red> & <Blue>Suri</Blue> 프로젝트는<br/> 클립과 함께 합니다.
+        <Red>Bummy</Red>&<Blue>Suri</Blue> 프로젝트는<br/> 클립과 함께 합니다.
       </Intro>
       <Bummisuri/>
       <AboutKlip/>

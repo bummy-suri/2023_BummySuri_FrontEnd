@@ -9,7 +9,8 @@ const Total = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;    
+    justify-content: center;   
+     
 `;
 
 const What = styled.div`
@@ -30,6 +31,7 @@ const Klipis = styled.div`
     font-size: 16px;
     text-align: center;
     margin-top: 19px;
+    font-family: "NanumSquare_acL";
 `;
 
 const Bold = styled.span`

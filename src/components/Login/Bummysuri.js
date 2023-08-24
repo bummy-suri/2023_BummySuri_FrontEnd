@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
-import Bummi from "../../assets/bummi.png";
+import Bummy from "../../assets/bummy.png";
 import Suri from "../../assets/suri.png";
 
 const ImageContainer = styled.div`
@@ -19,7 +19,7 @@ const Bummisuri = ()=> {
     return (
       <div>
       <ImageContainer>
-        <Image src={Bummi} />
+        <Image src={Bummy} />
         <Image src={Suri} />
       </ImageContainer>
       </div>

@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
-import Bummisuri from "../components/Login/Bummisuri";
+import Bummysuri from "../components/Login/Bummysuri";
 import Logo from "../components/Logo";
 import AboutKlip from "../components/Login/AboutKlip";
+
+//추후 삭제
+import SideBar from "../components/SideBar/SideBar";
+import SideBarContents from "../components/SideBar/SideBarContents";
 
 
 const Total = styled.div`
@@ -61,10 +65,15 @@ const Login = () => {
   return (
     <Total style={{ minHeight: `${totalHeight}px` }}>
       <Logo/>
+
+      <SideBar>
+        <SideBarContents/>
+      </SideBar> {/*추후 삭제*/}
+
       <Intro>
         <Red>Bummy</Red>&<Blue>Suri</Blue> 프로젝트는<br/> 클립과 함께 합니다.
       </Intro>
-      <Bummisuri/>
+      <Bummysuri/>
       <AboutKlip/>
       <Klipbtn>Klip 연동하기</Klipbtn>
     </Total>

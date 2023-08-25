@@ -35,6 +35,7 @@ const AboutText = styled.div`
   transition: max-height 0.3s ease-in-out;
 `;
 
+//AboutKlip 버튼
 const AboutKlip = () => {
   const [showContent, setShowContent] = useState(false);
 

@@ -28,6 +28,7 @@ const QRContainer = styled.div`
   margin: 30px;
 `;
 
+//Klip 연동하기 보라색 버튼
 const KlipBtn = ()=> {
     const [qrvalue_auth, setQrvalue_auth] = useState(DEFAULT_QR_CODE);
     const [myAddress, setMyAddress] = useState(DEFAULT_ADDRESS);

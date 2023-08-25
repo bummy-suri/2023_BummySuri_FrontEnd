@@ -4,6 +4,7 @@ import KlipLogo from "../../assets/Login/KlipLogo.png";
 import KakaoLogo from "../../assets/Login/KakaoLogo.png";
 import menu from "../../assets/Login/menu.png";
 
+//AboutKlip 누르면 나오는 토글내용
 const Total = styled.div`
     width: 100vw;
     display: flex;

@@ -5,6 +5,8 @@ import downBtn from "../../assets/Login/downBtn.png";
 import {Link} from "react-router-dom";
 import { useUserContext } from "../Login/UserAddress";
 
+
+//사이드바에 들어가는 내용
 const Total = styled.div`
     color: #FFFFFF;
     width: 100%;
@@ -15,7 +17,7 @@ const NFTImage = styled.img`
     width: 175px;
     height: 130px;
 `
-const PrintAddress = styled.div`
+const Address = styled.div`
     margin-top: 5px;
 `
 
@@ -60,20 +62,17 @@ const Down = styled.img`
 
 const SideBarContents = ()=> {
     const [miniGameVisible, setMiniGameVisible] = useState(false);
-    const { userAddress } = useUserContext(); // 컨텍스트에서 userAddress에 접근
+    const {userAddress} = useUserContext(); // userAddress로 접근하는 부분
 
     const toggleMiniGame = () => {
         setMiniGameVisible(!miniGameVisible);
     };
 
 
-
-
-
     return (
       <Total>
         <NFTImage src=""></NFTImage>
-        <PrintAddress>지갑주소: {userAddress}</PrintAddress>
+        <Address>지갑주소 <p style={{fontSize:"8px"}}>{userAddress}</p> </Address>
         <Point>보유 포인트</Point>
         <PointScore>1000P(수정)</PointScore>
         

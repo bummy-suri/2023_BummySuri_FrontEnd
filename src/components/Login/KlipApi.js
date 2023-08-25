@@ -1,5 +1,7 @@
 import axios from "axios";
 
+//Klip API 코드
+
 const A2P_API_PREPARE_URL = "https://a2a-api.klipwallet.com/v2/a2a/prepare";
 const APP_NAME = "BUMMY & SURI";
 const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|Windows Phone/i.test(window.navigator.userAgent);

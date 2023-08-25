@@ -2,7 +2,7 @@ import React from "react";
 import styled from 'styled-components';
 import {Link} from "react-router-dom";
 
-
+//사이드바 미니게임 누르면 토글내용
 const GotoGame = styled.button`
     padding-bottom: 10px;
     border: none;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 
-//Bummi&Suri 공통 로고 컴포넌트
+//Bummy&Suri 공통 로고 컴포넌트
 const MainLogo = styled.div`
   font-size: 25px;
   color: white;

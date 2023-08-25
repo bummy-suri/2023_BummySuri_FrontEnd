@@ -25,6 +25,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
+  font-family: "NanumSquare_acR";
 `;
 
 const SubContainer = styled.div`
@@ -49,7 +50,7 @@ const MenuBar = styled.span`
 `;
 
 const SubTitle = styled.div`
-  font-family: NanumSquare;
+  font-family: "NanumSquare_acR";
   font-size: 25px;
   font-weight: 800;
   line-height: 40px;

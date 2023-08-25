@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Bummysuri from "../components/Login/Bummysuri";
 import Logo from "../components/Logo";
 import AboutKlip from "../components/Login/AboutKlip";
-import KlipBtn from "../components/Login/KlipBtn";
+import KlipBtn from "../components/Login/KlipApi";
 
 //추후 삭제
 import SideBar from "../components/SideBar/SideBar";

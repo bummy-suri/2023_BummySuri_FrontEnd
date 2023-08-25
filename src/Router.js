@@ -4,7 +4,8 @@ import Lending from "./pages/Lending";
 import Login from "./pages/Login";
 import Minting from "./pages/Minting";
 
-const DefaultRouter = () => {
+
+function DefaultRouter () {
     return (
       <Router>
         <Routes>

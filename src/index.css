@@ -1,11 +1,29 @@
+@font-face {
+  font-family: "NanumSquare_acR";
+  src: url(./assets/fonts/NanumSquare_acR.ttf);
+}
+
+@font-face {
+  font-family: "NanumSquare_acL";
+  src: url(./assets/fonts/NanumSquare_acL.ttf);
+}
+
+@font-face {
+  font-family: "Inter_Bold";
+  src: url(./assets/fonts/Inter-Bold.ttf);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "NanumSquare_acR", "NanumSquare_acL";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+div, button, span{
+  font-family: "NanumSquare_acR", "Inter_Bold";
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

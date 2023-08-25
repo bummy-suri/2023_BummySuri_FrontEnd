@@ -11,7 +11,7 @@ const Contain = styled.div`
   display: flex;
   align-items: center;
   margin: 0 auto;
-  width: 210px;
+  width: 300px;
   overflow: hidden;
   @media (min-width: 800px) {
     width: 750px;
@@ -30,8 +30,8 @@ const ItemsWrap = styled.div`
 
   img {
     overflow: hidden;
-    width: 190px;
-    margin: 10px;
+    width: 130px;
+    margin: 0 10px;
   }
   @media (min-width: 800px) {
     img{
@@ -67,7 +67,7 @@ const items = [
 
 const responsive = {
   0: {
-    items: 1,
+    items: 2,
   },
   800: {
     items: 3,
@@ -89,7 +89,6 @@ function Carousel() {
         items={items}
         responsive={responsive}
         touchTracking={false}
-        
       />
     </Contain>
   );

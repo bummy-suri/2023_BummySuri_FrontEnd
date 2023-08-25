@@ -1,0 +1,118 @@
+import styled from 'styled-components';
+import Partner01 from '../../assets/sponsor/partner01.png';
+import Partner02 from '../../assets/sponsor/partner02.png';
+import Partner03 from '../../assets/sponsor/partner03.png';
+import Partner04 from '../../assets/sponsor/partner04.png';
+import Partner05 from '../../assets/sponsor/partner05.png';
+import Partner06 from '../../assets/sponsor/partner06.png';
+import Management01 from '../../assets/sponsor/management01.png';
+import Management02 from '../../assets/sponsor/management02.png';
+
+
+const SponTitle = styled.div`
+  p {
+    font-size: 20px;
+    color: white;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin-top: 50px;
+  }
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  @media (min-width: 768px) {
+    p {
+      font-size: 29px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      margin-top: 90px;
+    }
+  }
+`;
+const SponImgBox = styled.div`
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 5px;
+  align-items: center;
+`;
+
+
+ const SponImg = styled.div``;
+
+const Sponsor = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 500px;
+  margin: 40px auto;
+  /* margin-right: 30px; */
+  width: 300px;
+  @media (min-width: 768px) {
+    height: 600px;
+    margin-bottom: 160px;
+  }
+`;
+
+const PImg = styled.img`
+  width: 70px;
+  margin: 10px;
+  @media (min-width: 768px) {
+    width: 120px;
+    margin: 16px;
+  }
+`;
+const MImg = styled.img`
+  width: 120px;
+  @media (min-width: 768px) {
+    width: 210px;
+    margin: 0 18px;
+  }
+`;
+
+
+
+const SponsorList = () => {
+    return (
+        <Sponsor>
+            <SponTitle>
+              <p>Management</p>
+            </SponTitle>
+            <SponImgBox>
+              <SponImg>
+                <MImg src={Management01}alt="img" />
+              </SponImg>
+              <SponImg>
+                <MImg src={Management02} alt="img" />
+              </SponImg>
+            </SponImgBox>
+            <SponTitle>
+              <p>Partner</p>
+            </SponTitle>
+            <SponImgBox>
+              <SponImg>
+                <PImg src={Partner01} alt="img" />
+              </SponImg>
+              <SponImg>
+                <PImg src={Partner02}alt="img" />
+              </SponImg>
+              <SponImg>
+                <PImg src={Partner03} alt="img" />
+              </SponImg>
+            </SponImgBox>
+
+            <SponImgBox>
+              <SponImg>
+                <PImg src={Partner04} alt="img" />
+              </SponImg>
+              <SponImg>
+                <PImg src={Partner05} alt="img" />
+              </SponImg>
+              <SponImg>
+                <PImg src={Partner06} alt="img" />
+              </SponImg>
+            </SponImgBox>
+          </Sponsor>
+    );
+}
+
+export default SponsorList;

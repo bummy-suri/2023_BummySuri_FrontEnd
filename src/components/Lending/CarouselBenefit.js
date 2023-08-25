@@ -88,7 +88,6 @@ function CarouselBenefit() {
         items={benefits}
         responsive={responsive}
         touchTracking={false}
-        
       />
     </Contain>
   );

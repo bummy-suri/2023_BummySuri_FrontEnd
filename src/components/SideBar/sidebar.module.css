@@ -1,0 +1,62 @@
+.container {
+    background-color: #1D1D1D;
+    
+  }
+  .sidebar {
+    width: 235px;
+    background-color: #1D1D1D;
+    border-left: 4px solid #202020;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    transition: 0.4s ease;
+    color: #202020;
+    height: 100%;
+    z-index: 99;
+  }
+  .button {
+    position: relative;
+    right: 58px;
+    top: 21px;
+    z-index: 99;
+    border: none;
+    overflow: hidden;
+    background: transparent;
+  }
+  .openBtn {
+    width: 30px;
+    height: 14px;
+  }
+  .closeBtn{
+    width: 8px;
+    height: 16px;
+  }
+  .closeButton{
+    position: relative;
+    float: right;
+    margin-right:7px;
+    margin-top:10px;
+    z-index: 99;
+    border: none;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .content {
+    position: absolute; 
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    width: 100%;
+    text-align: center;
+  }
+  
+
+  .centered-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+  }

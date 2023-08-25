@@ -1,8 +1,9 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import styled from 'styled-components';
 import GameList from "./GameList";
 import downBtn from "../../assets/Login/downBtn.png";
 import {Link} from "react-router-dom";
+import { useUserContext } from "../Login/UserAddress";
 
 const Total = styled.div`
     color: #FFFFFF;
@@ -14,7 +15,7 @@ const NFTImage = styled.img`
     width: 175px;
     height: 130px;
 `
-const KlipAddress = styled.div`
+const PrintAddress = styled.div`
     margin-top: 5px;
 `
 
@@ -59,15 +60,20 @@ const Down = styled.img`
 
 const SideBarContents = ()=> {
     const [miniGameVisible, setMiniGameVisible] = useState(false);
+    const { userAddress } = useUserContext(); // 컨텍스트에서 userAddress에 접근
 
     const toggleMiniGame = () => {
         setMiniGameVisible(!miniGameVisible);
-    }
+    };
+
+
+
+
 
     return (
       <Total>
         <NFTImage src=""></NFTImage>
-        <KlipAddress>지갑주소(수정)</KlipAddress>
+        <PrintAddress>지갑주소: {userAddress}</PrintAddress>
         <Point>보유 포인트</Point>
         <PointScore>1000P(수정)</PointScore>
         

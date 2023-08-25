@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Bummysuri from "../components/Login/Bummysuri";
 import Logo from "../components/Logo";
 import AboutKlip from "../components/Login/AboutKlip";
+import KlipBtn from "../components/Login/KlipBtn";
 
 //추후 삭제
 import SideBar from "../components/SideBar/SideBar";
@@ -75,7 +76,7 @@ const Login = () => {
       </Intro>
       <Bummysuri/>
       <AboutKlip/>
-      <Klipbtn>Klip 연동하기</Klipbtn>
+      <KlipBtn/>
     </Total>
   );
 }

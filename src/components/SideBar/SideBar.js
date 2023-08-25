@@ -21,6 +21,22 @@ const SideBar = ({ width = 235, children }) => {
     }
   };
 
+
+    //사이드바 바깥 클릭시 닫히게 설정
+    useEffect(() => {
+      const handleClickOutside = (event) => {
+        if (side.current && !side.current.contains(event.target)) {
+          setX(-width);
+          setOpen(false);
+        }
+      };
+      document.addEventListener("mousedown", handleClickOutside);
+  
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [side, width]);
+
   return (
     <div className={styles.container}>
       <div

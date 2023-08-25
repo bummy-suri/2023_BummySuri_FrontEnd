@@ -26,6 +26,10 @@ const Intro = styled.div`
   font-size: 25px;
   margin-top: 79px;
   font-weight: 600;
+  transition: font-size 1s;
+  @media (min-width: 800px) {
+    font-size: 35px;
+  }
 `
 
 const Red = styled.span`

@@ -50,7 +50,6 @@ const MenuBar = styled.span`
 `;
 
 const SubTitle = styled.div`
-  font-family: "NanumSquare_acR";
   font-size: 25px;
   font-weight: 800;
   line-height: 40px;
@@ -65,7 +64,6 @@ const SubTitle = styled.div`
 `;
 
 const Content = styled.div`
-  font-family: NanumSquare;
   font-size: 16px;
   font-weight: 800;
   line-height: 30px;
@@ -79,7 +77,6 @@ const Content = styled.div`
 `;
 
 const SubContent = styled.div`
-  font-family: NanumSquare;
   font-size: 14.5px;
   font-weight: 400;
   line-height: 25px;
@@ -109,7 +106,7 @@ const BTN = styled.button`
   width: 320px;
   height: 51px;
   border-radius: 15px;
-  font-family: Inter;
+  font-family: "Inter_Bold";
   font-size: 15px;
   font-weight: 800;
   line-height: 22px;

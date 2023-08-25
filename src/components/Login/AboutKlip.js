@@ -20,6 +20,10 @@ const ToggleButton = styled.button`
   font-weight: 800;
   display: flex;
   align-items: center;
+  transition: font-size 1s;
+  @media (min-width: 800px) {
+    font-size: 30px;
+  }
 `;
 
 const DownBtn = styled.img`

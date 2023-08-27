@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom'; 
 import Logo from '../../components/Logo';
 import RpsImage from "../../assets/Game/Rps.png";
-import PopupWin from "./RpsWin";
-import PopupLose from "./RpsLose";
-
 
 const Background = styled.div`
     max-width: 100vw;
@@ -77,12 +75,18 @@ const ConfirmButton = styled.button`
 
 
 const Rps = () => {
-    const [selectedChoice, setSelectedChoice] = useState(""); // State to track the selected choice
+    const [selectedChoice, setSelectedChoice] = useState("");
+    const navigate = useNavigate();
 
-    // Function to handle button click and update the selectedChoice state
+
     const handleChoiceClick = (choice) => {
         setSelectedChoice(choice);
     };
+
+    const handleConfirmClick = () => {
+        navigate('/rock-paper-scissors/result', { state: { selectedChoice } });
+    };
+
    
     return (
         
@@ -99,8 +103,7 @@ const Rps = () => {
             </ButtonContainer>
 
 
-            <ConfirmButton>확인</ConfirmButton>
-
+            <ConfirmButton onClick={handleConfirmClick}>확인</ConfirmButton>
         </Background>
         );
 }

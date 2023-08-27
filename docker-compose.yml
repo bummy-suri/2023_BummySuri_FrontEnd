@@ -1,0 +1,9 @@
+services:
+  api:
+    container_name: bummy-suri-frontend
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "{EXPORTED_PORT}:3000"
+    command: ["serve", "-s", "build"]

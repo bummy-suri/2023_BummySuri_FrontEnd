@@ -9,7 +9,7 @@ env:
   USERNAME: ${{ secrets.USERNAME }}
   SSH_KEY: ${{ secrets.SSH_KEY }}
   PORT: ${{ secrets.PORT }}
-  DIR: ~/frontend-dev
+  DIR: ~/frontend-develop
 
 jobs:
   test:
@@ -59,4 +59,4 @@ jobs:
           port: ${{ env.PORT }}
           script: |
             cd ${{ env.DIR }}
-            make build-dev
+            make build-develop

@@ -1,6 +1,5 @@
 services:
   client:
-    container_name: bummy-suri-frontend
     build:
       context: .
       dockerfile: ./Dockerfile

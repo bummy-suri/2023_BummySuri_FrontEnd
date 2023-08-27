@@ -13,7 +13,7 @@ const SponTitle = styled.div`
   p {
     font-size: 20px;
     color: white;
-    font-weight: 500;
+    font-weight: 800;
     letter-spacing: 2px;
     margin-top: 50px;
   }
@@ -23,8 +23,15 @@ const SponTitle = styled.div`
   @media (min-width: 768px) {
     p {
       font-size: 29px;
-      font-weight: 600;
+      font-weight: 800;
       letter-spacing: 3px;
+      margin-top: 90px;
+    }
+  }
+  @media (max-width: 300px) {
+    p {
+      font-size: 18px;
+      font-weight: 800;
       margin-top: 90px;
     }
   }
@@ -32,7 +39,6 @@ const SponTitle = styled.div`
 const SponImgBox = styled.div`
   display: flex;
   justify-content: space-around;
-  margin-bottom: 5px;
   align-items: center;
 `;
 
@@ -44,21 +50,29 @@ const Sponsor = styled.div`
   flex-direction: column;
   justify-content: center;
   height: 500px;
-  margin: 40px auto;
+  margin: 0 auto;
   /* margin-right: 30px; */
+  margin-bottom: 40px;
   width: 300px;
   @media (min-width: 768px) {
     height: 600px;
     margin-bottom: 160px;
   }
+  @media (max-width: 300px) {
+    width: 210px;
+  }
 `;
 
 const PImg = styled.img`
-  width: 70px;
-  margin: 10px;
+  width: 99.86px;
+  margin: 5px;
+  border-radius: 12px;
   @media (min-width: 768px) {
     width: 120px;
     margin: 16px;
+  }
+  @media (max-width: 300px) {
+    width: 60px;
   }
 `;
 const MImg = styled.img`
@@ -66,6 +80,9 @@ const MImg = styled.img`
   @media (min-width: 768px) {
     width: 210px;
     margin: 0 18px;
+  }
+  @media (max-width: 299px) {
+    width: 100px;
   }
 `;
 

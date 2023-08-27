@@ -11,7 +11,6 @@ const Total = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;   
-     
 `;
 
 const What = styled.div`
@@ -20,6 +19,8 @@ const What = styled.div`
     border-top:1px solid #FFFFFF;
     width: 100%;
     text-align: center;
+    font-family: "Pretendard_Light";
+    font-weight: bold;
 `;
 
 const Image = styled.img`
@@ -32,7 +33,7 @@ const Klipis = styled.div`
     font-size: 16px;
     text-align: center;
     margin-top: 19px;
-    font-family: "NanumSquare_acL";
+    font-family: "Pretendard_Thin";
 `;
 
 const Bold = styled.span`
@@ -42,6 +43,8 @@ const Bold = styled.span`
 const FromKaKao = styled.div`
     font-size: 21px;
     margin-top: 41px;
+    font-family: "Pretendard_Light";
+    font-weight: bold;
 `
 
 const ListContainer = styled.div`
@@ -57,6 +60,7 @@ const List = styled.div`
     align-items: center;
     justify-content: flex-start;
     margin-top: 28px;
+    font-family: "Pretendard_Thin";
 `
 
 const Circle = styled.div`
@@ -69,12 +73,7 @@ const Circle = styled.div`
     justify-content: center;
     color: white;
     margin-right: 38px;
-    
 `
-
-const NumberContent = styled.div`
-`
-
 
 const KlipIntro = () => {
     return (

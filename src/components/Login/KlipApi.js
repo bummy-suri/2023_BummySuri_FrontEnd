@@ -5,16 +5,22 @@ import axios from "axios";
 import { useUserContext } from "./UserAddress";
 
 const Klipbtn = styled.button`
-  width: 236px;
+  width: 334px;
   height: 50px;
-  background-color: #C565E7;
-  font-size: 20px;
+  background-color: #7000FF;
+  font-size: 16px;
+  font-weight: bold;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   margin-top: 56px;
   margin-bottom: 29px;
   color: #FFFFFF;
+
+  @media (max-width: 350px) {
+    width: 230px;
+  }
+
 `;
 
 const QRContainer = styled.div`

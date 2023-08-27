@@ -13,15 +13,25 @@
   src: url(./assets/fonts/Inter-Bold.ttf);
 }
 
+@font-face {
+  font-family: "Pretendard_Regular";
+  src: url(./assets/fonts/Pretendard-Regular.otf);
+}
+
+@font-face {
+  font-family: "Pretendard_Bold";
+  src: url(./assets/fonts/Pretendard-Bold.otf);
+}
+
 body {
   margin: 0;
-  font-family: "NanumSquare_acR", "NanumSquare_acL";
+  font-family:  "Pretendard_Regular", "NanumSquare_acR", "NanumSquare_acL";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 div, button, span{
-  font-family: "NanumSquare_acR", "Inter_Bold";
+  font-family: "Pretendard_Regular", "NanumSquare_acR", "Inter_Bold";
 }
 
 

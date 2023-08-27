@@ -6,9 +6,6 @@ import CountDown from '../components/Minting/CountDown';
 import bummyimage from '../assets/bummy.png';
 import suriimage from '../assets/suri.png';
 
-import Carousel from "../components/Lending/Carousel";
-import CarouselBenefit from "../components/Lending/CarouselBenefit";
-
 
 const Minting = () => {
   const images = ['../assets/bummy.png', '../assets/suri.png'];
@@ -22,9 +19,7 @@ const Minting = () => {
         <BummySuriTitle />
         <KoYonDiv>2023 KO-YON Collection</KoYonDiv>
         <MintButton>Mint!</MintButton>
-        <CarouselBox>
-            <Carousel/>
-          </CarouselBox>
+
         <KoYonDiv>민팅 D-Day 카운트다운</KoYonDiv>
         <CountDown targetDate={targetDate} />
         <NFTCountDiv>

@@ -33,7 +33,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
-  font-family: Pretendard;
 `;
 
 const SubContainer = styled.div`

@@ -7,6 +7,10 @@ import RpsImage from "../../assets/Game/Rps.png";
 import SideBar from "../../components/SideBar/SideBar";
 import SideBarContents from "../../components/SideBar/SideBarContents";
 
+import rock from "../../assets/Game/rock.png";
+import paper from "../../assets/Game/paper.png";
+import scissors from "../../assets/Game/scissors.png";
+
 
 const Background = styled.div`
     max-width: 100vw;
@@ -20,8 +24,7 @@ const Background = styled.div`
 `;
 
 const Image = styled.img`
-    width: 50vw;
-    margin-top: 128px;
+    width: 80vw;
 `;
 
 const Title = styled.div`
@@ -39,7 +42,7 @@ const ButtonContainer = styled.div`
 
 const ChoiceButton = styled.button`
     background-color: ${props => props.isSelected ? "#7000FF" : "#333"};
-    justify-content: flex-end; 
+    justify-content: flex-start; 
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -48,7 +51,6 @@ const ChoiceButton = styled.button`
     width: 110px;
     height: 106px;
     margin: 51px 3px 0px;
-    padding-bottom:7px;
     font-size: 14px;
     cursor: pointer;
     border-radius: 4px;
@@ -59,7 +61,15 @@ const ChoiceButton = styled.button`
 
     `;
 
-const Ifwin = styled.div`
+const RPSimg = styled.img`
+    width: 110px;
+    margin: -17%;
+    @media (max-width: 280px) {
+        width: 100px;
+        }
+`
+
+const Text = styled.div`
     margin-top: 48px;
     font-size: 14px;
     @media (max-width: 280px) {
@@ -108,17 +118,24 @@ const Rps = () => {
             <Logo /> {/*수정필요..*/}
             <SideBar><SideBarContents/></SideBar>
             <Title>수리와 가위바위보 하기</Title>
-            <Image src={RpsImage} alt="가위바위보이미지" />
+            <Text style={{marginTop:"12px"}}>수리를 이길 수 있을까?</Text>
+            <Image src={RpsImage} alt="수리이미지" />
             
 
 
             <ButtonContainer>
-            <ChoiceButton isSelected={selectedChoice === "가위"} onClick={() => handleChoiceClick("가위")}>가위</ChoiceButton>
-                <ChoiceButton isSelected={selectedChoice === "바위"} onClick={() => handleChoiceClick("바위")}>바위</ChoiceButton>
-                <ChoiceButton isSelected={selectedChoice === "보"} onClick={() => handleChoiceClick("보")}>보</ChoiceButton>
+                <ChoiceButton isSelected={selectedChoice === "가위"} onClick={() => handleChoiceClick("가위")}>
+                    <RPSimg src={scissors}/>가위
+                </ChoiceButton>
+                <ChoiceButton isSelected={selectedChoice === "바위"} onClick={() => handleChoiceClick("바위")}>
+                    <RPSimg src={rock}/>바위
+                </ChoiceButton>
+                <ChoiceButton isSelected={selectedChoice === "보"} onClick={() => handleChoiceClick("보")}>
+                    <RPSimg src={paper}/>보
+                </ChoiceButton>
             </ButtonContainer>
 
-            <Ifwin>가위바위보에서 이기면 100P를 얻을 수 있어요!</Ifwin>
+            <Text>가위바위보에서 이기면 100P를 얻을 수 있어요!</Text>
             <ConfirmButton onClick={handleConfirmClick}>가위바위보 !</ConfirmButton>
         </Background>
         </div>

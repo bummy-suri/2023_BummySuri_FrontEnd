@@ -46,7 +46,6 @@ const Minting = () => {
     font-weight: 800;
     margin-top: 35px;
     margin-left: 10px;
-    font-family: 'Inter';
   `;
 
   const KoYonDivRed = styled.div`
@@ -56,7 +55,6 @@ const Minting = () => {
     font-weight: 800;
     margin-top: 35px;
     margin-left: 10px;
-    font-family: 'Inter';
   `;
 
   const KoYonDivBlue = styled.div`
@@ -66,7 +64,6 @@ const Minting = () => {
     font-weight: 800;
     margin-top: 35px;
     margin-left: 10px;
-    font-family: 'Inter';
   `;
 
   const NewEventDiv = styled.div`
@@ -77,7 +74,6 @@ const Minting = () => {
     text-align: center;
     color: black;
     font-size: 25px;
-    font-family: 'Inter';
     font-weight: 800;
     margin-top: 30px;
     line-height: 34px;
@@ -95,7 +91,6 @@ const Minting = () => {
     border-radius: 10px;
     text-align: center;
     color: white;
-    font-family: 'Inter-Bold';
     font-size: 35px;
     font-weight: 700;
     margin-top: 15px;
@@ -129,7 +124,6 @@ const Minting = () => {
     color: #f5f5f5;
     text-align: center;
     font-size: 16px;
-    font-family: 'Inter';
     font-weight: 800;
     margin-right: 50px;
     margin-top: 20px;
@@ -142,7 +136,6 @@ const Minting = () => {
     color: #f5f5f5;
     text-align: center;
     font-size: 16px;
-    font-family: 'Inter';
     font-weight: 800;
     margin-left: 50px;
     margin-top: 20px;
@@ -169,7 +162,6 @@ const Minting = () => {
     text-align: center;
     color: black;
     font-size: 20px;
-    font-family: 'Inter';
     font-weight: 800;
     margin-bottom: 10px;
   `;
@@ -180,7 +172,6 @@ const Minting = () => {
     text-align: center;
     color: black;
     font-size: 20px;
-    font-family: 'Inter';
     font-weight: 300;
   `;
 

@@ -14,7 +14,7 @@ const Total = styled.div`
 
 const NFTImage = styled.img`
     margin-top:50px;
-    width: 175px;
+    width: 130px;
     height: 130px;
 `
 const Address = styled.div`

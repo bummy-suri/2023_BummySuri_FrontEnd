@@ -16,7 +16,7 @@ const GotoGame = styled.button`
 const GameList = ()=> {
     return (
       <div>
-        <GotoGame style={{marginTop:"15px"}}>가위바위보</GotoGame>
+        <Link to="/rock-paper-scissors"><GotoGame style={{marginTop:"15px"}}>가위바위보</GotoGame></Link>
         <GotoGame>그림 퀴즈</GotoGame>
         <GotoGame>사다리 타기</GotoGame>
       </div>

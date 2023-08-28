@@ -6,27 +6,27 @@ import Arrow from "../../assets/SideBar/closeBtn.png";
 
 //사이드바 공통 컴포넌트
 const SideBar = ({ width = 235, children }) => {
-  const [isOpen, setOpen] = useState(false); //사이드바 열림 관련
-  const [xPosition, setX] = useState(-width);
+  const [isOpen, setOpen] = useState(false);
+  const [xPosition, setX] = useState(width);
   const side = useRef();
 
   
   const toggleMenu = () => {
-    if (xPosition < 0) {
+    if (xPosition > 0) {
       setX(0);
       setOpen(true);
     } else {
-      setX(-width);
+      setX(width);
       setOpen(false);
     }
   };
 
 
-    //사이드바 바깥 클릭시 닫히게 설정
+    //사이드바 바깥 클릭 -> 닫힘
     useEffect(() => {
       const handleClickOutside = (event) => {
         if (side.current && !side.current.contains(event.target)) {
-          setX(-width);
+          setX(width);
           setOpen(false);
         }
       };
@@ -35,7 +35,7 @@ const SideBar = ({ width = 235, children }) => {
       return () => {
         document.removeEventListener("mousedown", handleClickOutside);
       };
-    }, [side, width]);
+    }, [side, -width]);
 
   return (
     <div className={styles.container}>

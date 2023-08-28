@@ -57,6 +57,7 @@ const Down = styled.img`
     float: right;
     margin-right: 31px;
     margin-left: -50px;
+    margin-top: 5px;
 `
 
 

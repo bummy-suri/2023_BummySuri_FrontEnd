@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../../components/Logo';
 import RpsImage from "../../assets/Game/Rps.png";
 
+import SideBar from "../../components/SideBar/SideBar";
+import SideBarContents from "../../components/SideBar/SideBarContents";
+
 const Background = styled.div`
     max-width: 100vw;
     min-height: 100vh;
@@ -84,7 +87,11 @@ const Rps = () => {
     };
 
     const handleConfirmClick = () => {
-        navigate('/rock-paper-scissors/result', { state: { selectedChoice } });
+        if (selectedChoice) {
+            navigate('/rock-paper-scissors/result', { state: { selectedChoice } });
+        } else {
+            alert("가위, 바위, 보 중 하나를 선택하세요.");
+        }
     };
 
    
@@ -92,6 +99,7 @@ const Rps = () => {
         
         <Background>
             <Logo />
+            <SideBar><SideBarContents/></SideBar>
             <Image src={RpsImage} />
             <Mychoice>나의 선택</Mychoice>
 

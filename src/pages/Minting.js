@@ -5,6 +5,9 @@ import CountDown from '../components/Minting/CountDown';
 import bummyimage from '../assets/bummy.png';
 import suriimage from '../assets/suri.png';
 
+//사이드바
+import SideBar from '../components/SideBar/SideBar';
+import SideBarContents from '../components/SideBar/SideBarContents';
 
 
 const Minting = () => {
@@ -18,9 +21,14 @@ const Minting = () => {
 
   const Container = styled.div`
     background-color: black;
+    max-width: 100%;
+    min-height: 100vh;
+    color: #FFFFFF;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    position: relative;
   `;
 
   const KoYonDiv = styled.div`
@@ -180,6 +188,7 @@ const Minting = () => {
     <>
       <Container>
         <BummySuriTitle />
+        <SideBar><SideBarContents/></SideBar>
         <KoYonDiv>
           <KoYonDivWhite>2023</KoYonDivWhite>
           <KoYonDivRed>KO</KoYonDivRed>

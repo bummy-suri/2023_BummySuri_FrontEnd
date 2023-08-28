@@ -5,7 +5,7 @@ import styled from 'styled-components';
 //Bummy&Suri 공통 로고 컴포넌트
 
 const MainLogo = styled.div`
-  display: flex;
+  display: fixed;
   align-items: center;
   justify-content: center;
   font-size: 16px;

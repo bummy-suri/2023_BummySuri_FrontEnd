@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom'; 
-import Logo from "../../components/Logo";
 
-import rock from "../../assets/Game/rock.png";
-import paper from "../../assets/Game/paper.png";
-import scissors from "../../assets/Game/scissors.png";
+import suri from "../../../assets/Game/Rps.png";
+import rock from "../../../assets/Game/rock.png";
+import paper from "../../../assets/Game/paper.png";
+import scissors from "../../../assets/Game/scissors.png";
 
 import Popup from "./Popup";
 
@@ -20,6 +20,17 @@ const Background = styled.div`
     justify-content: flex-start;
 `;
 
+const MainLogo = styled.div`
+  display: fixed;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: white;
+  margin-top: 74px;
+  font-family: "Pretendard_Regular";
+`;
+
+
 const Who = styled.div`
     font-size: 25px;
     font-weight: 800;
@@ -27,19 +38,20 @@ const Who = styled.div`
 
 const ResultBox = styled.div`
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 115px;
-    height: 30px;
-    border-radius: 10px; 
-    background-color: rgba(255, 255, 255, 0.40);
+    width: 106px;
+    height: 102px;
+    border-radius: 4px; 
+    background-color: #7000FF;
     font-weight: bold;
     margin-top: 11px;
 `
 
 const Image = styled.img`
-    margin-top:21px;
-    width: 140px;
+    width: 110px;
+    margin: -15%;
 `
 
 const MessageContainer = styled.div`
@@ -62,7 +74,6 @@ const Rps = () => {
     const [showWinPopup, setShowWinPopup] = useState(false);
     const [showLosePopup, setShowLosePopup] = useState(false);
     const [showSamePopup, setShowSamePopup] = useState(false);
-
 
     //이미지랑 매핑..
     const choicesMap = {
@@ -103,28 +114,39 @@ const Rps = () => {
 
     return (        
         <Background>
-            <Logo />
-            <Who style={{ marginTop: "60px" }}>상대</Who>
-            <ResultBox style={{ backgroundColor: "#D9D9D9", color: "black" }}>{opponentText}</ResultBox>
-            <Image src={opponentImage} style={{transform:"rotate(180deg)"}} alt="상대 선택" />
-            <Image src={myImage} style={{ marginTop: "70px" }} alt="나의 선택" />
-            <Who style={{ marginTop: "20px" }}>나의 선택</Who>
-            <ResultBox style={{ marginBottom: "30px" }}>{selectedChoice}</ResultBox>
+            <MainLogo>가위바위보</MainLogo>
 
+            <Who style={{ marginTop: "60px", display: "flex", alignItems: "center" }}>
+                <img src={suri} style={{ width: "20vw"}} />
+                수리
+            </Who>
             
+            <ResultBox>
+                {opponentText}
+                <Image src={opponentImage} style={{transform:"rotate(180deg)"}} alt="수리 선택" />
+            </ResultBox>
+
+            <ResultBox style={{marginTop:"190px"}}>
+                <Image src={myImage} alt="나의 선택" />
+                {selectedChoice}
+            </ResultBox>
+            <Who style={{ marginTop: "20px", marginBottom:"50px" }}>나의 선택</Who>
+            
+
+
             {showSamePopup && <Popup 
             title="무승부"
-            message={<MessageContainer>비겼습니다.<br/>다시 한 번 해볼까요?</MessageContainer>} 
+            message={<MessageContainer>무승부예요.<br/>다시 한 번 해볼까요?</MessageContainer>} 
             remainingAttempts={3} />}
 
             {showWinPopup && <Popup 
-            title={<MessageContainer style={{color:"#EBBC18"}}>승리!</MessageContainer>} 
+            title={<MessageContainer style={{color:"#FFE500"}}>승리!</MessageContainer>} 
             message={<MessageContainer>축하합니다!<br/>100P를 얻었습니다!</MessageContainer>} 
             remainingAttempts={3} />}
 
             {showLosePopup && <Popup 
             title={<MessageContainer style={{color:"#C2C2C2"}}>패배</MessageContainer>} 
-            message={<MessageContainer>안타깝습니다...<br/>한 번 더 도전해보세요!</MessageContainer>} 
+            message={<MessageContainer>수리한테 졌어요...<br/>한 번 더 도전해보세요!</MessageContainer>} 
             remainingAttempts={3} />}
 
         </Background>

@@ -78,7 +78,7 @@ const SideBarContents = ()=> {
         <PointScore>1000P(수정)</PointScore>
         
         <Link to="/minting"><GoAnother style={{marginTop:'52px'}}>민팅하기</GoAnother></Link>
-        <GoAnother>승부예측</GoAnother>
+        <Link to="/bet/intro"><GoAnother>승부예측</GoAnother></Link>
 
         <GoAnother onClick={toggleMiniGame}>미니게임
         {miniGameVisible ? <Down src={downBtn} style={{transform:"rotate(180deg)"}}/> : <Down src={downBtn}/>}

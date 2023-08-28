@@ -47,7 +47,7 @@ const LoginBTN = styled.button`
   position: absolute;
   /* top: 28px; */
   right: 20px;
-  font-size: 14px;
+  font-size: 13px;
   background-color: rgba(29, 29, 29, 1);
   border: 1px solid white;
   border-radius: 17px;
@@ -56,9 +56,9 @@ const LoginBTN = styled.button`
   color: rgb(255,255,255);
   margin-top: 74px;
   @media (max-width: 400px) {
-    width: 50px;
-    height: 20px;
-    font-size: 11px;
+    width: 54px;
+    height: 24px;
+    font-size: 10px;
   }
 `;
 

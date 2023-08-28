@@ -5,6 +5,8 @@ import Login from "./pages/Login";
 import Minting from "./pages/Minting";
 import Rps from "./pages/Game/Rps";
 import RpsResult from "./pages/Game/RpsResult";
+import Betting from "./pages/BettingGame/Betting";
+import Predicting from "./pages/BettingGame/Predicting";
 
 
 function DefaultRouter () {
@@ -16,6 +18,9 @@ function DefaultRouter () {
           <Route path="/Minting" element={<Minting />} />
           <Route path="/rock-paper-scissors" element={<Rps />} />
           <Route path="/rock-paper-scissors/result" element={<RpsResult />} />
+
+          <Route path="/betting" element={<Betting/>} />
+          <Route path="/betting/predict" element={<Predicting/>}/>
         </Routes>
     </Router>
     );

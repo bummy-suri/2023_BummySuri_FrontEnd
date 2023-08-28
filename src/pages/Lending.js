@@ -17,9 +17,6 @@ import SideBarContents from "../components/SideBar/SideBarContents";
 import CarouselBenefit from "../components/Lending/CarouselBenefit";
 import SponsorList from "../components/Lending/SponsorList";
 import Logo from "../components/Logo";
-//import Logo from "../components/Logo";
-
-
 
 
 
@@ -226,29 +223,86 @@ const Arrow = styled.div`
   }
 `;
 
+//준비중 팝업
+const Popup = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1D1D1D;
+  border-radius: 8px;
+  width:260px;
+  height: 90px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  @media (min-width: 350px) {
+    width:332px;
+    height: 103px;
+  }
+`;
 
-
+const PopupContainer = styled.div`
+  width:260px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 9px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.15) 100%);
+  border: 1px solid white;
+  @media (min-width: 350px) {
+    width:332px;
+    height: 103px;
+  }
+`;
 
 const Lending = ()=> {
     const [loggedIn, setLoggedIn] = useState(false);
+    const [popupOpen, setPopupOpen] = useState(false); //준비중 팝업
+
 
     const navigate = useNavigate();
 
     const menuClick = () => {
-      navigate('/Login');
+      //navigate('/Login'); 원래 로그인 부분 코드!
     }
     
 
     return (
       <Container>
-        {/* 로그인 */}
-          <Link to="/" style={{textDecoration:"none", color:"white"}}><Logo/></Link>
+        <Link to="/" style={{textDecoration:"none", color:"white"}}><Logo/></Link>
+        <LoginBTN onClick={() => setPopupOpen(true)}>로그인</LoginBTN>
+
+        {popupOpen && (
+          <Popup>
+            <PopupContainer>
+              서비스 준비중입니다.
+              <button 
+              onClick={() => setPopupOpen(false)}
+              style={{backgroundColor:"#7000FF", color:"white", width:"65px", height:"23px", border:"none", borderRadius:"4px", marginTop: "10px"}}>
+              닫기</button>
+            </PopupContainer>
+          </Popup>
+        )}
+
+
+        {/* 로그인부분 원래 코드! 
           {loggedIn ? 
             <SideBar>
               <SideBarContents/>
             </SideBar>
             : <LoginBTN onClick={menuClick}>로그인</LoginBTN>
           }
+        */}
+
+
 
 
 
@@ -267,8 +321,11 @@ const Lending = ()=> {
           </Content>
 
         </SubContainer>
-        <BTN><Link to="/Minting" style={{ textDecoration: 'none', color: 'white' }}>버미와 수리 만나러 가기!</Link></BTN>
 
+        <BTN onClick={() => setPopupOpen(true)} style={{ textDecoration: 'none', color: 'white' }}>버미와 수리 만나러 가기!</BTN>
+        {/* 버미수리 만나러가기 버튼 원래 코드!! 
+        <BTN><Link to="/Minting" style={{ textDecoration: 'none', color: 'white' }}>버미와 수리 만나러 가기!</Link></BTN>
+        */}
         
         <SubContainer>
           <SubContent>

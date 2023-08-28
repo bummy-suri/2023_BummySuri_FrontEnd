@@ -5,10 +5,6 @@ import AboutKlip from "../components/Login/AboutKlip";
 import KlipBtn from "../components/Login/KlipApi";
 import BummySuriimage from "../assets/BummySuri.png";
 
-//추후 삭제
-import SideBar from "../components/SideBar/SideBar";
-import SideBarContents from "../components/SideBar/SideBarContents";
-
 
 const Total = styled.div`
   max-width: 100%;

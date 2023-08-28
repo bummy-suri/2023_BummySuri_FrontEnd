@@ -63,8 +63,14 @@ const Sponsor = styled.div`
   }
 `;
 
+const SponImgBox2 = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const PImg = styled.img`
-  width: 99.86px;
+  width: 100px;
   margin: 5px;
   border-radius: 12px;
   @media (min-width: 768px) {
@@ -75,13 +81,14 @@ const PImg = styled.img`
     width: 60px;
   }
 `;
+
 const MImg = styled.img`
   width: 120px;
   @media (min-width: 768px) {
     width: 210px;
     margin: 0 18px;
   }
-  @media (max-width: 299px) {
+  @media (max-width: 300px) {
     width: 100px;
   }
 `;
@@ -107,27 +114,24 @@ const SponsorList = () => {
             </SponTitle>
             <SponImgBox>
               <SponImg>
-                <PImg src={Partner01} alt="img" />
+                <PImg src={Partner02}alt="img" />
               </SponImg>
               <SponImg>
-                <PImg src={Partner02}alt="img" />
+                <PImg src={Partner06} alt="img" />
               </SponImg>
               <SponImg>
                 <PImg src={Partner03} alt="img" />
               </SponImg>
             </SponImgBox>
 
-            <SponImgBox>
+            <SponImgBox2>
               <SponImg>
                 <PImg src={Partner04} alt="img" />
               </SponImg>
               <SponImg>
                 <PImg src={Partner05} alt="img" />
               </SponImg>
-              <SponImg>
-                <PImg src={Partner06} alt="img" />
-              </SponImg>
-            </SponImgBox>
+            </SponImgBox2>
           </Sponsor>
     );
 }

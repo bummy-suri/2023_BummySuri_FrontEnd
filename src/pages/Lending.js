@@ -43,6 +43,25 @@ const SubContainer = styled.div`
   justify-content: center;
 `;
 
+
+const Menu = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 26px;
+`;
+
+
+const MainTitle = styled.h1`
+  font-weight:500;
+  font-size:16px;
+  position: absolute;
+  top:16px;
+  @media (max-width: 300px) {
+    font-size: 13px;
+  }
+`;
+
 const LoginBTN = styled.button`
   position: absolute;
   /* top: 28px; */
@@ -69,6 +88,9 @@ const Title = styled.div`
   text-align: center;
   margin: 0px 0px 20px 0px;
   text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+  @media (max-width: 300px) {
+    font-size: 20px;
+  }
 `;
 
 
@@ -89,6 +111,9 @@ const Content = styled.div`
   text-align: center;
   margin: 40px 0px 0px 0px;
   text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.3);
+  @media (max-width: 300px) {
+    font-size: 15px;
+  }
 `;
 
 const SubContent = styled.div`
@@ -97,6 +122,9 @@ const SubContent = styled.div`
   line-height: 26px;
   text-align: center;
   margin-top: 30px;
+  @media (max-width: 300px) {
+    font-size: 12px;
+  }
 `;
 
 const Benefit02 = styled.div`
@@ -143,11 +171,17 @@ const CarouselBox = styled.div`
 const Tiger = styled.span`
   color: rgba(253, 38, 38, 1);
   font-size: 32px;
+  @media (max-width: 300px) {
+    font-size: 23px;
+  }
 `;
 
 const Eagle = styled.span`
   color : rgba(22, 87, 255, 1);
   font-size: 32px;
+  @media (max-width: 300px) {
+    font-size: 23px;
+  }
 `;
 
 const ColoredText = styled.span`
@@ -198,22 +232,11 @@ const Arrow = styled.div`
     position: relative;
     animation: ${moveUpDown} 1s linear infinite;
   }
-`;
-
-const Menu = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 26px;
-`;
-
-
-
-const MainTitle = styled.h1`
-  font-weight:500;
-  font-size:16px;
-  position: absolute;
-  top:16px;
+  @media (max-width: 300px) {
+    img{
+      width: 25px;
+    }
+  }
 `;
 
 
@@ -233,7 +256,7 @@ const Lending = ()=> {
       <Container>
         {/* 로그인 */}
           <Menu>
-          <MainTitle>BUMMY & SURI</MainTitle>
+          <MainTitle><Link to="/" style={{textDecoration:"none", color:"white"}}>BUMMY & SURI</Link></MainTitle>
           {loggedIn ? 
             <SideBar>
               <SideBarContents/>

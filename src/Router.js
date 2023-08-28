@@ -6,6 +6,7 @@ import Minting from "./pages/Minting";
 import Rps from "./pages/Game/Rps";
 import RpsResult from "./pages/Game/RpsResult";
 import BetIntro from "./pages/Bet/BetIntro";
+import BetFinish from "./pages/Bet/BetFinish";
 
 function DefaultRouter () {
     return (
@@ -17,6 +18,7 @@ function DefaultRouter () {
           <Route path="/rock-paper-scissors" element={<Rps />} />
           <Route path="/rock-paper-scissors/result" element={<RpsResult />} />
           <Route path="/bet/intro" element={<BetIntro />} />
+          <Route path="/bet/finish" element={<BetFinish />} />
           
           </Routes>
     </Router>

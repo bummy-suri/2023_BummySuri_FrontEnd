@@ -30,18 +30,12 @@ const MainLogo = styled.div`
   font-family: "Pretendard_Regular";
 `;
 
-const TitleContent = styled.div`
-    display: flex;
-    align-items: center;
-    margin-top: 42px;
-`
 
-const Image = styled.img`
-    width: 25vw;
-`
 
 const Title = styled.div`
+    margin-top: 209px;
     font-size: 25px;
+    text-align: center;
     font-family: "Pretendard_bold";
     font-weight: bold;
     @media(max-width: 300px){
@@ -51,7 +45,7 @@ const Title = styled.div`
 
 
 const MainText = styled.div`
-    text-align: center;
+    margin-top: 33px;
     font-size: 16px;
     line-height: 26px; /* 162.5% */
     margin-top: 40px;
@@ -60,7 +54,7 @@ const MainText = styled.div`
     }
 `
 
-const Klipbtn = styled.button`
+const Btn = styled.button`
   width: 334px;
   height: 50px;
   background-color: #7000FF;
@@ -69,7 +63,7 @@ const Klipbtn = styled.button`
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  margin-top: 56px;
+  margin-top: 183px;
   margin-bottom: 29px;
   color: #FFFFFF;
 
@@ -96,24 +90,11 @@ const Rps = () => {
         <Background>
             <MainLogo>정기전 경기 예측</MainLogo>
             <SideBar><SideBarContents/></SideBar>
-            <TitleContent>
-                <Image src={Betsuri}/>
-                <Title>경기 예측이란?</Title>
-                <Image src={Betbummy} style={{transform:"scaleX(-1)"}}/>
-            </TitleContent>
+            <Title>경기 예측 이벤트가 <br/>종료되었습니다.</Title>
             <MainText>
-                버미와 수리를 가지고 있는 <br/>
-                연세대 학생, 고려대 학생이라면 누구나<br/>
-                경기 예측 이벤트에 참여할 수 있어요!<br/><br/>
-
-                어떤 학교가 이길지,<br/>
-                몇 점 차이일지,<br/>
-                몇 포인트를 배팅할지 선택해봐요!<br/><br/>
-
-                예측에 성공하면 <br/>
-                배팅한 포인트의 ✨3배✨를 얻을 수 있습니다.<br/>
+            나의 예측은 성공할 것인가 ˚✧₊( ˘ω˘ )⁎⁺˳✧༚
             </MainText>
-            <Link to="/bet"><Klipbtn>경기 예측하기</Klipbtn></Link>
+            <Link to="/bet"><Btn>나의 예측 보러가기</Btn></Link>
         </Background>
         </div>
         );

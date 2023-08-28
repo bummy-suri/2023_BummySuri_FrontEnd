@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom'; 
-import Logo from '../../components/Logo';
-import RpsImage from "../../assets/Game/Rps.png";
+import RpsImage from "../../../assets/Game/Rps.png";
 
-import SideBar from "../../components/SideBar/SideBar";
-import SideBarContents from "../../components/SideBar/SideBarContents";
+import SideBar from "../../../components/SideBar/SideBar";
+import SideBarContents from "../../../components/SideBar/SideBarContents";
 
-import rock from "../../assets/Game/rock.png";
-import paper from "../../assets/Game/paper.png";
-import scissors from "../../assets/Game/scissors.png";
+import rock from "../../../assets/Game/rock.png";
+import paper from "../../../assets/Game/paper.png";
+import scissors from "../../../assets/Game/scissors.png";
 
 
 const Background = styled.div`
@@ -21,6 +20,18 @@ const Background = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+`;
+
+
+
+const MainLogo = styled.div`
+  display: fixed;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: white;
+  margin-top: 74px;
+  font-family: "Pretendard_Regular";
 `;
 
 const Image = styled.img`
@@ -50,7 +61,7 @@ const ChoiceButton = styled.button`
     border: none;
     width: 110px;
     height: 106px;
-    margin: 51px 3px 0px;
+    margin: 10px 3px 0px;
     font-size: 14px;
     cursor: pointer;
     border-radius: 4px;
@@ -115,7 +126,7 @@ const Rps = () => {
     return (
         <div style={{backgroundColor:"#1D1D1D"}}>
         <Background>
-            <Logo /> {/*수정필요..*/}
+            <MainLogo>가위바위보</MainLogo>
             <SideBar><SideBarContents/></SideBar>
             <Title>수리와 가위바위보 하기</Title>
             <Text style={{marginTop:"12px"}}>수리를 이길 수 있을까?</Text>

@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import Logo from '../../components/Logo';
 import {Link} from "react-router-dom";
 
+import SideBar from "../../components/SideBar/SideBar";
+import SideBarContents from "../../components/SideBar/SideBarContents";
+
+
 const PopupContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -52,6 +56,7 @@ const Popup = ({ title, message, remainingAttempts }) => {
     return (
         <PopupContainer>
             <Logo/>
+            <SideBar><SideBarContents/></SideBar>
             <ModalContent>
                 <div style={{ marginTop: "60px", fontSize: "40px", fontWeight: "bold", fontFamily:"Pretendard_Bold" }}>{title}</div>
                 <div style={{ marginTop: "30px", marginBottom: "98px" }}>{message}</div>

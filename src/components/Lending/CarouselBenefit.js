@@ -4,16 +4,19 @@ import 'react-alice-carousel/lib/alice-carousel.css';
 
 import AliceCarousel from 'react-alice-carousel';
 
+import HMP1 from "../../assets/hidemeplease/hmp1.png";
+import HMP2 from "../../assets/hidemeplease/hmp2.png";
+import HMP3 from "../../assets/hidemeplease/hmp3.png";
+import HMP4 from "../../assets/hidemeplease/hmp4.png";
+import HMP5 from "../../assets/hidemeplease/hmp5.png";
+
 
 const Contain = styled.div`
   display: flex;
   align-items: center;
   margin: 0 auto;
-  width: 210px;
+  width: 620px;
   overflow: hidden;
-  @media (min-width: 800px) {
-    width: 600px;
-  }
 `;
 
 const ItemsContain = styled.div`
@@ -28,48 +31,46 @@ const ItemsWrap = styled.div`
 
   img {
     overflow: hidden;
-    width: 190px;
+    width: 104px;
     margin: 10px;
-  }
-  @media (min-width: 800px) {
-    img{
-      width: 200px;
-      margin-left: 200px;
-      margin-right: 200px;
-    }
   }
 `;
 
 const benefits = [
   <ItemsContain>
     <ItemsWrap>
-      <img src={Test} alt="혜택1" />
+      <img src={HMP1} alt="혜택1" />
     </ItemsWrap>
   </ItemsContain>,
   <ItemsContain>
     <ItemsWrap>
-      <img src={Test} alt="혜택2" />
+      <img src={HMP2} alt="혜택2" />
     </ItemsWrap>
   </ItemsContain>,
   <ItemsContain>
   <ItemsWrap>
-    <img src={Test} alt="혜택3" />
+    <img src={HMP3} alt="혜택3" />
   </ItemsWrap>
   </ItemsContain>,
   <ItemsContain>
     <ItemsWrap>
-      <img src={Test} alt="혜택4" />
+      <img src={HMP4} alt="혜택4" />
     </ItemsWrap>
   </ItemsContain>,
+  <ItemsContain>
+  <ItemsWrap>
+    <img src={HMP5} alt="혜택4" />
+  </ItemsWrap>
+</ItemsContain>,
 ]
 
 
 const responsive = {
   0: {
-    items: 1,
+    items: 5,
   },
   800: {
-    items: 1,
+    items: 5,
   },
 };
 

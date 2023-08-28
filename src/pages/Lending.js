@@ -16,6 +16,7 @@ import SideBarContents from "../components/SideBar/SideBarContents";
 
 import CarouselBenefit from "../components/Lending/CarouselBenefit";
 import SponsorList from "../components/Lending/SponsorList";
+import Logo from "../components/Logo";
 //import Logo from "../components/Logo";
 
 
@@ -28,7 +29,6 @@ const Container = styled.div`
   background-color: rgba(29, 29, 29, 1);
   color:rgba(255, 255, 255, 1);
   margin: 0px;
-  padding: 20px; //간격조정
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,23 +43,8 @@ const SubContainer = styled.div`
 `;
 
 
-const Menu = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 26px;
-`;
 
 
-const MainTitle = styled.h1`
-  font-weight:500;
-  font-size:16px;
-  position: absolute;
-  top:16px;
-  @media (max-width: 300px) {
-    font-size: 13px;
-  }
-`;
 
 const LoginBTN = styled.button`
   position: absolute;
@@ -72,6 +57,7 @@ const LoginBTN = styled.button`
   width: 66px;
   height: 26px;
   color: rgb(255,255,255);
+  margin-top: 74px;
   @media (max-width: 400px) {
     width: 50px;
     height: 20px;
@@ -121,6 +107,7 @@ const SubContent = styled.div`
   line-height: 26px;
   text-align: center;
   margin-top: 30px;
+  margin-bottom: 30px;
   @media (max-width: 300px) {
     font-size: 12px;
   }
@@ -165,6 +152,7 @@ const BTN = styled.button`
 const CarouselBox = styled.div`
   width: 100vw;
   margin-top: 40px;
+  overflow: hidden;
 `;
 
 const Tiger = styled.span`
@@ -254,17 +242,14 @@ const Lending = ()=> {
     return (
       <Container>
         {/* 로그인 */}
-          <Menu>
-          <MainTitle><Link to="/" style={{textDecoration:"none", color:"white"}}>BUMMY & SURI</Link></MainTitle>
+          <Link to="/" style={{textDecoration:"none", color:"white"}}><Logo/></Link>
           {loggedIn ? 
             <SideBar>
               <SideBarContents/>
             </SideBar>
             : <LoginBTN onClick={menuClick}>로그인</LoginBTN>
           }
-          </Menu>
 
-        {/* <Logo/> */}
 
 
         <SubContainer>
@@ -291,8 +276,8 @@ const Lending = ()=> {
             밑으로 스크롤 ( ⸝•ᴗ•⸝)<br />
           </SubContent>
           <Arrow>
-            <img src={Arrow01} style={{top: '10px'}} alt="화살표" />
-            <img src={Arrow02}  alt="화살표" />
+            <img src={Arrow01} style={{bottom: '7px'}} alt="화살표" />
+            <img src={Arrow02} style={{bottom: '17px'}} alt="화살표" />
           </Arrow>
         </SubContainer>
 
@@ -319,12 +304,15 @@ const Lending = ()=> {
           </CarouselBox>
 
           <SubContent>
-          NFT 소유자는 버미와 수리를 보여주고 <br />
-          하이드미플리즈의 할인 혜택을 받을 수 있어요. <br />
+          버미와 수리 NFT 소유자는<br />
+          하이드미플리즈 어플을 통해<br />
+          제휴 상점에서 혜택을 받을 수 있어요. <br />
           <br />
           버미와 수리를 통해 다양한<br />
-          <ColoredText>할인 혜택</ColoredText>을 받아가세요! <br />
+          <ColoredText>오프라인 할인 혜택</ColoredText>을 받아가세요! <br />
           </SubContent>
+
+          <BTN><a href="https://hidemeplease.xyz" style={{ textDecoration: 'none', color: 'white' }}>혜택 알아보기!</a></BTN>
 
         </SubContainer>
 

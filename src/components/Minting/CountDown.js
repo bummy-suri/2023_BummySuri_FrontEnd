@@ -1,18 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const CountdownContainer = styled.div`
-  width: 301px;
-  height: 58px;
-  background-color: #f1edf2;
-  border-radius: 10px;
-  text-align: center;
-  color: black;
-  font-size: 25px;
-  font-weight: 700;
-  line-height: 58px;
-`;
-
 const CountDown = ({ targetDate }) => {
   const calculateTimeLeft = () => {
     const difference = +new Date(targetDate) - +new Date();
@@ -46,5 +34,15 @@ const CountDown = ({ targetDate }) => {
     </CountdownContainer>
   );
 };
+
+const CountdownContainer = styled.div`
+  width: 350px;
+  text-align: center;
+  font-family: 'Inter';
+  color: white;
+  font-size: 25px;
+  font-weight: 800;
+  margin-top: 30px;
+`;
 
 export default CountDown;

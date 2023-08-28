@@ -7,7 +7,7 @@ const AbtKlip = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 60px;
+  margin-top: 73.81px;
   font-size: 22px;
 `;
 
@@ -19,16 +19,12 @@ const ToggleButton = styled.button`
   font-size: 22px;
   font-weight: 800;
   display: flex;
-  align-items: center;
-  transition: font-size 1s;
-  @media (min-width: 800px) {
-    font-size: 30px;
-  }
 `;
 
 const DownBtn = styled.img`
   width: 16px;
   height: 8px; 
+  margin-Top: 10px;
   transition: transform 0.3s;
 `;
 
@@ -51,7 +47,7 @@ const AboutKlip = () => {
     <AbtKlip>
       <ToggleButton onClick={toggleContent}>
         About Klip
-        <span style={{ marginRight: "20px" }}> </span>
+        <span style={{ marginRight: "23px" }}> </span>
         <DownBtn src={downBtn} style={{ transform: showContent ? "rotate(180deg)" : "rotate(0)" }} />
       </ToggleButton>
       <AboutText showContent={showContent}>

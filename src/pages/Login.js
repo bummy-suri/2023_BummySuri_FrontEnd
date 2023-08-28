@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
-import Bummysuri from "../components/Login/Bummysuri";
 import Logo from "../components/Logo";
 import AboutKlip from "../components/Login/AboutKlip";
 import KlipBtn from "../components/Login/KlipApi";
+import BummySuriimage from "../assets/BummySuri.png";
 
 //추후 삭제
 import SideBar from "../components/SideBar/SideBar";
@@ -11,7 +11,7 @@ import SideBarContents from "../components/SideBar/SideBarContents";
 
 
 const Total = styled.div`
-  width: 100%;
+  max-width: 100%;
   min-height: 100vh;
   background-color: #1D1D1D;
   color: #FFFFFF;
@@ -24,19 +24,20 @@ const Total = styled.div`
 const Intro = styled.div`
   text-align : center;
   font-size: 25px;
-  margin-top: 79px;
-  font-weight: 600;
+  margin-top: 68px;
   transition: font-size 1s;
+  font-family: Pretendard_Regular;
+  font-weight: bold;
   @media (min-width: 800px) {
-    font-size: 35px;
+    font-size: 30px;
   }
 `
 
 const Red = styled.span`
-  color: rgba(241, 11, 11, 0.82);
+  color: rgba(253, 38, 38, 0.82);
 `;
 const Blue = styled.span`
-  color: #120DF6;
+  color: #1657FF;
 `;
 
 const Klipbtn = styled.button`
@@ -54,31 +55,13 @@ color: #FFFFFF;
 
 
 const Login = () => {
-  const [totalHeight, setTotalHeight] = useState(window.innerHeight);
-
-  const handleScroll = () => {
-    setTotalHeight(window.innerHeight + window.scrollY);
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
-    <Total style={{ minHeight: `${totalHeight}px` }}>
+    <Total >
       <Logo/>
-
-      <SideBar>
-        <SideBarContents/>
-      </SideBar> {/*추후 삭제*/}
-
       <Intro>
         <Red>Bummy</Red>&<Blue>Suri</Blue> 프로젝트는<br/> 클립과 함께 합니다.
       </Intro>
-      <Bummysuri/>
+      <img src={BummySuriimage} style={{margin:"0 auto", overflow:"hidden", width:"80vw"}} />
       <AboutKlip/>
       <KlipBtn/>
     </Total>

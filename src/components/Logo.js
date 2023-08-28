@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
-
+import {Link} from "react-router-dom";
 
 //Bummy&Suri 공통 로고 컴포넌트
 
@@ -17,7 +17,7 @@ const MainLogo = styled.div`
 const Logo = ()=> {
     return (
       <MainLogo>
-        BUMMY & SURI
+        <Link to="/" style={{  fontSize: '16px',  color: 'white', textDecoration:'none'}}>BUMMY & SURI</Link>
       </MainLogo>
     );
   }

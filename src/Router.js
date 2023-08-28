@@ -12,11 +12,14 @@ function DefaultRouter () {
       <Router>
         <Routes>
           <Route path="/" element={<Lending />} />
+          {/*
           <Route path="/Login" element={<Login />} />
           <Route path="/Minting" element={<Minting />} />
+    
           <Route path="/rock-paper-scissors" element={<Rps />} />
           <Route path="/rock-paper-scissors/result" element={<RpsResult />} />
-        </Routes>
+        */}
+          </Routes>
     </Router>
     );
   };

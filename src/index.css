@@ -37,13 +37,13 @@
 
 body {
   margin: 0;
-  font-family:  "Pretendard_Regular", "NanumSquare_acR", "NanumSquare_acL", "Pretendard_Thin";
+  font-family:  "Pretendard_Regular", "NanumSquare_acR", "NanumSquare_acL", "Pretendard_Thin", "Pretendard_Bold";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 div, button, span{
-  font-family: "Pretendard_Regular", "NanumSquare_acR", "Pretendard_Medium", "Pretendard_Light", "Pretendard_Thin";
+  font-family: "Pretendard_Regular", "NanumSquare_acR", "Pretendard_Medium", "Pretendard_Light", "Pretendard_Thin", "Pretendard_Bold";
 }
 
 

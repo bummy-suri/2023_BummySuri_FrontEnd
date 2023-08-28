@@ -20,18 +20,15 @@ const Background = styled.div`
 `;
 
 const Image = styled.img`
-    width: 281px;
+    width: 50vw;
     margin-top: 128px;
-    @media (max-width: 350px) {
-        width: 200px;
-        }
 `;
 
-const Mychoice = styled.div`
+const Title = styled.div`
     font-size: 25px;
-    font-family: "Pretendard-Bold";
+    font-family: "Pretendard_bold";
     font-weight: bold;
-    margin-top: 69px;
+    margin-top: 49px;
 `;
 
 const ButtonContainer = styled.div`
@@ -41,17 +38,20 @@ const ButtonContainer = styled.div`
 `;
 
 const ChoiceButton = styled.button`
-    background-color: ${props => props.isSelected ? "rgba(255, 255, 255, 0.40)" : "#D9D9D9"};
-    color: ${props => props.isSelected ? "white" : "black"};
+    background-color: ${props => props.isSelected ? "#7000FF" : "#333"};
+    justify-content: flex-end; 
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    color: white;
     border: none;
-    width: 115px;
-    height: 30px;
-    margin: 0 5px;
-    font-size: 16px;
+    width: 110px;
+    height: 106px;
+    margin: 51px 3px 0px;
+    padding-bottom:7px;
+    font-size: 14px;
     cursor: pointer;
-    border-radius: 10px;
-    font-family: "Pretendard-Bold";
-    font-weight: bold;
+    border-radius: 4px;
     transition: background-color 0.3s ease-in-out, color 0.2s ease-in-out;
     @media (max-width: 350px) {
         width: 80px;
@@ -59,17 +59,25 @@ const ChoiceButton = styled.button`
 
     `;
 
+const Ifwin = styled.div`
+    margin-top: 48px;
+    font-size: 14px;
+    @media (max-width: 280px) {
+        font-size: 11px;
+        }
+`
+
 const ConfirmButton = styled.button`
     width: 334px;
     height: 50px;
     background-color: #7000FF;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
     border: none;
     border-radius: 14px;
     cursor: pointer;
-    margin-top: 56px;
-    margin-bottom: 29px;
+    margin-top: 12px;
+    margin-bottom: 100px;
     color: #FFFFFF;
 
     @media (max-width: 350px) {
@@ -95,12 +103,13 @@ const Rps = () => {
     };
 
     return (
-        
+        <div style={{backgroundColor:"#1D1D1D"}}>
         <Background>
-            <Logo />
+            <Logo /> {/*수정필요..*/}
             <SideBar><SideBarContents/></SideBar>
-            <Image src={RpsImage} />
-            <Mychoice>나의 선택</Mychoice>
+            <Title>수리와 가위바위보 하기</Title>
+            <Image src={RpsImage} alt="가위바위보이미지" />
+            
 
 
             <ButtonContainer>
@@ -109,9 +118,10 @@ const Rps = () => {
                 <ChoiceButton isSelected={selectedChoice === "보"} onClick={() => handleChoiceClick("보")}>보</ChoiceButton>
             </ButtonContainer>
 
-
-            <ConfirmButton onClick={handleConfirmClick}>확인</ConfirmButton>
+            <Ifwin>가위바위보에서 이기면 100P를 얻을 수 있어요!</Ifwin>
+            <ConfirmButton onClick={handleConfirmClick}>가위바위보 !</ConfirmButton>
         </Background>
+        </div>
         );
 }
 

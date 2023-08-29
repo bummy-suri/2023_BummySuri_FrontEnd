@@ -16,6 +16,7 @@ const PopupContainer = styled.div`
     color: black;
     background-color: #1D1D1D;
     
+    
 `;
 
 const ModalContent = styled.div`
@@ -33,8 +34,23 @@ const ModalContent = styled.div`
         font-size: 17px;
         width: 130px;
       }
+    @media (max-width: 300px) {
+        font-size: 15px;
+        width: 80px;
+      }
 
 `;
+
+const Title = styled.div`
+    margin-top: 50px;
+    font-size: 40px;
+    font-weight: bold;
+    font-family:"Pretendard_Bold";
+    @media (max-width: 300px) {
+        font-size: 30px;
+      }
+
+`
 
 const Button = styled.button`
     border-radius: 8px;
@@ -46,10 +62,15 @@ const Button = styled.button`
     color: white;
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 94px;
+    margin-bottom: 200px;
 
     @media (max-width: 350px) {
-        width: 90px;
+        width: 100px;
+        margin-top: 60px;
+      }
+      @media (max-width: 250px) {
+        width: 80px;
+        margin-top: 60px;
       }
 `
 
@@ -60,7 +81,7 @@ const Popup = ({ title, message, remainingAttempts }) => {
             <Logo/>
             <SideBar><SideBarContents/></SideBar>
             <ModalContent>
-                <div style={{ marginTop: "60px", fontSize: "40px", fontWeight: "bold", fontFamily:"Pretendard_Bold" }}>{title}</div>
+                <Title >{title}</Title>
                 <div style={{ marginTop: "30px", marginBottom: "80px" }}>{message}</div>
                 {remainingAttempts !== undefined && (
                     <div style={{ fontSize: "16px", marginBottom: "15px" }}>남은 횟수: {remainingAttempts}</div>

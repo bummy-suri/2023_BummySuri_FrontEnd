@@ -46,7 +46,7 @@ const FromKaKao = styled.div`
     font-family: "Pretendard_Light";
     font-weight: bold;
 `
-const Klipbtn = styled.button`
+const Btn = styled.button`
   width: 334px;
   height: 50px;
   background-color: #7000FF;
@@ -109,7 +109,7 @@ const KlipIntro = () => {
             <Klipis>
                 <Bold>클립</Bold>은 클레이튼과 이더리움 네트워크 자산을<br/>안전하고 편리하게 관리할 수 있는<br/>카카오 기반 지갑입니다.
             </Klipis>
-            <a href="https://klipwallet.com/" target="_blank"><Klipbtn style={{marginTop:"10px", textDecoration:"none"}}>자세히 알아보기</Klipbtn></a>
+            <a href="https://klipwallet.com/" target="_blank"><Btn style={{marginTop:"10px", textDecoration:"none"}}>자세히 알아보기</Btn></a>
             <FromKaKao>
                 카카오톡에서 클립 바로가기
             </FromKaKao>

@@ -30,6 +30,22 @@ const MainLogo = styled.div`
   font-family: "Pretendard_Regular";
 `;
 
+const Suri = styled.img`
+    width: 8vw;
+    @media(max-width: 800px){
+        width: 10vw;
+    }
+    @media(max-width: 500px){
+        width: 15vw;
+    }
+    @media(max-width: 400px){
+        width: 20vw;
+    }
+    @media(max-width: 300px){
+        width: 25vw;
+    }
+`
+
 
 const Who = styled.div`
     font-size: 25px;
@@ -117,7 +133,7 @@ const Rps = () => {
             <MainLogo>가위바위보</MainLogo>
 
             <Who style={{ marginTop: "60px", display: "flex", alignItems: "center" }}>
-                <img src={suri} style={{ width: "20vw"}} />
+                <Suri src={suri} />
                 수리
             </Who>
             

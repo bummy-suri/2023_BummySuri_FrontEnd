@@ -36,17 +36,17 @@ const TitleContent = styled.div`
 `
 
 const Image = styled.img`
-    width: 70vw;
-    margin-top:50px;
+    width: 40vw;
 `
 
-const Title = styled.div`
-    font-size: 25px;
-    font-family: "Pretendard_bold";
-    font-weight: bold;
-    margin-top: 45px;
-    @media(max-width: 300px){
-        font-size: 18px;
+const RandomImage = styled.div`
+    width:450px;
+    height: 450px;
+    background-color: white;
+    margin-top: 20px;
+    @media(max-width: 500px){
+        width: 65vw;
+        height: 65vw;
     }
 `;
 
@@ -62,6 +62,40 @@ const MainText = styled.div`
     }
 `
 
+const Answer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 163px;
+    height: 42px;
+    margin-right: 10px;
+    border-radius: 10px;
+    background: #FFF;
+    color: black;
+    font-weight: bold;
+    font-family: "Pretendard_Bold";
+    font-size: 24px;
+
+    @media(max-width: 250px){
+        width: 133px;
+        font-size: 20px;
+    }
+`
+
+const AnswerInput = styled.input`
+    width: 100px;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    color: black;
+    font-size: 24px;
+
+    @media(max-width: 250px){
+        width: 70px;
+        font-size: 20px;
+    }
+`;
+
 const Btn = styled.button`
   width: 334px;
   height: 50px;
@@ -71,7 +105,7 @@ const Btn = styled.button`
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  margin-top: 56px;
+  margin-top: 10px;
   margin-bottom: 29px;
   color: #FFFFFF;
 
@@ -91,21 +125,33 @@ const Btn = styled.button`
 
 
 
-const QuizIntro = () => {
+const ImageQuiz = () => {
+    const [answer, setAnswer] = useState(""); //답 입력
+
+    const handleAnswerChange = (event) => {
+      setAnswer(event.target.value);
+    };
 
     return (
         <div style={{backgroundColor:"#1D1D1D"}}>
         <Background>
             <MainLogo>넌센스 그림퀴즈</MainLogo>
             <SideBar><SideBarContents/></SideBar>
-            <Title>버미의 넌센스 그림퀴즈</Title>
-            <MainText>30초 안에 버미가 내는 문제를 맞춰봐!</MainText>
+            <RandomImage></RandomImage>
             <Image src={bummy}/>
-            
-            <Link to="/ImageQuiz"><Btn>그림 퀴즈 시작!</Btn></Link>
+            <MainText>30초시계</MainText>
+            <Answer>답:
+          <AnswerInput
+            type="text"
+            placeholder=""
+            value={answer}
+            onChange={handleAnswerChange}
+          />
+        </Answer>
+            <Link to="/ImageQuiz"><Btn>제출하기!</Btn></Link>
         </Background>
         </div>
         );
 }
 
-export default QuizIntro;
+export default ImageQuiz;

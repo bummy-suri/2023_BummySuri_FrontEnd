@@ -8,6 +8,7 @@ import RpsResult from "./pages/Game/Rps/RpsResult";
 import BetIntro from "./pages/Bet/BetIntro";
 import BetFinish from "./pages/Bet/BetFinish";
 import QuizIntro from "./pages/Game/ImageQuiz/QuizIntro";
+import ImageQuiz from "./pages/Game/ImageQuiz/ImageQuiz";
 
 function DefaultRouter () {
     return (
@@ -21,6 +22,7 @@ function DefaultRouter () {
           <Route path="/bet/intro" element={<BetIntro />} />
           <Route path="/bet/finish" element={<BetFinish />} />
           <Route path="/imageQuiz/intro" element={<QuizIntro />} />
+          <Route path="/imageQuiz" element={<ImageQuiz />} />
           
           </Routes>
     </Router>

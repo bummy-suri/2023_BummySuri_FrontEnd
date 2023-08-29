@@ -8,6 +8,7 @@ import Rpswait from "./pages/Game/Rps/RpswaitResult";
 import RpsResult from "./pages/Game/Rps/RpsResult";
 import BetIntro from "./pages/Bet/BetIntro";
 import BetFinish from "./pages/Bet/BetFinish";
+import Bet from "./pages/Bet/Bet";
 
 function DefaultRouter () {
     return (
@@ -21,6 +22,7 @@ function DefaultRouter () {
           <Route path="/rock-paper-scissors/result" element={<RpsResult />} />
           <Route path="/bet/intro" element={<BetIntro />} />
           <Route path="/bet/finish" element={<BetFinish />} />
+          <Route path="/bet" element={<Bet/>}/>
           
           </Routes>
     </Router>

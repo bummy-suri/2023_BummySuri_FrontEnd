@@ -7,6 +7,7 @@ import Rps from "./pages/Game/Rps/Rps";
 import RpsResult from "./pages/Game/Rps/RpsResult";
 import BetIntro from "./pages/Bet/BetIntro";
 import BetFinish from "./pages/Bet/BetFinish";
+import Bet from "./pages/Bet/Bet";
 import QuizIntro from "./pages/Game/ImageQuiz/QuizIntro";
 import ImageQuiz from "./pages/Game/ImageQuiz/ImageQuiz";
 
@@ -21,6 +22,7 @@ function DefaultRouter () {
           <Route path="/rock-paper-scissors/result" element={<RpsResult />} />
           <Route path="/bet/intro" element={<BetIntro />} />
           <Route path="/bet/finish" element={<BetFinish />} />
+          <Route path="/bet" element={<Bet/>}/>
           <Route path="/imageQuiz/intro" element={<QuizIntro />} />
           <Route path="/imageQuiz" element={<ImageQuiz />} />
           

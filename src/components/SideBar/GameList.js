@@ -17,7 +17,7 @@ const GameList = ()=> {
     return (
       <div>
         <Link to="/rock-paper-scissors"><GotoGame style={{marginTop:"15px"}}>가위바위보</GotoGame></Link>
-        <GotoGame>그림 퀴즈</GotoGame>
+        <Link to="/ImageQuiz/intro"><GotoGame>그림 퀴즈</GotoGame></Link>
         <GotoGame>사다리 타기</GotoGame>
       </div>
     );

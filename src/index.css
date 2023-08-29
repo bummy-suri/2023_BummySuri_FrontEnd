@@ -42,7 +42,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-div, button, span{
+div, button, span, input{
   font-family: "Pretendard_Regular", "NanumSquare_acR", "Pretendard_Medium", "Pretendard_Light", "Pretendard_Thin", "Pretendard_Bold";
 }
 

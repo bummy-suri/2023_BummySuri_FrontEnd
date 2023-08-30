@@ -31,7 +31,7 @@ const DownBtn = styled.img`
 const AboutText = styled.div`
   margin-top: 10px;
   overflow: hidden;
-  max-height: ${props => (props.showContent ? "700px" : "0")};
+  max-height: ${props => (props.showContent ? "900px" : "0")};
   transition: max-height 0.3s ease-in-out;
 `;
 

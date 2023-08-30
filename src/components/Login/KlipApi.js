@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import QRcode from "qrcode.react";
 import axios from "axios";
-import { useUserContext } from "./UserAddress";
 
 const Klipbtn = styled.button`
   width: 334px;
@@ -49,46 +48,45 @@ const getKlipAccessUrl = (method, request_key) => {
 
 const KlipBtn = () => {
   const [qrvalue_auth, setQrvalue_auth] = useState(DEFAULT_QR_CODE);
-  const { setUserAddress } = useUserContext();
+  const [accessToken, setAccessToken] = useState("");
 
-  const getUserData = () => {
-    // Prepare
-    axios
-      .post(A2P_API_PREPARE_URL, {
+  const getUserData = async () => {
+    try {
+      // prepare
+      const prepareResponse = await axios.post(A2P_API_PREPARE_URL, {
         bapp: {
           name: APP_NAME,
         },
         type: "auth",
-      })
-      .then((response) => {
-        const { request_key } = response.data;
-
-        // Request
-        if (isMobile) {
-          window.location.href = getKlipAccessUrl("deeplink", request_key);
-        } else {
-          setQrvalue_auth(getKlipAccessUrl("QR", request_key));
-        }
-
-        // Result
-        const timerId = setInterval(() => {
-          axios
-            .get(
-              `https://a2a-api.klipwallet.com/v2/a2a/result?request_key=${request_key}`
-            )
-            .then((res) => {
-              if (res.data.result) {
-                clearInterval(timerId);
-                setQrvalue_auth("DEFAULT");
-
-                const klaytn_address = res.data.result.klaytn_address;
-                setUserAddress(klaytn_address); // Update user address in context
-                console.log("Klaytn Address:", klaytn_address); // Log the address to console
-              }
-            });
-        }, 1000);
       });
+      const { request_key } = prepareResponse.data;
+
+      // request
+      if (isMobile) {
+        window.location.href = getKlipAccessUrl("deeplink", request_key);
+      } else {
+        setQrvalue_auth(getKlipAccessUrl("QR", request_key));
+      }
+
+
+      const backendResponse = await axios.post("YOUR_BACKEND_AUTHENTICATE_ENDPOINT", {
+        requestKey: request_key,
+      });
+
+      const { accessToken } = backendResponse.data;
+      setAccessToken(accessToken);
+  
+      console.log(accessToken);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+  useEffect(() => {
+    // 여기서 액세스 토큰을 활용하여 추가적인 API 요청을 할 수 있습니다
+    // 예를 들어, axios를 위한 인증 헤더로 설정할 수 있습니다
+    // axios.defaults.headers.common["Authorization"] = `bearer ${accessToken}`;
+  }, [accessToken]);
 
   return (
     <div>
@@ -99,5 +97,6 @@ const KlipBtn = () => {
     </div>
   );
 };
+
 
 export default KlipBtn;

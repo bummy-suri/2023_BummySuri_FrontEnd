@@ -52,6 +52,7 @@ const KlipBtn = () => {
   const walletAddress = useRef('');
 
   const getUserData = () => {
+    localStorage.clear()
     // Prepare
     axios
       .post(A2P_API_PREPARE_URL, {
@@ -71,25 +72,33 @@ const KlipBtn = () => {
         } else {
           setQrvalue_auth(getKlipAccessUrl("QR", request_key));
         }
-        
-        });
 
-        axios
-        .post('/users', {
-          requestKey: localStorage.getItem("requestKey"),
+
+        sendRequestKey(request_key);
         })
-        .then((response) => {
-            const { accessToken } = response.data;
-            console.log("accessToken", accessToken);
-          })
         .catch((error) => {
           console.error(error);
         });
 
-
+        
 
   };
       
+
+  const sendRequestKey = (request_key) => {
+    axios
+      .post('/users', {
+        requestKey: request_key,
+      })
+      .then(response => {
+        const { accessToken } = response.data;
+        localStorage.setItem("accessToken", accessToken);
+        console.log("accessToken", accessToken);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
 
 

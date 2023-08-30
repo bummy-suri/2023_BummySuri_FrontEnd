@@ -69,7 +69,7 @@ const KlipBtn = () => {
       }
 
 
-      const backendResponse = await axios.post("YOUR_BACKEND_AUTHENTICATE_ENDPOINT", {
+      const backendResponse = await axios.post("/user", {
         requestKey: request_key,
       });
 

@@ -72,18 +72,22 @@ const KlipBtn = () => {
           setQrvalue_auth(getKlipAccessUrl("QR", request_key));
         }
         
-        axios
-          .post('/users', {
-            requestKey: request_key,
-          })
-          .then((response) => {
-              const { accessToken } = response.data;
-              console.log("accessToken", accessToken);
-            })
-          .catch((error) => {
-            console.error(error);
-          });
         });
+
+        axios
+        .post('/users', {
+          requestKey: localStorage.getItem("requestKey"),
+        })
+        .then((response) => {
+            const { accessToken } = response.data;
+            console.log("accessToken", accessToken);
+          })
+        .catch((error) => {
+          console.error(error);
+        });
+
+
+
   };
       
 

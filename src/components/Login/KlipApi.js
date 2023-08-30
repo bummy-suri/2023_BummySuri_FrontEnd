@@ -73,7 +73,7 @@ const KlipBtn = () => {
         }
         
         axios
-          .post(`/user`, {
+          .post('/user', {
             requestKey: request_key,
           })
           .then((response) => {

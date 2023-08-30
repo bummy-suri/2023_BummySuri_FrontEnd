@@ -159,12 +159,19 @@ const Sports = ({gameType, handleData, currentschool, currentscore, currentbetpo
         if(event.target.innerHTML === "고대 승")
         {
             setSchool("고대");
+            if(score === -2){
+                setScore(0);
+            }
         }
         else if(event.target.innerHTML === "연대 승"){
             setSchool("연대");
+            if(score === -2){
+                setScore(0);
+            }
         }
         else if(event.target.innerHTML === "무승부"){
             setSchool("무승부");
+            setScore(-2); // score 선택 못하게 버튼 disable
         }
     }
 
@@ -198,19 +205,19 @@ const Sports = ({gameType, handleData, currentschool, currentscore, currentbetpo
             <ScoreSelect>
                 <ScoreOption>
                     <p>{option[0]}</p>
-                    <BTN isActive={score === 0} onClick={() => ScoreChange(0)} >선택</BTN>
+                    <BTN isActive={score === 0} onClick={() => ScoreChange(0)} disabled={score === -2}>선택</BTN>
                 </ScoreOption>
                 <ScoreOption>
                     <p>{option[1]}</p>
-                    <BTN isActive={score === 1} onClick={() => ScoreChange(1)} >선택</BTN>
+                    <BTN isActive={score === 1} onClick={() => ScoreChange(1)} disabled={score === -2}>선택</BTN>
                 </ScoreOption>
                 <ScoreOption>
                     <p>{option[2]}</p>
-                    <BTN isActive={score === 2} onClick={() => ScoreChange(2)} >선택</BTN>
+                    <BTN isActive={score === 2} onClick={() => ScoreChange(2)} disabled={score === -2}>선택</BTN>
                 </ScoreOption>
                 <ScoreOption>
                     <p>{option[3]}</p>
-                    <BTN isActive={score === 3} onClick={() => ScoreChange(3)} >선택</BTN>
+                    <BTN isActive={score === 3} onClick={() => ScoreChange(3)} disabled={score === -2}>선택</BTN>
                 </ScoreOption>
             </ScoreSelect>
             <Point>

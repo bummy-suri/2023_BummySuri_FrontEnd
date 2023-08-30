@@ -72,31 +72,18 @@ const KlipBtn = () => {
           setQrvalue_auth(getKlipAccessUrl("QR", request_key));
         }
         
-
-        if (isMobile) {
-          window.location.href = getKlipAccessUrl("deeplink", request_key);
-        } else {
-          setQrvalue_auth(getKlipAccessUrl("QR", request_key));
-        }
-
-
         axios
-          .post('/user', {
-            requestKey: request_key
+          .post(`/user`, {
+            requestKey: request_key,
           })
           .then((response) => {
-            const { accessToken } = response.data;
-
-            localStorage.setItem("accessToken", accessToken);
-            console.log("accessToken", accessToken);
-          })
+              const { accessToken } = response.data;
+              console.log("accessToken", accessToken);
+            })
           .catch((error) => {
-            console.error("Error backend request:", error);
+            console.error(error);
           });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+        });
   };
       
 

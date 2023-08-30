@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import KlipLogo from "../../assets/Login/KlipLogo.png";
 import KakaoLogo from "../../assets/Login/KakaoLogo.png";
 import menu from "../../assets/Login/menu.png";
+import Klip from "../../assets/Login/Klip.png";
 
 //AboutKlip 누르면 나오는 토글내용
 const Total = styled.div`
@@ -24,16 +25,16 @@ const What = styled.div`
 `;
 
 const Image = styled.img`
-    width: 99.31px;
-    height: 100px;
-    margin-top: 26px;
+    width: 169px;
+    height: 115px;
 `;
 
 const Klipis = styled.div`
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
     margin-top: 19px;
     font-family: "Pretendard_Thin";
+    line-height: 18px;
 `;
 
 const Bold = styled.span`
@@ -105,9 +106,10 @@ const KlipIntro = () => {
     return (
         <Total>
             <What>Klip이란?</What>
-            <Image src={KlipLogo}></Image>
+            <Image src={Klip}></Image>
             <Klipis>
-                <Bold>클립</Bold>은 클레이튼과 이더리움 네트워크 자산을<br/>안전하고 편리하게 관리할 수 있는<br/>카카오 기반 지갑입니다.
+            클립은 클레이튼, 이더리움, 폴리곤 네트워크 자산을 <br/>
+            안전하고 편리하게 관리할 수 있는 디지털 자산 지갑입니다.
             </Klipis>
             <a href="https://klipwallet.com/" target="_blank"><Btn style={{marginTop:"10px", textDecoration:"none"}}>자세히 알아보기</Btn></a>
             <FromKaKao>

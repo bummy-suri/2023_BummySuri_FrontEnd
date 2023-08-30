@@ -265,42 +265,26 @@ const PopupContainer = styled.div`
 
 const Lending = ()=> {
     const [loggedIn, setLoggedIn] = useState(false);
-    const [popupOpen, setPopupOpen] = useState(false); //준비중 팝업
 
 
     const navigate = useNavigate();
 
     const menuClick = () => {
-      //navigate('/Login'); 원래 로그인 부분 코드!
+      navigate('/Login');
     }
     
 
     return (
       <Container>
         <Link to="/" style={{textDecoration:"none", color:"white"}}><Logo/></Link>
-        <LoginBTN onClick={() => setPopupOpen(true)}>로그인</LoginBTN>
+        <LoginBTN>로그인</LoginBTN>
 
-        {popupOpen && (
-          <Popup>
-            <PopupContainer>
-              서비스 준비중입니다.
-              <button 
-              onClick={() => setPopupOpen(false)}
-              style={{backgroundColor:"#7000FF", color:"white", width:"65px", height:"23px", border:"none", borderRadius:"4px", marginTop: "10px"}}>
-              닫기</button>
-            </PopupContainer>
-          </Popup>
-        )}
-
-
-        {/* 로그인부분 원래 코드! 
           {loggedIn ? 
             <SideBar>
               <SideBarContents/>
             </SideBar>
             : <LoginBTN onClick={menuClick}>로그인</LoginBTN>
           }
-        */}
 
 
 
@@ -322,10 +306,9 @@ const Lending = ()=> {
 
         </SubContainer>
 
-        <BTN onClick={() => setPopupOpen(true)} style={{ textDecoration: 'none', color: 'white' }}>버미와 수리 만나러 가기!</BTN>
-        {/* 버미수리 만나러가기 버튼 원래 코드!! 
+
         <BTN><Link to="/Minting" style={{ textDecoration: 'none', color: 'white' }}>버미와 수리 만나러 가기!</Link></BTN>
-        */}
+
         
         <SubContainer>
           <SubContent>

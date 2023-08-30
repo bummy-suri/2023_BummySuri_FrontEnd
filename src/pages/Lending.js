@@ -130,6 +130,7 @@ const BTN = styled.button`
   border-radius: 8px;
   font-size: 16px;
   font-weight: 800;
+  color: white;
   @media (max-width: 400px) {
     width: 95%;
     font-size: 14px;
@@ -265,6 +266,8 @@ const PopupContainer = styled.div`
 
 const Lending = ()=> {
     const [loggedIn, setLoggedIn] = useState(false);
+    const [popupOpen, setPopupOpen] = useState(false); //준비중 팝업
+    const [popupOpen2, setPopupOpen2] = useState(false); 
 
 
     const navigate = useNavigate();
@@ -272,26 +275,59 @@ const Lending = ()=> {
     const menuClick = () => {
       navigate('/Login');
     }
+
+    const DownloadClick = () => {
+      
+      const userAgent = navigator.userAgent;
+
+      // iOS인 경우  --> 잘 되는지 확인 필요
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        window.location.href = 'https://apps.apple.com/kr/app/%ED%95%98%EC%9D%B4%EB%93%9C%EB%AF%B8%ED%94%8C%EB%A6%AC%EC%A6%88/id1663171012'; // iOS 앱스토어 링크로 이동
+      }
+
+      // Android인 경우
+      else if (/android/i.test(userAgent)) {
+        window.location.href = 'https://play.google.com/store/apps/details?id=com.kr.hideme&hl=ko-KR'; // Google Play 스토어 링크로 이동
+      }
+
+      else{
+        setPopupOpen2(true);
+      }
+    }
     
 
     return (
       <Container>
         <Link to="/" style={{textDecoration:"none", color:"white"}}><Logo/></Link>
-        <LoginBTN>로그인</LoginBTN>
+        <LoginBTN onClick={() => setPopupOpen(true)}>로그인</LoginBTN>
 
+        {popupOpen && (
+          <Popup>
+            <PopupContainer>
+              9월 6일 오전 9시에 만나요!
+              <button 
+              onClick={() => setPopupOpen(false)}
+              style={{backgroundColor:"#7000FF", color:"white", width:"65px", height:"23px", border:"none", borderRadius:"4px", marginTop: "10px"}}>
+              닫기</button>
+            </PopupContainer>
+          </Popup>
+        )}
+
+
+        {/* 로그인부분 원래 코드! 
           {loggedIn ? 
             <SideBar>
               <SideBarContents/>
             </SideBar>
             : <LoginBTN onClick={menuClick}>로그인</LoginBTN>
           }
+        */}
 
 
 
 
 
         <SubContainer>
-          {/* 이미지 추후 변경 / 수정 될 듯 */}
           <img src={BummySuri} style={{margin:"0 auto", overflow:"hidden", width:"80vw"}} alt="버미수리이미지" />
           <Title>
             <Tiger>버미</Tiger>와 <Eagle>수리</Eagle>가
@@ -307,7 +343,10 @@ const Lending = ()=> {
         </SubContainer>
 
 
+        <BTN onClick={() => setPopupOpen(true)} style={{ textDecoration: 'none', color: 'white' }}>버미와 수리 만나러 가기!</BTN>
+        {/* 버미수리 만나러가기 버튼 원래 코드!! 
         <BTN><Link to="/Minting" style={{ textDecoration: 'none', color: 'white' }}>버미와 수리 만나러 가기!</Link></BTN>
+        */}
 
         
         <SubContainer>
@@ -352,7 +391,18 @@ const Lending = ()=> {
           <ColoredText>오프라인 할인 혜택</ColoredText>을 받아가세요! <br />
           </SubContent>
 
-          <BTN><a href="https://hidemeplease.xyz" style={{ textDecoration: 'none', color: 'white' }}>혜택 알아보기!</a></BTN>
+          <BTN onClick={DownloadClick}>혜택 알아보기!</BTN>
+          {popupOpen2 && (
+          <Popup>
+            <PopupContainer>
+              모바일로 접속해주세요!
+              <button 
+              onClick={() => setPopupOpen2(false)}
+              style={{backgroundColor:"#7000FF", color:"white", width:"65px", height:"23px", border:"none", borderRadius:"4px", marginTop: "10px"}}>
+              닫기</button>
+            </PopupContainer>
+          </Popup>
+        )}
 
         </SubContainer>
 
@@ -366,10 +416,10 @@ const Lending = ()=> {
             <img src={Benefit0202} alt="가위바위보" />
           </Benefit02>
           <SubContent>
-          NFT 소유자는 정기 교류전 <ColoredText>경기 예측</ColoredText>과 <br />
+          버미와 수리 홀더는 정기 교류전 <ColoredText>경기 예측</ColoredText>과 <br />
           <ColoredText>가위바위보 게임</ColoredText>에 참여할 수 있어요. <br />
           <br />
-          포인트를 가장 많이 모은 10명에게 <br />
+          포인트를 가장 많이 모은 재학생 10명에게 <br />
           경품을 드립니다! <br />
           </SubContent>
         </SubContainer>

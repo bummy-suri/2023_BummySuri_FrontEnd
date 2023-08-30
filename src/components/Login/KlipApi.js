@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+
 import styled from 'styled-components';
 import QRcode from "qrcode.react";
 import axios from "axios";
@@ -48,6 +49,7 @@ const getKlipAccessUrl = (method, request_key) => {
 
 const KlipBtn = () => {
   const [qrvalue_auth, setQrvalue_auth] = useState(DEFAULT_QR_CODE);
+  const walletAddress = useRef('');
 
   const getUserData = () => {
     // Prepare
@@ -61,6 +63,7 @@ const KlipBtn = () => {
       .then((response) => {
         const { request_key } = response.data;
         console.log(request_key);
+        localStorage.setItem("requestKey", request_key);
 
         // Request
         if (isMobile) {
@@ -68,10 +71,35 @@ const KlipBtn = () => {
         } else {
           setQrvalue_auth(getKlipAccessUrl("QR", request_key));
         }
+        
 
+        if (isMobile) {
+          window.location.href = getKlipAccessUrl("deeplink", request_key);
+        } else {
+          setQrvalue_auth(getKlipAccessUrl("QR", request_key));
+        }
+
+
+        axios
+          .post('/user', {
+            requestKey: request_key
+          })
+          .then((response) => {
+            const { accessToken } = response.data;
+
+            localStorage.setItem("accessToken", accessToken);
+            console.log("accessToken", accessToken);
+          })
+          .catch((error) => {
+            console.error("Error backend request:", error);
+          });
+      })
+      .catch((error) => {
+        console.error(error);
       });
-
   };
+      
+
 
 
 

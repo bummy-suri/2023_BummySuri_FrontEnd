@@ -10,6 +10,8 @@ import BetFinish from "./pages/Bet/BetFinish";
 import Bet from "./pages/Bet/Bet";
 import QuizIntro from "./pages/Game/ImageQuiz/QuizIntro";
 import ImageQuiz from "./pages/Game/ImageQuiz/ImageQuiz";
+import MyPrediction from "./pages/Bet/MyPrediction";
+import GameResult from "./pages/Bet/GameResult";
 
 function DefaultRouter () {
     return (
@@ -23,6 +25,8 @@ function DefaultRouter () {
           <Route path="/bet/intro" element={<BetIntro />} />
           <Route path="/bet/finish" element={<BetFinish />} />
           <Route path="/bet" element={<Bet/>}/>
+          <Route path="/bet/my-prediction" element={<MyPrediction/>}/>
+          <Route path="/bet/result" element={<GameResult/>}/>
           <Route path="/imageQuiz/intro" element={<QuizIntro />} />
           <Route path="/imageQuiz" element={<ImageQuiz />} />
           

@@ -148,7 +148,7 @@ const ImageQuiz = () => {
             onChange={handleAnswerChange}
           />
         </Answer>
-            <Link to="/ImageQuiz"><Btn>제출하기!</Btn></Link>
+            <Btn>제출하기!</Btn>
         </Background>
         </div>
         );

@@ -84,12 +84,16 @@ const getRandomChoice = () => {
 const Rps = () => {
     const location = useLocation(); 
     const selectedChoice = location.state?.selectedChoice || '';  //이전 페이지에서 선택한 rps값 가져오기
-    const opponentChoice = getRandomChoice();
+    const opponentChoice = getRandomChoice(); 
 
     const [showResultText, setShowResultText] = useState(false);
+    //팝업
     const [showWinPopup, setShowWinPopup] = useState(false);
     const [showLosePopup, setShowLosePopup] = useState(false);
     const [showSamePopup, setShowSamePopup] = useState(false);
+    const [showOpponentChoice, setShowOpponentChoice] = useState(false);
+    const [opponentBoxColor, setOpponentBoxColor] = useState("#333"); // 수리 결과
+    const [showOpponentImage, setShowOpponentImage] = useState(false);
 
     //이미지랑 매핑..
     const choicesMap = {
@@ -98,12 +102,30 @@ const Rps = () => {
         가위: { text: '가위', image: scissors },
     };
 
-    const opponentImage = choicesMap[opponentChoice].image;
-    const opponentText = choicesMap[opponentChoice].text;
+    const [opponentImage, setOpponentImage] = useState(choicesMap[opponentChoice].image);
+    const [opponentText, setOpponentText] = useState(choicesMap[opponentChoice].text);
     const myImage = choicesMap[selectedChoice].image;
 
+    //수리의 가위바위보 결과
+    useEffect(() => {
+        const delay = 1000;
+
+        const timeoutId = setTimeout(() => {
+            setShowOpponentChoice(true);
+            setOpponentBoxColor("#7000FF");
+            setShowOpponentImage(true);
+        }, delay);
+
+        return () => {
+            clearTimeout(timeoutId);
+        };
+    }, []);
+
+
+
+    //가위바위보 결과 팝업
     useEffect(() => { 
-        const delay = 1500;  //팝업 뜨는 시간
+        const delay = 2500;
 
         const timeoutId = setTimeout(() => {
             setShowResultText(true);
@@ -137,9 +159,17 @@ const Rps = () => {
                 수리
             </Who>
             
-            <ResultBox>
-                {opponentText}
-                <Image src={opponentImage} style={{transform:"rotate(180deg)"}} alt="수리 선택" />
+            <ResultBox style={{ backgroundColor: opponentBoxColor }}>
+                {showOpponentImage ? (
+                    <>
+                        {opponentText}
+                        <Image src={opponentImage} style={{transform: "rotate(180deg)"}} alt="수리 선택" />
+                    </>
+                ) : ( 
+                    <div style={{fontSize:"40px"}}>
+                        ?
+                    </div>
+                )}
             </ResultBox>
 
             <ResultBox style={{marginTop:"190px"}}>
@@ -170,4 +200,3 @@ const Rps = () => {
 }
 
 export default Rps;
-

@@ -12,10 +12,13 @@ import QuizIntro from "./pages/Game/ImageQuiz/QuizIntro";
 import ImageQuiz from "./pages/Game/ImageQuiz/ImageQuiz";
 import MyPrediction from "./pages/Bet/MyPrediction";
 import GameResult from "./pages/Bet/GameResult";
+import BenefitPopup from "./components/Lending/BenefitPopup";
+import ScrollToTop from "./components/ScrollToTop";
 
 function DefaultRouter () {
     return (
       <Router>
+        <ScrollToTop/>
         <Routes>
           <Route path="/" element={<Lending />} />
           <Route path="/Login" element={<Login />} />
@@ -29,6 +32,8 @@ function DefaultRouter () {
           <Route path="/bet/result" element={<GameResult/>}/>
           <Route path="/imageQuiz/intro" element={<QuizIntro />} />
           <Route path="/imageQuiz" element={<ImageQuiz />} />
+
+          <Route path="/hmpBenefit" element={<BenefitPopup/>}/>
           
           </Routes>
     </Router>

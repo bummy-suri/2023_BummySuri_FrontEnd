@@ -299,22 +299,7 @@ const Lending = ()=> {
     return (
       <Container>
         <Link to="/" style={{textDecoration:"none", color:"white"}}><Logo/></Link>
-        <LoginBTN>로그인</LoginBTN>
 
-        {popupOpen && (
-          <Popup>
-            <PopupContainer>
-              9월 6일 오전 9시에 만나요!
-              <button 
-              onClick={() => setPopupOpen(false)}
-              style={{backgroundColor:"#7000FF", color:"white", width:"65px", height:"23px", border:"none", borderRadius:"4px", marginTop: "10px"}}>
-              닫기</button>
-            </PopupContainer>
-          </Popup>
-        )}
-
-
-        
           {loggedIn ? 
             <SideBar>
               <SideBarContents/>
@@ -347,6 +332,17 @@ const Lending = ()=> {
         {/* 버미수리 만나러가기 버튼 원래 코드!! 
         <BTN><Link to="/Minting" style={{ textDecoration: 'none', color: 'white' }}>버미와 수리 만나러 가기!</Link></BTN>
         */}
+        {popupOpen && (
+          <Popup>
+            <PopupContainer>
+              9월 6일 오전 9시에 만나요!
+              <button 
+              onClick={() => setPopupOpen(false)}
+              style={{backgroundColor:"#7000FF", color:"white", width:"65px", height:"23px", border:"none", borderRadius:"4px", marginTop: "10px"}}>
+              닫기</button>
+            </PopupContainer>
+          </Popup>
+        )}
 
         
         <SubContainer>

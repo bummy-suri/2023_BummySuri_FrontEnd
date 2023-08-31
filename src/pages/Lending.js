@@ -282,7 +282,7 @@ const Lending = ()=> {
 
       // iOS인 경우  --> 잘 되는지 확인 필요
       if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.href = 'https://apps.apple.com/kr/app/%ED%95%98%EC%9D%B4%EB%93%9C%EB%AF%B8%ED%94%8C%EB%A6%AC%EC%A6%88/id1663171012'; // iOS 앱스토어 링크로 이동
+        window.location.href = 'https://apps.apple.com/kr/app/%ED%95%98%EC%9D%B4%EB%93%9C%EB%AF%B8%ED%94%8C%EB%A6%AC%EC%A6%88/id1663171012';
       }
 
       // Android인 경우
@@ -315,15 +315,13 @@ const Lending = ()=> {
 
 
         
+
           {loggedIn ? 
             <SideBar>
               <SideBarContents/>
             </SideBar>
             : <LoginBTN onClick={menuClick}>로그인</LoginBTN>
           }
-
-
-
 
 
 
@@ -347,6 +345,17 @@ const Lending = ()=> {
         {/* 버미수리 만나러가기 버튼 원래 코드!! 
         <BTN><Link to="/Minting" style={{ textDecoration: 'none', color: 'white' }}>버미와 수리 만나러 가기!</Link></BTN>
         */}
+        {popupOpen && (
+          <Popup>
+            <PopupContainer>
+              9월 6일 오전 9시에 만나요!
+              <button 
+              onClick={() => setPopupOpen(false)}
+              style={{backgroundColor:"#7000FF", color:"white", width:"65px", height:"23px", border:"none", borderRadius:"4px", marginTop: "10px"}}>
+              닫기</button>
+            </PopupContainer>
+          </Popup>
+        )}
 
         
         <SubContainer>

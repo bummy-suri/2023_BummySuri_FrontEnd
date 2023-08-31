@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback } from "react";
 
 import styled from 'styled-components';
 import QRcode from "qrcode.react";
@@ -39,7 +39,7 @@ const DEFAULT_QR_CODE = "DEFAULT";
 const A2P_API_PREPARE_URL = "https://a2a-api.klipwallet.com/v2/a2a/prepare";
 const APP_NAME = "BUMMY & SURI";
 const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|Windows Phone/i.test(window.navigator.userAgent);
-const SendRequestKey_URL = "https://api.dev.bummysuri.com/users";
+const SendRequestKey_URL = "https://api.dev.bummysuri.com/";
 
 const getKlipAccessUrl = (method, request_key) => {
   if (method === "QR") {
@@ -52,43 +52,10 @@ const KlipBtn = () => {
   const [qrvalue_auth, setQrvalue_auth] = useState(DEFAULT_QR_CODE);
   const walletAddress = useRef('');
 
-  const getUserData = (setQrvalue, callback) => {
-    localStorage.clear()
-    // Prepare
-    axios
-      .post(A2P_API_PREPARE_URL, {
-        bapp: {
-          name: APP_NAME,
-        },
-        type: "auth",
-      })
-      .then((response) => {
-        const { request_key } = response.data;
-        console.log(request_key);
-        localStorage.setItem("requestKey", request_key);
-
-        // Request
-        if (isMobile) {
-          window.location.href = getKlipAccessUrl("deeplink", request_key);
-        } else {
-          setQrvalue_auth(getKlipAccessUrl("QR", request_key));
-        }
-
-        
-
-
-        sendRequestKey(request_key);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-
-        
-
-  };
+ 
       
 
-  const sendRequestKey = (request_key) => {
+  const sendRequestKey = useCallback((request_key) => {
     axios
       .post(SendRequestKey_URL, {
         requestKey: request_key,
@@ -101,8 +68,34 @@ const KlipBtn = () => {
       .catch((error) => {
         console.error(error);
       });
-  };
+  }, []);
 
+  const getUserData = useCallback(() => {
+    localStorage.clear();
+    axios
+      .post(A2P_API_PREPARE_URL, {
+        bapp: {
+          name: APP_NAME,
+        },
+        type: "auth",
+      })
+      .then((response) => {
+        const { request_key } = response.data;
+        console.log(request_key);
+        localStorage.setItem("requestKey", request_key);
+
+        if (isMobile) {
+          window.location.href = getKlipAccessUrl("deeplink", request_key);
+        } else {
+          setQrvalue_auth(getKlipAccessUrl("QR", request_key));
+        }
+
+        sendRequestKey(request_key);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [sendRequestKey]);
 
 
 

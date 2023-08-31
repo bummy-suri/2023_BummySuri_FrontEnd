@@ -10,7 +10,7 @@ const Popup = styled.div`
   min-height: 100vh;
   background-color: #1D1D1D;
   border-radius: 8px;
-  
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +30,7 @@ const BenefitContainer = styled.div`
   background: linear-gradient(97.14deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.15) 100%);
   
   border: 1px solid white;
-
+  position: relative;
   @media (max-width: 300px) {
     width:250px;
     height: 750px;
@@ -112,7 +112,6 @@ const List2 = styled.div`
     align-items: center;
     justify-content: flex-start;
     margin-bottom: 18px;
-    font-family: "Pretendard_Thin";
 `
 
 
@@ -199,6 +198,15 @@ const SubList = styled.ul`
 `;
 
 
+const CloseBTN = styled.button`
+    border: none;
+    background-color: rgba(0,0,0,0);
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    color: rgba(170,170,170,1);
+`;
+
 const BenefitPopup = () => {
     const [popupOpen, setPopupOpen] = useState(false); 
 
@@ -221,16 +229,11 @@ const BenefitPopup = () => {
         }
       }
 
-      const clickBackground = () => {
-        window.history.back();
-      }
-      const clickMainPart = (event) => {
-        event.stopPropagation();
-      }
 
     return (
-        <Popup onClick={clickBackground}>
-            <BenefitContainer onClick={clickMainPart}>
+        <Popup>
+            <BenefitContainer>
+              <CloseBTN onClick={() => window.history.back()}>X</CloseBTN>
               <Benefit>
                 <BenefitTitle>버미와 수리 X 하이드미플리즈 혜택</BenefitTitle>
                 <ListContainer>

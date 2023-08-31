@@ -185,7 +185,6 @@ const Content = styled.div`
 
 const SubList = styled.ul`
     font-size: 15px;
-    font-family: "Pretendard_Thin";
     margin-left: 25px;
     margin-top: 0px;
     li{
@@ -255,7 +254,7 @@ const BenefitPopup = () => {
                     <Circle>3</Circle>
                     <Content>
                     기타 블루체크맵<br />
-                    <Stress>제휴 공간들 혜택 제공</Stress>
+                    <Stress>제휴 공간들 다양한 혜택 제공</Stress>
                     </Content>
                   </List>
                   <SubList>

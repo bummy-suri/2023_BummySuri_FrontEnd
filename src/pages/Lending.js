@@ -269,7 +269,7 @@ const PopupContainer = styled.div`
 const Lending = ()=> {
     const [loggedIn, setLoggedIn] = useState(false);
     const [popupOpen, setPopupOpen] = useState(false); //준비중 팝업
-    const [popupOpen2, setPopupOpen2] = useState(false); 
+    
 
 
     const navigate = useNavigate();
@@ -277,31 +277,16 @@ const Lending = ()=> {
     const menuClick = () => {
       navigate('/Login');
     }
-
-    const DownloadClick = () => {
-      
-      const userAgent = navigator.userAgent;
-
-      // iOS인 경우  --> 잘 되는지 확인 필요
-      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.href = 'https://apps.apple.com/kr/app/%ED%95%98%EC%9D%B4%EB%93%9C%EB%AF%B8%ED%94%8C%EB%A6%AC%EC%A6%88/id1663171012';
-      }
-
-      // Android인 경우
-      else if (/android/i.test(userAgent)) {
-        window.location.href = 'https://play.google.com/store/apps/details?id=com.kr.hideme&hl=ko-KR'; // Google Play 스토어 링크로 이동
-      }
-
-      else{
-        setPopupOpen2(true);
-      }
-    }
     
+
+    const clickBenefitBTN = () => {
+      navigate('/hmpBenefit');
+    }
+
 
     return (
       <Container>
         <Link to="/" style={{textDecoration:"none", color:"white"}}><Logo/></Link>
-        <LoginBTN>로그인</LoginBTN>
 
         {popupOpen && (
           <Popup>
@@ -402,18 +387,7 @@ const Lending = ()=> {
           <ColoredText>오프라인 할인 혜택</ColoredText>을 받아가세요! <br />
           </SubContent>
 
-          <BTN onClick={DownloadClick}>혜택 알아보기!</BTN>
-          {popupOpen2 && (
-          <Popup>
-            <PopupContainer>
-              모바일로 접속해주세요!
-              <button 
-              onClick={() => setPopupOpen2(false)}
-              style={{backgroundColor:"#7000FF", color:"white", width:"65px", height:"23px", border:"none", borderRadius:"4px", marginTop: "10px"}}>
-              닫기</button>
-            </PopupContainer>
-          </Popup>
-        )}
+          <BTN onClick={clickBenefitBTN}>혜택 알아보기!</BTN>
 
         </SubContainer>
 

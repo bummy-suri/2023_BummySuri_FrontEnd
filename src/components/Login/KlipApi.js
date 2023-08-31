@@ -39,19 +39,20 @@ const DEFAULT_QR_CODE = "DEFAULT";
 const A2P_API_PREPARE_URL = "https://a2a-api.klipwallet.com/v2/a2a/prepare";
 const APP_NAME = "BUMMY & SURI";
 const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|Windows Phone/i.test(window.navigator.userAgent);
+const SendRequestKey_URL = "https://api.dev.bummysuri.com/users";
 
 const getKlipAccessUrl = (method, request_key) => {
   if (method === "QR") {
-    return `https://klipwallet.com/?target=/a2a?request_key=${request_key}`;
-  }
-  return `kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${request_key}`;
-};
+      return `https://klipwallet.com/?target=/a2a?request_key=${request_key}`;
+    }
+    return `kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${request_key}`;
+  };
 
 const KlipBtn = () => {
   const [qrvalue_auth, setQrvalue_auth] = useState(DEFAULT_QR_CODE);
   const walletAddress = useRef('');
 
-  const getUserData = () => {
+  const getUserData = (setQrvalue, callback) => {
     localStorage.clear()
     // Prepare
     axios
@@ -73,6 +74,8 @@ const KlipBtn = () => {
           setQrvalue_auth(getKlipAccessUrl("QR", request_key));
         }
 
+        
+
 
         sendRequestKey(request_key);
         })
@@ -87,7 +90,7 @@ const KlipBtn = () => {
 
   const sendRequestKey = (request_key) => {
     axios
-      .post('/users', {
+      .post(SendRequestKey_URL, {
         requestKey: request_key,
       })
       .then(response => {

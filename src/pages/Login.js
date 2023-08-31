@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from "react";
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import Logo from "../components/Logo";
 import AboutKlip from "../components/Login/AboutKlip";
 import KlipBtn from "../components/Login/KlipApi";
 import BummySuriimage from "../assets/BummySuri.png";
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 
 const Total = styled.div`
@@ -16,6 +27,9 @@ const Total = styled.div`
   align-items: center;
   justify-content: flex-start;
   position: relative;
+  opacity: 0.8;
+  transform: translateY(15px);
+  animation: ${fadeIn} 2s ease-out forwards;
 `;
 
 const Intro = styled.div`
@@ -52,6 +66,12 @@ color: #FFFFFF;
 
 
 const Login = () => {
+  const [isPageLoaded, setPageLoaded] = useState(false);
+
+  useEffect(() => {
+    setPageLoaded(true);
+  }, []);
+
   return (
     <Total >
       <Logo/>

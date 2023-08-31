@@ -299,7 +299,7 @@ const Lending = ()=> {
     return (
       <Container>
         <Link to="/" style={{textDecoration:"none", color:"white"}}><Logo/></Link>
-        <LoginBTN onClick={() => setPopupOpen(true)}>로그인</LoginBTN>
+        <LoginBTN>로그인</LoginBTN>
 
         {popupOpen && (
           <Popup>
@@ -314,14 +314,14 @@ const Lending = ()=> {
         )}
 
 
-        {/* 로그인부분 원래 코드! 
+        
           {loggedIn ? 
             <SideBar>
               <SideBarContents/>
             </SideBar>
             : <LoginBTN onClick={menuClick}>로그인</LoginBTN>
           }
-        */}
+
 
 
 

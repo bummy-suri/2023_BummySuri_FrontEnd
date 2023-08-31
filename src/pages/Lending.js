@@ -175,7 +175,7 @@ const ColoredText = styled.span`
 `;
 
 
-const InstaDiv = styled.div`
+const InstaDiv = styled.a`
   width: 248px;
   height: 132px;
   border-radius: 12px;
@@ -187,6 +187,9 @@ const InstaDiv = styled.div`
   flex-direction: column;
   align-items: center;
 
+  color: white;
+  text-decoration: none;
+  
   img{
     width: 46px;
     height: 46px;
@@ -414,7 +417,7 @@ const Lending = ()=> {
           <SubTitle>
             버미와 수리 세 번째 혜택!
           </SubTitle> 
-          <InstaDiv>
+          <InstaDiv href="https://instagram.com/bummy_suri_official?igshid=NTc4MTIwNjQ2YQ==">
             <img src={Insta} alt="인스타그램 로고" />
             <div>@bummy_suri_official</div>
           </InstaDiv>

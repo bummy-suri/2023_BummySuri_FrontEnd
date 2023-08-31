@@ -185,7 +185,6 @@ const Content = styled.div`
 
 const SubList = styled.ul`
     font-size: 15px;
-    font-family: "Pretendard_Thin";
     margin-left: 25px;
     margin-top: 0px;
     li{

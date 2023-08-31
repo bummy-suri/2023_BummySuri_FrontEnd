@@ -133,6 +133,7 @@ const PointAmount = styled.div`
     font-size: 18px;
     font-weight: 800;
     margin-right: 10px;
+    margin-top: 5px;
     @media(max-width: 365px){
         font-size: 13px;
         margin-right: 10px;

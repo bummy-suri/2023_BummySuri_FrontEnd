@@ -264,6 +264,8 @@ const PopupContainer = styled.div`
   }
 `;
 
+
+
 const Lending = ()=> {
     const [loggedIn, setLoggedIn] = useState(false);
     const [popupOpen, setPopupOpen] = useState(false); //준비중 팝업

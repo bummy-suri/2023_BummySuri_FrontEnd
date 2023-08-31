@@ -132,6 +132,7 @@ const Score = styled.div`
 const PointAmount = styled.div`
     font-size: 18px;
     font-weight: 800;
+    margin-top: 5px;
     margin-right: 10px;
     @media(max-width: 365px){
         font-size: 13px;
@@ -140,19 +141,14 @@ const PointAmount = styled.div`
 `;
 
 const TotalP = styled.div`
-    width: 254px;
-    background-color: rgba(112, 0, 255, 1);
-    border-radius: 10px;
-    margin-top: 15px;
-    height: 42px;
-    font-size: 20px;
-    /* text-align: center; */
-    display: flex;
+    margin-top: 25px;
+    font-size: 16px;
+    font-weight: 700;
+    color:black;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     @media(max-width: 365px){
-         width: 200px;
-         height: 28px;
          font-size: 12px;
      }
 `;

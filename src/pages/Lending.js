@@ -282,7 +282,7 @@ const Lending = ()=> {
 
       // iOS인 경우  --> 잘 되는지 확인 필요
       if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.href = 'https://apps.apple.com/kr/app/%ED%95%98%EC%9D%B4%EB%93%9C%EB%AF%B8%ED%94%8C%EB%A6%AC%EC%A6%88/id1663171012'; // iOS 앱스토어 링크로 이동
+        window.location.href = 'https://apps.apple.com/kr/app/%ED%95%98%EC%9D%B4%EB%93%9C%EB%AF%B8%ED%94%8C%EB%A6%AC%EC%A6%88/id1663171012';
       }
 
       // Android인 경우
@@ -299,7 +299,7 @@ const Lending = ()=> {
     return (
       <Container>
         <Link to="/" style={{textDecoration:"none", color:"white"}}><Logo/></Link>
-        <LoginBTN onClick={() => setPopupOpen(true)}>로그인</LoginBTN>
+        <LoginBTN>로그인</LoginBTN>
 
         {popupOpen && (
           <Popup>
@@ -314,14 +314,14 @@ const Lending = ()=> {
         )}
 
 
-        {/* 로그인부분 원래 코드! 
+        
           {loggedIn ? 
             <SideBar>
               <SideBarContents/>
             </SideBar>
             : <LoginBTN onClick={menuClick}>로그인</LoginBTN>
           }
-        */}
+       
 
 
 

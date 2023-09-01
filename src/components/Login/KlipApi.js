@@ -85,11 +85,10 @@ const KlipBtn = () => {
               `https://a2a-api.klipwallet.com/v2/a2a/result?request_key=${request_key}`
             )
             .then((res) => {
-              sendRequestKey(request_key);
-              console.log(res.data);
               if (res.data.result) {
+                console.log(res.data);
+                sendRequestKey(request_key);
                 clearInterval(timerId);
-                window.location.href = '/';
               }
             });
         }, 1000);
@@ -125,7 +124,8 @@ const KlipBtn = () => {
         sessionStorage.setItem("accessToken", accessToken);
         console.log("accessToken", accessToken);
         let timerId = setInterval(() => {
-        clearInterval(timerId);
+          window.location.href = '/';
+          clearInterval(timerId);
       }, 1000);
       })
       .catch((error) => {

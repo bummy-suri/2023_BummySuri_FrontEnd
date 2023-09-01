@@ -5,6 +5,8 @@ import downBtn from "../../assets/Login/downBtn.png";
 import {Link} from "react-router-dom";
 import NoNFT from "../../assets/SideBar/NoNFT.png";
 import axios from "axios";
+import { API } from "../../config";
+
 
 //사이드바에 들어가는 내용
 const Total = styled.div`
@@ -109,8 +111,7 @@ const SideBarContents = ()=> {
   });
   
   useEffect(() => {
-    // 백엔드 API에 GET 요청 보내기
-    axios.get("https://api.dev.bummysuri.com/users", {
+    axios.get(`${API}/users`, {
       headers:{
         Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
         }

@@ -285,8 +285,8 @@ const Lending = ()=> {
 
 
     useEffect(() => {
-      const requestKey = sessionStorage.getItem('requestKey');
-      if (requestKey) {
+      const accessToken = sessionStorage.getItem('accessToken');
+      if (accessToken) {
           setLoggedIn(true);
       }
   }, []);

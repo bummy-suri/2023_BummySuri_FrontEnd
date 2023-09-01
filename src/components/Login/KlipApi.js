@@ -4,9 +4,7 @@ import styled from 'styled-components';
 import QRcode from "qrcode.react";
 import axios from "axios";
 
-import { prepare, request } from 'klip-sdk';
-const SUCCESSLINK = 'http://10.10.1.194:3000/';
-const FAILLINK = '/login';
+import { API } from '../../config';
 
 const Klipbtn = styled.button`
   width: 334px;
@@ -99,23 +97,10 @@ const KlipBtn = () => {
   };
 
 
-  const prepareAuth = async () => {
-    try {
-      const prepareResult = await prepare.auth({ bappName: APP_NAME, successLink: SUCCESSLINK, failLink: FAILLINK });
-      const requestKey = prepareResult.request_key;
-      request(requestKey, () => alert('모바일로 접속해랏!'));
-      sessionStorage.setItem('BUMISURI_NFT', requestKey);
-    } catch (error) {
-      console.log(error, 'error!!!!!!');
-      return null;
-    }
-    sendRequestKey(sessionStorage.getItem("BUMISURI_NFT"));
-  };
-
 
   const sendRequestKey = (request_key) => {
     axios
-      .post('https://api.dev.bummysuri.com/users', {
+      .post(`${API}/users`, {
         requestKey: request_key,
       })
       .then(response => {

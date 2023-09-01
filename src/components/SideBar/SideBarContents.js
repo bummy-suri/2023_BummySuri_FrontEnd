@@ -161,7 +161,7 @@ const SideBarContents = ()=> {
                         <button
                             onClick={() => setMintingPopupOpen(false)}
                             style={{ backgroundColor: "#7000FF", color: "white", width: "55px", height: "23px", border: "none", borderRadius: "4px", marginTop: "10px" }}>
-                            닫기
+                            닫기 
                         </button>
                     </PopupContainer>
                 </Popup>

@@ -411,10 +411,13 @@ const Lending = ()=> {
           <SubTitle>
             버미와 수리 세 번째 혜택!
           </SubTitle> 
-          <InstaDiv>
+            <InstaDiv>
+            <a href="https://www.instagram.com/bummy_suri_official/" target="_blank"> 
             <img src={Insta} alt="인스타그램 로고" />
+            </a>
             <div>@bummy_suri_official</div>
           </InstaDiv>
+          
           <SubContent>
             버미와 수리를 가지기만 해도 선물이 팡팡?<br />
             <ColoredText>버미와 수리 공식 인스타그램</ColoredText>에서<br />

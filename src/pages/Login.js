@@ -27,9 +27,6 @@ const Total = styled.div`
   align-items: center;
   justify-content: flex-start;
   position: relative;
-  opacity: 0.8;
-  transform: translateY(15px);
-  animation: ${fadeIn} 2s ease-out forwards;
 `;
 
 const Intro = styled.div`
@@ -42,6 +39,7 @@ const Intro = styled.div`
   @media (min-width: 800px) {
     font-size: 30px;
   }
+  animation: ${fadeIn} 2s ease-out forwards;
 `
 
 const Red = styled.span`
@@ -51,19 +49,13 @@ const Blue = styled.span`
   color: #1657FF;
 `;
 
-const Klipbtn = styled.button`
-width: 236px;
-height: 50px;
-background-color: #C565E7;
-font-size: 20px;
-border: none;
-border-radius: 10px;
-cursor: pointer;
-margin-top: 56px;
-margin-bottom: 29px;
-color: #FFFFFF;
-`
 
+const BummySuriImage = styled.img`
+  margin: 0 auto;
+  overflow: hidden;
+  width: 80vw;
+  animation: ${fadeIn} 2s ease-out forwards;
+`;
 
 const Login = () => {
   const [isPageLoaded, setPageLoaded] = useState(false);
@@ -78,7 +70,7 @@ const Login = () => {
       <Intro>
         <Red>Bummy</Red>&<Blue>Suri</Blue> 프로젝트는<br/> 클립과 함께 합니다.
       </Intro>
-      <img src={BummySuriimage} style={{margin:"0 auto", overflow:"hidden", width:"80vw"}} />
+      <BummySuriImage src={BummySuriimage} style={{margin:"0 auto", overflow:"hidden", width:"80vw"}} />
       <AboutKlip/>
       <KlipBtn/>
     </Total>

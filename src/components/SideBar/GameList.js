@@ -70,8 +70,6 @@ const GameList = ()=> {
             )}
 
         <GotoGame onClick={() => setMintingPopupOpen(true)}>그림 퀴즈</GotoGame>
-        <GotoGame onClick={() => setMintingPopupOpen(true)}>사다리 타기</GotoGame>
-
         {/*    
         <Link to="/ImageQuiz/intro"><GotoGame>그림 퀴즈</GotoGame></Link>
         <GotoGame>사다리 타기</GotoGame>*/}

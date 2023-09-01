@@ -157,7 +157,7 @@ const SideBarContents = ()=> {
             {mintingPopupOpen && (
                 <Popup style={{width:""}}>
                     <PopupContainer>
-                        9월 6일 오전 9시에 만나요!
+                        준비 중입니다!
                         <button
                             onClick={() => setMintingPopupOpen(false)}
                             style={{ backgroundColor: "#7000FF", color: "white", width: "55px", height: "23px", border: "none", borderRadius: "4px", marginTop: "10px" }}>

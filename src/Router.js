@@ -22,8 +22,8 @@ function DefaultRouter () {
         <Routes>
           <Route path="/" element={<Lending />} />
           <Route path="/Login" element={<Login />} />
-          <Route path="/Minting" element={<Minting />} />
           {/*
+          <Route path="/Minting" element={<Minting />} />
           <Route path="/rock-paper-scissors" element={<Rps />} />
           <Route path="/rock-paper-scissors/result" element={<RpsResult />} />
           <Route path="/bet/intro" element={<BetIntro />} />

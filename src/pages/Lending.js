@@ -365,7 +365,7 @@ const Lending = ()=> {
           </SubContent>
         </SubContainer>
 
-
+        <BTN onClick={() => setPopupOpen(true)} style={{ textDecoration: 'none', color: 'white' }}>버미와 수리 만나러 가기!</BTN>
         <SubContainer>
           <SubTitle>
             버미와 수리 첫 번째 혜택!

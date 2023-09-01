@@ -175,7 +175,7 @@ const ColoredText = styled.span`
 `;
 
 
-const InstaDiv = styled.a`
+const InstaDiv = styled.div`
   width: 248px;
   height: 132px;
   border-radius: 12px;
@@ -187,9 +187,6 @@ const InstaDiv = styled.a`
   flex-direction: column;
   align-items: center;
 
-  color: white;
-  text-decoration: none;
-  
   img{
     width: 46px;
     height: 46px;
@@ -287,21 +284,18 @@ const Lending = ()=> {
     }
 
 
-    return (
+    useEffect(() => {
+      const requestKey = sessionStorage.getItem('requestKey');
+      if (requestKey) {
+          setLoggedIn(true);
+      }
+  }, []);
+
+
+    return (  
       <Container>
         <Link to="/" style={{textDecoration:"none", color:"white"}}><Logo/></Link>
 
-        {popupOpen && (
-          <Popup>
-            <PopupContainer>
-              9월 6일 오전 9시에 만나요!
-              <button 
-              onClick={() => setPopupOpen(false)}
-              style={{backgroundColor:"#7000FF", color:"white", width:"65px", height:"23px", border:"none", borderRadius:"4px", marginTop: "10px"}}>
-              닫기</button>
-            </PopupContainer>
-          </Popup>
-        )}
 
 
         
@@ -417,7 +411,7 @@ const Lending = ()=> {
           <SubTitle>
             버미와 수리 세 번째 혜택!
           </SubTitle> 
-          <InstaDiv href="https://instagram.com/bummy_suri_official?igshid=NTc4MTIwNjQ2YQ==">
+          <InstaDiv>
             <img src={Insta} alt="인스타그램 로고" />
             <div>@bummy_suri_official</div>
           </InstaDiv>
@@ -437,7 +431,6 @@ const Lending = ()=> {
   }
   
   export default Lending;
-
 
 
 

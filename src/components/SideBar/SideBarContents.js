@@ -156,22 +156,8 @@ const SideBarContents = ()=> {
         
 
         
-        {/*원래 민팅하기 버튼
-        <Link to="/minting"><GoAnother style={{marginTop:'52px'}}>민팅하기</GoAnother></Link>*/}
 
-         <GoAnother onClick={() => setMintingPopupOpen(true)}>민팅하기</GoAnother>
-            {mintingPopupOpen && (
-                <Popup>
-                    <PopupContainer>
-                        9월 6일 오전 9시에 만나요!
-                        <button
-                            onClick={() => setMintingPopupOpen(false)}
-                            style={{ backgroundColor: "#7000FF", color: "white", width: "65px", height: "23px", border: "none", borderRadius: "4px", marginTop: "10px" }}>
-                            닫기
-                        </button>
-                    </PopupContainer>
-                </Popup>
-            )}
+        <Link to="/minting"><GoAnother style={{marginTop:'52px'}}>민팅하기</GoAnother></Link>
 
         <Link to="/bet/intro"><GoAnother>승부예측</GoAnother></Link>
 

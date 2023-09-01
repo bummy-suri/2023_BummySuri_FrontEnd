@@ -88,6 +88,7 @@ const KlipBtn = () => {
               sendRequestKey(request_key);
               console.log(res.data);
               if (res.data.result) {
+                clearInterval(timerId);
                 window.location.href = '/';
               }
             });

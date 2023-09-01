@@ -5,7 +5,7 @@ import QRcode from "qrcode.react";
 import axios from "axios";
 
 import { prepare, request } from 'klip-sdk';
-const SUCCESSLINK = '/';
+const SUCCESSLINK = 'http://10.10.1.194:3000/';
 const FAILLINK = '/login';
 
 const Klipbtn = styled.button`
@@ -67,8 +67,8 @@ const KlipBtn = () => {
         type: "auth",
       })
       .then((response) => {
-        const { request_key } = response.data;
-        console.log(request_key);
+        const { request_key } = response.data
+        console.log(response.data);
         sessionStorage.setItem("requestKey", request_key);
 
         // Request
@@ -76,18 +76,40 @@ const KlipBtn = () => {
           window.location.href = getKlipAccessUrl("deeplink", request_key);
         } else {
           setQrvalue_auth(getKlipAccessUrl("QR", request_key));
+
         }
         
-        
         let timerId = setInterval(() => {
-          sendRequestKey(request_key);
-          console.log(response.data)
-          clearInterval(timerId);
-        }, 10000);
+          axios
+            .get(
+              `https://a2a-api.klipwallet.com/v2/a2a/result?request_key=${request_key}`
+            )
+            .then((res) => {
+              sendRequestKey(request_key);
+              console.log(res.data);
+              if (res.data.result) {
+                window.location.href = '/';
+              }
+            });
+        }, 1000);
         })
         .catch((error) => {
           console.error(error);
         });
+  };
+
+
+  const prepareAuth = async () => {
+    try {
+      const prepareResult = await prepare.auth({ bappName: APP_NAME, successLink: SUCCESSLINK, failLink: FAILLINK });
+      const requestKey = prepareResult.request_key;
+      request(requestKey, () => alert('모바일로 접속해랏!'));
+      sessionStorage.setItem('BUMISURI_NFT', requestKey);
+    } catch (error) {
+      console.log(error, 'error!!!!!!');
+      return null;
+    }
+    sendRequestKey(sessionStorage.getItem("BUMISURI_NFT"));
   };
 
 
@@ -102,7 +124,6 @@ const KlipBtn = () => {
         sessionStorage.setItem("accessToken", accessToken);
         console.log("accessToken", accessToken);
         let timerId = setInterval(() => {
-        window.location.href = "/";
         clearInterval(timerId);
       }, 1000);
       })

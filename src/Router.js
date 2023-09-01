@@ -23,6 +23,7 @@ function DefaultRouter () {
           <Route path="/" element={<Lending />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Minting" element={<Minting />} />
+          {/*
           <Route path="/rock-paper-scissors" element={<Rps />} />
           <Route path="/rock-paper-scissors/result" element={<RpsResult />} />
           <Route path="/bet/intro" element={<BetIntro />} />
@@ -32,7 +33,7 @@ function DefaultRouter () {
           <Route path="/bet/result" element={<GameResult/>}/>
           <Route path="/imageQuiz/intro" element={<QuizIntro />} />
           <Route path="/imageQuiz" element={<ImageQuiz />} />
-
+          */}
           <Route path="/hmpBenefit" element={<BenefitPopup/>}/>
           
           </Routes>

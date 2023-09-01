@@ -69,24 +69,20 @@ const Popup = styled.div`
   transform: translate(-50%, -50%);
   background-color: #1D1D1D;
   border-radius: 8px;
-  width:260px;
-  height: 90px;
+  width: 185px; 
+  height: 60px;
   z-index: 1000;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: bold;
-  @media (min-width: 350px) {
-    width:332px;
-    height: 103px;
-  }
 `;
 
 const PopupContainer = styled.div`
-  width:260px;
-  height: 90px;
+  width: 185px; 
+  height: 60px;
   display: flex;
   flex-direction: column;
   border-radius: 9px;
@@ -95,10 +91,7 @@ const PopupContainer = styled.div`
   color: white;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.15) 100%);
   border: 1px solid white;
-  @media (min-width: 350px) {
-    width:332px;
-    height: 103px;
-  }
+
 `;
 
 
@@ -156,10 +149,25 @@ const SideBarContents = ()=> {
         
 
         
+        {/*원래 민팅하기 버튼
+        <Link to="/minting"><GoAnother style={{marginTop:'52px'}}>민팅하기</GoAnother></Link>*/}
 
-        <Link to="/minting"><GoAnother style={{marginTop:'52px'}}>민팅하기</GoAnother></Link>
-
-        <Link to="/bet/intro"><GoAnother>승부예측</GoAnother></Link>
+         <GoAnother onClick={() => setMintingPopupOpen(true)}>민팅하기</GoAnother>
+            {mintingPopupOpen && (
+                <Popup style={{width:""}}>
+                    <PopupContainer>
+                        9월 6일 오전 9시에 만나요!
+                        <button
+                            onClick={() => setMintingPopupOpen(false)}
+                            style={{ backgroundColor: "#7000FF", color: "white", width: "55px", height: "23px", border: "none", borderRadius: "4px", marginTop: "10px" }}>
+                            닫기
+                        </button>
+                    </PopupContainer>
+                </Popup>
+            )}
+        {/*
+        <Link to="/bet/intro"><GoAnother>승부예측</GoAnother></Link>*/}
+        <GoAnother onClick={() => setMintingPopupOpen(true)}>승부예측</GoAnother>
 
         <GoAnother onClick={toggleMiniGame}>미니게임
         {miniGameVisible ? <Down src={downBtn} style={{transform:"rotate(180deg)"}}/> : <Down src={downBtn}/>}
@@ -167,10 +175,8 @@ const SideBarContents = ()=> {
         <MiniGameContent show={miniGameVisible}>
                 <GameList/>
         </MiniGameContent>
-
-        <GoAnother>Ranking</GoAnother>
-
-
+        
+        <GoAnother onClick={() => setMintingPopupOpen(true)}>Ranking</GoAnother>
       </Total>
     );
   }

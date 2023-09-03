@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 
-
 import SideBar from "../../components/SideBar/SideBar";
 import SideBarContents from "../../components/SideBar/SideBarContents";
-
 import gold from "../../assets/Ranking/gold.png";
 import silver from "../../assets/Ranking/silver.png";
 import bronze from "../../assets/Ranking/bronze.png";
+
+import { API } from "../../config";
 
 const Background = styled.div`
     max-width: 100vw;
@@ -40,7 +40,17 @@ const RankingBox = styled.div`
     border-radius: 10px;
     background: linear-gradient(97deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.15) 100%);
     margin-top: 10px;
+    border: none;
+    border: 1px solid ${props => { //테두리
+        if (props.isGold) return '#FFE264';
+        if (props.isSilver) return '#C2C8CC';
+        if (props.isBronze) return '#EBB257';
+        return 'no';
+    }};
     @media (max-width: 330px) {
+        width: 300px;
+    }
+    @media (max-width: 310px) {
         width: 270px;
     }
     @media (max-width: 280px) {
@@ -107,7 +117,7 @@ const Point = styled.span`
 
 const Text = styled.div`
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
     margin-top: 70px;
     font-weight: 500;
     line-height: 30px;
@@ -149,10 +159,15 @@ const Ranking = () => {
             <SideBar><SideBarContents/></SideBar>
             <div>
             {top10Rankings.map((ranking, index) => (
-                <RankingBox key={index}>
-                {index === 0 && <RankImage src={gold} alt="Gold Rank"/>}
-                {index === 1 && <RankImage src={silver} alt="Silver Rank" />}
-                {index === 2 && <RankImage src={bronze} alt="Bronze Rank" />}
+                <RankingBox
+                    key={index}
+                    isGold={index === 0}
+                    isSilver={index === 1}
+                    isBronze={index === 2}
+                >
+                {index === 0 && <RankImage src={gold} alt="1등"/>}
+                {index === 1 && <RankImage src={silver} alt="2등" />}
+                {index === 2 && <RankImage src={bronze} alt="3등" />}
                 {(index !== 0 && index !== 1 && index !== 2) && <Num>{index + 1}</Num>}
                     <NFTImage src=""/>
                     <div>

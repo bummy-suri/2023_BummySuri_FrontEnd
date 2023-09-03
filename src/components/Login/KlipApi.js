@@ -100,7 +100,7 @@ const KlipBtn = () => {
   /*`${API}/users`*/
   const sendRequestKey = (request_key) => {
     axios
-      .post('https://api.dev.bummysuri.com/users', {
+      .post(`${API}/users`, {
         requestKey: request_key,
       })
       .then(response => {

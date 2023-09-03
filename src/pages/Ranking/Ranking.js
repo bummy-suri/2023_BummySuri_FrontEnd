@@ -9,6 +9,7 @@ import silver from "../../assets/Ranking/silver.png";
 import bronze from "../../assets/Ranking/bronze.png";
 
 import { API } from "../../config";
+import MyRanking from "./MyRanking";
 
 const Background = styled.div`
     max-width: 100vw;
@@ -55,6 +56,9 @@ const RankingBox = styled.div`
     }
     @media (max-width: 280px) {
         width: 240px;
+    }
+    @media (max-width: 241px) {
+        width: 220px;
     }
 `;
 
@@ -123,9 +127,27 @@ const Text = styled.div`
     line-height: 30px;
 `
 
-
-
-
+const MyRankingText = styled.div`
+    text-align: left;
+    font-size: 14px;
+    margin-top: 70px;
+    font-weight: 500;
+    line-height: 30px;
+    width: 280px;
+    @media (max-width: 330px) {
+        width: 250px;
+    }
+    @media (max-width: 310px) {
+        width: 220px;
+    }
+    @media (max-width: 280px) {
+        width: 190px;
+    }
+    @media (max-width: 220px) {
+        width: 140px;
+    }
+`
+    //`${API}/ranking/top10`
 const Ranking = () => {
     const [top10Rankings, setTop10Rankings] = useState([]);
 
@@ -133,7 +155,7 @@ const Ranking = () => {
     const accessToken = sessionStorage.getItem("accessToken");
 
     // 탑10 api
-    axios.get('https://api.dev.bummysuri.com/ranking/top10', {
+    axios.get(`${API}/ranking/top10`, {
       headers: {
         Authorization: `bearer ${accessToken}`,
       },
@@ -142,7 +164,7 @@ const Ranking = () => {
       setTop10Rankings(response.data);
     })
     .catch(error => {
-      console.error('API 호출 오류', error);
+      console.error('top10 API 호출 오류', error);
     });
   }, []);
 
@@ -169,7 +191,7 @@ const Ranking = () => {
                 {index === 1 && <RankImage src={silver} alt="2등" />}
                 {index === 2 && <RankImage src={bronze} alt="3등" />}
                 {(index !== 0 && index !== 1 && index !== 2) && <Num>{index + 1}</Num>}
-                    <NFTImage src=""/>
+                    <NFTImage src="" alt="NFT 이미지"/>
                     <div>
                         <Address>{formatUserCardAddress(ranking.userCardAddress)}</Address><br />
                         <Point>{ranking.totalPoint}P</Point>
@@ -181,6 +203,9 @@ const Ranking = () => {
                 포인트를 가장 많이 모은 10명에게 <br/>
                 경품을 드립니다!
             </Text>
+            <MyRankingText style={{textAlign:"left !important"}}>나의 랭킹</MyRankingText>
+            <MyRanking/>
+            
             
 
         </Background>

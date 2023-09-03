@@ -111,7 +111,7 @@ const SideBarContents = ()=> {
   });
   
   useEffect(() => {
-    axios.get(`${API}/users`, {
+    axios.get('https://api.dev.bummysuri.com/users', {
       headers:{
         Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
         }
@@ -150,34 +150,16 @@ const SideBarContents = ()=> {
         
 
         
-        {/*원래 민팅하기 버튼
-        <Link to="/minting"><GoAnother style={{marginTop:'52px'}}>민팅하기</GoAnother></Link>*/}
 
-         <GoAnother onClick={() => setMintingPopupOpen(true)}>민팅하기</GoAnother>
-            {mintingPopupOpen && (
-                <Popup style={{width:""}}>
-                    <PopupContainer>
-                        준비 중입니다!
-                        <button
-                            onClick={() => setMintingPopupOpen(false)}
-                            style={{ backgroundColor: "#7000FF", color: "white", width: "50px", height: "25px", border: "none", borderRadius: "4px", marginTop: "10px" }}>
-                            닫기 
-                        </button>
-                    </PopupContainer>
-                </Popup>
-            )}
-        {/*
-        <Link to="/bet/intro"><GoAnother>승부예측</GoAnother></Link>*/}
-        <GoAnother onClick={() => setMintingPopupOpen(true)}>승부예측</GoAnother>
-
+        <Link to="/minting"><GoAnother style={{marginTop:'52px'}}>민팅하기</GoAnother></Link>
+        <Link to="/bet/intro"><GoAnother>승부예측</GoAnother></Link>
         <GoAnother onClick={toggleMiniGame}>미니게임
         {miniGameVisible ? <Down src={downBtn} style={{transform:"rotate(180deg)"}}/> : <Down src={downBtn}/>}
         </GoAnother>
         <MiniGameContent show={miniGameVisible}>
                 <GameList/>
         </MiniGameContent>
-        
-        <GoAnother onClick={() => setMintingPopupOpen(true)}>Ranking</GoAnother>
+        <Link to="/Ranking"><GoAnother>Ranking</GoAnother></Link>
       </Total>
     );
   }

@@ -97,10 +97,10 @@ const KlipBtn = () => {
   };
 
 
-
+  /*`${API}/users`*/
   const sendRequestKey = (request_key) => {
     axios
-      .post(`${API}/users`, {
+      .post('https://api.dev.bummysuri.com/users', {
         requestKey: request_key,
       })
       .then(response => {

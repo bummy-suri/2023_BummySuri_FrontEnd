@@ -6,7 +6,7 @@ import Minting from "./pages/Minting";
 import Rps from "./pages/Game/Rps/Rps";
 import RpsResult from "./pages/Game/Rps/RpsResult";
 import BetIntro from "./pages/Bet/BetIntro";
-import BetFinish from "./pages/Bet/BetFinish";
+import BetNotFound from "./pages/Bet/BetNotFound";
 import Bet from "./pages/Bet/Bet";
 import QuizIntro from "./pages/Game/ImageQuiz/QuizIntro";
 import ImageQuiz from "./pages/Game/ImageQuiz/ImageQuiz";
@@ -27,7 +27,7 @@ function DefaultRouter () {
           <Route path="/rock-paper-scissors" element={<Rps />} />
           <Route path="/rock-paper-scissors/result" element={<RpsResult />} />
           <Route path="/bet/intro" element={<BetIntro />} />
-          <Route path="/bet/finish" element={<BetFinish />} />
+          <Route path="/bet/notfound" element={<BetNotFound />} />
           <Route path="/bet" element={<Bet/>}/>
           <Route path="/bet/my-prediction" element={<MyPrediction/>}/>
           <Route path="/bet/result" element={<GameResult/>}/>
@@ -35,7 +35,6 @@ function DefaultRouter () {
           <Route path="/imageQuiz" element={<ImageQuiz />} />
           <Route path="/hmpBenefit" element={<BenefitPopup/>}/>
           <Route path="/Ranking" element={<Ranking/>}/>
-          
           </Routes>
     </Router>
     );

@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
 
 import SideBar from "../../components/SideBar/SideBar";
 import SideBarContents from "../../components/SideBar/SideBarContents";
+
+import axios from "axios";
+
+import { API } from '../../config';
 
 
 const Background = styled.div`
@@ -173,74 +177,160 @@ const TotalP = styled.div`
 
 const GameResult = () => {
     {/* 
-        * 현재는 디자인만 만들어 놓았음 기능 구현해야 됨*
     
-        1. 백에서 경기 결과 값 가져오기 -> 화면에 표시
-        2. 연대 / 고대에 따라 폰트 색상 변경
+        1. 백에서 경기 결과 값 가져오기 -> 화면에 표시 (경기결과조회)
+        2. 연대 / 고대에 따라 폰트 색상 변경 
         3. 총 획득 포인트 계산하여 표시
 
+        베팅조회 -> 베팅결과확인 -> 베팅결과얻은포인트반영하기
+
     */}
+    const gameTypes = ["baseball", "basketball", "hockey", "rugby", "soccer"];
+
+    const success = [];
+    const earnedPoint = [];
+    const totalPoint = [];
+
+    const winner = [];
+    const scoredifference = [];
+    const [total, setTotal] = useState(0);
+
+    useEffect(() => {
+        async function getBetting() {
+            for (let i = 0; i < 5; i++) {
+                try {
+                    const response = await axios.get(`${API}/betting/${gameTypes[i]}`, {
+                        headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
+                    });
+                    const userData = response.data;
+                    const bettingresponse = await axios({
+                        url: `${API}/bettingResult/${gameTypes[i]}`,
+                        method: "post",
+                        data: userData,
+                        headers: {
+                            Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
+                        },
+                    });
+                    const bettingData = bettingresponse.data;
+                    success.push(bettingData.success);
+                    earnedPoint.push(bettingData.earnedPoint);
+                    totalPoint.push(bettingData.totalPoint);
+                    const gameresponse = await axios({
+                        url: `${API}/game/${gameTypes[i]}`,
+                        method: "get",
+                        headers: {
+                            Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
+                        },
+                    });
+                    const gameData = gameresponse.data;
+                    if (gameData.koreaScore > gameData.yonseiScore) {
+                        winner.push("고대 승");
+                        scoredifference.push(gameData.koreaScore - gameData.yonseiScore);
+                    }
+                    else if (gameData.koreaScore < gameData.yonseiScore) {
+                        winner.push("연대 승");
+                        scoredifference.push(gameData.yonseiScore - gameData.koreaScore);
+                    }
+                    else {
+                        winner.push("무승부");
+                        scoredifference.push(0);
+                    }
+
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        }
+        getBetting();
+        setTotal(earnedPoint[0] + earnedPoint[1] + earnedPoint[2] + earnedPoint[3] + earnedPoint[4]);
+
+    }, []);
+
+    
+
+
+    useEffect(() => {
+        async function updatePoint() {
+            try {
+                await axios({
+                    url: `${API}/bettingResult`,
+                    method: "put",
+                    data: {
+                        totalEarnedPoint: total,
+                    },
+                    headers: {
+                        Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
+                    },
+                });
+            } catch (error) {console.log(error);}
+        }
+        updatePoint();
+    }, [total]);
+
+
+
+
 
     return (
-        <div style={{backgroundColor:"#1D1D1D"}}>
-        <Background>
-            <MainLogo>정기전 경기 예측</MainLogo>
-            <SideBar><SideBarContents/></SideBar>
-            <Title>경기 결과</Title>
+        <div style={{ backgroundColor: "#1D1D1D" }}>
+            <Background>
+                <MainLogo>정기전 경기 예측</MainLogo>
+                <SideBar><SideBarContents /></SideBar>
+                <Title>경기 결과</Title>
 
-            <Container>
-                <Column>
-                    <span style={{marginLeft:"20px"}}>종목</span>
-                    <span style={{marginLeft:"30px"}}>결과</span>
-                    <span style={{marginRight:"15px"}}>획득 포인트</span>
-                </Column>
-                <Result>
-                    <Row>
-                        <Type>야구 ⚾️</Type>
-                        <Predict>
-                            <School>연대 승</School>
-                            <Score>1점차 예상</Score>
-                        </Predict>
-                        <PointAmount>+100p</PointAmount>
-                    </Row>
-                    <Row>
-                        <Type>농구 🏀</Type>
-                        <Predict>
-                            <School>연대 승</School>
-                            <Score>1점차 예상</Score>
-                        </Predict>
-                        <PointAmount>+100p</PointAmount>
-                    </Row>
-                    <Row>
-                        <Type>빙구 🏒</Type>
-                        <Predict>
-                            <School>연대 승</School>
-                            <Score>1점차 예상</Score>
-                        </Predict>
-                        <PointAmount>+100p</PointAmount>
-                    </Row>
-                    <Row>
-                        <Type>럭비 🏉</Type>
-                        <Predict>
-                            <School>연대 승</School>
-                            <Score>1점차 예상</Score>
-                        </Predict>
-                        <PointAmount>+100p</PointAmount>
-                    </Row>
-                    <Row>
-                        <Type>축구 ⚽</Type>
-                        <Predict>
-                            <School>연대 승</School>
-                            <Score>1점차 예상</Score>
-                        </Predict>
-                        <PointAmount>+100p</PointAmount>
-                    </Row>
-                </Result>
-                <TotalP>총 획득 포인트 : 2900p</TotalP>
-            </Container>
-        </Background>
+                <Container>
+                    <Column>
+                        <span style={{ marginLeft: "20px" }}>종목</span>
+                        <span style={{ marginLeft: "30px" }}>결과</span>
+                        <span style={{ marginRight: "15px" }}>획득 포인트</span>
+                    </Column>
+                    <Result>
+                        <Row>
+                            <Type>야구 ⚾️</Type>
+                            <Predict>
+                                <School>{winner[0]}</School>
+                                <Score>{scoredifference[0]}점차</Score>
+                            </Predict>
+                            <PointAmount>+{earnedPoint[0]}p</PointAmount>
+                        </Row>
+                        <Row>
+                            <Type>농구 🏀</Type>
+                            <Predict>
+                                <School>{winner[1]}</School>
+                                <Score>{scoredifference[1]}점차</Score>
+                            </Predict>
+                            <PointAmount>+{earnedPoint[1]}p</PointAmount>
+                        </Row>
+                        <Row>
+                            <Type>빙구 🏒</Type>
+                            <Predict>
+                                <School>{winner[2]}</School>
+                                <Score>{scoredifference[2]}점차</Score>
+                            </Predict>
+                            <PointAmount>+{earnedPoint[2]}p</PointAmount>
+                        </Row>
+                        <Row>
+                            <Type>럭비 🏉</Type>
+                            <Predict>
+                                <School>{winner[3]}</School>
+                                <Score>{scoredifference[3]}점차</Score>
+                            </Predict>
+                            <PointAmount>+{earnedPoint[3]}p</PointAmount>
+                        </Row>
+                        <Row>
+                            <Type>축구 ⚽</Type>
+                            <Predict>
+                                <School>{winner[4]}</School>
+                                <Score>{scoredifference[4]}점차</Score>
+                            </Predict>
+                            <PointAmount>+{earnedPoint[4]}p</PointAmount>
+                        </Row>
+                    </Result>
+                    <TotalP>총 획득 포인트 : {total}p</TotalP>
+                </Container>
+            </Background>
         </div>
-        );
+    );
 }
 
 export default GameResult;

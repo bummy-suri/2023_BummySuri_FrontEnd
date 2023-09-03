@@ -83,21 +83,20 @@ const Btn = styled.button`
 
 
 
-const Rps = () => {
+const BetNotFound = () => {
 
     return (
         <div style={{backgroundColor:"#1D1D1D"}}>
         <Background>
             <MainLogo>정기전 경기 예측</MainLogo>
             <SideBar><SideBarContents/></SideBar>
-            <Title>경기 예측 이벤트가 <br/>종료되었습니다.</Title>
+            <Title>경기 예측 이벤트에 참여하지 <br/>않았습니다.</Title>
             <MainText>
-            나의 예측은 성공할 것인가 ˚✧₊( ˘ω˘ )⁎⁺˳✧༚
+            미니 게임을 통해서도 포인트를 얻을 수 있어요 ˚✧₊( ˘ω˘ )⁎⁺˳✧༚
             </MainText>
-            <Link to="/bet"><Btn>나의 예측 보러가기</Btn></Link>
         </Background>
         </div>
         );
 }
 
-export default Rps;
+export default BetNotFound;

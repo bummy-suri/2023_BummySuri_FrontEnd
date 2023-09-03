@@ -134,7 +134,7 @@ const Sports = ({gameType, handleData, currentschool, currentscore, currentbetpo
             setGame("농구 🏀");
             setOption(Basketballoption);
         }
-        else if(gameType === "hocky"){
+        else if(gameType === "hockey"){
             setGame("빙구 🏒");
             setOption(Hockeyoption);
         }
@@ -149,29 +149,30 @@ const Sports = ({gameType, handleData, currentschool, currentscore, currentbetpo
     }, []);
 
     useEffect(() => {
-        // console.log([school, score, betPoint]);
         handleData([gameType, school, score, betPoint]);
+        //console.log(school, score, betPoint);
     }, [school, score, betPoint]);
+
 
 
 
     const SchoolChange = (event) => {
         if(event.target.innerHTML === "고대 승")
         {
-            setSchool("고대");
+            setSchool("KOREA");
             if(score === -2){
                 setScore(0);
             }
         }
         else if(event.target.innerHTML === "연대 승"){
-            setSchool("연대");
+            setSchool("YONSEI");
             if(score === -2){
                 setScore(0);
             }
         }
         else if(event.target.innerHTML === "무승부"){
-            setSchool("무승부");
-            setScore(-2); // score 선택 못하게 버튼 disable
+            setSchool("DRAW");
+            setScore(-2);
         }
     }
 
@@ -188,7 +189,6 @@ const Sports = ({gameType, handleData, currentschool, currentscore, currentbetpo
             return;
         }
         setBetPoint(selectedPoint)
-
     }
 
     return (
@@ -196,28 +196,28 @@ const Sports = ({gameType, handleData, currentschool, currentscore, currentbetpo
             <SportsName>
                 <span style={{fontSize:"20px", fontWeight:"800"}}>{game}</span>
                 <SchoolSelect>
-                    <SchoolBTN isActive={school === '고대'} onClick={SchoolChange}>고대 승</SchoolBTN>
-                    <SchoolBTN isActive={school === '무승부'} onClick={SchoolChange}>무승부</SchoolBTN>
-                    <SchoolBTN isActive={school === '연대'} onClick={SchoolChange}>연대 승</SchoolBTN>
+                    <SchoolBTN isActive={school === 'KOREA'} onClick={SchoolChange}>고대 승</SchoolBTN>
+                    <SchoolBTN isActive={school === 'DRAW'} onClick={SchoolChange}>무승부</SchoolBTN>
+                    <SchoolBTN isActive={school === 'YONSEI'} onClick={SchoolChange}>연대 승</SchoolBTN>
                 </SchoolSelect>
             </SportsName>
 
             <ScoreSelect>
                 <ScoreOption>
                     <p>{option[0]}</p>
-                    <BTN isActive={score === 0} onClick={() => ScoreChange(0)} disabled={score === -2}>선택</BTN>
+                    <BTN isActive={score === 0} onClick={() => ScoreChange(0)} disabled={school === "DRAW"}>선택</BTN>
                 </ScoreOption>
                 <ScoreOption>
                     <p>{option[1]}</p>
-                    <BTN isActive={score === 1} onClick={() => ScoreChange(1)} disabled={score === -2}>선택</BTN>
+                    <BTN isActive={score === 1} onClick={() => ScoreChange(1)} disabled={school === "DRAW"}>선택</BTN>
                 </ScoreOption>
                 <ScoreOption>
                     <p>{option[2]}</p>
-                    <BTN isActive={score === 2} onClick={() => ScoreChange(2)} disabled={score === -2}>선택</BTN>
+                    <BTN isActive={score === 2} onClick={() => ScoreChange(2)} disabled={school === "DRAW"}>선택</BTN>
                 </ScoreOption>
                 <ScoreOption>
                     <p>{option[3]}</p>
-                    <BTN isActive={score === 3} onClick={() => ScoreChange(3)} disabled={score === -2}>선택</BTN>
+                    <BTN isActive={score === 3} onClick={() => ScoreChange(3)} disabled={school === "DRAW"}>선택</BTN>
                 </ScoreOption>
             </ScoreSelect>
             <Point>

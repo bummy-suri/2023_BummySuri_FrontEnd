@@ -111,7 +111,7 @@ const MyRanking = () => {
 
     // 나의 순위
     useEffect(() => {
-        axios.get(`${API}/ranking/users`, {
+        axios.get(`${API}/ranking/user`, {
           headers:{
             Authorization: `bearer ${accessToken}`
             }

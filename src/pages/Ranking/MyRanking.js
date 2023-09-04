@@ -109,7 +109,7 @@ const MyRanking = () => {
         });
 }, []); 
 
-    // 나의 순위
+    // 나의 순위   'https://api.dev.bummysuri.com/ranking/user'
     useEffect(() => {
         axios.get(`${API}/ranking/user`, {
           headers:{

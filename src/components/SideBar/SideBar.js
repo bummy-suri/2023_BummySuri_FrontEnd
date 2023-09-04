@@ -18,8 +18,7 @@ const SideBar = ({ width = 235, children }) => {
     }
   };
 
-
-    //사이드바 바깥 클릭 -> 닫힘
+    //사이드바 바깥 클릭하면 닫히게
     useEffect(() => {
       const handleClickOutside = (event) => {
         if (side.current && !side.current.contains(event.target)) {

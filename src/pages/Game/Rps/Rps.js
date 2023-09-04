@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import SideBar from "../../../components/SideBar/SideBar";
 import SideBarContents from "../../../components/SideBar/SideBarContents";
 
+
+
 const Background = styled.div`
     max-width: 100vw;
     min-height: 100vh;

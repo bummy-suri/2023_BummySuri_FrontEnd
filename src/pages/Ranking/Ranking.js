@@ -135,7 +135,7 @@ const BoxText = styled.div`
     border: 0.5px solid #FFF;
     border-radius: 8px;
     padding: 10px 0;
-    width: 325px;
+    width: 315px;
     @media (max-width: 330px) {
         width: 300px;
     }
@@ -144,9 +144,11 @@ const BoxText = styled.div`
     }
     @media (max-width: 280px) {
         width: 240px;
+        font-size: 8px;
     }
     @media (max-width: 241px) {
         width: 220px;
+        font-size: 8px;
     }
 `
 

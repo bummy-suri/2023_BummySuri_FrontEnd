@@ -89,7 +89,7 @@ const MyRanking = () => {
 
   // 나의 정보 'https://api.dev.bummysuri.com/users'
   useEffect(() => {
-    axios.get(`${API}/ranking/users`, {
+    axios.get(`${API}/users`, {
       headers:{
         Authorization: `bearer ${accessToken}`
         }

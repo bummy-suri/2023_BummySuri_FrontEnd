@@ -127,6 +127,29 @@ const Text = styled.div`
     line-height: 30px;
 `
 
+const BoxText = styled.div`
+    text-align: center;
+    font-size: 10px;
+    margin-top: 20px;
+    font-weight: 400;
+    border: 0.5px solid #FFF;
+    border-radius: 8px;
+    padding: 10px 0;
+    width: 325px;
+    @media (max-width: 330px) {
+        width: 300px;
+    }
+    @media (max-width: 310px) {
+        width: 270px;
+    }
+    @media (max-width: 280px) {
+        width: 240px;
+    }
+    @media (max-width: 241px) {
+        width: 220px;
+    }
+`
+
 const MyRankingText = styled.div`
     text-align: left;
     font-size: 14px;
@@ -147,7 +170,7 @@ const MyRankingText = styled.div`
         width: 140px;
     }
 `
-    //`${API}/ranking/top10`
+    // 'https://api.dev.bummysuri.com/ranking/top10'
 const Ranking = () => {
     const [top10Rankings, setTop10Rankings] = useState([]);
 
@@ -155,7 +178,7 @@ const Ranking = () => {
     const accessToken = sessionStorage.getItem("accessToken");
 
     // 탑10 api
-    axios.get('https://api.dev.bummysuri.com/ranking/top10', {
+    axios.get(`${API}/ranking/top10`, {
       headers: {
         Authorization: `bearer ${accessToken}`,
       },
@@ -203,6 +226,7 @@ const Ranking = () => {
                 포인트를 가장 많이 모은 10명에게 <br/>
                 경품을 드립니다!
             </Text>
+            <BoxText>※ 동점이더라도 먼저 포인트를 획득한 유저가 더 높은 순위에 기록됩니다!</BoxText>
             <MyRankingText style={{textAlign:"left !important"}}>나의 랭킹</MyRankingText>
             <MyRanking/>
             

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
-import { Link } from 'react-router-dom'; 
 import SideBar from "../../../components/SideBar/SideBar";
 import SideBarContents from "../../../components/SideBar/SideBarContents";
 
@@ -62,9 +61,9 @@ const RandomImage = styled.div`
 
 const MainText = styled.div`
     text-align: center;
-    font-size: 14px;
+    font-size: 20px;
     line-height: 26px; /* 162.5% */
-    margin-top: 5px;
+    margin-bottom: 5px;
     @media(max-width: 300px){
         font-size: 12px;
         margin-top: 1px;

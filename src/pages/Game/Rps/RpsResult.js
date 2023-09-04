@@ -9,6 +9,7 @@ import paper from "../../../assets/Game/paper.png";
 import scissors from "../../../assets/Game/scissors.png";
 
 import Popup from "./Popup";
+import { API } from '../../../config';
 
 const Background = styled.div`
     max-width: 100vw;
@@ -112,10 +113,10 @@ const Rps = () => {
 
     const accessToken = sessionStorage.getItem("accessToken");
 
-    // 결과 전달 api
+    // 결과 전달 api https://api.dev.bummysuri.com/minigame
     const gameResult = (rpsResult) => {
         axios
-            .put('https://api.dev.bummysuri.com/minigame', { 
+            .put(`${API}/minigame`, { 
                 result: rpsResult,
             }, {
                 headers: {

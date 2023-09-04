@@ -109,9 +109,9 @@ const MyRanking = () => {
         });
 }, []); 
 
-    // 나의 순위 `${API}/ranking/user` 
+    // 나의 순위   'https://api.dev.bummysuri.com/ranking/user'
     useEffect(() => {
-        axios.get('https://api.dev.bummysuri.com/ranking/user', {
+        axios.get(`${API}/ranking/user`, {
           headers:{
             Authorization: `bearer ${accessToken}`
             }

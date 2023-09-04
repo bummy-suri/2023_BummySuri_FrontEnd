@@ -53,6 +53,7 @@ const RandomImage = styled.div`
     height: 400px;
     background-color: white;
     margin-top: 40px;
+    border-radius: 20px;
     @media(max-width: 500px){
         width: 65vw;
         height: 65vw;
@@ -144,17 +145,20 @@ const ImageQuiz = () => {
     const [answer, setAnswer] = useState("");
     const [image, setImage] = useState(getRandomImage());
     const [isAnswered, setIsAnswered] = useState(false);
+    const [remainingTime, setRemainingTime] = useState(30);
 
-    //수정
     useEffect(() => {
-      const timer = setTimeout(() => {
-        if (!isAnswered) {
+      const timer = setInterval(() => {
+        if (remainingTime > 0 && !isAnswered) {
+          setRemainingTime((prevTime) => prevTime - 1); // 시간 감소
+        } else if (remainingTime === 0 && !isAnswered) {
           alert("시간이 초과되었습니다.");
+          setIsAnswered(true);
         }
-      }, 30000);
-  
-      return () => clearTimeout(timer);
-    }, [isAnswered]);
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }, [isAnswered, remainingTime]);
 
     const handleAnswerChange = (event) => {
       setAnswer(event.target.value);
@@ -182,9 +186,9 @@ const ImageQuiz = () => {
         <Background>
             <MainLogo>넌센스 그림퀴즈</MainLogo>
             <SideBar><SideBarContents/></SideBar>
-            <RandomImage><img src={image} alt="Random" width="100%" /></RandomImage>
+            <RandomImage><img src={image} alt="Random" width="100%" style={{borderRadius:"20px"}}/></RandomImage>
             <Image src={bummy}/>
-            <MainText>30초시계</MainText>
+            <MainText>{remainingTime}</MainText>
             <Answer>답:
           <AnswerInput
             type="text"

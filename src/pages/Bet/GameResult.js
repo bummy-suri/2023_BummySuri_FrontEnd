@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled, {keyframes} from 'styled-components';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 import SideBar from "../../components/SideBar/SideBar";
@@ -99,6 +99,7 @@ const Row = styled.div`
 const Type = styled.div`
     font-size: 22px;
     font-weight: 800;
+    width: 30%;
     @media(max-width: 365px){
         font-size: 17px;
         margin-left: 5px;
@@ -109,7 +110,7 @@ const Predict = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-right: 20px;
+    width: 40%;
     @media(max-width: 365px){
         margin-right: 13px;
     }
@@ -118,7 +119,6 @@ const Predict = styled.div`
 const School = styled.div`
     font-size: 22px;
     font-weight: 700;
-    color: rgba(22, 87, 255, 1);
     @media(max-width: 365px){
         font-size: 17px;
     }
@@ -137,7 +137,8 @@ const PointAmount = styled.div`
     font-size: 18px;
     font-weight: 800;
     margin-top: 5px;
-    margin-right: 10px;
+    width: 30%;
+    text-align: right;
     @media(max-width: 365px){
         font-size: 13px;
         margin-right: 10px;
@@ -157,22 +158,62 @@ const TotalP = styled.div`
      }
 `;
 
-// const BTN = styled.button`
-//     margin-top: 15px;
-//     width: 332px;
-//     height: 50px;
-//     background-color: rgba(112, 0, 255, 1);
-//     border: none;
-//     color: white;
-//     font-size: 16px;
-//     border-radius: 10px;
-//     @media(max-width: 365px){
-//         width: 230px;
-//         height: 33px;
-//         font-size: 11px;
-//     }
+const Popup = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1D1D1D;
+  border-radius: 8px;
+  width:260px;
+  height: 90px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  @media (min-width: 350px) {
+    width:332px;
+    height: 103px;
+  }
+`;
 
-// `;
+const PopupContainer = styled.div`
+  width:260px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 9px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.15) 100%);
+  border: 1px solid white;
+  @media (min-width: 350px) {
+    width:332px;
+    height: 103px;
+  }
+`;
+
+const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(360deg); }
+  100% {transform: rotate(720deg);}
+`;
+
+const Circle = styled.div`
+    width: 18px;
+    height: 18px;
+    border: 6px solid transparent;
+  border-top: 6px solid #7000FF;
+  border-radius: 50%;
+  animation: ${spin} 1.5s linear infinite;
+  margin-bottom: 10px;
+`;
+
+
 
 
 const GameResult = () => {
@@ -187,22 +228,29 @@ const GameResult = () => {
     */}
     const gameTypes = ["baseball", "basketball", "hockey", "rugby", "soccer"];
 
-    const success = [];
-    const earnedPoint = [];
-    const totalPoint = [];
 
-    const winner = [];
-    const scoredifference = [];
     const [total, setTotal] = useState(0);
+    const [earnedPoint, setEarnedPoint] = useState([0, 0, 0, 0, 0]);
+    const [winner, setWinner] = useState([]);
+    const [score, setScore] = useState([]);
+    const school = [];
+    const point = [];
+    const scoredifference = [];
+    const [loading, setLoading] = useState(true);
+    const [changed, setChanged] = useState(false);
 
     useEffect(() => {
         async function getBetting() {
+            school.length = 0;
+            scoredifference.length = 0;
+            point.length = 0;
+            let sum = 0;
             for (let i = 0; i < 5; i++) {
                 try {
                     const response = await axios.get(`${API}/betting/${gameTypes[i]}`, {
                         headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
                     });
-                    const userData = response.data;
+                    const userData = response.data; // 사용자 베팅 내용 가져오기
                     const bettingresponse = await axios({
                         url: `${API}/bettingResult/${gameTypes[i]}`,
                         method: "post",
@@ -212,9 +260,8 @@ const GameResult = () => {
                         },
                     });
                     const bettingData = bettingresponse.data;
-                    success.push(bettingData.success);
-                    earnedPoint.push(bettingData.earnedPoint);
-                    totalPoint.push(bettingData.totalPoint);
+                    point[i] = bettingData.earnedPoint;
+                    sum += point[i];
                     const gameresponse = await axios({
                         url: `${API}/game/${gameTypes[i]}`,
                         method: "get",
@@ -223,30 +270,36 @@ const GameResult = () => {
                         },
                     });
                     const gameData = gameresponse.data;
-                    if (gameData.koreaScore > gameData.yonseiScore) {
-                        winner.push("고대 승");
-                        scoredifference.push(gameData.koreaScore - gameData.yonseiScore);
+                    if (gameData.KoreaScore > gameData.YonseiScore) {
+                        school[i] = "고대 승";
+                        scoredifference[i] = gameData.KoreaScore - gameData.YonseiScore;
                     }
-                    else if (gameData.koreaScore < gameData.yonseiScore) {
-                        winner.push("연대 승");
-                        scoredifference.push(gameData.yonseiScore - gameData.koreaScore);
+                    else if (gameData.KoreaScore < gameData.YonseiScore) {
+                        school[i] = "연대 승";
+                        scoredifference[i] = gameData.YonseiScore - gameData.KoreaScore;
                     }
                     else {
-                        winner.push("무승부");
-                        scoredifference.push(0);
+                        school[i] = "무승부";
+                        scoredifference[i] = 0;
                     }
+                    console.log(point[i], gameTypes[i], school[i]);
 
                 } catch (error) {
                     console.error(error);
                 }
             }
+            setWinner(school);
+            setScore(scoredifference);
+            setEarnedPoint(point);
+            setTotal(sum);
+            setLoading(false);
+            setChanged(true);
         }
         getBetting();
-        setTotal(earnedPoint[0] + earnedPoint[1] + earnedPoint[2] + earnedPoint[3] + earnedPoint[4]);
-
     }, []);
 
-    
+
+
 
 
     useEffect(() => {
@@ -262,73 +315,116 @@ const GameResult = () => {
                         Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
                     },
                 });
-            } catch (error) {console.log(error);}
+            } catch (error) { console.log(error); }
         }
         updatePoint();
-    }, [total]);
+    }, [changed]);
+
+    const getSchoolColor = (schoolText) => {
+        if (schoolText === "연대 승") {
+            return "rgba(22, 87, 255, 1)";
+        }
+        else if (schoolText === "고대 승") {
+
+            return "rgba(253, 38, 38, 1)";
+        }
+        else {
+            return "rgba(112, 0, 255, 1)";
+        }
+    }
 
 
+
+    // const navigate = useNavigate();
+    //
+    // const deleteme = () => {
+    //     axios.delete(`${API}/users`, {
+    //         headers: {
+    //           Authorization: `bearer ${sessionStorage.getItem("accessToken")}`,
+    //         },
+    //       })
+    //         .then(response => {
+    //           console.log('DELETE 요청이 성공했습니다.');
+    //           // 서버로부터 성공 응답을 처리할 코드를 여기에 추가
+    //           navigate('/');
+    //         })
+    //         .catch(error => {
+    //           console.error('DELETE 요청이 실패했습니다.');
+    //           // 요청 실패 시 에러를 처리할 코드를 여기에 추가
+    //         });
+    // }
 
 
 
     return (
         <div style={{ backgroundColor: "#1D1D1D" }}>
-            <Background>
-                <MainLogo>정기전 경기 예측</MainLogo>
-                <SideBar><SideBarContents /></SideBar>
-                <Title>경기 결과</Title>
+            {loading ?
+                <Background>
+                    <Popup>
+                        <PopupContainer>
+                            <Circle><div></div></Circle>
+                            로딩 중입니다!
+                        </PopupContainer>
+                    </Popup>
+                </Background> :
+                <Background>
+                    <MainLogo>정기전 경기 예측</MainLogo>
+                    <SideBar><SideBarContents /></SideBar>
+                    <Title>경기 결과</Title>
 
-                <Container>
-                    <Column>
-                        <span style={{ marginLeft: "20px" }}>종목</span>
-                        <span style={{ marginLeft: "30px" }}>결과</span>
-                        <span style={{ marginRight: "15px" }}>획득 포인트</span>
-                    </Column>
-                    <Result>
-                        <Row>
-                            <Type>야구 ⚾️</Type>
-                            <Predict>
-                                <School>{winner[0]}</School>
-                                <Score>{scoredifference[0]}점차</Score>
-                            </Predict>
-                            <PointAmount>+{earnedPoint[0]}p</PointAmount>
-                        </Row>
-                        <Row>
-                            <Type>농구 🏀</Type>
-                            <Predict>
-                                <School>{winner[1]}</School>
-                                <Score>{scoredifference[1]}점차</Score>
-                            </Predict>
-                            <PointAmount>+{earnedPoint[1]}p</PointAmount>
-                        </Row>
-                        <Row>
-                            <Type>빙구 🏒</Type>
-                            <Predict>
-                                <School>{winner[2]}</School>
-                                <Score>{scoredifference[2]}점차</Score>
-                            </Predict>
-                            <PointAmount>+{earnedPoint[2]}p</PointAmount>
-                        </Row>
-                        <Row>
-                            <Type>럭비 🏉</Type>
-                            <Predict>
-                                <School>{winner[3]}</School>
-                                <Score>{scoredifference[3]}점차</Score>
-                            </Predict>
-                            <PointAmount>+{earnedPoint[3]}p</PointAmount>
-                        </Row>
-                        <Row>
-                            <Type>축구 ⚽</Type>
-                            <Predict>
-                                <School>{winner[4]}</School>
-                                <Score>{scoredifference[4]}점차</Score>
-                            </Predict>
-                            <PointAmount>+{earnedPoint[4]}p</PointAmount>
-                        </Row>
-                    </Result>
-                    <TotalP>총 획득 포인트 : {total}p</TotalP>
-                </Container>
-            </Background>
+                    <Container>
+                        <Column>
+                            <span style={{ marginLeft: "20px" }}>종목</span>
+                            <span style={{ marginLeft: "30px" }}>결과</span>
+                            <span style={{ marginRight: "15px" }}>획득 포인트</span>
+                        </Column>
+                        <Result>
+                            <Row>
+                                <Type>야구 ⚾️</Type>
+                                <Predict>
+                                    <School style={{ color: getSchoolColor(winner[0]) }}>{winner[0]}</School>
+                                    <Score>{score[0] === 0 ? "" : `${score[0]} 점차`}</Score>
+                                </Predict>
+                                <PointAmount>+{earnedPoint[0]}p</PointAmount>
+                            </Row>
+                            <Row>
+                                <Type>농구 🏀</Type>
+                                <Predict>
+                                    <School style={{ color: getSchoolColor(winner[1]) }}>{winner[1]}</School>
+                                    <Score>{score[1] === 0 ? "" : `${score[1]} 점차`}</Score>
+                                </Predict>
+                                <PointAmount>+{earnedPoint[1]}p</PointAmount>
+                            </Row>
+                            <Row>
+                                <Type>빙구 🏒</Type>
+                                <Predict>
+                                    <School style={{ color: getSchoolColor(winner[2]) }}>{winner[2]}</School>
+                                    <Score>{score[2] === 0 ? "" : `${score[2]} 점차`}</Score>
+                                </Predict>
+                                <PointAmount>+{earnedPoint[2]}p</PointAmount>
+                            </Row>
+                            <Row>
+                                <Type>럭비 🏉</Type>
+                                <Predict>
+                                    <School style={{ color: getSchoolColor(winner[3]) }}>{winner[3]}</School>
+                                    <Score>{score[3] === 0 ? "" : `${score[3]} 점차`}</Score>
+                                </Predict>
+                                <PointAmount>+{earnedPoint[3]}p</PointAmount>
+                            </Row>
+                            <Row>
+                                <Type>축구 ⚽</Type>
+                                <Predict>
+                                    <School style={{ color: getSchoolColor(winner[4]) }}>{winner[4]}</School>
+                                    <Score>{score[4] === 0 ? "" : `${score[4]}점차`}</Score>
+                                </Predict>
+                                <PointAmount>+{earnedPoint[4]}p</PointAmount>
+                            </Row>
+                        </Result>
+                        <TotalP>총 획득 포인트 : {total}p</TotalP>
+                    </Container>
+                    {/* <button onClick={deleteme}>나 지우기</button> */}
+                </Background>
+            }
         </div>
     );
 }

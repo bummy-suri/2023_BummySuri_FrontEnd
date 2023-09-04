@@ -122,7 +122,7 @@ const Sports = ({gameType, handleData, currentschool, currentscore, currentbetpo
     const Baseballoption = ['1점차 예상', '2점차 예상', '3점차 예상', '4점차 이상 예상'];
     const Hockeyoption = ['1점차 예상', '2점차 예상', '3점차 예상', '4점차 이상 예상'];
     const Basketballoption = ['1-5점차 예상', '6-10점차 예상', '11-15점차 예상', '16점차 이상 예상'];
-    const Rugbyoption = ['1-5점차 예상', '6-10점차 예상', '7-9점차 예상', '10점차 이상 예상'];
+    const Rugbyoption = ['1-5점차 예상', '6-10점차 예상', '11-15점차 예상', '16점차 이상 예상'];
     const Socceroption = ['1점차 예상', '2점차 예상', '3점차 예상', '4점차 이상 예상'];
 
     useEffect(() => {

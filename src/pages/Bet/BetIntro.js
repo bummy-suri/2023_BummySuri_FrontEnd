@@ -140,15 +140,63 @@ const FinishMainText = styled.div`
 
 
 const BetIntro = () => {
+
+    // 테스트 
+    // const gameTypes = ["baseball", "basketball", "hockey", "rugby", "soccer"];
+
+    // useEffect(() => {
+    //     async function fetchGameInfo() {
+    //         for (let i = 0; i < 5; i++) {
+    //             try {
+    //                 await axios({
+    //                     url: `${API}/game/${gameTypes[i]}`,
+    //                     method: 'put',
+    //                     data: {
+    //                         playing: "경기 종료",
+    //                         KoreaScore: 10,
+    //                         YonseiScore: 11
+    //                     },
+    //                     headers: {
+    //                         Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
+    //                     },
+    //                 })
+    //             } catch (error) {
+    //                 console.error(error);
+    //             }
+    //         }
+    //     }
+    //     fetchGameInfo();
+    // }, []);
+    //
+
+
+
     const currentDate = new Date();
-    const cutoffDate = new Date("2023-09-08T11:00:00");
+    const cutoffDate = new Date("2023-09-08T10:00:00");
     const [redirectToBet, setRedirectToBet] = useState(false);
 
     const handleBetButtonClick = () => {
-        const time = new Date();
-        if(time >= cutoffDate){
-            setRedirectToBet(true);
+        async function checkSelected() {
+            try {
+                const response = await axios.get(`${API}/betting/baseball`, {
+                    headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
+                });
+                const userData = response.data;
+                if (userData.selected === true) {
+                    navigate('/bet/my-prediction');
+                }
+            } catch (error) {
+                //console.log(error);
+                const time = new Date();
+                if (time >= cutoffDate) {
+                    setRedirectToBet(true);
+                }
+                else{
+                    navigate('/bet');
+                }
+            }
         }
+        checkSelected();
     }
 
     const navigate = useNavigate();
@@ -171,6 +219,13 @@ const BetIntro = () => {
         }
         checkSelected();
     }
+
+    useEffect(() => {
+        if(redirectToBet)
+        {
+            navigate('/bet/intro');
+        }
+    },[redirectToBet]);
 
 
     return (
@@ -197,7 +252,7 @@ const BetIntro = () => {
                             예측에 성공하면 <br />
                             배팅한 포인트의 ✨3배✨를 얻을 수 있습니다.<br />
                         </MainText>
-                        <Link to={redirectToBet ? "/bet" : "/bet/intro"}><Klipbtn onClick={handleBetButtonClick}>경기 예측하기</Klipbtn></Link>
+                        <Klipbtn onClick={handleBetButtonClick}>경기 예측하기</Klipbtn>
                     </>
                 ) : (
                     <>

@@ -97,10 +97,10 @@ const KlipBtn = () => {
   };
 
 
-  /*`${API}/users`*/
+  //`${API}/users` 'https://api.dev.bummysuri.com/users'
   const sendRequestKey = (request_key) => {
     axios
-      .post(`${API}/users`, {
+      .post('https://api.dev.bummysuri.com/users', {
         requestKey: request_key,
       })
       .then(response => {
@@ -111,7 +111,7 @@ const KlipBtn = () => {
         let timerId = setInterval(() => {
           window.location.href = '/';
           clearInterval(timerId);
-      }, 1000);
+      }, 100);
       })
       .catch((error) => {
         if (error.response) {

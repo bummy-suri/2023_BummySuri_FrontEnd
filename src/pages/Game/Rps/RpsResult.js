@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom'; 
+import axios from "axios";
 
 import suri from "../../../assets/Game/Rps.png";
 import rock from "../../../assets/Game/rock.png";
@@ -95,7 +96,10 @@ const Rps = () => {
     const [opponentBoxColor, setOpponentBoxColor] = useState("#333"); // 수리 결과
     const [showOpponentImage, setShowOpponentImage] = useState(false);
 
-    //이미지랑 매핑..
+    const [remainingAttempts, setRemainingAttempts] = useState(3); //잔여 횟수
+
+
+    //이미지랑 매핑
     const choicesMap = {
         바위: { text: '바위', image: rock },
         보: { text: '보', image: paper },
@@ -105,6 +109,42 @@ const Rps = () => {
     const [opponentImage, setOpponentImage] = useState(choicesMap[opponentChoice].image);
     const [opponentText, setOpponentText] = useState(choicesMap[opponentChoice].text);
     const myImage = choicesMap[selectedChoice].image;
+
+    const accessToken = sessionStorage.getItem("accessToken");
+
+    // 결과 전달 api
+    const gameResult = (rpsResult) => {
+        axios
+            .put('https://api.dev.bummysuri.com/minigame', { 
+                result: rpsResult,
+            }, {
+                headers: {
+                    Authorization: `bearer ${accessToken}`,
+                },
+            })
+            .then((response) => {
+                const { times } = response.data;
+                console.log(times);
+                setRemainingAttempts(times);
+            })
+            .catch((error) => {
+                console.error("API Error:", error);
+            
+                // 오류 메시지 출력
+                if (error.response) {
+                    console.error("Response Data:", error.response.data);
+                    console.error("Status Code:", error.response.status);
+                } else if (error.request) {
+                    console.error("Request:", error.request);
+                } else {
+                    console.error("Error Message:", error.message);
+                }
+            });
+    };
+    
+
+
+
 
     //수리의 가위바위보 결과
     useEffect(() => {
@@ -137,8 +177,10 @@ const Rps = () => {
                 (selectedChoice === "보" && opponentText === "바위") ||
                 (selectedChoice === "가위" && opponentText === "보")
             ) {
+                gameResult("win");
                 setShowWinPopup(true);
             } else {
+                gameResult("lose");
                 setShowLosePopup(true);
             }
         }, delay);
@@ -148,7 +190,8 @@ const Rps = () => {
         };
     }, []);
 
-    
+
+  
 
     return (        
         <Background>
@@ -183,17 +226,17 @@ const Rps = () => {
             {showSamePopup && <Popup 
             title="무승부"
             message={<MessageContainer>무승부예요.<br/>다시 한 번 해볼까요?</MessageContainer>} 
-            remainingAttempts={3} />}
+            remainingAttempts={remainingAttempts} />}
 
             {showWinPopup && <Popup 
             title={<MessageContainer style={{color:"#FFE500"}}>승리!</MessageContainer>} 
             message={<MessageContainer>축하합니다!<br/>100P를 얻었습니다!</MessageContainer>} 
-            remainingAttempts={3} />}
+            remainingAttempts={remainingAttempts} />}
 
             {showLosePopup && <Popup 
             title={<MessageContainer style={{color:"#C2C2C2"}}>패배</MessageContainer>} 
             message={<MessageContainer>수리한테 졌어요...<br/>한 번 더 도전해보세요!</MessageContainer>} 
-            remainingAttempts={3} />}
+            remainingAttempts={remainingAttempts} />}
 
         </Background>
         );

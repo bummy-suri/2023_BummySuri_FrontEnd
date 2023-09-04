@@ -111,7 +111,7 @@ const SideBarContents = ()=> {
   });
   
   useEffect(() => {
-    axios.get(`${API}/users`, {
+    axios.get('https://api.dev.bummysuri.com/users', {
       headers:{
         Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
         }

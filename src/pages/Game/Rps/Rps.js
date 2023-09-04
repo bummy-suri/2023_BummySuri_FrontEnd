@@ -67,7 +67,19 @@ const ChoiceButton = styled.button`
     border-radius: 4px;
     transition: background-color 0.3s ease-in-out, color 0.2s ease-in-out;
     @media (max-width: 350px) {
+        width: 100px;
+        }
+    @media (max-width: 340px) {
+        width: 85px;
+        }
+    @media (max-width: 335px) {
         width: 80px;
+        }
+    @media (max-width: 300px) {
+        width: 73px;
+        }
+    @media (max-width: 250px) {
+        width: 60px;
         }
 
     `;
@@ -75,6 +87,9 @@ const ChoiceButton = styled.button`
 const RPSimg = styled.img`
     width: 110px;
     margin: -17%;
+    @media (max-width: 280px) {
+        width: 100px;
+        }
     @media (max-width: 280px) {
         width: 100px;
         }

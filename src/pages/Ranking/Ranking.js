@@ -155,7 +155,7 @@ const Ranking = () => {
     const accessToken = sessionStorage.getItem("accessToken");
 
     // 탑10 api
-    axios.get(`${API}/ranking/top10`, {
+    axios.get('https://api.dev.bummysuri.com/ranking/top10', {
       headers: {
         Authorization: `bearer ${accessToken}`,
       },

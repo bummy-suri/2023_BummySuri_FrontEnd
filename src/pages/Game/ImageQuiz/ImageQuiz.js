@@ -5,7 +5,6 @@ import SideBar from "../../../components/SideBar/SideBar";
 import SideBarContents from "../../../components/SideBar/SideBarContents";
 
 import bummy from "../../../assets/Game/bummyInQuiz.png";
-
 import candle from "../../../assets/Game/randomImage/candle.png";
 import cow from "../../../assets/Game/randomImage/cow.png";
 import fire from "../../../assets/Game/randomImage/fire.png";
@@ -147,12 +146,14 @@ const ImageQuiz = () => {
     const [isAnswered, setIsAnswered] = useState(false);
     const [remainingTime, setRemainingTime] = useState(30);
 
+
+    //타이머
     useEffect(() => {
       const timer = setInterval(() => {
         if (remainingTime > 0 && !isAnswered) {
-          setRemainingTime((prevTime) => prevTime - 1); // 시간 감소
+          setRemainingTime((prevTime) => prevTime - 1);
         } else if (remainingTime === 0 && !isAnswered) {
-          alert("시간이 초과되었습니다.");
+          window.location.href = '/imageQuiz/lose';
           setIsAnswered(true);
         }
       }, 1000);
@@ -164,21 +165,19 @@ const ImageQuiz = () => {
       setAnswer(event.target.value);
     };
 
+
     const handleSubmit = () => {
       if (answer.trim() === "") {
         alert("답을 입력하세요.");
-      } else if (correctAnswer.includes(answer)) { // 정답 배열에 포함되어 있는지 확인
-        alert("정답!");
       } else {
-        alert("오답!");
+        const trimmedAnswer = answer.trim(); //공백 제거
+        if (correctAnswer.includes(trimmedAnswer)) {
+          window.location.href = '/imageQuiz/win';
+        } else {
+          window.location.href = '/imageQuiz/lose';
+        }
+        setIsAnswered(true);
       }
-      setIsAnswered(true);
-    };
-  
-    const handleNextImage = () => {
-      setImage(getRandomImage());
-      setAnswer("");
-      setIsAnswered(false);
     };
 
     return (

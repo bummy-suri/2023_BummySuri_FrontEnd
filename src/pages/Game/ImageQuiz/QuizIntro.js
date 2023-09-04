@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 import SideBar from "../../../components/SideBar/SideBar";
 import SideBarContents from "../../../components/SideBar/SideBarContents";
 
-import bummy from "../../../assets/Game/bummyInQuiz.png";
 
 const Background = styled.div`
     max-width: 100vw;
@@ -100,7 +99,7 @@ const QuizIntro = () => {
             <SideBar><SideBarContents/></SideBar>
             <Title>버미의 넌센스 그림퀴즈</Title>
             <MainText>30초 안에 버미가 내는 문제를 맞춰봐!</MainText>
-            <Image src={bummy}/>
+            <Image src={`${process.env.PUBLIC_URL}/assets/Game/randomImage/bummyInQuiz.png`}/>
             
             <Link to="/ImageQuiz"><Btn>그림 퀴즈 시작!</Btn></Link>
         </Background>

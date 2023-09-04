@@ -3,18 +3,6 @@ import styled from 'styled-components';
 import SideBar from "../../../components/SideBar/SideBar";
 import SideBarContents from "../../../components/SideBar/SideBarContents";
 
-import bummy from "../../../assets/Game/bummyInQuiz.png";
-import candle from "../../../assets/Game/randomImage/candle.png";
-import cow from "../../../assets/Game/randomImage/cow.png";
-import fire from "../../../assets/Game/randomImage/fire.png";
-import greenOni from "../../../assets/Game/randomImage/greenOni.png";
-import guitar from "../../../assets/Game/randomImage/guitar.png";
-import ice from "../../../assets/Game/randomImage/ice.png";
-import radish from "../../../assets/Game/randomImage/radish.png";
-import sun from "../../../assets/Game/randomImage/sun.png";
-import letter from "../../../assets/Game/randomImage/letter.png";
-import moon from "../../../assets/Game/randomImage/moon.png";
-
 const Background = styled.div`
     max-width: 100vw;
     min-height: 100vh;
@@ -130,7 +118,18 @@ const Btn = styled.button`
 
 `;
 
-const images = [ candle, cow, fire, greenOni, guitar, ice, radish, sun, letter, moon,];
+const images = [ 
+  `${process.env.PUBLIC_URL}/assets/Game/randomImage/candle.png`,
+  `${process.env.PUBLIC_URL}/assets/Game/randomImage/cow.png`,
+  `${process.env.PUBLIC_URL}/assets/Game/randomImage/fire.png`,
+  `${process.env.PUBLIC_URL}/assets/Game/randomImage/greenOni.png`,
+  `${process.env.PUBLIC_URL}/assets/Game/randomImage/guitar.png`, 
+  `${process.env.PUBLIC_URL}/assets/Game/randomImage/ice.png`,
+  `${process.env.PUBLIC_URL}/assets/Game/randomImage/radish.png`,
+  `${process.env.PUBLIC_URL}/assets/Game/randomImage/sun.png`,
+  `${process.env.PUBLIC_URL}/assets/Game/randomImage/letter.png`,
+  `${process.env.PUBLIC_URL}/assets/Game/randomImage/moon.png`,
+];
 const correctAnswer = ["초음파", "우거지", "화상전화", "파스타", "타악기", "다이빙", "무에타이", "해수면", "편의점", "알쏭달쏭"];
 
 const getRandomImage = () => {
@@ -185,7 +184,7 @@ const ImageQuiz = () => {
             <MainLogo>넌센스 그림퀴즈</MainLogo>
             <SideBar><SideBarContents/></SideBar>
             <RandomImage><img src={image} alt="Random" width="100%" style={{borderRadius:"20px"}}/></RandomImage>
-            <Image src={bummy}/>
+            <Image src={`${process.env.PUBLIC_URL}/assets/Game/randomImage/bummyInQuiz.png`}/>
             <MainText>{remainingTime}</MainText>
             <Answer>답:
           <AnswerInput

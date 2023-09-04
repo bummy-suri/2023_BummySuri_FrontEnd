@@ -1,9 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
-import KlipLogo from "../../assets/Login/KlipLogo.png";
-import KakaoLogo from "../../assets/Login/KakaoLogo.png";
-import menu from "../../assets/Login/menu.png";
-import Klip from "../../assets/Login/Klip.png";
+
 
 //AboutKlip 누르면 나오는 토글내용
 const Total = styled.div`
@@ -106,7 +103,7 @@ const KlipIntro = () => {
     return (
         <Total>
             <What>Klip이란?</What>
-            <Image src={Klip}></Image>
+            <Image src={`${process.env.PUBLIC_URL}/assets/Login/Klip.png`}></Image>
             <Klipis>
             클립은 클레이튼, 이더리움, 폴리곤 네트워크 자산을 <br/>
             안전하고 편리하게 관리할 수 있는 디지털 자산 지갑입니다.
@@ -119,7 +116,7 @@ const KlipIntro = () => {
             <ListContainer>
                 <List>
                     <Circle>1</Circle>
-                    <img src={KakaoLogo} style={{width: "20px", height: "20px", marginRight: "9px"}}/>카카오톡 실행
+                    <img src={`${process.env.PUBLIC_URL}/assets/Login/KaKaoLogo.png`} style={{width: "20px", height: "20px", marginRight: "9px"}}/>카카오톡 실행
                 </List>
                 <List>
                     <Circle>2</Circle>
@@ -127,11 +124,11 @@ const KlipIntro = () => {
                 </List>
                 <List>
                     <Circle>3</Circle>
-                    <img src={menu} style={{width: "17px", height: "17px", marginRight: "9px"}}/>[전체서비스]를 누르세요
+                    <img src={`${process.env.PUBLIC_URL}/assets/Login/menu.png`} style={{width: "17px", height: "17px", marginRight: "9px"}}/>[전체서비스]를 누르세요
                 </List>
                 <List>
                     <Circle>4</Circle>
-                    <img src={KlipLogo} style={{width: "20px", height: "20px", marginRight: "9px"}}/>클립을 실행해주세요
+                    <img src={`${process.env.PUBLIC_URL}/assets/Login/KlipLogo.png`} style={{width: "20px", height: "20px", marginRight: "9px"}}/>클립을 실행해주세요
                 </List>
             </ListContainer>
         </Total>

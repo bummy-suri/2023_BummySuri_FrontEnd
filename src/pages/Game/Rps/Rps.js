@@ -1,15 +1,10 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom'; 
-import RpsImage from "../../../assets/Game/Rps.png";
+
 
 import SideBar from "../../../components/SideBar/SideBar";
 import SideBarContents from "../../../components/SideBar/SideBarContents";
-
-import rock from "../../../assets/Game/rock.png";
-import paper from "../../../assets/Game/paper.png";
-import scissors from "../../../assets/Game/scissors.png";
-
 
 const Background = styled.div`
     max-width: 100vw;
@@ -145,19 +140,19 @@ const Rps = () => {
             <SideBar><SideBarContents/></SideBar>
             <Title>수리와 가위바위보 하기</Title>
             <Text style={{marginTop:"12px"}}>수리를 이길 수 있을까?</Text>
-            <Image src={RpsImage} alt="수리이미지" />
+            <Image src={`${process.env.PUBLIC_URL}/assets/Game/Rps/Rps.png`} alt="수리이미지" />
             
 
 
             <ButtonContainer>
                 <ChoiceButton isSelected={selectedChoice === "가위"} onClick={() => handleChoiceClick("가위")}>
-                    <RPSimg src={scissors}/>가위
+                    <RPSimg src={`${process.env.PUBLIC_URL}/assets/Game/Rps/scissors.png`}/>가위
                 </ChoiceButton>
                 <ChoiceButton isSelected={selectedChoice === "바위"} onClick={() => handleChoiceClick("바위")}>
-                    <RPSimg src={rock}/>바위
+                    <RPSimg src={`${process.env.PUBLIC_URL}/assets/Game/Rps/rock.png`}/>바위
                 </ChoiceButton>
                 <ChoiceButton isSelected={selectedChoice === "보"} onClick={() => handleChoiceClick("보")}>
-                    <RPSimg src={paper}/>보
+                    <RPSimg src={`${process.env.PUBLIC_URL}/assets/Game/Rps/paper.png`}/>보
                 </ChoiceButton>
             </ButtonContainer>
 

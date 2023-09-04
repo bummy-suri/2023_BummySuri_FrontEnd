@@ -87,7 +87,7 @@ const MyRanking = () => {
 
     const accessToken = sessionStorage.getItem("accessToken");
 
-  // 나의 정보 'https://api.dev.bummysuri.com/users'
+  // 나의 정보 'https://api.dev.bummysuri.com/users' `${API}/users`
   useEffect(() => {
     axios.get(`${API}/users`, {
       headers:{
@@ -106,7 +106,7 @@ const MyRanking = () => {
 
     // 나의 순위   `${API}/ranking/user` 'https://api.dev.bummysuri.com/ranking/user'
     useEffect(() => {
-        axios.get( `${API}/ranking/user`, {
+        axios.get(`${API}/ranking/user`, {
           headers:{
             Authorization: `bearer ${accessToken}`
             }

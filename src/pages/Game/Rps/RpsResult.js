@@ -109,20 +109,20 @@ const Rps = () => {
 
     const accessToken = sessionStorage.getItem("accessToken");
 
-    // 결과 전달 api https://api.dev.bummysuri.com/minigame
+    // 결과 전달 api `${API}/minigame` https://api.dev.bummysuri.com/minigame
     const gameResult = (rpsResult) => {
         axios
-            .put(`${API}/minigame`, { 
+            .put( `${API}/minigame`, { 
                 result: rpsResult,
+                miniGameType: '가위바위보',
             }, {
                 headers: {
                     Authorization: `bearer ${accessToken}`,
                 },
             })
             .then((response) => {
-                const { times } = response.data;
-                console.log(times);
-                setRemainingAttempts(times);
+                console.log(response.data);
+                //setRemainingAttempts(times);
             })
             .catch((error) => {
                 console.error("API Error:", error);

@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import SideBar from "../../../components/SideBar/SideBar";
 import SideBarContents from "../../../components/SideBar/SideBarContents";
+import axios from "axios";
+import { API } from '../../../config';
+
 
 const Background = styled.div`
     max-width: 100vw;
@@ -23,12 +26,6 @@ const MainLogo = styled.div`
   margin-top: 74px;
   font-family: "Pretendard_Regular";
 `;
-
-const TitleContent = styled.div`
-    display: flex;
-    align-items: center;
-    margin-top: 42px;
-`
 
 const Image = styled.img`
     width: 40vw;
@@ -144,6 +141,38 @@ const ImageQuiz = () => {
     const [isAnswered, setIsAnswered] = useState(false);
     const [remainingTime, setRemainingTime] = useState(30);
 
+    const accessToken = sessionStorage.getItem("accessToken");
+
+    //`${API}/miniGame` "https://api.dev.bummysuri.com/minigame"
+    const gameResult = (rpsResult) => {
+      axios
+          .put(`${API}/miniGame` , { 
+              result: rpsResult,
+              miniGameType: '그림 퀴즈',
+          }, {
+              headers: {
+                  Authorization: `bearer ${accessToken}`,
+              },
+          })
+          .then((response) => {
+              console.log(response.data);
+              //setRemainingAttempts(times);
+          })
+          .catch((error) => {
+              console.error("API Error:", error);
+          
+              // 오류 메시지 출력
+              if (error.response) {
+                  console.error("Response Data:", error.response.data);
+                  console.error("Status Code:", error.response.status);
+              } else if (error.request) {
+                  console.error("Request:", error.request);
+              } else {
+                  console.error("Error Message:", error.message);
+              }
+          });
+  };
+
 
     //타이머
     useEffect(() => {
@@ -170,8 +199,10 @@ const ImageQuiz = () => {
       } else {
         const trimmedAnswer = answer.trim(); //공백 제거
         if (correctAnswer.includes(trimmedAnswer)) {
+          gameResult("win");
           window.location.href = '/imageQuiz/win';
         } else {
+          gameResult("lose");
           window.location.href = '/imageQuiz/lose';
         }
         setIsAnswered(true);

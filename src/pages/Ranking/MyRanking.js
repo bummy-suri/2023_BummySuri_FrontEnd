@@ -2,11 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
 
-import SideBar from "../../components/SideBar/SideBar";
-import SideBarContents from "../../components/SideBar/SideBarContents";
-import gold from "../../assets/Ranking/gold.png";
-import silver from "../../assets/Ranking/silver.png";
-import bronze from "../../assets/Ranking/bronze.png";
 
 import { API } from "../../config";
 
@@ -92,9 +87,9 @@ const MyRanking = () => {
 
     const accessToken = sessionStorage.getItem("accessToken");
 
-  // 나의 정보
+  // 나의 정보 'https://api.dev.bummysuri.com/users'
   useEffect(() => {
-    axios.get('https://api.dev.bummysuri.com/users', {
+    axios.get(`${API}/ranking/users`, {
       headers:{
         Authorization: `bearer ${accessToken}`
         }
@@ -109,9 +104,9 @@ const MyRanking = () => {
         });
 }, []); 
 
-    // 나의 순위   'https://api.dev.bummysuri.com/ranking/user'
+    // 나의 순위   `${API}/ranking/user` 'https://api.dev.bummysuri.com/ranking/user'
     useEffect(() => {
-        axios.get(`${API}/ranking/user`, {
+        axios.get( `${API}/ranking/user`, {
           headers:{
             Authorization: `bearer ${accessToken}`
             }

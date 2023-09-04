@@ -4,9 +4,6 @@ import axios from 'axios';
 
 import SideBar from "../../components/SideBar/SideBar";
 import SideBarContents from "../../components/SideBar/SideBarContents";
-import gold from "../../assets/Ranking/gold.png";
-import silver from "../../assets/Ranking/silver.png";
-import bronze from "../../assets/Ranking/bronze.png";
 
 import { API } from "../../config";
 import MyRanking from "./MyRanking";
@@ -172,7 +169,7 @@ const MyRankingText = styled.div`
         width: 140px;
     }
 `
-    // 'https://api.dev.bummysuri.com/ranking/top10'
+    // 'https://api.dev.bummysuri.com/ranking/top10' `${API}/ranking/top10`
 const Ranking = () => {
     const [top10Rankings, setTop10Rankings] = useState([]);
 
@@ -212,9 +209,9 @@ const Ranking = () => {
                     isSilver={index === 1}
                     isBronze={index === 2}
                 >
-                {index === 0 && <RankImage src={gold} alt="1등"/>}
-                {index === 1 && <RankImage src={silver} alt="2등" />}
-                {index === 2 && <RankImage src={bronze} alt="3등" />}
+                {index === 0 && <RankImage src={`${process.env.PUBLIC_URL}/assets/Ranking/gold.png`} alt="1등"/>}
+                {index === 1 && <RankImage src={`${process.env.PUBLIC_URL}/assets/Ranking/silver.png`} alt="2등" />}
+                {index === 2 && <RankImage src={`${process.env.PUBLIC_URL}/assets/Ranking/bronze.png`} alt="3등" />}
                 {(index !== 0 && index !== 1 && index !== 2) && <Num>{index + 1}</Num>}
                     <NFTImage src="" alt="NFT 이미지"/>
                     <div>

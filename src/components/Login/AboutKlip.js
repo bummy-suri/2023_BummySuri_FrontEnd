@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 import KlipIntro from "./KlipIntro";
-import downBtn from "../../assets/Login/downBtn.png";
+
 
 const AbtKlip = styled.div`
   display: flex;
@@ -48,7 +48,7 @@ const AboutKlip = () => {
       <ToggleButton onClick={toggleContent}>
         About Klip
         <span style={{ marginRight: "23px" }}> </span>
-        <DownBtn src={downBtn} style={{ transform: showContent ? "rotate(180deg)" : "rotate(0)" }} />
+        <DownBtn src={`${process.env.PUBLIC_URL}/assets/Login/downBtn.png`} style={{ transform: showContent ? "rotate(180deg)" : "rotate(0)" }} />
       </ToggleButton>
       <AboutText showContent={showContent}>
         {showContent && <KlipIntro />}

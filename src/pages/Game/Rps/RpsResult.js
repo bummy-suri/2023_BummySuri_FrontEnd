@@ -3,10 +3,6 @@ import styled from 'styled-components';
 import { useLocation } from 'react-router-dom'; 
 import axios from "axios";
 
-import suri from "../../../assets/Game/Rps.png";
-import rock from "../../../assets/Game/rock.png";
-import paper from "../../../assets/Game/paper.png";
-import scissors from "../../../assets/Game/scissors.png";
 
 import Popup from "./Popup";
 import { API } from '../../../config';
@@ -102,9 +98,9 @@ const Rps = () => {
 
     //이미지랑 매핑
     const choicesMap = {
-        바위: { text: '바위', image: rock },
-        보: { text: '보', image: paper },
-        가위: { text: '가위', image: scissors },
+        바위: { text: '바위', image: `${process.env.PUBLIC_URL}/assets/Game/Rps/rock.png` },
+        보: { text: '보', image: `${process.env.PUBLIC_URL}/assets/Game/Rps/paper.png` },
+        가위: { text: '가위', image: `${process.env.PUBLIC_URL}/assets/Game/Rps/scissors.png` },
     };
 
     const [opponentImage, setOpponentImage] = useState(choicesMap[opponentChoice].image);
@@ -199,7 +195,7 @@ const Rps = () => {
             <MainLogo>가위바위보</MainLogo>
 
             <Who style={{ marginTop: "60px", display: "flex", alignItems: "center" }}>
-                <Suri src={suri} />
+                <Suri src={`${process.env.PUBLIC_URL}/assets/Game/Rps/Rps.png`} />
                 수리
             </Who>
             

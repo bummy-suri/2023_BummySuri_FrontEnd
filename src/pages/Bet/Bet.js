@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled, {keyframes} from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
@@ -191,6 +191,7 @@ const Bet = () => {
     const [sportopts, setsportopts] = useState([0, 0, 0, 0, 0]);
 
     const [budget, setBudget] = useState(0);
+    const [beforepoint, setBeforePoint] = useState(0);
 
     const gameTypes = ["baseball", "basketball", "hockey", "rugby", "soccer"];
 
@@ -208,84 +209,83 @@ const Bet = () => {
 
 
     useEffect(() => {
-        axios.get(`${API}/users`, {
-            headers: {
-                Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
-            }
-        })
-            .then(response => {
-                const userData = response.data;
-                setBudget(userData.totalPoint);
-                console.log(userData.totalPoint);
+        async function getInfo() {
+            await axios.get(`${API}/users`, {
+                headers: {
+                    Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
+                }
             })
-            .catch(error => {
-                console.error(error);
-            });
-
-
-
-        async function fetchGameInfo() {
-            sportopt.length = 0;
-            sportpoint.length = 0;
-            sportuniv.length = 0;
-            let sumpoint = 0;
-
-            for (let i = 0; i < 5; i++) {
-                try {
-                    const response = await axios.get(`${API}/betting/${gameTypes[i]}`, {
-                        headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
-                    });
+                .then(response => {
                     const userData = response.data;
-                    console.log("edit in: ", userData.predictedScore, userData.bettingPoint, userData.predictedWinner);
-                    sportopt[i] = parseInt(userData.predictedScore);
-                    sportpoint[i] = parseInt(userData.bettingPoint);
-                    sportuniv[i] = userData.predictedWinner;
-                    if(userData.predictedWinner === "DRAW")
-                    {
-                        sportopt[i] = -2;
-                    }
-                    sumpoint += sportpoint[i];
-                } catch (error) {
-
+                    setBudget(userData.totalPoint);
+                })
+                .catch(error => {
                     console.error(error);
-                }
-            }
+                })
 
-            // 모든 게임 정보를 가져온 후에 budget 계산
 
-            setPoint(sumpoint);
-            setBudget((prev) => prev + sumpoint);
+            async function fetchGameInfo() {
+                sportopt.length = 0;
+                sportpoint.length = 0;
+                sportuniv.length = 0;
+                let sumpoint = 0;
 
-            // 상태 업데이트
-            setMethod("put");
-            setsportopts(sportopt);
-            setsportpoints(sportpoint);
-            setsportunivs(sportuniv);
-            setLoading(false);
+                for (let i = 0; i < 5; i++) {
+                    try {
+                        const response = await axios.get(`${API}/betting/${gameTypes[i]}`, {
+                            headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
+                        });
+                        const userData = response.data;
+                        sportopt[i] = parseInt(userData.predictedScore);
+                        sportpoint[i] = parseInt(userData.bettingPoint);
+                        sportuniv[i] = userData.predictedWinner;
+                        if (userData.predictedWinner === "DRAW") {
+                            sportopt[i] = -2;
+                        }
+                        sumpoint += sportpoint[i];
+                    } catch (error) {
 
-        }
-
-        // 수정하기로 들어온 경우 (포인트 지불 고려해야) else 참여여부 check
-        if (isEdit) {
-            fetchGameInfo();
-        }
-        else {
-            async function checkSelected() {
-                try {
-                    const response = await axios.get(`${API}/betting/baseball`, {
-                        headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
-                    });
-                    const userData = response.data;
-                    if (userData.selected === true) {
-                        navigate('/bet/my-prediction');
+                        console.error(error);
                     }
-                } catch (error) {
-                    //console.log(error); (Betting data not found)
                 }
-            }
-            checkSelected();
-        }
 
+                // 모든 게임 정보를 가져온 후에 budget 계산
+
+                setPoint(sumpoint);
+                setBeforePoint(sumpoint);
+
+                // 상태 업데이트
+                setMethod("put");
+                setsportopts(sportopt);
+                setsportpoints(sportpoint);
+                setsportunivs(sportuniv);
+                setLoading(false);
+
+            }
+
+            // 수정하기로 들어온 경우 (포인트 지불 고려해야) else 참여여부 check
+            if (isEdit) {
+                fetchGameInfo();
+            }
+            else {
+                async function checkSelected() {
+                    try {
+                        const response = await axios.get(`${API}/betting/baseball`, {
+                            headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
+                        });
+                        const userData = response.data;
+                        if (userData.selected === true) {
+                            navigate('/bet/my-prediction');
+                        }
+                    } catch (error) {
+                        //console.log(error); (Betting data not found)
+                    }
+                }
+                checkSelected();
+            }
+
+        }
+        getInfo();
     }, []);
 
 
@@ -319,13 +319,17 @@ const Bet = () => {
                     setsportpoints((prev) => {
                         prev[i] = data[3];
                         setPoint(sportpoints[0] + sportpoints[1] + sportpoints[2] + sportpoints[3] + sportpoints[4]);
-                        console.log(sportpoints);
+                        
                         return prev;
                     });
                 }
             }
         }
     }
+
+    // useEffect(() => {
+    //     console.log(point, budget, "pointcheck");
+    // }, [point])
 
 
 
@@ -334,8 +338,7 @@ const Bet = () => {
 
     // 제출하기
     const Submit = () => {
-        console.log(budget, point);
-        if (budget >= point) {
+        if ((budget + beforepoint) >= point) {
 
             async function submitBetting() {
                 setLoading2(true);
@@ -348,7 +351,6 @@ const Bet = () => {
                             predictedScore: sportopts[i] !== -2 ? sportopts[i].toString() : "3",
                             bettingPoint: sportpoints[i].toString(),
                         };
-                        console.log(gameTypes[i], value, "bet.js");
                         await axios({
                             url: `${API}/betting/${gameTypes[i]}`,
                             method: `${method}`,
@@ -357,12 +359,16 @@ const Bet = () => {
                                 Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
                             },
                         })
-                        
+
                     } catch (error) {
-                        console.error(error);
+                        console.log(error);
+                        setLoading2(false);
+                        setPopupOpen(true);
+                        return;
+
                     }
                 }
-                navigate('/bet/my-prediction');
+                navigate('/bet/done');
             }
             submitBetting();
         }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled, {keyframes} from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 
 
@@ -45,7 +45,7 @@ const Title = styled.div`
 
 const Container = styled.div`
     width: 358px;
-    height: 548px;
+    height: 620px;
     border-radius: 14px;
     background-color: white;
     margin-bottom: 60px;
@@ -55,7 +55,7 @@ const Container = styled.div`
     flex-direction: column;
     @media(max-width: 365px){
         width: 260px;
-        height: 440px;
+        height: 465px;
     }
 `;
 
@@ -112,7 +112,7 @@ const Predict = styled.div`
     align-items: center;
     width: 40%;
     @media(max-width: 365px){
-        margin-right: 13px;
+        margin-left: 5px;
     }
 `;
 
@@ -146,9 +146,9 @@ const PointAmount = styled.div`
 `;
 
 const TotalP = styled.div`
-    margin-top: 25px;
+    margin-top: 20px;
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 800;
     color:black;
     /* display: flex;
     justify-content: center;
@@ -213,6 +213,26 @@ const Circle = styled.div`
   margin-bottom: 10px;
 `;
 
+const GetPointBTN = styled.button`
+    background-color: rgba(112, 0, 255, 1);
+    border: none;
+    border-radius: 10px;
+    width: 300px;
+    height: 45px;
+    color: white;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 800;
+    @media (max-width: 360px)
+    {
+        width: 220px;
+        height: 30px;
+        font-size: 12px;
+        margin-top: 13px;
+        border-radius: 7px;
+    }
+`;
+
 
 
 
@@ -237,7 +257,10 @@ const GameResult = () => {
     const point = [];
     const scoredifference = [];
     const [loading, setLoading] = useState(true);
-    const [changed, setChanged] = useState(false);
+    const [getP, setgetP] = useState(false);
+
+    const [popupOpen, setPopupOpen] = useState(false);
+    const [popupOpen2, setPopupOpen2] = useState(false);
 
     useEffect(() => {
         async function getBetting() {
@@ -247,42 +270,29 @@ const GameResult = () => {
             let sum = 0;
             for (let i = 0; i < 5; i++) {
                 try {
-                    const response = await axios.get(`${API}/betting/${gameTypes[i]}`, {
+                    const response = await axios.get(`${API}/bettingResult/${gameTypes[i]}`, {
                         headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
                     });
                     const userData = response.data; // 사용자 베팅 내용 가져오기
-                    const bettingresponse = await axios({
-                        url: `${API}/bettingResult/${gameTypes[i]}`,
-                        method: "post",
-                        data: userData,
-                        headers: {
-                            Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
-                        },
-                    });
-                    const bettingData = bettingresponse.data;
-                    point[i] = bettingData.earnedPoint;
+                    console.log(userData, gameTypes[i]);
+
+                    scoredifference[i] = userData.difference;
+                    point[i] = userData.earnedPoint;
                     sum += point[i];
-                    const gameresponse = await axios({
-                        url: `${API}/game/${gameTypes[i]}`,
-                        method: "get",
-                        headers: {
-                            Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
-                        },
-                    });
-                    const gameData = gameresponse.data;
-                    if (gameData.KoreaScore > gameData.YonseiScore) {
+                    if (userData.winner === "KOREA") {
                         school[i] = "고대 승";
-                        scoredifference[i] = gameData.KoreaScore - gameData.YonseiScore;
+                        console.log("korea", gameTypes[i]);
                     }
-                    else if (gameData.KoreaScore < gameData.YonseiScore) {
+                    else if (userData.winner === "YONSEI") {
                         school[i] = "연대 승";
-                        scoredifference[i] = gameData.YonseiScore - gameData.KoreaScore;
+                        console.log("yonsei", gameTypes[i]);
                     }
                     else {
                         school[i] = "무승부";
                         scoredifference[i] = 0;
+                        console.log("draw", gameTypes[i]);
                     }
-                    console.log(point[i], gameTypes[i], school[i]);
+
 
                 } catch (error) {
                     console.error(error);
@@ -293,32 +303,15 @@ const GameResult = () => {
             setEarnedPoint(point);
             setTotal(sum);
             setLoading(false);
-            setChanged(true);
         }
         getBetting();
     }, []);
 
 
 
+    const navigate = useNavigate();
 
 
-    useEffect(() => {
-        async function updatePoint() {
-            try {
-                await axios({
-                    url: `${API}/bettingResult`,
-                    method: "put",
-                    data: {
-                        totalEarnedPoint: total,
-                    },
-                    headers: {
-                        Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
-                    },
-                });
-            } catch (error) { console.log(error); }
-        }
-        updatePoint();
-    }, [changed]);
 
     const getSchoolColor = (schoolText) => {
         if (schoolText === "연대 승") {
@@ -333,26 +326,47 @@ const GameResult = () => {
         }
     }
 
+    const getPoint = () => {
+
+        axios({
+            url: `${API}/bettingResult`,
+            method: "put",
+            data: {
+                totalEarnedPoint: total,
+            },
+            headers: {
+                Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
+            },
+        })
+            .then(response => {
+                console.log("응답 데이터:", response.data);
+                navigate('/bet/done', { state: { pointreceived: true , pamount:total} });
+            })
+            .catch(error => {
+                setPopupOpen(true);
+                setgetP(true);
+                console.error("오류 발생:", error);
+            })
+
+    }
 
 
-    // const navigate = useNavigate();
-    //
-    // const deleteme = () => {
-    //     axios.delete(`${API}/users`, {
-    //         headers: {
-    //           Authorization: `bearer ${sessionStorage.getItem("accessToken")}`,
-    //         },
-    //       })
-    //         .then(response => {
-    //           console.log('DELETE 요청이 성공했습니다.');
-    //           // 서버로부터 성공 응답을 처리할 코드를 여기에 추가
-    //           navigate('/');
-    //         })
-    //         .catch(error => {
-    //           console.error('DELETE 요청이 실패했습니다.');
-    //           // 요청 실패 시 에러를 처리할 코드를 여기에 추가
-    //         });
-    // }
+    const deleteme = () => {
+        axios.delete(`${API}/users`, {
+            headers: {
+                Authorization: `bearer ${sessionStorage.getItem("accessToken")}`,
+            },
+        })
+            .then(response => {
+                console.log('DELETE 요청이 성공했습니다.');
+                // 서버로부터 성공 응답을 처리할 코드를 여기에 추가
+                navigate('/');
+            })
+            .catch(error => {
+                console.error('DELETE 요청이 실패했습니다.');
+                // 요청 실패 시 에러를 처리할 코드를 여기에 추가
+            });
+    }
 
 
 
@@ -421,8 +435,20 @@ const GameResult = () => {
                             </Row>
                         </Result>
                         <TotalP>총 획득 포인트 : {total}p</TotalP>
+                        {getP ? <Link to='/'><GetPointBTN>메인 페이지로 돌아가기</GetPointBTN></Link> : <GetPointBTN onClick={getPoint}>포인트 얻기!</GetPointBTN>}
+                        {popupOpen && (
+                            <Popup>
+                                <PopupContainer>
+                                    이미 포인트를 받았습니다.
+                                    <button
+                                        onClick={() => setPopupOpen(false)}
+                                        style={{ backgroundColor: "#7000FF", color: "white", width: "65px", height: "23px", border: "none", borderRadius: "4px", marginTop: "10px" }}>
+                                        닫기</button>
+                                </PopupContainer>
+                            </Popup>
+                        )}
                     </Container>
-                    {/* <button onClick={deleteme}>나 지우기</button> */}
+                    <button onClick={deleteme}>나 지우기</button>
                 </Background>
             }
         </div>

@@ -140,6 +140,20 @@ const FinishMainText = styled.div`
 
 
 const BetIntro = () => {
+    useEffect(() => {
+        axios.get(`${API}/users`, {
+          headers:{
+            Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
+            }
+          })
+            .then(response => {
+                const userData = response.data;
+                console.log(userData);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, []); 
 
     // 테스트 
     // const gameTypes = ["baseball", "basketball", "hockey", "rugby", "soccer"];
@@ -177,7 +191,7 @@ const BetIntro = () => {
 
     const handleBetButtonClick = () => {
         async function checkSelected() {
-            try {
+            try { // 만약 참여 이력 있으면 나의 예측 페이지로
                 const response = await axios.get(`${API}/betting/baseball`, {
                     headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
                 });
@@ -185,7 +199,7 @@ const BetIntro = () => {
                 if (userData.selected === true) {
                     navigate('/bet/my-prediction');
                 }
-            } catch (error) {
+            } catch (error) { // 참여 이력 없지만 참여 가능 시간 지난 경우 bet/intro로 (종료 문구 뜸), 시간 내인 경우 베팅 페이지로
                 //console.log(error);
                 const time = new Date();
                 if (time >= cutoffDate) {
@@ -201,11 +215,13 @@ const BetIntro = () => {
 
     const navigate = useNavigate();
 
+
+    // 종료 문구 뜬 경우의 페이지에서 나의 예측으로 가는 버튼 클릭
     const goToMyPrediction = () => {
 
 
         async function checkSelected() {
-            try {
+            try { // 참여 이력 있으면 나의 예측 페이지로
                 const response = await axios.get(`${API}/betting/baseball`, {
                     headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
                 });
@@ -213,13 +229,15 @@ const BetIntro = () => {
                 if (userData.selected === true) {
                     navigate('/bet/my-prediction');
                 }
-            } catch (error) {
+            } catch (error) { // 없으면 not found 페이지로
                 navigate('/bet/notfound');
             }
         }
         checkSelected();
     }
 
+
+    
     useEffect(() => {
         if(redirectToBet)
         {

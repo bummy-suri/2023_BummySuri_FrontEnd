@@ -15,6 +15,7 @@ import GameResult from "./pages/Bet/GameResult";
 import BenefitPopup from "./components/Lending/BenefitPopup";
 import ScrollToTop from "./components/ScrollToTop";
 import Ranking from "./pages/Ranking/Ranking";
+import BetDone from "./pages/Bet/BetDone";
 
 function DefaultRouter () {
     return (
@@ -30,6 +31,7 @@ function DefaultRouter () {
           <Route path="/bet/notfound" element={<BetNotFound />} />
           <Route path="/bet" element={<Bet/>}/>
           <Route path="/bet/my-prediction" element={<MyPrediction/>}/>
+          <Route path="/bet/done" element={<BetDone/>}/>
           <Route path="/bet/result" element={<GameResult/>}/>
           <Route path="/imageQuiz/intro" element={<QuizIntro />} />
           <Route path="/imageQuiz" element={<ImageQuiz />} />

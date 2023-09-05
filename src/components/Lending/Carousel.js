@@ -40,7 +40,6 @@ const ItemsWrap = styled.div`
   }
 `;
 
-
 const items = [
   <ItemsContain>
     <ItemsWrap>
@@ -63,7 +62,6 @@ const items = [
     </ItemsWrap>
 </ItemsContain>,
 ];
-
 
 const responsive = {
   0: {

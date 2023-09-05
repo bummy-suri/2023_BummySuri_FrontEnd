@@ -10,12 +10,15 @@ import BetNotFound from "./pages/Bet/BetNotFound";
 import Bet from "./pages/Bet/Bet";
 import QuizIntro from "./pages/Game/ImageQuiz/QuizIntro";
 import ImageQuiz from "./pages/Game/ImageQuiz/ImageQuiz";
+import QuizWin from "./pages/Game/ImageQuiz/QuizWin";
+import QuizLose from "./pages/Game/ImageQuiz/QuizLose";
 import MyPrediction from "./pages/Bet/MyPrediction";
 import GameResult from "./pages/Bet/GameResult";
 import BenefitPopup from "./components/Lending/BenefitPopup";
 import ScrollToTop from "./components/ScrollToTop";
 import Ranking from "./pages/Ranking/Ranking";
 import BetDone from "./pages/Bet/BetDone";
+import MyNFT from "./pages/MyNFT";
 
 function DefaultRouter () {
     return (
@@ -35,8 +38,11 @@ function DefaultRouter () {
           <Route path="/bet/result" element={<GameResult/>}/>
           <Route path="/imageQuiz/intro" element={<QuizIntro />} />
           <Route path="/imageQuiz" element={<ImageQuiz />} />
+          <Route path="/imageQuiz/win" element={<QuizWin />} />
+          <Route path="/imageQuiz/lose" element={<QuizLose />} />
           <Route path="/hmpBenefit" element={<BenefitPopup/>}/>
           <Route path="/Ranking" element={<Ranking/>}/>
+          <Route path="/MyNFT" element={<MyNFT/>}/>
           </Routes>
     </Router>
     );

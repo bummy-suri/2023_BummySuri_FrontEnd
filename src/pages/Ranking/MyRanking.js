@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
-
-import SideBar from "../../components/SideBar/SideBar";
-import SideBarContents from "../../components/SideBar/SideBarContents";
-import gold from "../../assets/Ranking/gold.png";
-import silver from "../../assets/Ranking/silver.png";
-import bronze from "../../assets/Ranking/bronze.png";
-
 import { API } from "../../config";
-
 
 const RankingBox = styled.div`
     display: flex;
@@ -90,11 +82,11 @@ const MyRanking = () => {
     const [userPoint, setUserPoint] = useState("");
     const [myRank, setmyRank] = useState("");
 
-    const accessToken = sessionStorage.getItem("accessToken");
+    const accessToken = sessionStorage.getItem("bummySuri");
 
-  // 나의 정보
+  // 나의 정보 'https://api.dev.bummysuri.com/users' `${API}/users`
   useEffect(() => {
-    axios.get('https://api.dev.bummysuri.com/users', {
+    axios.get(`${API}/users`, {
       headers:{
         Authorization: `bearer ${accessToken}`
         }
@@ -109,7 +101,7 @@ const MyRanking = () => {
         });
 }, []); 
 
-    // 나의 순위
+    // 나의 순위   `${API}/ranking/user` 'https://api.dev.bummysuri.com/ranking/user'
     useEffect(() => {
         axios.get(`${API}/ranking/user`, {
           headers:{

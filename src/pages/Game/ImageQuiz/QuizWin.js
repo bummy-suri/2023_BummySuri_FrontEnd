@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from "react-router-dom";
-
 import SideBar from "../../../components/SideBar/SideBar";
 import SideBarContents from "../../../components/SideBar/SideBarContents";
-
 
 const PopupContainer = styled.div`
     max-width: 100vw;
@@ -77,7 +75,6 @@ const Times = styled.div`
     @media (max-width: 300px) {
         font-size: 17px;
       }
-
 `
 
 const Button = styled.button`
@@ -93,8 +90,7 @@ const Button = styled.button`
     margin-bottom: 200px;
 `
 
-const QuizWin = ({ title, message}) => {
-
+const QuizWin = () => {
     return (
         <PopupContainer>
             <MainLogo>넌센스 그림퀴즈</MainLogo>
@@ -103,13 +99,11 @@ const QuizWin = ({ title, message}) => {
                 <Title >승리!</Title>
                 <Message>축하합니다!<br/>200P를 얻었습니다!</Message>
                 <Times>남은 횟수: 0</Times>
-
                 </ModalContent>
                 <div>
                     <Link to="/"><Button style={{border:"1px solid #7000FF", backgroundColor:"#1D1D1D"}}>돌아가기</Button></Link>
                 </div>
         </PopupContainer>
-
     );
 };
 

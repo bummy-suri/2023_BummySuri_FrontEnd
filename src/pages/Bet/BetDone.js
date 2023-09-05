@@ -7,8 +7,6 @@ import { useLocation } from 'react-router-dom';
 import SideBar from "../../components/SideBar/SideBar";
 import SideBarContents from "../../components/SideBar/SideBarContents";
 
-import Betbummy from "../../assets/Bet/betBummy.png";
-import Betsuri from "../../assets/Bet/betSuri.png";
 
 const Background = styled.div`
     max-width: 100vw;

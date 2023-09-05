@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import axios from 'axios';
-
-
 import { API } from "../../config";
-
 
 const RankingBox = styled.div`
     display: flex;

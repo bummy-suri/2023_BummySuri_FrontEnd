@@ -91,7 +91,7 @@ const KlipBtn = () => {
       })
       .then(response => {
         const { accessToken } = response.data;
-        sessionStorage.setItem("accessToken", accessToken);
+        sessionStorage.setItem("bummySuri", accessToken);
         console.log("accessToken", accessToken);
         let timerId = setInterval(() => {
           window.location.href = '/';

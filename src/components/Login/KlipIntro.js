@@ -1,7 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
 
-
 //AboutKlip 누르면 나오는 토글내용
 const Total = styled.div`
     width: 100vw;
@@ -56,11 +55,9 @@ const Btn = styled.button`
   margin-top: 56px;
   margin-bottom: 29px;
   color: #FFFFFF;
-
   @media (max-width: 350px) {
     width: 230px;
   }
-
   @media (max-width: 235px) {
     padding-left: 30px;
     padding-right: 30px;
@@ -69,7 +66,6 @@ const Btn = styled.button`
   }
 
 `;
-
 
 const ListContainer = styled.div`
     display: flex;

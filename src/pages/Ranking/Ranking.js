@@ -174,7 +174,7 @@ const Ranking = () => {
     const [top10Rankings, setTop10Rankings] = useState([]);
 
   useEffect(() => {
-    const accessToken = sessionStorage.getItem("accessToken");
+    const accessToken = sessionStorage.getItem("bummySuri");
 
     // 탑10 api
     axios.get(`${API}/ranking/top10`, {

@@ -111,7 +111,7 @@ const SideBarContents = ()=> {
   useEffect(() => {
     axios.get(`${API}/users`, {
       headers:{
-        Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
+        Authorization: `bearer ${sessionStorage.getItem("bummySuri")}`
         }
       })
         .then(response => {

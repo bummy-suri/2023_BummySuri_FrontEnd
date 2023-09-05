@@ -156,8 +156,8 @@ const BetIntro = () => {
     }, []);
 
     const currentDate = new Date();
-    // const cutoffDate = new Date("2023-09-08T10:00:00");
-    const cutoffDate = new Date("2023-09-05T23:40:50");
+    const cutoffDate = new Date("2023-09-08T10:00:00");
+    // const cutoffDate = new Date("2023-09-05T23:40:50"); test
     const [redirectToBet, setRedirectToBet] = useState(false);
 
     const handleBetButtonClick = () => {
@@ -186,8 +186,8 @@ const BetIntro = () => {
 
     const navigate = useNavigate();
 
-    // const endDate = new Date("2023-09-09T20:00:00");
-    const endDate = new Date("2023-09-05T23:41:30");
+    const endDate = new Date("2023-09-09T20:00:00"); // 경기 종료 시점
+    // const endDate = new Date("2023-09-05T23:41:30"); test
 
     // 종료 문구 뜬 경우의 페이지에서 나의 예측으로 가는 버튼 클릭
     const goToMyPrediction = () => {

@@ -212,7 +212,7 @@ const Bet = () => {
         async function getInfo() {
             await axios.get(`${API}/users`, {
                 headers: {
-                    Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
+                    Authorization: `bearer ${sessionStorage.getItem("bummySuri")}`
                 }
             })
                 .then(response => {
@@ -233,7 +233,7 @@ const Bet = () => {
                 for (let i = 0; i < 5; i++) {
                     try {
                         const response = await axios.get(`${API}/betting/${gameTypes[i]}`, {
-                            headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
+                            headers: { Authorization: `bearer ${sessionStorage.getItem("bummySuri")}` }
                         });
                         const userData = response.data;
                         sportopt[i] = parseInt(userData.predictedScore);
@@ -271,7 +271,7 @@ const Bet = () => {
                 async function checkSelected() {
                     try {
                         const response = await axios.get(`${API}/betting/baseball`, {
-                            headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
+                            headers: { Authorization: `bearer ${sessionStorage.getItem("bummySuri")}` }
                         });
                         const userData = response.data;
                         if (userData.selected === true) {
@@ -356,7 +356,8 @@ const Bet = () => {
                             method: `${method}`,
                             data: value,
                             headers: {
-                                Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
+                                Authorization: `bearer ${sessionStorage.getItem("bummySuri")}`
+                                
                             },
                         })
 

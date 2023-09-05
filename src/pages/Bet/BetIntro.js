@@ -137,31 +137,31 @@ const FinishMainText = styled.div`
 
 
 const BetIntro = () => {
-    useEffect(() => {
-        axios.get(`${API}/users`, {
-          headers:{
-            Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
-            }
-          })
-            .then(response => {
-                const userData = response.data;
-                console.log(userData);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, []);
+    // useEffect(() => {
+    //     axios.get(`${API}/users`, {
+    //       headers:{
+    //         Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
+    //         }
+    //       })
+    //         .then(response => {
+    //             const userData = response.data;
+    //             console.log(userData);
+    //         })
+    //         .catch(error => {
+    //             console.error(error);
+    //         });
+    // }, []);
 
     const currentDate = new Date();
-    const cutoffDate = new Date("2023-09-08T10:00:00");
-    // const cutoffDate = new Date("2023-09-05T23:40:50"); test
+    const cutoffDate = new Date("2023-09-08T10:00:00"); // 베팅 종료 시점
+    // const cutoffDate = new Date("2023-09-06T01:22:00"); //test
     const [redirectToBet, setRedirectToBet] = useState(false);
 
     const handleBetButtonClick = () => {
         async function checkSelected() {
             try { // 만약 참여 이력 있으면 나의 예측 페이지로
                 const response = await axios.get(`${API}/betting/baseball`, {
-                    headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
+                    headers: { Authorization: `bearer ${sessionStorage.getItem("bummySuri")}` }
                 });
                 const userData = response.data;
                 if (userData.selected === true) {
@@ -184,7 +184,7 @@ const BetIntro = () => {
     const navigate = useNavigate();
 
     const endDate = new Date("2023-09-09T20:00:00"); // 경기 종료 시점
-    // const endDate = new Date("2023-09-05T23:41:30"); test
+    // const endDate = new Date("2023-09-06T01:24:00"); // test
 
     // 종료 문구 뜬 경우의 페이지에서 나의 예측으로 가는 버튼 클릭
     const goToMyPrediction = () => {
@@ -193,7 +193,7 @@ const BetIntro = () => {
         async function checkSelected() {
             try { // 참여 이력 있으면 나의 예측 페이지로
                 const response = await axios.get(`${API}/betting/baseball`, {
-                    headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
+                    headers: { Authorization: `bearer ${sessionStorage.getItem("bummySuri")}` }
                 });
                 const userData = response.data;
                 if (userData.selected === true) {

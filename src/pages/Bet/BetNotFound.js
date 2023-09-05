@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from 'styled-components';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 
 import SideBar from "../../components/SideBar/SideBar";
@@ -79,23 +80,52 @@ const Btn = styled.button`
 
 `;
 
+const SubmitBTN = styled.button`
+    background-color: rgba(112, 0, 255, 1);
+    border: none;
+    border-radius: 10px;
+    width: 334px;
+    height: 50px;
+    color: white;
+    margin-bottom: 30px;
+    font-size: 16px;
+    font-weight: 800;
+    margin-top: 100px;
+    @media (max-width: 300px)
+    {
+        width: 250px;
+        height: 30px;
+        font-size: 12px;
+    }
+`;
+
 
 
 
 const BetNotFound = () => {
+  const location = useLocation();
 
-    return (
-        <div style={{backgroundColor:"#1D1D1D"}}>
+  const fromGameResultPage = location.state?.fromGameResultPage || false;
+
+  return (
+    <div style={{ backgroundColor: "#1D1D1D" }}>
+      {fromGameResultPage ?
         <Background>
-            <MainLogo>정기전 경기 예측</MainLogo>
-            <SideBar><SideBarContents/></SideBar>
-            <Title>경기 예측 이벤트에 참여하지 <br/>않았습니다.</Title>
-            <MainText>
+          <MainLogo>정기전 경기 예측</MainLogo>
+          <SideBar><SideBarContents /></SideBar>
+          <Title>잘못된 경로입니다!</Title>
+          <Link to='/'><SubmitBTN>메인 페이지로 돌아가기</SubmitBTN></Link>
+        </Background> :
+        <Background>
+          <MainLogo>정기전 경기 예측</MainLogo>
+          <SideBar><SideBarContents /></SideBar>
+          <Title>경기 예측 이벤트에 참여하지 <br />않았습니다.</Title>
+          <MainText>
             미니 게임을 통해서도 <br />포인트를 얻을 수 있어요 ˚✧₊( ˘ω˘ )⁎⁺˳✧༚
-            </MainText>
-        </Background>
-        </div>
-        );
+          </MainText>
+        </Background>}
+    </div>
+  );
 }
 
 export default BetNotFound;

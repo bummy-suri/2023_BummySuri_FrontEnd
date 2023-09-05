@@ -275,7 +275,7 @@ const GameResult = () => {
             for (let i = 0; i < 5; i++) {
                 try {
                     const response = await axios.get(`${API}/bettingResult/${gameTypes[i]}`, {
-                        headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
+                        headers: { Authorization: `bearer ${sessionStorage.getItem("bummySuri")}` }
                     });
                     const userData = response.data; // 사용자 베팅 내용 가져오기
                     console.log(userData, gameTypes[i]);
@@ -309,7 +309,7 @@ const GameResult = () => {
             setLoading(false);
         }
         if(!permitted){
-            navigate('/bet/notfound');
+            navigate('/bet/notfound', { state: { fromGameResultPage : true} }); //이상한 경로로 들어옴
         }
         else{
             getBetting();
@@ -345,7 +345,7 @@ const GameResult = () => {
                 totalEarnedPoint: total,
             },
             headers: {
-                Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
+                Authorization: `bearer ${sessionStorage.getItem("bummySuri")}`
             },
         })
             .then(response => {
@@ -361,22 +361,22 @@ const GameResult = () => {
     }
 
 
-    // const deleteme = () => {
-    //     axios.delete(`${API}/users`, {
-    //         headers: {
-    //             Authorization: `bearer ${sessionStorage.getItem("accessToken")}`,
-    //         },
-    //     })
-    //         .then(response => {
-    //             console.log('DELETE 요청이 성공했습니다.');
-    //             // 서버로부터 성공 응답을 처리할 코드를 여기에 추가
-    //             navigate('/');
-    //         })
-    //         .catch(error => {
-    //             console.error('DELETE 요청이 실패했습니다.');
-    //             // 요청 실패 시 에러를 처리할 코드를 여기에 추가
-    //         });
-    // }
+    const deleteme = () => {
+        axios.delete(`${API}/users`, {
+            headers: {
+                Authorization: `bearer ${sessionStorage.getItem("bummySuri")}`,
+            },
+        })
+            .then(response => {
+                console.log('DELETE 요청이 성공했습니다.');
+                // 서버로부터 성공 응답을 처리할 코드를 여기에 추가
+                navigate('/');
+            })
+            .catch(error => {
+                console.error('DELETE 요청이 실패했습니다.');
+                // 요청 실패 시 에러를 처리할 코드를 여기에 추가
+            });
+    }
 
 
 
@@ -458,7 +458,7 @@ const GameResult = () => {
                             </Popup>
                         )}
                     </Container>
-                    {/* <button onClick={deleteme}>나 지우기</button> */}
+                    <button onClick={deleteme}>나 지우기</button>
                 </Background>
             }
         </div>

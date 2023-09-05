@@ -13,8 +13,6 @@ const GotoGame = styled.button`
     font-family: 'NanumSquare_acL';
    
 `
-
-
 const GameList = ()=> {
     return (
       <div>

@@ -61,7 +61,6 @@ const KlipBtn = () => {
           window.location.href = getKlipAccessUrl("deeplink", request_key);
         } else {
           setQrvalue_auth(getKlipAccessUrl("QR", request_key));
-
         }
         
         let timerId = setInterval(() => {

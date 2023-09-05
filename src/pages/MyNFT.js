@@ -46,36 +46,23 @@ const Textbox = styled.div`
 
 
 const Btn = styled.button`
-  width: 334px;
-  height: 50px;
-  background-color: #7000FF;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-top: 56px;
-  margin-bottom: 29px;
-  color: #FFFFFF;
-
-  @media (max-width: 350px) {
-    width: 230px;
-  }
-
-  @media (max-width: 235px) {
-    padding-left: 30px;
-    padding-right: 30px;
-    width: 100%;
-    font-size: 13px;
-  }
-
+    width: 334px;
+    height: 50px;
+    background-color: #7000FF;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 56px;
+    margin-bottom: 29px;
+    color: #FFFFFF;
+    @media (max-width: 350px) {
+        width: 80vw;
+    }
 `;
 
-
-
-
 const MyNFT = () => {
-
     return (
         <div style={{backgroundColor:"#1D1D1D"}}>
         <Background>
@@ -87,5 +74,4 @@ const MyNFT = () => {
         </div>
         );
 }
-
 export default MyNFT;

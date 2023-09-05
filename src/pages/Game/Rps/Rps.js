@@ -144,53 +144,26 @@ const PopupContainer = styled.div`
   }
 `;
 
-
 const Rps = () => {
-    const [remainingTimes, setRemainingTimes] = useState(2);
-    const accessToken = sessionStorage.getItem("access_token");
-
-    const gameResult = (rpsResult) => {
-        axios
-            .put( 'https://api.dev.bummysuri.com/minigame', { 
-                result: rpsResult,
-                miniGameType: '가위바위보',
-            }, {
-                headers: {
-                    Authorization: `bearer ${accessToken}`,
-                },
-            })
-            .then((response) => {
-                console.log(response.data);
-                const {times} = response.data;
-                setRemainingTimes(times);
-            })
-            .catch((error) => {
-                if (error.response) {
-                    console.error("Response Data:", error.response.data);
-                    console.error("Status Code:", error.response.status);
-                } else if (error.request) {
-                    console.error("Request:", error.request);
-                } else {
-                    console.error("Error Message:", error.message);
-                }
-            });
-    };
-
+    const [popupOpen, setPopupOpen] = useState(false);
     const [selectedChoice, setSelectedChoice] = useState("");
     const navigate = useNavigate();
 
     const handleChoiceClick = (choice) => {
         setSelectedChoice(choice);
     };
-
     const handleConfirmClick = () => {
         if (selectedChoice) {
-            navigate('/rock-paper-scissors/result', { state: { selectedChoice } });
+            if ((3-sessionStorage.getItem("RpsTimes"))< 0) {
+                setPopupOpen(true);
+            } else {
+                navigate('/rock-paper-scissors/result', { state: { selectedChoice } });
+            }
         } else {
             alert("가위, 바위, 보 중 하나를 선택하세요.");
         }
     };
-
+    
     return (
         <div style={{backgroundColor:"#1D1D1D"}}>
         <Background>
@@ -212,13 +185,12 @@ const Rps = () => {
             </ButtonContainer>
             <Text>가위바위보에서 이기면 100P를 얻을 수 있어요!</Text>
             
-            {/**제한횟수 도달 -> 버튼과 연결시키기 */}
-            {remainingTimes === 2 && (
+            {popupOpen &&(
                 <Popup>
                     <PopupContainer>
                         아쉽지만 제한 횟수에 도달했어요.
                         <button
-                            //onClick={() => setPopupOpen(false)}
+                            onClick={() => setPopupOpen(false)}
                             style={{backgroundColor:"#7000FF", color:"white", width:"65px", height:"23px", border:"none", borderRadius:"4px", marginTop: "10px"}}>
                             닫기
                         </button>

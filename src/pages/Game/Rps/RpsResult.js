@@ -98,12 +98,12 @@ const Rps = () => {
     const [opponentImage, setOpponentImage] = useState(choicesMap[opponentChoice].image);
     const [opponentText, setOpponentText] = useState(choicesMap[opponentChoice].text);
     const myImage = choicesMap[selectedChoice].image;
-    const accessToken = sessionStorage.getItem("accessToken");
+    const accessToken = sessionStorage.getItem("bummySuri");
     
     // 결과 전달 api `${API}/minigame` https://api.dev.bummysuri.com/minigame
     const gameResult = (rpsResult) => {
         axios
-            .put( `${API}/minigame`, { 
+            .put(`${API}/minigame`, { 
                 result: rpsResult,
                 miniGameType: '가위바위보',
             }, {
@@ -115,11 +115,9 @@ const Rps = () => {
                 console.log(response.data);
                 const {times} = response.data;
                 setRemainingAttempts(times);
+                sessionStorage.setItem("RpsTimes", times);
             })
             .catch((error) => {
-                console.error("API Error:", error);
-            
-                // 오류 메시지 출력
                 if (error.response) {
                     console.error("Response Data:", error.response.data);
                     console.error("Status Code:", error.response.status);
@@ -130,8 +128,7 @@ const Rps = () => {
                 }
             });
     };
-    
-    //수리의 가위바위보 결과
+    //수리의 가위바위보 선택
     useEffect(() => {
         const delay = 1000;
 
@@ -173,15 +170,15 @@ const Rps = () => {
         };
     }, []);
 
+    
+
     return (        
         <Background>
             <MainLogo>가위바위보</MainLogo>
-
             <Who style={{ marginTop: "60px", display: "flex", alignItems: "center" }}>
                 <Suri src={`${process.env.PUBLIC_URL}/assets/Game/Rps/Rps.png`} />
                 수리
             </Who>
-            
             <ResultBox style={{ backgroundColor: opponentBoxColor }}>
                 {showOpponentImage ? (
                     <>
@@ -189,34 +186,29 @@ const Rps = () => {
                         <Image src={opponentImage} style={{transform: "rotate(180deg)"}} alt="수리 선택" />
                     </>
                 ) : ( 
-                    <div style={{fontSize:"40px"}}>
-                        ?
-                    </div>
+                    <div style={{fontSize:"40px"}}>?</div>
                 )}
             </ResultBox>
-
             <ResultBox style={{marginTop:"190px"}}>
                 <Image src={myImage} alt="나의 선택" />
                 {selectedChoice}
             </ResultBox>
             <Who style={{ marginTop: "20px", marginBottom:"50px" }}>나의 선택</Who>
             
-
-
             {showSamePopup && <Popup 
             title="무승부"
             message={<MessageContainer>무승부예요.<br/>다시 한 번 해볼까요?</MessageContainer>} 
-            remainingAttempts={remainingAttempts} />}
+            remainingAttempts= { remainingAttempts } />} 
 
             {showWinPopup && <Popup 
             title={<MessageContainer style={{color:"#FFE500"}}>승리!</MessageContainer>} 
             message={<MessageContainer>축하합니다!<br/>100P를 얻었습니다!</MessageContainer>} 
-            remainingAttempts={remainingAttempts} />}
+            remainingAttempts={ 3 - remainingAttempts } />}
 
             {showLosePopup && <Popup 
             title={<MessageContainer style={{color:"#C2C2C2"}}>패배</MessageContainer>} 
             message={<MessageContainer>수리한테 졌어요...<br/>한 번 더 도전해보세요!</MessageContainer>} 
-            remainingAttempts={remainingAttempts} />}
+            remainingAttempts={ 3 - remainingAttempts } />}
 
         </Background>
         );

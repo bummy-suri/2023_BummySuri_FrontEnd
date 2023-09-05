@@ -138,7 +138,7 @@ const ImageQuiz = () => {
     const [isAnswered, setIsAnswered] = useState(false);
     const [remainingTime, setRemainingTime] = useState(30);
 
-    const accessToken = sessionStorage.getItem("accessToken");
+    const accessToken = sessionStorage.getItem("bummySuri");
 
     //`${API}/miniGame` "https://api.dev.bummysuri.com/minigame"
     const gameResult = (rpsResult) => {

@@ -240,13 +240,14 @@ const MyPrediction = () => {
     const point = [];
     const score = [];
     const school = [];
+    const targetDate = new Date('2023-09-08T10:00:00'); // 버튼을 비활성화할 날짜와 시간 설정
+    const today = new Date();
 
 
 
     const navigate = useNavigate();
     const EditBetting = () => {
         const currentDate = new Date(); // 현재 날짜와 시간 가져오기
-        const targetDate = new Date('2023-09-08T10:00:00'); // 버튼을 비활성화할 날짜와 시간 설정
 
         // 현재 날짜가 타겟 날짜 이후인지 확인
         if (currentDate >= targetDate) {
@@ -406,7 +407,7 @@ const MyPrediction = () => {
                                 <PointAmount>{betPoint[4]}p</PointAmount>
                             </Row>
                         </Result>
-                        <BTN onClick={EditBetting}>수정하기</BTN>
+                        {(today >= targetDate) ? <div style={{fontWeight:"800", fontSize:"16px", color:"black", marginTop:"25px"}}>경기 진행 중...</div> : <BTN onClick={EditBetting}>수정하기</BTN>}
                         {popupOpen && (
                             <Popup>
                                 <PopupContainer>

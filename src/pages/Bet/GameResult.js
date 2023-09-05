@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 
 import SideBar from "../../components/SideBar/SideBar";
@@ -262,6 +263,9 @@ const GameResult = () => {
     const [popupOpen, setPopupOpen] = useState(false);
     const [popupOpen2, setPopupOpen2] = useState(false);
 
+    const location = useLocation();
+    const permitted = location.state?.permitted || false;
+
     useEffect(() => {
         async function getBetting() {
             school.length = 0;
@@ -304,7 +308,13 @@ const GameResult = () => {
             setTotal(sum);
             setLoading(false);
         }
-        getBetting();
+        if(!permitted){
+            navigate('/bet/notfound');
+        }
+        else{
+            getBetting();
+        }
+
     }, []);
 
 
@@ -351,22 +361,22 @@ const GameResult = () => {
     }
 
 
-    const deleteme = () => {
-        axios.delete(`${API}/users`, {
-            headers: {
-                Authorization: `bearer ${sessionStorage.getItem("accessToken")}`,
-            },
-        })
-            .then(response => {
-                console.log('DELETE 요청이 성공했습니다.');
-                // 서버로부터 성공 응답을 처리할 코드를 여기에 추가
-                navigate('/');
-            })
-            .catch(error => {
-                console.error('DELETE 요청이 실패했습니다.');
-                // 요청 실패 시 에러를 처리할 코드를 여기에 추가
-            });
-    }
+    // const deleteme = () => {
+    //     axios.delete(`${API}/users`, {
+    //         headers: {
+    //             Authorization: `bearer ${sessionStorage.getItem("accessToken")}`,
+    //         },
+    //     })
+    //         .then(response => {
+    //             console.log('DELETE 요청이 성공했습니다.');
+    //             // 서버로부터 성공 응답을 처리할 코드를 여기에 추가
+    //             navigate('/');
+    //         })
+    //         .catch(error => {
+    //             console.error('DELETE 요청이 실패했습니다.');
+    //             // 요청 실패 시 에러를 처리할 코드를 여기에 추가
+    //         });
+    // }
 
 
 
@@ -448,7 +458,7 @@ const GameResult = () => {
                             </Popup>
                         )}
                     </Container>
-                    <button onClick={deleteme}>나 지우기</button>
+                    {/* <button onClick={deleteme}>나 지우기</button> */}
                 </Background>
             }
         </div>

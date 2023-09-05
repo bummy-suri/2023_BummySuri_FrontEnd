@@ -1,9 +1,7 @@
 import React, { useState, useRef } from "react";
-
 import styled from 'styled-components';
 import QRcode from "qrcode.react";
 import axios from "axios";
-
 import { API } from '../../config';
 
 const Klipbtn = styled.button`
@@ -18,18 +16,9 @@ const Klipbtn = styled.button`
   margin-top: 56px;
   margin-bottom: 29px;
   color: #FFFFFF;
-
   @media (max-width: 350px) {
-    width: 230px;
+    width: 80vw;
   }
-
-  @media (max-width: 235px) {
-    padding-left: 30px;
-    padding-right: 30px;
-    width: 100%;
-    font-size: 13px;
-  }
-
 `;
 
 const QRContainer = styled.div`
@@ -41,7 +30,6 @@ const DEFAULT_QR_CODE = "DEFAULT";
 const A2P_API_PREPARE_URL = "https://a2a-api.klipwallet.com/v2/a2a/prepare";
 const APP_NAME = "BUMMY & SURI";
 const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|Windows Phone/i.test(window.navigator.userAgent);
-const SendRequestKey_URL = "https://api.dev.bummysuri.com/";
 
 const getKlipAccessUrl = (method, request_key) => {
   if (method === "QR") {
@@ -55,7 +43,6 @@ const KlipBtn = () => {
   const walletAddress = useRef('');
 
   const getUserData = () => {
-
     // Prepare
     axios
       .post(A2P_API_PREPARE_URL, {
@@ -96,7 +83,6 @@ const KlipBtn = () => {
         });
   };
 
-
   // 'https://api.dev.bummysuri.com/users' `${API}/users`
   const sendRequestKey = (request_key) => {
     axios
@@ -104,7 +90,6 @@ const KlipBtn = () => {
         requestKey: request_key,
       })
       .then(response => {
-        
         const { accessToken } = response.data;
         sessionStorage.setItem("accessToken", accessToken);
         console.log("accessToken", accessToken);
@@ -122,13 +107,6 @@ const KlipBtn = () => {
       });
   };
 
-
-
-
-
-
-
-    
   return (
     <div>
       <Klipbtn onClick={getUserData}>Klip 연동하기</Klipbtn>

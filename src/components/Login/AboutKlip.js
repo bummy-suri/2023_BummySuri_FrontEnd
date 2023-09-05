@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from 'styled-components';
 import KlipIntro from "./KlipIntro";
 
-
 const AbtKlip = styled.div`
   display: flex;
   flex-direction: column;

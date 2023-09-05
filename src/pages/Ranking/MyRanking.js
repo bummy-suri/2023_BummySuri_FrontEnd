@@ -106,7 +106,7 @@ const MyRanking = () => {
 
     // 나의 순위   `${API}/ranking/user` 'https://api.dev.bummysuri.com/ranking/user'
     useEffect(() => {
-        axios.get(`${API}/ranking/user`, {
+        axios.get( `${API}/ranking/user`, {
           headers:{
             Authorization: `bearer ${accessToken}`
             }

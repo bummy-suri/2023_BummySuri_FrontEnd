@@ -242,6 +242,7 @@ const MyPrediction = () => {
     const school = [];
     const targetDate = new Date('2023-09-08T10:00:00'); // 버튼을 비활성화할 날짜와 시간 설정
     const today = new Date();
+    // const targetDate = new Date("2023-09-06T01:22:00"); //test
 
 
 
@@ -275,7 +276,7 @@ const MyPrediction = () => {
             for (let i = 0; i < 5; i++) {
                 try {
                     const response = await axios.get(`${API}/betting/${gameTypes[i]}`, {
-                        headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
+                        headers: { Authorization: `bearer ${sessionStorage.getItem("bummySuri")}` }
                     });
                     const userData = response.data;
                     point[i] = userData.bettingPoint;

@@ -78,7 +78,7 @@ const BetDone = () => {
                 <Background>
                     <MainLogo>정기전 경기 예측</MainLogo>
                     <SideBar><SideBarContents /></SideBar>
-                    <Title>{point} 포인트를 성공적으로 <br />얻었습니다!</Title>
+                    <Title>{point}p를 성공적으로 <br />얻었습니다!</Title>
                     <Link to='/'><SubmitBTN>메인 페이지로 돌아가기</SubmitBTN></Link>
                 </Background> :
                 <Background>

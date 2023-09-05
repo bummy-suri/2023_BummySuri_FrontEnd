@@ -73,22 +73,10 @@ const Btn = styled.button`
   margin-top: 56px;
   margin-bottom: 29px;
   color: #FFFFFF;
-
   @media (max-width: 350px) {
-    width: 230px;
+    width: 80vw;
   }
-
-  @media (max-width: 235px) {
-    padding-left: 30px;
-    padding-right: 30px;
-    width: 100%;
-    font-size: 13px;
-  }
-
 `;
-
-
-
 
 const QuizIntro = () => {
 

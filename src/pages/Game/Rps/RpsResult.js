@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom'; 
 import axios from "axios";
-
-
 import Popup from "./Popup";
 import { API } from '../../../config';
 
@@ -19,13 +17,13 @@ const Background = styled.div`
 `;
 
 const MainLogo = styled.div`
-  display: fixed;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  color: white;
-  margin-top: 74px;
-  font-family: "Pretendard_Regular";
+    display: fixed;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+    margin-top: 74px;
+    font-family: "Pretendard_Regular";
 `;
 
 const Suri = styled.img`
@@ -43,7 +41,6 @@ const Suri = styled.img`
         width: 25vw;
     }
 `
-
 
 const Who = styled.div`
     font-size: 25px;
@@ -72,7 +69,6 @@ const MessageContainer = styled.div`
     white-space: pre-line;
 `;
 
-
 const getRandomChoice = () => {
     const choices = ['바위', '보', '가위'];
     const randomIndex = Math.floor(Math.random() * choices.length);
@@ -83,18 +79,14 @@ const Rps = () => {
     const location = useLocation(); 
     const selectedChoice = location.state?.selectedChoice || '';  //이전 페이지에서 선택한 rps값 가져오기
     const opponentChoice = getRandomChoice(); 
-
     const [showResultText, setShowResultText] = useState(false);
-    //팝업
     const [showWinPopup, setShowWinPopup] = useState(false);
     const [showLosePopup, setShowLosePopup] = useState(false);
     const [showSamePopup, setShowSamePopup] = useState(false);
     const [showOpponentChoice, setShowOpponentChoice] = useState(false);
     const [opponentBoxColor, setOpponentBoxColor] = useState("#333"); // 수리 결과
     const [showOpponentImage, setShowOpponentImage] = useState(false);
-
-    const [remainingAttempts, setRemainingAttempts] = useState(3); //잔여 횟수
-
+    const [remainingAttempts, setRemainingAttempts] = useState(); //잔여 횟수
 
     //이미지랑 매핑
     const choicesMap = {
@@ -106,9 +98,8 @@ const Rps = () => {
     const [opponentImage, setOpponentImage] = useState(choicesMap[opponentChoice].image);
     const [opponentText, setOpponentText] = useState(choicesMap[opponentChoice].text);
     const myImage = choicesMap[selectedChoice].image;
-
     const accessToken = sessionStorage.getItem("accessToken");
-
+    
     // 결과 전달 api `${API}/minigame` https://api.dev.bummysuri.com/minigame
     const gameResult = (rpsResult) => {
         axios
@@ -122,7 +113,8 @@ const Rps = () => {
             })
             .then((response) => {
                 console.log(response.data);
-                //setRemainingAttempts(times);
+                const {times} = response.data;
+                setRemainingAttempts(times);
             })
             .catch((error) => {
                 console.error("API Error:", error);
@@ -139,10 +131,6 @@ const Rps = () => {
             });
     };
     
-
-
-
-
     //수리의 가위바위보 결과
     useEffect(() => {
         const delay = 1000;
@@ -157,8 +145,6 @@ const Rps = () => {
             clearTimeout(timeoutId);
         };
     }, []);
-
-
 
     //가위바위보 결과 팝업
     useEffect(() => { 
@@ -186,9 +172,6 @@ const Rps = () => {
             clearTimeout(timeoutId);
         };
     }, []);
-
-
-  
 
     return (        
         <Background>

@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
+import axios from "axios";
 import { useNavigate } from 'react-router-dom'; 
-
-
 import SideBar from "../../../components/SideBar/SideBar";
 import SideBarContents from "../../../components/SideBar/SideBarContents";
-
-
 
 const Background = styled.div`
     max-width: 100vw;
@@ -18,8 +15,6 @@ const Background = styled.div`
     align-items: center;
     justify-content: flex-start;
 `;
-
-
 
 const MainLogo = styled.div`
   display: fixed;
@@ -56,7 +51,7 @@ const ChoiceButton = styled.button`
     flex-direction: column;
     color: white;
     border: none;
-    width: 110px;
+    width: 105px;
     height: 106px;
     margin: 10px 3px 0px;
     font-size: 14px;
@@ -66,19 +61,9 @@ const ChoiceButton = styled.button`
     @media (max-width: 350px) {
         width: 100px;
         }
-    @media (max-width: 340px) {
-        width: 85px;
-        }
     @media (max-width: 335px) {
-        width: 80px;
+        width: 29vw;
         }
-    @media (max-width: 300px) {
-        width: 73px;
-        }
-    @media (max-width: 250px) {
-        width: 60px;
-        }
-
     `;
 
 const RPSimg = styled.img`
@@ -97,7 +82,7 @@ const Text = styled.div`
     font-size: 14px;
     @media (max-width: 280px) {
         font-size: 11px;
-        }
+    }
 `
 
 const ConfirmButton = styled.button`
@@ -112,14 +97,85 @@ const ConfirmButton = styled.button`
     margin-top: 12px;
     margin-bottom: 100px;
     color: #FFFFFF;
-
     @media (max-width: 350px) {
-    width: 230px;
+    width: 80vw;
     }
+`;
+
+//제한횟수 도달
+const Popup = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1D1D1D;
+  border-radius: 8px;
+  width:260px;
+  height: 90px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  @media (max-width: 350px) {
+    width: 80vw;
+  }
+
+`;
+
+const PopupContainer = styled.div`
+  width:260px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 9px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.15) 100%);
+  border: 1px solid white;
+  @media (max-width: 350px) {
+    width: 80vw;
+  }
+  @media (max-width: 300px) {
+    font-size: 14px;
+  }
 `;
 
 
 const Rps = () => {
+    const [remainingTimes, setRemainingTimes] = useState(2);
+    const accessToken = sessionStorage.getItem("access_token");
+
+    const gameResult = (rpsResult) => {
+        axios
+            .put( 'https://api.dev.bummysuri.com/minigame', { 
+                result: rpsResult,
+                miniGameType: '가위바위보',
+            }, {
+                headers: {
+                    Authorization: `bearer ${accessToken}`,
+                },
+            })
+            .then((response) => {
+                console.log(response.data);
+                const {times} = response.data;
+                setRemainingTimes(times);
+            })
+            .catch((error) => {
+                if (error.response) {
+                    console.error("Response Data:", error.response.data);
+                    console.error("Status Code:", error.response.status);
+                } else if (error.request) {
+                    console.error("Request:", error.request);
+                } else {
+                    console.error("Error Message:", error.message);
+                }
+            });
+    };
+
     const [selectedChoice, setSelectedChoice] = useState("");
     const navigate = useNavigate();
 
@@ -143,9 +199,6 @@ const Rps = () => {
             <Title>수리와 가위바위보 하기</Title>
             <Text style={{marginTop:"12px"}}>수리를 이길 수 있을까?</Text>
             <Image src={`${process.env.PUBLIC_URL}/assets/Game/Rps/Rps.png`} alt="수리이미지" />
-            
-
-
             <ButtonContainer>
                 <ChoiceButton isSelected={selectedChoice === "가위"} onClick={() => handleChoiceClick("가위")}>
                     <RPSimg src={`${process.env.PUBLIC_URL}/assets/Game/Rps/scissors.png`}/>가위
@@ -157,9 +210,23 @@ const Rps = () => {
                     <RPSimg src={`${process.env.PUBLIC_URL}/assets/Game/Rps/paper.png`}/>보
                 </ChoiceButton>
             </ButtonContainer>
-
             <Text>가위바위보에서 이기면 100P를 얻을 수 있어요!</Text>
+            
+            {/**제한횟수 도달 -> 버튼과 연결시키기 */}
+            {remainingTimes === 2 && (
+                <Popup>
+                    <PopupContainer>
+                        아쉽지만 제한 횟수에 도달했어요.
+                        <button
+                            //onClick={() => setPopupOpen(false)}
+                            style={{backgroundColor:"#7000FF", color:"white", width:"65px", height:"23px", border:"none", borderRadius:"4px", marginTop: "10px"}}>
+                            닫기
+                        </button>
+                    </PopupContainer>
+                </Popup>
+            )}
             <ConfirmButton onClick={handleConfirmClick}>가위바위보 !</ConfirmButton>
+        
         </Background>
         </div>
         );

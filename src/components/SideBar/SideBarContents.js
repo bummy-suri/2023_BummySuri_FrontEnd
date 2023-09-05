@@ -1,9 +1,7 @@
 import React,{useState, useEffect} from "react";
 import styled from 'styled-components';
 import GameList from "./GameList";
-import downBtn from "../../assets/Login/downBtn.png";
 import {Link} from "react-router-dom";
-import NoNFT from "../../assets/SideBar/NoNFT.png";
 import axios from "axios";
 import { API } from "../../config";
 
@@ -109,11 +107,11 @@ const SideBarContents = ()=> {
       totalPoint: 0,
       isMinted: false,
   });
-  
+  // `${API}/users` 'https://api.dev.bummysuri.com/users'
   useEffect(() => {
     axios.get(`${API}/users`, {
       headers:{
-        Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
+        Authorization: `bearer ${sessionStorage.getItem("bummySuri")}`
         }
       })
         .then(response => {
@@ -143,7 +141,7 @@ const SideBarContents = ()=> {
 
     return (
       <Total>
-        <NFTImage src={NoNFT}></NFTImage>
+        <NFTImage src={`${process.env.PUBLIC_URL}/assets/SideBar/NoNFT.png`}></NFTImage>
         <Address>지갑주소 <p style={{ fontSize: "12px" }}>{partOfAddress}</p></Address>
         <Point>보유 포인트</Point>
         <PointScore>{userPoint}P</PointScore>
@@ -154,7 +152,7 @@ const SideBarContents = ()=> {
         <Link to="/minting"><GoAnother style={{marginTop:'52px'}}>민팅하기</GoAnother></Link>
         <Link to="/bet/intro"><GoAnother>승부예측</GoAnother></Link>
         <GoAnother onClick={toggleMiniGame}>미니게임
-        {miniGameVisible ? <Down src={downBtn} style={{transform:"rotate(180deg)"}}/> : <Down src={downBtn}/>}
+        {miniGameVisible ? <Down src={`${process.env.PUBLIC_URL}/assets/Login/downBtn.png`} style={{transform:"rotate(180deg)"}}/> : <Down src={`${process.env.PUBLIC_URL}/assets/Login/downBtn.png`}/>}
         </GoAnother>
         <MiniGameContent show={miniGameVisible}>
                 <GameList/>

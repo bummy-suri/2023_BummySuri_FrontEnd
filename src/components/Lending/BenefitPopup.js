@@ -266,9 +266,6 @@ const BenefitPopup = () => {
                 </ListContainer>
             
               </Benefit>
-
-
-              
               <Benefit>
                 <BenefitTitle>하이드미플리즈에서 클립 연동하기</BenefitTitle>
                 <ListContainer2>

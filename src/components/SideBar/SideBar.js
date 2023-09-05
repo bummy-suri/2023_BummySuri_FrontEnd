@@ -1,8 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import Barbtn from "../../assets/SideBar/barBtn.png";
 import styles from "./sidebar.module.css";
-import closeBtn from "../../assets/SideBar/closeBtn.png";
-
 
 //사이드바 공통 컴포넌트
 const SideBar = ({ width = 235, children }) => {
@@ -21,8 +18,7 @@ const SideBar = ({ width = 235, children }) => {
     }
   };
 
-
-    //사이드바 바깥 클릭 -> 닫힘
+    //사이드바 바깥 클릭하면 닫히게
     useEffect(() => {
       const handleClickOutside = (event) => {
         if (side.current && !side.current.contains(event.target)) {
@@ -49,11 +45,11 @@ const SideBar = ({ width = 235, children }) => {
         }}
       >
         <button onClick={() => toggleMenu()} className={styles.button} style={{ display: isOpen ? "none" : "block" }}>
-        <img src={Barbtn} className={styles.openBtn}/>
+        <img src={`${process.env.PUBLIC_URL}/assets/SideBar/barBtn.png`} className={styles.openBtn}/>
         </button>
 
         <button onClick={() => toggleMenu()} className={styles.closeButton}>
-          <img src={closeBtn} style={{transform:"rotate(180deg)"}} className={styles.closeBtn}/>
+          <img src={`${process.env.PUBLIC_URL}/assets/SideBar/closeBtn.png`} style={{transform:"rotate(180deg)"}} className={styles.closeBtn}/>
         </button>
         
         <div className={`${styles.content} ${styles['centered-content']}`}>

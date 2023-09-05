@@ -16,7 +16,6 @@ const fadeIn = keyframes`
   }
 `;
 
-
 const Total = styled.div`
   max-width: 100%;
   min-height: 100vh;

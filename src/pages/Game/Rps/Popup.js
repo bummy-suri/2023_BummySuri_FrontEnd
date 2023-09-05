@@ -2,10 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Logo from '../../../components/Logo';
 import {Link} from "react-router-dom";
-
 import SideBar from "../../../components/SideBar/SideBar";
 import SideBarContents from "../../../components/SideBar/SideBarContents";
-
 
 const PopupContainer = styled.div`
     display: flex;
@@ -15,8 +13,6 @@ const PopupContainer = styled.div`
     justify-content: flex-start;
     color: black;
     background-color: #1D1D1D;
-    
-    
 `;
 
 const ModalContent = styled.div`
@@ -38,7 +34,6 @@ const ModalContent = styled.div`
         font-size: 15px;
         width: 80px;
       }
-
 `;
 
 const Title = styled.div`
@@ -63,19 +58,17 @@ const Button = styled.button`
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 200px;
-
     @media (max-width: 350px) {
         width: 100px;
         margin-top: 60px;
-      }
-      @media (max-width: 250px) {
+    }
+    @media (max-width: 250px) {
         width: 80px;
         margin-top: 60px;
-      }
+    }
 `
 
 const Popup = ({ title, message, remainingAttempts }) => {
-
     return (
         <PopupContainer>
             <Logo/>

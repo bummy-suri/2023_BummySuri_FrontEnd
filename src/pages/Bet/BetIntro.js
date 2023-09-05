@@ -6,9 +6,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import SideBar from "../../components/SideBar/SideBar";
 import SideBarContents from "../../components/SideBar/SideBarContents";
 
-import Betbummy from "../../assets/Bet/betBummy.png";
-import Betsuri from "../../assets/Bet/betSuri.png";
-
 import axios from "axios";
 
 import { API } from '../../config';
@@ -254,9 +251,9 @@ const BetIntro = () => {
                         <MainLogo>정기전 경기 예측</MainLogo>
                         <SideBar><SideBarContents /></SideBar>
                         <TitleContent>
-                            <Image src={Betsuri} />
+                            <Image src={`${process.env.PUBLIC_URL}/assets/Bet/betSuri.png`} />
                             <Title>경기 예측이란?</Title>
-                            <Image src={Betbummy} style={{ transform: "scaleX(-1)" }} />
+                            <Image src={`${process.env.PUBLIC_URL}/assets/Bet/betBummy.png`} style={{ transform: "scaleX(-1)" }} />
                         </TitleContent>
                         <MainText>
                             버미와 수리를 가지고 있는 <br />

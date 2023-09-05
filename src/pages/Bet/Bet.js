@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
@@ -147,6 +147,24 @@ const PopupContainer = styled.div`
 
 
 
+const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(360deg); }
+  100% {transform: rotate(720deg);}
+`;
+
+const Circle = styled.div`
+    width: 18px;
+    height: 18px;
+    border: 6px solid transparent;
+  border-top: 6px solid #7000FF;
+  border-radius: 50%;
+  animation: ${spin} 1.5s linear infinite;
+  margin-bottom: 10px;
+`;
+
+
+
 const Bet = () => {
     {/*
         해야하는 부분들
@@ -173,82 +191,101 @@ const Bet = () => {
     const [sportopts, setsportopts] = useState([0, 0, 0, 0, 0]);
 
     const [budget, setBudget] = useState(0);
+    const [beforepoint, setBeforePoint] = useState(0);
 
     const gameTypes = ["baseball", "basketball", "hockey", "rugby", "soccer"];
 
     const [method, setMethod] = useState("post");
 
 
+    const sportopt = [];
+    const sportpoint = [];
+    const sportuniv = [];
+
+    const [loading, setLoading] = useState(true);
+    const [loading2, setLoading2] = useState(false);
+
+
+
 
     useEffect(() => {
-        axios.get(`${API}/users`, {
-            headers: {
-                Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
-            }
-        })
-            .then(response => {
-                const userData = response.data;
-                setBudget(userData.totalPoint);
+        async function getInfo() {
+            await axios.get(`${API}/users`, {
+                headers: {
+                    Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
+                }
             })
-            .catch(error => {
-                console.error(error);
-            });
-
-
-
-        async function fetchGameInfo() {
-            const sportopt = [];
-            const sportpoint = [];
-            const sportuniv = [];
-
-
-            for (const gameType of gameTypes) {
-                try {
-                    const response = await axios.get(`${API}/betting/${gameType}`, {
-                        headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
-                    });
+                .then(response => {
                     const userData = response.data;
-                    console.log(userData.predictedScore, userData.bettingPoint, userData.predictedWinner);
-                    sportopt.push(parseInt(userData.predictedScore));
-                    sportpoint.push(parseInt(userData.bettingPoint));
-                    sportuniv.push(userData.predictedWinner);
-                } catch (error) {
+                    setBudget(userData.totalPoint);
+                })
+                .catch(error => {
                     console.error(error);
-                }
-            }
+                })
 
-            // 모든 게임 정보를 가져온 후에 budget 계산
-            const totalPoints = sportpoint[0] + sportpoint[1] + sportpoint[2] + sportpoint[3] + sportpoint[4];
-            setBudget((prev) => prev + totalPoints);
 
-            // 상태 업데이트
-            setsportopts(sportopt);
-            setsportpoints(sportpoint);
-            setsportunivs(sportuniv);
-            setMethod("put");
-        }
+            async function fetchGameInfo() {
+                sportopt.length = 0;
+                sportpoint.length = 0;
+                sportuniv.length = 0;
+                let sumpoint = 0;
 
-        // 수정하기로 들어온 경우 (포인트 지불 고려해야) else 참여여부 check
-        if (isEdit) {
-            fetchGameInfo();
-        }
-        else {
-            async function checkSelected() {
-                try {
-                    const response = await axios.get(`${API}/betting/baseball`, {
-                        headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
-                    });
-                    const userData = response.data;
-                    if (userData.selected === true) {
-                        navigate('/bet/my-prediction');
+                for (let i = 0; i < 5; i++) {
+                    try {
+                        const response = await axios.get(`${API}/betting/${gameTypes[i]}`, {
+                            headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
+                        });
+                        const userData = response.data;
+                        sportopt[i] = parseInt(userData.predictedScore);
+                        sportpoint[i] = parseInt(userData.bettingPoint);
+                        sportuniv[i] = userData.predictedWinner;
+                        if (userData.predictedWinner === "DRAW") {
+                            sportopt[i] = -2;
+                        }
+                        sumpoint += sportpoint[i];
+                    } catch (error) {
+
+                        console.error(error);
                     }
-                } catch (error) {
-                    //console.log(error);
                 }
-            }
-            checkSelected();
-        }
 
+                // 모든 게임 정보를 가져온 후에 budget 계산
+
+                setPoint(sumpoint);
+                setBeforePoint(sumpoint);
+
+                // 상태 업데이트
+                setMethod("put");
+                setsportopts(sportopt);
+                setsportpoints(sportpoint);
+                setsportunivs(sportuniv);
+                setLoading(false);
+
+            }
+
+            // 수정하기로 들어온 경우 (포인트 지불 고려해야) else 참여여부 check
+            if (isEdit) {
+                fetchGameInfo();
+            }
+            else {
+                async function checkSelected() {
+                    try {
+                        const response = await axios.get(`${API}/betting/baseball`, {
+                            headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
+                        });
+                        const userData = response.data;
+                        if (userData.selected === true) {
+                            navigate('/bet/my-prediction');
+                        }
+                    } catch (error) {
+                        //console.log(error); (Betting data not found)
+                    }
+                }
+                checkSelected();
+            }
+
+        }
+        getInfo();
     }, []);
 
 
@@ -282,13 +319,17 @@ const Bet = () => {
                     setsportpoints((prev) => {
                         prev[i] = data[3];
                         setPoint(sportpoints[0] + sportpoints[1] + sportpoints[2] + sportpoints[3] + sportpoints[4]);
-                        console.log(sportpoints);
+                        
                         return prev;
                     });
                 }
             }
         }
     }
+
+    // useEffect(() => {
+    //     console.log(point, budget, "pointcheck");
+    // }, [point])
 
 
 
@@ -297,9 +338,10 @@ const Bet = () => {
 
     // 제출하기
     const Submit = () => {
-        if (budget >= point) {
+        if ((budget + beforepoint) >= point) {
 
             async function submitBetting() {
+                setLoading2(true);
                 for (let i = 0; i < 5; i++) {
                     try {
                         const value = {
@@ -317,13 +359,18 @@ const Bet = () => {
                                 Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
                             },
                         })
+
                     } catch (error) {
-                        console.error(error);
+                        console.log(error);
+                        setLoading2(false);
+                        setPopupOpen(true);
+                        return;
+
                     }
                 }
+                navigate('/bet/done');
             }
             submitBetting();
-            navigate('/bet/my-prediction');
         }
         else {
             //소지 포인트가 부족
@@ -336,50 +383,59 @@ const Bet = () => {
 
     return (
         <div style={{ backgroundColor: "#1D1D1D" }}>
-            <Background>
-                <MainLogo>정기전 경기 예측</MainLogo>
-                <SideBar><SideBarContents /></SideBar>
-
-                <DaySelectDiv>
-                    <p>날짜를 선택해주세요.</p>
-                    <DaySelect>
-                        <DayBTN isActive={day === '9월 8일'} onClick={DayChange}>9월 8일</DayBTN>
-                        <DayBTN isActive={day === '9월 9일'} onClick={DayChange}>9월 9일</DayBTN>
-                    </DaySelect>
-                </DaySelectDiv>
-
-                {day === "9월 8일" ?
-                    (<div>
-                        <Sports gameType="baseball" handleData={handleData} currentschool={sportunivs[0]} currentscore={sportopts[0]} currentbetpoint={sportpoints[0]} />
-                        <Sports gameType="basketball" handleData={handleData} currentschool={sportunivs[1]} currentscore={sportopts[1]} currentbetpoint={sportpoints[1]} />
-                        <Sports gameType="hockey" handleData={handleData} currentschool={sportunivs[2]} currentscore={sportopts[2]} currentbetpoint={sportpoints[2]} />
-                    </div>
-                    ) : null}
-                {day === "9월 9일" ?
-                    (<div>
-                        <Sports gameType="rugby" handleData={handleData} currentschool={sportunivs[3]} currentscore={sportopts[3]} currentbetpoint={sportpoints[3]} />
-                        <Sports gameType="soccer" handleData={handleData} currentschool={sportunivs[4]} currentscore={sportopts[4]} currentbetpoint={sportpoints[4]} />
-                    </div>
-                    ) : null}
-
-                <div style={{ fontSize: "22px", fontWeight: "500", margin: "50px 0px 30px 0px", }}>총 지불 포인트 : {point}p</div>
-                <SubmitBTN onClick={Submit}>제출하기</SubmitBTN>
-                <div style={{ fontSize: "12px", fontWeight: "500px", marginBottom: "70px", width: "80%", textAlign: "center" }}>제출 후에도 경기 시작 1시간 전까지 예측을 변경할 수 있어요.</div>
-
-
-                {popupOpen && (
+            {(loading && isEdit) || (loading2) ?
+                <Background>
                     <Popup>
                         <PopupContainer>
-                            보유 포인트가 부족합니다!
-                            <button
-                                onClick={() => setPopupOpen(false)}
-                                style={{ backgroundColor: "#7000FF", color: "white", width: "65px", height: "23px", border: "none", borderRadius: "4px", marginTop: "10px" }}>
-                                닫기</button>
+                            <Circle><div></div></Circle>
+                            로딩 중입니다!
                         </PopupContainer>
                     </Popup>
-                )}
+                </Background> :
+                <Background>
+                    <MainLogo>정기전 경기 예측</MainLogo>
+                    <SideBar><SideBarContents /></SideBar>
 
-            </Background>
+                    <DaySelectDiv>
+                        <p>날짜를 선택해주세요.</p>
+                        <DaySelect>
+                            <DayBTN isActive={day === '9월 8일'} onClick={DayChange}>9월 8일</DayBTN>
+                            <DayBTN isActive={day === '9월 9일'} onClick={DayChange}>9월 9일</DayBTN>
+                        </DaySelect>
+                    </DaySelectDiv>
+
+                    {day === "9월 8일" ?
+                        (<div>
+                            <Sports gameType="baseball" handleData={handleData} currentschool={sportunivs[0]} currentscore={sportopts[0]} currentbetpoint={sportpoints[0]} />
+                            <Sports gameType="basketball" handleData={handleData} currentschool={sportunivs[1]} currentscore={sportopts[1]} currentbetpoint={sportpoints[1]} />
+                            <Sports gameType="hockey" handleData={handleData} currentschool={sportunivs[2]} currentscore={sportopts[2]} currentbetpoint={sportpoints[2]} />
+                        </div>
+                        ) : null}
+                    {day === "9월 9일" ?
+                        (<div>
+                            <Sports gameType="rugby" handleData={handleData} currentschool={sportunivs[3]} currentscore={sportopts[3]} currentbetpoint={sportpoints[3]} />
+                            <Sports gameType="soccer" handleData={handleData} currentschool={sportunivs[4]} currentscore={sportopts[4]} currentbetpoint={sportpoints[4]} />
+                        </div>
+                        ) : null}
+
+                    <div style={{ fontSize: "22px", fontWeight: "500", margin: "50px 0px 30px 0px", }}>총 지불 포인트 : {point}p</div>
+                    <SubmitBTN onClick={Submit}>제출하기</SubmitBTN>
+                    <div style={{ fontSize: "12px", fontWeight: "500px", marginBottom: "70px", width: "80%", textAlign: "center" }}>제출 후에도 경기 시작 1시간 전까지 예측을 변경할 수 있어요.</div>
+
+
+                    {popupOpen && (
+                        <Popup>
+                            <PopupContainer>
+                                보유 포인트가 부족합니다!
+                                <button
+                                    onClick={() => setPopupOpen(false)}
+                                    style={{ backgroundColor: "#7000FF", color: "white", width: "65px", height: "23px", border: "none", borderRadius: "4px", marginTop: "10px" }}>
+                                    닫기</button>
+                            </PopupContainer>
+                        </Popup>
+                    )}
+
+                </Background>}
 
         </div>
     );

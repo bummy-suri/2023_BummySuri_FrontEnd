@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
@@ -201,6 +201,24 @@ const PopupContainer = styled.div`
   }
 `;
 
+const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(360deg); }
+  100% {transform: rotate(720deg);}
+`;
+
+const Circle = styled.div`
+    width: 18px;
+    height: 18px;
+    border: 6px solid transparent;
+  border-top: 6px solid #7000FF;
+  border-radius: 50%;
+  animation: ${spin} 1.5s linear infinite;
+  margin-bottom: 10px;
+`;
+
+
+
 const MyPrediction = () => {
     {/* 
 
@@ -210,65 +228,89 @@ const MyPrediction = () => {
 
     */}
     const [popupOpen, setPopupOpen] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const gameTypes = ["baseball", "basketball", "hockey", "rugby", "soccer"];
     const option =
         [['1점차 예상', '2점차 예상', '3점차 예상', '4점차 이상 예상'],
+        ['1-5점차 예상', '6-10점차 예상', '11-15점차 예상', '16점차 이상 예상'],
         ['1점차 예상', '2점차 예상', '3점차 예상', '4점차 이상 예상'],
         ['1-5점차 예상', '6-10점차 예상', '11-15점차 예상', '16점차 이상 예상'],
-        ['1-5점차 예상', '6-10점차 예상', '7-9점차 예상', '10점차 이상 예상'],
         ['1점차 예상', '2점차 예상', '3점차 예상', '4점차 이상 예상']];
     const point = [];
     const score = [];
     const school = [];
+    const targetDate = new Date('2023-09-08T10:00:00'); // 버튼을 비활성화할 날짜와 시간 설정
+    const today = new Date();
 
 
 
     const navigate = useNavigate();
     const EditBetting = () => {
         const currentDate = new Date(); // 현재 날짜와 시간 가져오기
-        const targetDate = new Date('2023-09-08T11:00:00'); // 버튼을 비활성화할 날짜와 시간 설정
 
         // 현재 날짜가 타겟 날짜 이후인지 확인
         if (currentDate >= targetDate) {
             console.log(targetDate <= currentDate);
             setPopupOpen(true);
         }
-        else{
+        else {
             navigate('/bet', { state: { isEdit: true } });
         }
     }
 
 
+    const [winner, setWinner] = useState([]);
+    const [betPoint, setBetPoint] = useState([]);
+    const [scoreOption, setScoreOption] = useState([]);
+
 
 
     useEffect(() => {
         async function getBetting() {
+
+            point.length = 0;
+            score.length = 0;
+            school.length = 0;
             for (let i = 0; i < 5; i++) {
                 try {
                     const response = await axios.get(`${API}/betting/${gameTypes[i]}`, {
                         headers: { Authorization: `bearer ${sessionStorage.getItem("accessToken")}` }
                     });
                     const userData = response.data;
-                    console.log(userData);
-                    console.log(userData.predictedScore, userData.bettingPoint, userData.predictedWinner);
-                    point.push(userData.bettingPoint);
-                    if (userData.predictedWinner === "YONSEI") {
-                        school.push("연대 승");
-                    }
-                    else if (userData.predictedWinner === "KOREA") {
-                        school.push('고대 승');
-                    }
-                    else {
-                        school.push('무승부');
-                    }
+                    point[i] = userData.bettingPoint;
                     const predicted = userData.predictedScore;
                     if (predicted === "") {
-                        score.push("");
+                        score[i] = "";
                     }
                     else {
-                        score.push(option[i][parseInt(predicted)]);
+                        score[i] = option[i][parseInt(predicted)];
                     }
+
+                    if (userData.predictedWinner === "YONSEI") {
+                        school[i] = "연대 승";
+                    }
+                    else if (userData.predictedWinner === "KOREA") {
+                        school[i] = '고대 승';
+                    }
+                    else {
+                        school[i] = '무승부';
+                        score[i] = "";
+                    }
+
+
+                    // axios.get(`${API}/users`, {
+                    //     headers: {
+                    //         Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
+                    //     }
+                    // })
+                    //     .then(response => {
+                    //         const userData = response.data;
+                    //         console.log(userData.totalPoint, "budget");
+                    //     })
+                    //     .catch(error => {
+                    //         console.error(error);
+                    //     });
 
                 } catch (error) {
                     console.error(error);
@@ -276,6 +318,10 @@ const MyPrediction = () => {
                     return;
                 }
             }
+            setBetPoint(point);
+            setScoreOption(score);
+            setWinner(school);
+            setLoading(false);
         }
         getBetting();
 
@@ -296,75 +342,85 @@ const MyPrediction = () => {
         }
     }
 
+
     return (
         <div style={{ backgroundColor: "#1D1D1D" }}>
-            <Background>
-                <MainLogo>정기전 경기 예측</MainLogo>
-                <SideBar><SideBarContents /></SideBar>
-                <Title>나의 예측</Title>
+            {loading ?
+                <Background>
+                    <Popup>
+                        <PopupContainer>
+                            <Circle><div></div></Circle>
+                            로딩 중입니다!
+                        </PopupContainer>
+                    </Popup>
+                </Background> :
+                <Background>
+                    <MainLogo>정기전 경기 예측</MainLogo>
+                    <SideBar><SideBarContents /></SideBar>
+                    <Title>나의 예측</Title>
 
-                <Container>
-                    <Column>
-                        <span style={{ marginLeft: "20px" }}>종목</span>
-                        <span style={{ marginLeft: "30px" }}>예측</span>
-                        <span style={{ marginRight: "15px" }}>배팅 포인트</span>
-                    </Column>
-                    <Result>
-                        <Row>
-                            <Type>야구 ⚾️</Type>
-                            <Predict>
-                                <School style={{ color: getSchoolColor(school[0]) }}>{school[0]}</School>
-                                <Score>{score[0]}</Score>
-                            </Predict>
-                            <PointAmount>{point[0]}p</PointAmount>
-                        </Row>
-                        <Row>
-                            <Type>농구 🏀</Type>
-                            <Predict>
-                                <School style={{ color: getSchoolColor(school[1]) }}>{school[1]}</School>
-                                <Score>{score[1]}</Score>
-                            </Predict>
-                            <PointAmount>{point[1]}p</PointAmount>
-                        </Row>
-                        <Row>
-                            <Type>빙구 🏒</Type>
-                            <Predict>
-                                <School style={{ color: getSchoolColor(school[2]) }}>{school[2]}</School>
-                                <Score>{score[2]}</Score>
-                            </Predict>
-                            <PointAmount>{point[2]}p</PointAmount>
-                        </Row>
-                        <Row>
-                            <Type>럭비 🏉</Type>
-                            <Predict>
-                                <School style={{ color: getSchoolColor(school[3]) }}>{school[3]}</School>
-                                <Score>{score[3]}</Score>
-                            </Predict>
-                            <PointAmount>{point[3]}p</PointAmount>
-                        </Row>
-                        <Row>
-                            <Type>축구 ⚽</Type>
-                            <Predict>
-                                <School style={{ color: getSchoolColor(school[4]) }}>{school[3]}</School>
-                                <Score>{score[4]}</Score>
-                            </Predict>
-                            <PointAmount>{point[4]}p</PointAmount>
-                        </Row>
-                    </Result>
-                    <BTN onClick={EditBetting}>수정하기</BTN>
-                    {popupOpen && (
-                        <Popup>
-                            <PopupContainer>
-                                경기가 시작되어 이제 수정이 불가능해요!
-                                <button
-                                    onClick={() => setPopupOpen(false)}
-                                    style={{ backgroundColor: "#7000FF", color: "white", width: "65px", height: "23px", border: "none", borderRadius: "4px", marginTop: "10px" }}>
-                                    닫기</button>
-                            </PopupContainer>
-                        </Popup>
-                    )}
-                </Container>
-            </Background>
+                    <Container>
+                        <Column>
+                            <span style={{ marginLeft: "20px" }}>종목</span>
+                            <span style={{ marginLeft: "30px" }}>예측</span>
+                            <span style={{ marginRight: "15px" }}>배팅 포인트</span>
+                        </Column>
+                        <Result>
+                            <Row>
+                                <Type>야구 ⚾️</Type>
+                                <Predict>
+                                    <School style={{ color: getSchoolColor(winner[0]) }}>{winner[0]}</School>
+                                    <Score>{scoreOption[0]}</Score>
+                                </Predict>
+                                <PointAmount>{betPoint[0]}p</PointAmount>
+                            </Row>
+                            <Row>
+                                <Type>농구 🏀</Type>
+                                <Predict>
+                                    <School style={{ color: getSchoolColor(winner[1]) }}>{winner[1]}</School>
+                                    <Score>{scoreOption[1]}</Score>
+                                </Predict>
+                                <PointAmount>{betPoint[1]}p</PointAmount>
+                            </Row>
+                            <Row>
+                                <Type>빙구 🏒</Type>
+                                <Predict>
+                                    <School style={{ color: getSchoolColor(winner[2]) }}>{winner[2]}</School>
+                                    <Score>{scoreOption[2]}</Score>
+                                </Predict>
+                                <PointAmount>{betPoint[2]}p</PointAmount>
+                            </Row>
+                            <Row>
+                                <Type>럭비 🏉</Type>
+                                <Predict>
+                                    <School style={{ color: getSchoolColor(winner[3]) }}>{winner[3]}</School>
+                                    <Score>{scoreOption[3]}</Score>
+                                </Predict>
+                                <PointAmount>{betPoint[3]}p</PointAmount>
+                            </Row>
+                            <Row>
+                                <Type>축구 ⚽</Type>
+                                <Predict>
+                                    <School style={{ color: getSchoolColor(winner[4]) }}>{winner[4]}</School>
+                                    <Score>{scoreOption[4]}</Score>
+                                </Predict>
+                                <PointAmount>{betPoint[4]}p</PointAmount>
+                            </Row>
+                        </Result>
+                        {(today >= targetDate) ? <div style={{fontWeight:"800", fontSize:"16px", color:"black", marginTop:"25px"}}>경기 진행 중...</div> : <BTN onClick={EditBetting}>수정하기</BTN>}
+                        {popupOpen && (
+                            <Popup>
+                                <PopupContainer>
+                                    경기가 시작되어 이제 수정이 불가능해요!
+                                    <button
+                                        onClick={() => setPopupOpen(false)}
+                                        style={{ backgroundColor: "#7000FF", color: "white", width: "65px", height: "23px", border: "none", borderRadius: "4px", marginTop: "10px" }}>
+                                        닫기</button>
+                                </PopupContainer>
+                            </Popup>
+                        )}
+                    </Container>
+                </Background>}
         </div>
     );
 }

@@ -390,8 +390,11 @@ const Lending = ()=> {
           버미와 수리 홀더는 정기 교류전 <ColoredText>경기 예측</ColoredText>과 <br />
           <ColoredText>가위바위보 게임</ColoredText>에 참여할 수 있어요. <br />
           <br />
-          포인트를 가장 많이 모은 재학생 10명에게 <br />
-          경품을 드립니다! <br />
+          9월 9일까지 포인트를 가장 많이 모은 <br />
+          재학생 및 졸업생 10명에게 경품을 드립니다! <br />
+          <br />
+          재학생 및 졸업생 인증은 공식 인스타그램에<br />
+          링크된 구글폼 작성으로 해주시면 됩니다.<br />
           </SubContent>
         </SubContainer>
 

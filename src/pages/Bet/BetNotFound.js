@@ -47,6 +47,7 @@ const MainText = styled.div`
     font-size: 16px;
     line-height: 26px; /* 162.5% */
     margin-top: 40px;
+    text-align: center;
     @media(max-width: 300px){
         font-size: 13px;
     }
@@ -90,7 +91,7 @@ const BetNotFound = () => {
             <SideBar><SideBarContents/></SideBar>
             <Title>경기 예측 이벤트에 참여하지 <br/>않았습니다.</Title>
             <MainText>
-            미니 게임을 통해서도 포인트를 얻을 수 있어요 ˚✧₊( ˘ω˘ )⁎⁺˳✧༚
+            미니 게임을 통해서도 <br />포인트를 얻을 수 있어요 ˚✧₊( ˘ω˘ )⁎⁺˳✧༚
             </MainText>
         </Background>
         </div>

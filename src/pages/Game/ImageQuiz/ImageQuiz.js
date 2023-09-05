@@ -153,11 +153,12 @@ const ImageQuiz = () => {
           })
           .then((response) => {
               console.log(response.data);
-              //setRemainingAttempts(times);
+              const { quiz } = response.data;
+              console.log(quiz);
+              sessionStorage.setItem("quiz", quiz);
           })
           .catch((error) => {
               console.error("API Error:", error);
-          
               // 오류 메시지 출력
               if (error.response) {
                   console.error("Response Data:", error.response.data);
@@ -196,10 +197,10 @@ const ImageQuiz = () => {
         const trimmedAnswer = answer.trim(); //공백 제거
         if (correctAnswer.includes(trimmedAnswer)) {
           gameResult("win");
-          //window.location.href = '/imageQuiz/win';
+          window.location.href = '/imageQuiz/win';
         } else {
           gameResult("lose");
-          //window.location.href = '/imageQuiz/lose';
+          window.location.href = '/imageQuiz/lose';
         }
         setIsAnswered(true);
       }

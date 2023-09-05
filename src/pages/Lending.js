@@ -275,14 +275,12 @@ const Lending = ()=> {
       navigate('/Login');
     }
     
-
     const clickBenefitBTN = () => {
       navigate('/hmpBenefit');
     }
 
-
     useEffect(() => {
-      const accessToken = sessionStorage.getItem('accessToken');
+      const accessToken = sessionStorage.getItem('bummySuri');
       if (accessToken) {
           setLoggedIn(true);
       }

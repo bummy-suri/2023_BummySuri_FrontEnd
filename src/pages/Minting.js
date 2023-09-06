@@ -5,8 +5,6 @@ import axios from 'axios';
 import SideBar from '../components/SideBar/SideBar';
 import SideBarContents from '../components/SideBar/SideBarContents';
 import { API } from '../config';
-import bummy from '../assets/minting/bummyquestionmark.png';
-import suri from '../assets/minting/suriquestionmark.png';
 
 const Minting = () => {
   const [selectedUniversity, setSelectedUniversity] = useState(null);
@@ -157,9 +155,9 @@ const Minting = () => {
 
         {selectedUniversity ? (
           selectedUniversity === '고려대학교' ? (
-            <ThreeImageBummy src={bummy} alt="버미 물음표 이미지" />
+            <ThreeImageBummy src={`${process.env.PUBLIC_URL}/assets/Minting/bummyquestionmark.png`} alt="버미 물음표 이미지" />
           ) : (
-            <ThreeImageSuri src={suri} alt="수리 물음표 이미지" />
+            <ThreeImageSuri src={`${process.env.PUBLIC_URL}/assets/Minting/suriquestionmark.png`} alt="수리 물음표 이미지" />
           )
         ) : (
           <ThreeImageRandombox

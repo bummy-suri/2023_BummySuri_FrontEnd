@@ -161,6 +161,7 @@ const Minting = () => {
   const handleMintButtonClick = () => {
     const university = selectedUniversity === '고려대학교' ? 'KOREA' : 'YONSEI';
 
+    
     setIsLoading(true);
 
     axios

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import SideBar from "../../../components/SideBar/SideBar";
 import SideBarContents from "../../../components/SideBar/SideBarContents";
 import axios from "axios";
@@ -113,6 +113,58 @@ const Btn = styled.button`
     }
 `;
 
+const Popup = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1D1D1D;
+  border-radius: 8px;
+  width:260px;
+  height: 90px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @media (max-width: 350px) {
+    80vw;
+  }
+`;
+
+const PopupContainer = styled.div`
+  width:260px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 9px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.15) 100%);
+  border: 1px solid white;
+  @media (max-width: 350px) {
+    width:80vw;
+  }
+`;
+
+const spin = keyframes`
+
+  50% { transform: rotate(360deg); }
+  100% {transform: rotate(720deg);}
+`;
+
+const Circle = styled.div`
+    width: 18px;
+    height: 18px;
+    border: 6px solid transparent;
+    border-top: 6px solid #7000FF;
+    border-radius: 50%;
+    animation: ${spin} 1.5s linear infinite;
+    margin-bottom: 10px;
+`;
+
+
 const images = [ 
     `${process.env.PUBLIC_URL}/assets/Game/randomImage/candle.png`,
     `${process.env.PUBLIC_URL}/assets/Game/randomImage/cow.png`,
@@ -207,22 +259,22 @@ const ImageQuiz = () => {
 
     return (
         <div style={{backgroundColor:"#1D1D1D"}}>
-        <Background>
-            <MainLogo>넌센스 그림퀴즈</MainLogo>
-            <SideBar><SideBarContents/></SideBar>
-            <RandomImage><img src={image} alt="Random" width="100%" style={{borderRadius:"20px"}}/></RandomImage>
-            <Image src={`${process.env.PUBLIC_URL}/assets/Game/randomImage/bummyInQuiz.png`}/>
-            <MainText>{remainingTime}</MainText>
-            <Answer>답:
-          <AnswerInput
-            type="text"
-            placeholder=""
-            value={answer}
-            onChange={handleAnswerChange}
-          />
-        </Answer>
-          <Btn onClick={handleSubmit}>제출하기!</Btn>
-        </Background>
+          <Background>
+              <MainLogo>넌센스 그림퀴즈</MainLogo>
+              <SideBar><SideBarContents/></SideBar>
+              <RandomImage><img src={image} alt="Random" width="100%" style={{borderRadius:"20px"}}/></RandomImage>
+              <Image src={`${process.env.PUBLIC_URL}/assets/Game/randomImage/bummyInQuiz.png`}/>
+              <MainText>{remainingTime}</MainText>
+              <Answer>답:
+            <AnswerInput
+              type="text"
+              placeholder=""
+              value={answer}
+              onChange={handleAnswerChange}
+            />
+          </Answer>
+            <Btn onClick={handleSubmit}>제출하기!</Btn>
+          </Background>
         </div>
         );
 }

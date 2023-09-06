@@ -258,6 +258,7 @@ const Ranking = () => {
                     <Popup>
                         <PopupContainer>
                             <Circle><div></div></Circle>
+                            랭킹 불러오는 중...
                         </PopupContainer>
                     </Popup>
                 </Background> :

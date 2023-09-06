@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import SideBar from "../../../components/SideBar/SideBar";
 import SideBarContents from "../../../components/SideBar/SideBarContents";
+import { API } from "../../../config";
+import axios from "axios";
 
 const Background = styled.div`
     max-width: 100vw;
@@ -110,19 +112,34 @@ const PopupContainer = styled.div`
 
 const QuizIntro = () => {
     const [popupOpen, setPopupOpen] = useState(false);
+    const [quizTimes, setquizTimes] = useState(true);
+    const accessToken = sessionStorage.getItem("bummySuri");
 
     useEffect(() => {
-        const quizValue = sessionStorage.getItem('quiz');
-
-        if (quizValue === 'false') {
-            // 'quiz'가 'false'이면 팝업 표시
-            setPopupOpen(true);
-        }
-    }, []);
+        axios.get(`${API}/minigame`, {
+          headers:{
+            Authorization: `bearer ${accessToken}`
+            }
+          })
+            .then(response => {
+                console.log(response.data);
+                const {quiz} = response.data;
+                setquizTimes(quiz);
+            })
+            .catch(error => {
+              if (error.response) {
+                  console.error("Response Data:", error.response.data);
+                  console.error("Status Code:", error.response.status);
+              } else if (error.request) {
+                  console.error("Request:", error.request);
+              } else {
+                  console.error("Error Message:", error.message);
+              }
+            });
+    }, []); 
 
     const handleQuizButtonClick = () => {
-        const quizValue = sessionStorage.getItem('quiz');
-        if (quizValue === 'true') {
+        if (quizTimes === true) {
             window.location.href = '/ImageQuiz';
         } else {
             setPopupOpen(true);

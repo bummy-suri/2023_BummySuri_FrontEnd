@@ -182,7 +182,6 @@ const SelectYu = styled.div`
       width: 40vw;
       height: 40vw;
   }
-
  `;
 
  const [BummyAmount, setBummyAmount] = useState(0);
@@ -199,22 +198,24 @@ const SelectYu = styled.div`
       })
         .then(response => {
             console.log(response.data);
+            setBummyAmount(response.data.count);
         })
         .catch(error => {
             console.error(error);
         });
 
-
-
-/*
- axios
- .get(`${API}/users/mint/YONSEI`)
- .then((response) => {
-   setSuriAmount(response.data.count);
- })
- .catch((error) => {
-   console.error('수리 NFT 수량 확인에서 에러가 발생했습니다.', error);
- });*/
+   axios.get(`${API}/mint/${teamType[1]}`, {
+      headers:{
+        Authorization: `bearer ${AccessToken}`,
+        }
+      })
+        .then(response => {
+            console.log(response.data);
+            setSuriAmount(response.data.count);
+        })
+        .catch(error => {
+            console.error(error);
+        });
  }, []);
 
 
@@ -275,6 +276,7 @@ const SelectYu = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 24px;
  `;
 
  const UnderGraphTextFirst = styled.div`
@@ -363,29 +365,27 @@ const SelectYu = styled.div`
 
     <MintButton>NFT 민팅하기</MintButton>
     <NFTCountDiv>
-    <ImageGraphDiv>
-    <GraphImage src={`${process.env.PUBLIC_URL}/assets/Minting/graphbummy.png`} alt="Bummy"></GraphImage>
-    <GraphImage src={`${process.env.PUBLIC_URL}/assets/Minting/graphsuri.png`} alt="Suri"></GraphImage>
-    </ImageGraphDiv>
-    <ImageGraphDiv>
-    <GraphSetting>
-    <BummyGraph>{BummyAmount}</BummyGraph>
-    </GraphSetting>
-    <GraphSetting>
-    <SuriGraph>{SuriAmount}</SuriGraph>
-    </GraphSetting>
-    </ImageGraphDiv>
-    <Line>
-    <GraphLine></GraphLine>
-    </Line>
-    <TextDiv>
-    <UnderGraphTextFirst>남은 수량</UnderGraphTextFirst>
-    <UnderGraphTextSecond>
-    버미와 수리가 기다리고 있어요!
-    <br />
-    빨리 데려가라굿 (๑•◡-๑)
-    </UnderGraphTextSecond>
-    </TextDiv>
+      <ImageGraphDiv>
+         <GraphImage src={`${process.env.PUBLIC_URL}/assets/Minting/graphbummy.png`} alt="Bummy"></GraphImage>
+         <GraphImage src={`${process.env.PUBLIC_URL}/assets/Minting/graphsuri.png`} alt="Suri"></GraphImage>
+      </ImageGraphDiv>
+      <ImageGraphDiv>
+         <GraphSetting>
+            <BummyGraph>{BummyAmount}</BummyGraph>
+         </GraphSetting>
+         <GraphSetting>
+            <SuriGraph>{SuriAmount}</SuriGraph>
+         </GraphSetting>
+      </ImageGraphDiv>
+      <Line>
+         <GraphLine></GraphLine>
+      </Line>
+      <TextDiv>
+         <UnderGraphTextFirst>남은 수량</UnderGraphTextFirst>
+         <UnderGraphTextSecond>
+         버미와 수리가 기다리고 있어요!<br />빨리 데려가라굿 (๑•◡-๑)
+         </UnderGraphTextSecond>
+      </TextDiv>
     </NFTCountDiv>
  </Container>
  </>

@@ -42,6 +42,7 @@ const SchoolBTN = styled.button`
 
 const ScoreSelect = styled.div`
     background-color: rgba(51, 51, 51, 1);
+    background-color: ${(props) => (props.isDraw ? 'rgba(42, 40, 40, 0.75)' : 'rgba(51, 51, 51, 1)')};
     width: 332px;
     display: flex;
     align-items: center;
@@ -51,9 +52,12 @@ const ScoreSelect = styled.div`
     border-radius: 8px;
     margin-top: 10px;
     margin-bottom: 10px;
+    color: ${(props) => (props.isDraw ? 'rgba(150,150,150, 0.5)' : 'white')};
     @media (max-width: 300px)
     {
         width: 250px;
+    }
+    button{
     }
 `;
 
@@ -80,7 +84,14 @@ const BTN = styled.button`
     border: none;
     font-size: 14px;
     font-weight: 500;
-    background-color: ${(props) => (props.isActive ? 'rgba(112, 0, 255, 1)' : 'rgba(217, 217, 217, 1)')};
+    /* background-color: ${(props) => (props.isActive ? 'rgba(112, 0, 255, 1)' :'white')}; */
+    background-color: ${(props) =>
+        !props.isDraw
+            ? (props.isActive
+                ? 'rgba(112, 0, 255, 1)'
+                : 'white')
+            : 'rgba(150,150,150, 0.5)'};
+    
     color: ${(props) => (props.isActive ? 'white' : 'black')};
     @media (max-width: 300px)
     {
@@ -202,22 +213,22 @@ const Sports = ({gameType, handleData, currentschool, currentscore, currentbetpo
                 </SchoolSelect>
             </SportsName>
 
-            <ScoreSelect>
-                <ScoreOption>
+            <ScoreSelect isDraw={score===-2}>
+                <ScoreOption isDraw={score===-2}>
                     <p>{option[0]}</p>
-                    <BTN isActive={score === 0} onClick={() => ScoreChange(0)} disabled={school === "DRAW"}>선택</BTN>
+                    <BTN isActive={score === 0} isDraw={score===-2} onClick={() => ScoreChange(0)} disabled={school === "DRAW"}>선택</BTN>
                 </ScoreOption>
                 <ScoreOption>
                     <p>{option[1]}</p>
-                    <BTN isActive={score === 1} onClick={() => ScoreChange(1)} disabled={school === "DRAW"}>선택</BTN>
+                    <BTN isActive={score === 1} isDraw={score===-2} onClick={() => ScoreChange(1)} disabled={school === "DRAW"}>선택</BTN>
                 </ScoreOption>
                 <ScoreOption>
                     <p>{option[2]}</p>
-                    <BTN isActive={score === 2} onClick={() => ScoreChange(2)} disabled={school === "DRAW"}>선택</BTN>
+                    <BTN isActive={score === 2} isDraw={score===-2} onClick={() => ScoreChange(2)} disabled={school === "DRAW"}>선택</BTN>
                 </ScoreOption>
                 <ScoreOption>
                     <p>{option[3]}</p>
-                    <BTN isActive={score === 3} onClick={() => ScoreChange(3)} disabled={school === "DRAW"}>선택</BTN>
+                    <BTN isActive={score === 3} isDraw={score===-2} onClick={() => ScoreChange(3)} disabled={school === "DRAW"}>선택</BTN>
                 </ScoreOption>
             </ScoreSelect>
             <Point>

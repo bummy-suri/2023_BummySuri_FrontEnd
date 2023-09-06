@@ -187,31 +187,36 @@ const SelectYu = styled.div`
 
  const [BummyAmount, setBummyAmount] = useState(0);
  const [SuriAmount, setSuriAmount] = useState(0);
- const AccessToken = sessionStorage.getItem('accessToken');
+
+ const AccessToken = sessionStorage.getItem('bummySuri');
+ const teamType = ['KOREA', 'YONSEI'] 
 
  useEffect(() => {
- axios
- .get(`${API}/users/mint/KOREA`, {
- headers: {
- Authorization: `bearer ${AccessToken}`,
- },
- })
- .then((response) => {
- setBummyAmount(response.data.count);
- })
- .catch((error) => {
- console.error('버미 NFT 수량 확인에서 에러가 발생했습니다.', error);
- });
+   axios.get(`${API}/mint/${teamType[0]}`, {
+      headers:{
+        Authorization: `bearer ${AccessToken}`,
+        }
+      })
+        .then(response => {
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
 
+
+
+/*
  axios
  .get(`${API}/users/mint/YONSEI`)
  .then((response) => {
- setSuriAmount(response.data.count);
+   setSuriAmount(response.data.count);
  })
  .catch((error) => {
- console.error('수리 NFT 수량 확인에서 에러가 발생했습니다.', error);
- });
+   console.error('수리 NFT 수량 확인에서 에러가 발생했습니다.', error);
+ });*/
  }, []);
+
 
  const BummyGraphHeight = (BummyAmount / 5000) * 177;
  const SuriGraphHeight = (SuriAmount / 5000) * 177;

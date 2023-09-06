@@ -140,7 +140,6 @@ const ImageQuiz = () => {
 
     const accessToken = sessionStorage.getItem("bummySuri");
 
-    //`${API}/miniGame` "https://api.dev.bummysuri.com/minigame"
     const gameResult = (rpsResult) => {
       axios
           .put(`${API}/miniGame`, { 

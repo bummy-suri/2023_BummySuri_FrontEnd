@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import axios from 'axios';
 
 import SideBar from "../../components/SideBar/SideBar";
@@ -169,14 +169,71 @@ const MyRankingText = styled.div`
         width: 140px;
     }
 `
-    // 'https://api.dev.bummysuri.com/ranking/top10' `${API}/ranking/top10`
+
+const Popup = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #1D1D1D;
+  border-radius: 8px;
+  width:260px;
+  height: 90px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  @media (min-width: 350px) {
+    width:332px;
+    height: 103px;
+  }
+`;
+
+const PopupContainer = styled.div`
+  width:260px;
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 9px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.15) 100%);
+  border: 1px solid white;
+  @media (min-width: 350px) {
+    width:332px;
+    height: 103px;
+  }
+`;
+
+
+const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(360deg); }
+  100% {transform: rotate(720deg);}
+`;
+
+const Circle = styled.div`
+    width: 18px;
+    height: 18px;
+    border: 6px solid transparent;
+    border-top: 6px solid #7000FF;
+    border-radius: 50%;
+    animation: ${spin} 1.5s linear infinite;
+    margin-bottom: 10px;
+`;
+    //
 const Ranking = () => {
     const [top10Rankings, setTop10Rankings] = useState([]);
+    const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const accessToken = sessionStorage.getItem("bummySuri");
 
-    // 탑10 api
+    // 탑10
     axios.get(`${API}/ranking/top10`, {
       headers: {
         Authorization: `bearer ${accessToken}`,
@@ -184,6 +241,7 @@ const Ranking = () => {
     })
     .then(response => {
       setTop10Rankings(response.data);
+      setLoading(false);
     })
     .catch(error => {
       console.error('top10 API 호출 오류', error);
@@ -197,8 +255,17 @@ const Ranking = () => {
   };
 
     return (
+        
         <div style={{backgroundColor:"#1D1D1D"}}>
-        <Background>
+            {loading ?
+                <Background>
+                    <Popup>
+                        <PopupContainer>
+                            <Circle><div></div></Circle>
+                        </PopupContainer>
+                    </Popup>
+                </Background> :
+                <Background>
             <MainLogo>Ranking</MainLogo>
             <SideBar><SideBarContents/></SideBar>
             <div>
@@ -231,7 +298,7 @@ const Ranking = () => {
             
             
 
-        </Background>
+        </Background>}
         </div>
         );
 }

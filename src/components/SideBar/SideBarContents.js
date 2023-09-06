@@ -107,7 +107,7 @@ const SideBarContents = ()=> {
       totalPoint: 0,
       isMinted: false,
   });
-  // `${API}/users` 'https://api.dev.bummysuri.com/users'
+
   useEffect(() => {
     axios.get(`${API}/users`, {
       headers:{

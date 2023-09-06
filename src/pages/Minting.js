@@ -188,7 +188,6 @@ const SelectYu = styled.div`
  const [SuriAmount, setSuriAmount] = useState(0);
  const AccessToken = sessionStorage.getItem('accessToken');
 
- //`${API}/users` 'https://api.dev.bummysuri.com/users/mint/KOREA'
  useEffect(() => {
  axios
  .get(`${API}/users/mint/KOREA`, {

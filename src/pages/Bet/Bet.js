@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled, { keyframes } from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
 
@@ -168,8 +167,6 @@ const Circle = styled.div`
 const Bet = () => {
     const location = useLocation();
     const isEdit = location.state?.isEdit || false;
-    
-    const navigate = useNavigate();
 
     const [day, setDay] = useState("9월 8일");
 
@@ -264,7 +261,7 @@ const Bet = () => {
                         });
                         const userData = response.data;
                         if (userData.selected === true) {
-                            navigate('/bet/my-prediction');
+                            window.location.href = '/bet/my-prediction';
                         }
                     } catch (error) {
                         //console.log(error); (Betting data not found)
@@ -355,7 +352,7 @@ const Bet = () => {
 
                     }
                 }
-                navigate('/bet/done');
+                window.location.href = '/bet/done'
             }
             submitBetting();
         }

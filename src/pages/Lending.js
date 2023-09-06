@@ -1,5 +1,5 @@
 import React, { useEffect,  useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import styled, {keyframes} from 'styled-components';
 
 import Benefit0201 from '../assets/benefit0201.png';
@@ -267,14 +267,13 @@ const PopupContainer = styled.div`
 const Lending = ()=> {
     const [loggedIn, setLoggedIn] = useState(false);
     const [popupOpen, setPopupOpen] = useState(false); //준비중 팝업 
-    const navigate = useNavigate();
 
     const menuClick = () => {
-      navigate('/Login');
+      window.location.href = '/Login';
     }
     
     const clickBenefitBTN = () => {
-      navigate('/hmpBenefit');
+      window.location.href = '/hmpBenefit';
     }
 
     useEffect(() => {

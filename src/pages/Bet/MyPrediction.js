@@ -235,7 +235,7 @@ const MyPrediction = () => {
     const school = [];
 
     // const targetDate = new Date("2023-09-05T01:22:00"); //test
-    const targetDate = new Date('2023-09-08T10:00:00'); // 버튼을 비활성화할 날짜와 시간 설정
+    const targetDate = new Date('2023-09-08T10:00:00'); // 수정 버튼을 비활성화할 날짜와 시간 설정
     
     
     const today = new Date();
@@ -298,7 +298,7 @@ const MyPrediction = () => {
 
                 } catch (error) {
                     console.error(error);
-                    navigate('/bet/notfound');
+                    window.location.href = '/bet/notfound';
                     return;
                 }
             }

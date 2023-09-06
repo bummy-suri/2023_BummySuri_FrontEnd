@@ -238,15 +238,6 @@ const GetPointBTN = styled.button`
 
 
 const GameResult = () => {
-    {/* 
-    
-        1. 백에서 경기 결과 값 가져오기 -> 화면에 표시 (경기결과조회)
-        2. 연대 / 고대에 따라 폰트 색상 변경 
-        3. 총 획득 포인트 계산하여 표시
-
-        베팅조회 -> 베팅결과확인 -> 베팅결과얻은포인트반영하기
-
-    */}
     const gameTypes = ["baseball", "basketball", "hockey", "rugby", "soccer"];
 
 
@@ -364,13 +355,13 @@ const GameResult = () => {
     const deleteme = () => {
         axios.delete(`${API}/users`, {
             headers: {
-                Authorization: `bearer ${sessionStorage.getItem("bummySuri")}`,
+                Authorization: `bearer ${localStorage.getItem("bummySuri")}`,
             },
         })
             .then(response => {
                 console.log('DELETE 요청이 성공했습니다.');
                 // 서버로부터 성공 응답을 처리할 코드를 여기에 추가
-                navigate('/');
+                window.location.href = '/';
             })
             .catch(error => {
                 console.error('DELETE 요청이 실패했습니다.');
@@ -458,7 +449,7 @@ const GameResult = () => {
                             </Popup>
                         )}
                     </Container>
-                    <button onClick={deleteme}>나 지우기</button>
+                    {/* <button onClick={deleteme}>나 지우기</button> */}
                 </Background>
             }
         </div>

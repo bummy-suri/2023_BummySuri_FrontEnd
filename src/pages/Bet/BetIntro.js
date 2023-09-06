@@ -191,7 +191,7 @@ const BetIntro = () => {
                 });
                 const userData = response.data;
                 if (userData.selected === true) {
-                    navigate('/bet/my-prediction');
+                    window.location.href = '/bet/my-prediction';
                 }
             } catch (error) { // 참여 이력 없지만 참여 가능 시간 지난 경우 bet/intro로 (종료 문구 뜸), 시간 내인 경우 베팅 페이지로
                 //console.log(error);
@@ -200,7 +200,7 @@ const BetIntro = () => {
                     setRedirectToBet(true);
                 }
                 else {
-                    navigate('/bet');
+                    window.location.href = '/bet'
                 }
             }
         }
@@ -209,7 +209,7 @@ const BetIntro = () => {
 
     const navigate = useNavigate();
 
-    const endDate = new Date("2023-09-09T20:00:00"); // 경기 종료 시점 (베팅 결과 페이지로 로드해야)
+    const endDate = new Date("2023-09-09T18:00:00"); // 경기 종료 시점 (베팅 결과 페이지로 로드해야)
     // const endDate = new Date("2023-09-05T01:24:00"); // test
 
     // 종료 문구 뜬 경우의 페이지에서 나의 예측으로 가는 버튼 클릭
@@ -228,11 +228,11 @@ const BetIntro = () => {
                         navigate('/bet/result', { state: { permitted: true } });
                     }
                     else {
-                        navigate('/bet/my-prediction');
+                        window.location.href = '/bet/my-prediction';
                     }
                 }
             } catch (error) { // 없으면 not found 페이지로
-                navigate('/bet/notfound');
+                window.location.href = '/bet/notfound';
             }
         }
         checkSelected();
@@ -242,7 +242,7 @@ const BetIntro = () => {
 
     useEffect(() => {
         if (redirectToBet) {
-            navigate('/bet/intro');
+            window.location.href = '/bet/intro';
         }
     }, [redirectToBet]);
 

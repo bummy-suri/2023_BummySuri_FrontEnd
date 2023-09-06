@@ -298,7 +298,7 @@ const MyPrediction = () => {
 
                 } catch (error) {
                     console.error(error);
-                    window.location.href = '/bet/notfound';
+                    navigate('/bet/notfound');
                     return;
                 }
             }

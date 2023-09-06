@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import QRcode from "qrcode.react";
 import axios from "axios";
 import { API } from '../../config';
+import { useNavigate } from 'react-router-dom';
 
 const Klipbtn = styled.button`
   width: 334px;
@@ -39,6 +40,7 @@ const getKlipAccessUrl = (method, request_key) => {
 };
 
 const KlipApi = () => {
+  const navigate = useNavigate();
   const [qrvalue_auth, setQrvalue_auth] = useState(DEFAULT_QR_CODE);
   const walletAddress = useRef('');
 
@@ -92,7 +94,7 @@ const KlipApi = () => {
         localStorage.setItem("bummySuri", accessToken);
         console.log("accessToken", accessToken);
         let timerId = setInterval(() => {
-          window.location.href = '/';
+          navigate('/');
           clearInterval(timerId);
         }, 100);
       })

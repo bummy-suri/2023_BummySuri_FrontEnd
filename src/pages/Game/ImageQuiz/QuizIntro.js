@@ -4,6 +4,7 @@ import SideBar from "../../../components/SideBar/SideBar";
 import SideBarContents from "../../../components/SideBar/SideBarContents";
 import { API } from "../../../config";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const Background = styled.div`
   max-width: 100vw;
@@ -117,6 +118,7 @@ const PopupContainer = styled.div`
 `;
 
 const QuizIntro = () => {
+  const navigate = useNavigate();
   const [popupOpen, setPopupOpen] = useState(false);
   const [quizTimes, setquizTimes] = useState(true);
   const accessToken = localStorage.getItem("bummySuri");
@@ -146,7 +148,7 @@ const QuizIntro = () => {
 
   const handleQuizButtonClick = () => {
     if (quizTimes === true) {
-      window.location.href = '/ImageQuiz';
+      navigate("/imageQuiz");
     } else {
       setPopupOpen(true);
     }

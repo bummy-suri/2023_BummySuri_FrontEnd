@@ -100,7 +100,6 @@ const Rps = () => {
     const myImage = choicesMap[selectedChoice].image;
     const accessToken = sessionStorage.getItem("bummySuri");
     
-    // 결과 전달 api `${API}/minigame` https://api.dev.bummysuri.com/minigame
     const gameResult = (rpsResult) => {
         axios
             .put(`${API}/minigame`, { 

@@ -184,11 +184,8 @@ const Popup = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  font-weight: bold;
-  @media (min-width: 350px) {
-    width:332px;
-    height: 103px;
+  @media (max-width: 350px) {
+    80vw;
   }
 `;
 
@@ -203,9 +200,8 @@ const PopupContainer = styled.div`
   color: white;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.15) 100%);
   border: 1px solid white;
-  @media (min-width: 350px) {
-    width:332px;
-    height: 103px;
+  @media (max-width: 350px) {
+    width:80vw;
   }
 `;
 

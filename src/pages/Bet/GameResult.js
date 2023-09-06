@@ -361,7 +361,7 @@ const GameResult = () => {
             .then(response => {
                 console.log('DELETE 요청이 성공했습니다.');
                 // 서버로부터 성공 응답을 처리할 코드를 여기에 추가
-                window.location.href = '/';
+                navigate('/');
             })
             .catch(error => {
                 console.error('DELETE 요청이 실패했습니다.');

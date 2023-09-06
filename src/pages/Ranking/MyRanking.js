@@ -112,8 +112,8 @@ const MyRanking = () => {
             }
           })
             .then(response => {
-                const checkMyRank = response.data;
-                setmyRank(checkMyRank.ranking);
+                console.log(response.data.ranking);
+                setmyRank(response.data.ranking);
             })
             .catch(error => {
                 console.error(error);

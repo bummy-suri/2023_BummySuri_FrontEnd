@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 import SideBar from "../../components/SideBar/SideBar";
@@ -178,6 +178,7 @@ const BetIntro = () => {
     //     fetchGameInfo();
     // }, []);
 
+
     const currentDate = new Date();
     const cutoffDate = new Date("2023-09-08T10:00:00"); // 베팅 종료 시점
     // const cutoffDate = new Date("2023-09-05T01:22:00"); //test
@@ -191,7 +192,7 @@ const BetIntro = () => {
                 });
                 const userData = response.data;
                 if (userData.selected === true) {
-                    window.location.href = '/bet/my-prediction';
+                    navigate("/bet/my-prediction");
                 }
             } catch (error) { // 참여 이력 없지만 참여 가능 시간 지난 경우 bet/intro로 (종료 문구 뜸), 시간 내인 경우 베팅 페이지로
                 //console.log(error);
@@ -200,7 +201,7 @@ const BetIntro = () => {
                     setRedirectToBet(true);
                 }
                 else {
-                    window.location.href = '/bet'
+                    navigate("/bet");
                 }
             }
         }
@@ -228,11 +229,11 @@ const BetIntro = () => {
                         navigate('/bet/result', { state: { permitted: true } });
                     }
                     else {
-                        window.location.href = '/bet/my-prediction';
+                        navigate('/bet/my-prediction');
                     }
                 }
             } catch (error) { // 없으면 not found 페이지로
-                window.location.href = '/bet/notfound';
+                navigate('/bet/notfound');
             }
         }
         checkSelected();
@@ -242,7 +243,7 @@ const BetIntro = () => {
 
     useEffect(() => {
         if (redirectToBet) {
-            window.location.href = '/bet/intro';
+            navigate('/bet/intro');
         }
     }, [redirectToBet]);
 

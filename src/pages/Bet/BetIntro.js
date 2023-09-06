@@ -179,8 +179,8 @@ const BetIntro = () => {
     // }, []);
 
     const currentDate = new Date();
-    // const cutoffDate = new Date("2023-09-08T10:00:00"); // 베팅 종료 시점
-    const cutoffDate = new Date("2023-09-05T01:22:00"); //test
+    const cutoffDate = new Date("2023-09-08T10:00:00"); // 베팅 종료 시점
+    // const cutoffDate = new Date("2023-09-05T01:22:00"); //test
     const [redirectToBet, setRedirectToBet] = useState(false);
 
     const handleBetButtonClick = () => {

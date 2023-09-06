@@ -9,6 +9,7 @@ import HMP2 from "../../assets/hidemeplease/hmp2.png";
 import HMP3 from "../../assets/hidemeplease/hmp3.png";
 import HMP4 from "../../assets/hidemeplease/hmp4.png";
 import HMP5 from "../../assets/hidemeplease/hmp5.png";
+import HMP6 from "../../assets/hidemeplease/hmp6.png";
 
 
 const Contain = styled.div`
@@ -59,7 +60,12 @@ const benefits = [
   </ItemsContain>,
   <ItemsContain>
   <ItemsWrap>
-    <img src={HMP5} alt="혜택4" />
+    <img src={HMP5} alt="혜택5" />
+  </ItemsWrap>
+</ItemsContain>,
+<ItemsContain>
+  <ItemsWrap>
+    <img src={HMP6} alt="혜택6" />
   </ItemsWrap>
 </ItemsContain>,
 ]

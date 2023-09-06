@@ -70,7 +70,7 @@ const BetDone = () => {
     const location = useLocation();
 
     const pointreceived = location.state?.pointreceived || false;
-    const point = location.state?.pamount || null;
+    const point = location.state?.pamount || 0;
 
     return (
         <div style={{ backgroundColor: "#1D1D1D" }}>

@@ -220,13 +220,6 @@ const Circle = styled.div`
 
 
 const MyPrediction = () => {
-    {/* 
-
-        1. 백에서 나의 예측 값 가져오기 -> 화면에 표시
-        2. 연대 / 고대에 따라 폰트 색상 변경
-        3. 수정하기 기능 사용 (Bet.js로 보내기) / 경기 시작되면 비활성화(o)
-
-    */}
     const [popupOpen, setPopupOpen] = useState(false);
     const [loading, setLoading] = useState(true);
 
@@ -240,9 +233,13 @@ const MyPrediction = () => {
     const point = [];
     const score = [];
     const school = [];
+
+    // const targetDate = new Date("2023-09-05T01:22:00"); //test
     const targetDate = new Date('2023-09-08T10:00:00'); // 버튼을 비활성화할 날짜와 시간 설정
+    
+    
     const today = new Date();
-    // const targetDate = new Date("2023-09-06T01:22:00"); //test
+    
 
 
 
@@ -252,11 +249,11 @@ const MyPrediction = () => {
 
         // 현재 날짜가 타겟 날짜 이후인지 확인
         if (currentDate >= targetDate) {
-            console.log(targetDate <= currentDate);
+            //console.log(targetDate <= currentDate);
             setPopupOpen(true);
         }
         else {
-            navigate('/bet', { state: { isEdit: true } });
+            navigate('/bet', { state: { isEdit: true} });
         }
     }
 
@@ -299,20 +296,6 @@ const MyPrediction = () => {
                         score[i] = "";
                     }
 
-
-                    // axios.get(`${API}/users`, {
-                    //     headers: {
-                    //         Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
-                    //     }
-                    // })
-                    //     .then(response => {
-                    //         const userData = response.data;
-                    //         console.log(userData.totalPoint, "budget");
-                    //     })
-                    //     .catch(error => {
-                    //         console.error(error);
-                    //     });
-
                 } catch (error) {
                     console.error(error);
                     navigate('/bet/notfound');
@@ -330,7 +313,6 @@ const MyPrediction = () => {
     }, []);
 
     const getSchoolColor = (schoolText) => {
-        console.log(schoolText);
         if (schoolText === "연대 승") {
             return "rgba(22, 87, 255, 1)";
         }

@@ -278,23 +278,23 @@ const GameResult = () => {
                         headers: { Authorization: `bearer ${sessionStorage.getItem("bummySuri")}` }
                     });
                     const userData = response.data; // 사용자 베팅 내용 가져오기
-                    console.log(userData, gameTypes[i]);
+                    //console.log(userData, gameTypes[i]);
 
                     scoredifference[i] = userData.difference;
                     point[i] = userData.earnedPoint;
                     sum += point[i];
                     if (userData.winner === "KOREA") {
                         school[i] = "고대 승";
-                        console.log("korea", gameTypes[i]);
+                        //console.log("korea", gameTypes[i]);
                     }
                     else if (userData.winner === "YONSEI") {
                         school[i] = "연대 승";
-                        console.log("yonsei", gameTypes[i]);
+                        //console.log("yonsei", gameTypes[i]);
                     }
                     else {
                         school[i] = "무승부";
                         scoredifference[i] = 0;
-                        console.log("draw", gameTypes[i]);
+                        //console.log("draw", gameTypes[i]);
                     }
 
 
@@ -349,7 +349,7 @@ const GameResult = () => {
             },
         })
             .then(response => {
-                console.log("응답 데이터:", response.data);
+                //console.log("응답 데이터:", response.data);
                 navigate('/bet/done', { state: { pointreceived: true , pamount:total} });
             })
             .catch(error => {

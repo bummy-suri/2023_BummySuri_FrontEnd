@@ -223,6 +223,8 @@ const Circle = styled.div`
 const Ranking = () => {
     const [top10Rankings, setTop10Rankings] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [image, setImage] = useState("");
+    const [contract, setContract] = useState("");
 
   useEffect(() => {
         const accessToken = localStorage.getItem("bummySuri");
@@ -236,11 +238,17 @@ const Ranking = () => {
     .then(response => {
         setTop10Rankings(response.data);
         setLoading(false);
+        //setImage();
+        //setContract();
+        
     })
     .catch(error => {
         console.error('top10 API 호출 오류', error);
     });
   }, []);
+
+  const userNFT = `https://static.bummysuri.com/${contract}/${image}`;
+
 
   const formatUserCardAddress = (address) => {
         const frontPart = address.substring(0, 6);
@@ -274,7 +282,7 @@ const Ranking = () => {
                     {index === 1 && <RankImage src={`${process.env.PUBLIC_URL}/assets/Ranking/silver.png`} alt="2등" />}
                     {index === 2 && <RankImage src={`${process.env.PUBLIC_URL}/assets/Ranking/bronze.png`} alt="3등" />}
                     {(index !== 0 && index !== 1 && index !== 2) && <Num>{index + 1}</Num>}
-                    <NFTImage src="" />
+                    <NFTImage src={userNFT} />
                     <div>
                     <Address>{formatUserCardAddress(ranking.userCardAddress)}</Address><br />
                     <Point>{ranking.totalPoint}P</Point>

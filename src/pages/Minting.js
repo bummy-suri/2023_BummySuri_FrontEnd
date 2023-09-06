@@ -161,7 +161,7 @@ const Minting = () => {
   const handleMintButtonClick = () => {
     const university = selectedUniversity === '고려대학교' ? 'KOREA' : 'YONSEI';
 
-    
+
     setIsLoading(true);
 
     axios
@@ -498,7 +498,7 @@ const Circle = styled.div`
           </PopupContainer>
         </Popup>
         )}
-        {isPopupOpen && <EndPopup>민팅 완료!</EndPopup>}
+        {isPopupOpen && <Popup><PopupContainer>민팅 완료!</PopupContainer></Popup>}
 
         <NFTCountDiv>
           <ImageGraphDiv>

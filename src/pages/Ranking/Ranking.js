@@ -45,17 +45,8 @@ const RankingBox = styled.div`
         if (props.isBronze) return '#EBB257';
         return 'no';
     }};
-    @media (max-width: 330px) {
-        width: 300px;
-    }
-    @media (max-width: 310px) {
-        width: 270px;
-    }
-    @media (max-width: 280px) {
-        width: 240px;
-    }
-    @media (max-width: 241px) {
-        width: 220px;
+    @media (max-width: 345px) {
+        width: 90vw;
     }
 `;
 
@@ -65,6 +56,10 @@ const RankImage = styled.img`
     margin-left: 10px;
     @media (max-width: 330px) {
         width: 44px;
+        margin-left: none;
+    }
+    @media (max-width: 300px) {
+        width: 15vw;
         margin-left: none;
     }
 
@@ -79,6 +74,10 @@ const Num = styled.div`
     @media (max-width: 330px) {
         width: 64px;
     }
+    @media (max-width: 300px) {
+        width: 24vw;
+        margin-left: none;
+    }
 `
 
 const NFTImage = styled.img`
@@ -92,6 +91,16 @@ const NFTImage = styled.img`
         width: 55px;
         height: 55px;
         margin-right: 10px;
+    }
+    @media (max-width: 255px) {
+        width: 20vw;
+        height: 20vw;
+        margin-right: 5px;
+    }
+    @media (max-width: 245px) {
+        width: 17vw;
+        height: 17vw;
+        margin-right: none;
     }
 `
 
@@ -113,7 +122,6 @@ const Point = styled.span`
     @media (max-width: 280px) {
         width: 14px;
     }
-    
 `
 
 const Text = styled.div`
@@ -133,19 +141,8 @@ const BoxText = styled.div`
     border-radius: 8px;
     padding: 10px 0;
     width: 315px;
-    @media (max-width: 330px) {
-        width: 300px;
-    }
-    @media (max-width: 310px) {
-        width: 270px;
-    }
-    @media (max-width: 280px) {
-        width: 240px;
-        font-size: 8px;
-    }
-    @media (max-width: 241px) {
-        width: 220px;
-        font-size: 8px;
+    @media (max-width: 345px) {
+        width: 90vw;
     }
 `
 
@@ -277,7 +274,7 @@ const Ranking = () => {
                 {index === 1 && <RankImage src={`${process.env.PUBLIC_URL}/assets/Ranking/silver.png`} alt="2등" />}
                 {index === 2 && <RankImage src={`${process.env.PUBLIC_URL}/assets/Ranking/bronze.png`} alt="3등" />}
                 {(index !== 0 && index !== 1 && index !== 2) && <Num>{index + 1}</Num>}
-                    <NFTImage src="" alt="NFT 이미지"/>
+                    <NFTImage src=""/>
                     <div>
                         <Address>{formatUserCardAddress(ranking.userCardAddress)}</Address><br />
                         <Point>{ranking.totalPoint}P</Point>

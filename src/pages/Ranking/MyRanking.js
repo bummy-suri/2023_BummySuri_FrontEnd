@@ -14,17 +14,8 @@ const RankingBox = styled.div`
     margin-top: 10px;
     margin-bottom: 100px;
     border: none;
-    @media (max-width: 330px) {
-        width: 300px;
-    }
-    @media (max-width: 310px) {
-        width: 270px;
-    }
-    @media (max-width: 280px) {
-        width: 240px;
-    }
-    @media (max-width: 241px) {
-        width: 220px;
+    @media (max-width: 345px) {
+        width: 90vw;
     }
 `;
 
@@ -39,6 +30,10 @@ const Num = styled.div`
     @media (max-width: 330px) {
         width: 64px;
     }
+    @media (max-width: 300px) {
+        width: 24vw;
+        margin-left: none;
+    }
 `
 
 const NFTImage = styled.img`
@@ -52,6 +47,16 @@ const NFTImage = styled.img`
         width: 55px;
         height: 55px;
         margin-right: 10px;
+    }
+    @media (max-width: 255px) {
+        width: 20vw;
+        height: 20vw;
+        margin-right: 5px;
+    }
+    @media (max-width: 245px) {
+        width: 17vw;
+        height: 17vw;
+        margin-right: none;
     }
 `
 
@@ -122,7 +127,7 @@ const MyRanking = () => {
             <div>
                 <RankingBox>
                     <Num>{myRank}</Num>
-                    <NFTImage src="" alt="NFT 이미지"/>
+                    <NFTImage src="" />
                     <div>
                         <Address>{partOfAddress}</Address><br />
                         <Point>{userPoint}P</Point>

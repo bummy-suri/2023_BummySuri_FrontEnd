@@ -17,6 +17,7 @@ const Minting = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [mintingFailure, setMintingFailure] = useState(false);
+  const [mintingError, setMintingError] = useState(false);
   const AccessToken = localStorage.getItem('bummySuri');
 
   const handleMintButtonClick = () => {
@@ -55,6 +56,10 @@ const Minting = () => {
       })
       .catch((error) => {
         console.error('NFT 민팅에서 에러가 발생했습니다.', error);
+        setMintingError(true);
+        setTimeout(() => {
+          setMintingError(false);
+        }, 3000);
         setIsLoading(false);
       });
   };
@@ -212,6 +217,15 @@ const Minting = () => {
         {mintingFailure && (
           <Popup>
             <PopupContainer>이미 민팅이 완료되었습니다!</PopupContainer>
+          </Popup>
+        )}
+
+        {mintingError && (
+          <Popup>
+            <PopupContainerSmallText>
+              민팅 과정에 오류가 발생했습니다. <br />
+              (오류가 계속될 경우 인스타그램으로 문의해주세요!)
+            </PopupContainerSmallText>
           </Popup>
         )}
 
@@ -438,12 +452,37 @@ const Popup = styled.div`
 const PopupContainer = styled.div`
   width: 260px;
   height: 90px;
+  text-align: center;
   display: flex;
   flex-direction: column;
   border-radius: 9px;
   align-items: center;
   justify-content: center;
   color: white;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+  border: 1px solid white;
+  @media (max-width: 350px) {
+    width: 80vw;
+  }
+`;
+
+const PopupContainerSmallText = styled.div`
+  width: 260px;
+  height: 90px;
+  text-align: center;
+  font-size: 12px;
+  display: flex;
+
+  flex-direction: column;
+  border-radius: 9px;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.4) 0%,

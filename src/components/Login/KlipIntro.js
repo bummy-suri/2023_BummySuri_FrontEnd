@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from 'styled-components';
 
 //AboutKlip 누르면 나오는 토글내용
@@ -94,8 +94,31 @@ const Circle = styled.div`
     color: white;
     margin-right: 38px;
 `
+const LoadingSpinner = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid #7000FF;
+  animation: spin 1s linear infinite;
+  
+  @keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+`;
 
 const KlipIntro = () => {
+    const [imagesLoaded, setImagesLoaded] = useState(false);
+    const handleImageLoad = () => {
+        // Check if all required images are loaded
+        // In this example, you might want to check multiple images
+        setImagesLoaded(true);
+    }
     return (
         <Total>
             <What>Klip이란?</What>
@@ -104,7 +127,7 @@ const KlipIntro = () => {
             클립은 클레이튼, 이더리움, 폴리곤 네트워크 자산을 <br/>
             안전하고 편리하게 관리할 수 있는 디지털 자산 지갑입니다.
             </Klipis>
-            <a href="https://klipwallet.com/" target="_blank"><Btn style={{marginTop:"10px", textDecoration:"none"}}>자세히 알아보기</Btn></a>
+            <a href="https://klipwallet.com/" target="_blank"><Btn style={{marginTop:"10px", textDecoration:"none"}} onLoad={handleImageLoad}>자세히 알아보기</Btn></a>
             <FromKaKao>
                 카카오톡에서 클립 바로가기
             </FromKaKao>
@@ -112,7 +135,7 @@ const KlipIntro = () => {
             <ListContainer>
                 <List>
                     <Circle>1</Circle>
-                    <img src={`${process.env.PUBLIC_URL}/assets/Login/KaKaoLogo.png`} style={{width: "20px", height: "20px", marginRight: "9px"}}/>카카오톡 실행
+                    <img src={`${process.env.PUBLIC_URL}/assets/Login/KakaoLogo.png`} style={{width: "20px", height: "20px", marginRight: "9px"}} onLoad={handleImageLoad}/>카카오톡 실행
                 </List>
                 <List>
                     <Circle>2</Circle>
@@ -120,11 +143,11 @@ const KlipIntro = () => {
                 </List>
                 <List>
                     <Circle>3</Circle>
-                    <img src={`${process.env.PUBLIC_URL}/assets/Login/menu.png`} style={{width: "17px", height: "17px", marginRight: "9px"}}/>[전체서비스]를 누르세요
+                    <img src={`${process.env.PUBLIC_URL}/assets/Login/menu.png`} style={{width: "17px", height: "17px", marginRight: "9px"}} onLoad={handleImageLoad}/>[전체서비스]를 누르세요
                 </List>
                 <List>
                     <Circle>4</Circle>
-                    <img src={`${process.env.PUBLIC_URL}/assets/Login/KlipLogo.png`} style={{width: "20px", height: "20px", marginRight: "9px"}}/>클립을 실행해주세요
+                    <img src={`${process.env.PUBLIC_URL}/assets/Login/KlipLogo.png`} style={{width: "20px", height: "20px", marginRight: "9px"}} onLoad={handleImageLoad}/>클립을 실행해주세요
                 </List>
             </ListContainer>
         </Total>

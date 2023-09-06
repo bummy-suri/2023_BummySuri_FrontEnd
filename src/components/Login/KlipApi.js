@@ -33,12 +33,12 @@ const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|Windows Phone/i.test
 
 const getKlipAccessUrl = (method, request_key) => {
   if (method === "QR") {
-      return `https://klipwallet.com/?target=/a2a?request_key=${request_key}`;
-    }
-    return `kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${request_key}`;
-  };
+    return `https://klipwallet.com/?target=/a2a?request_key=${request_key}`;
+  }
+  return `kakaotalk://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${request_key}`;
+};
 
-const KlipBtn = () => {
+const KlipApi = () => {
   const [qrvalue_auth, setQrvalue_auth] = useState(DEFAULT_QR_CODE);
   const walletAddress = useRef('');
 
@@ -52,7 +52,7 @@ const KlipBtn = () => {
         type: "auth",
       })
       .then((response) => {
-        const { request_key } = response.data
+        const { request_key } = response.data;
         console.log(response.data);
         sessionStorage.setItem("requestKey", request_key);
 
@@ -62,7 +62,7 @@ const KlipBtn = () => {
         } else {
           setQrvalue_auth(getKlipAccessUrl("QR", request_key));
         }
-        
+
         let timerId = setInterval(() => {
           axios
             .get(
@@ -76,13 +76,12 @@ const KlipBtn = () => {
               }
             });
         }, 1000);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
-  // 'https://api.dev.bummysuri.com/users' `${API}/users`
   const sendRequestKey = (request_key) => {
     axios
       .post(`${API}/users`, {
@@ -95,13 +94,13 @@ const KlipBtn = () => {
         let timerId = setInterval(() => {
           window.location.href = '/';
           clearInterval(timerId);
-      }, 100);
+        }, 100);
       })
       .catch((error) => {
         if (error.response) {
-          console.error("응답 오류:", error.response.status, error.response.data);
+          console.error(error.response.status, error.response.data);
         } else {
-          console.error("요청 오류:", error.message);
+          console.error(error.message);
         }
       });
   };
@@ -116,4 +115,4 @@ const KlipBtn = () => {
   );
 };
 
-export default KlipBtn;
+export default KlipApi;

@@ -16,6 +16,7 @@ const Minting = () => {
   };
   const [isLoading, setIsLoading] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [mintingFailure, setMintingFailure] = useState(false);
   const AccessToken = localStorage.getItem('bummySuri');
 
   const handleMintButtonClick = () => {
@@ -23,9 +24,11 @@ const Minting = () => {
 
     setIsLoading(true);
 
-    axios.post(
+    axios
+      .post(
         `${API}/mint/${university}`,
         null,
+
         {
           headers: {
             Authorization: `bearer ${AccessToken}`,
@@ -33,27 +36,25 @@ const Minting = () => {
         }
       )
       .then((response) => {
-        //console.log(response.data);
         const newAccessToken = response.data.accessToken;
         localStorage.setItem('bummySuri', newAccessToken);
-        setIsLoading(false);
-        setIsPopupOpen(true);
 
-        setTimeout(() => {
-          setIsPopupOpen(false);
-        }, 1000);
+        setIsLoading(false);
+
+        if (response.status === 200) {
+          setIsPopupOpen(true);
+          setTimeout(() => {
+            setIsPopupOpen(false);
+          }, 2000);
+        } else if (response.status === 202) {
+          setMintingFailure(true);
+          setTimeout(() => {
+            setMintingFailure(false);
+          }, 2000);
+        }
       })
       .catch((error) => {
         console.error('NFT 민팅에서 에러가 발생했습니다.', error);
-        if (error.response) {
-          console.error('Response Data:', error.response.data);
-          console.error('Status Code:', error.response.status);
-        } else if (error.request) {
-          console.error('Request:', error.request);
-        } else {
-          console.error('Error Message:', error.message);
-        }
-
         setIsLoading(false);
       });
   };
@@ -70,6 +71,7 @@ const Minting = () => {
         },
       })
       .then((response) => {
+        console.log(response.data);
         setBummyAmount(response.data.count);
       })
       .catch((error) => {
@@ -83,6 +85,7 @@ const Minting = () => {
         },
       })
       .then((response) => {
+        console.log(response.data);
         setSuriAmount(response.data.count);
       })
       .catch((error) => {
@@ -206,6 +209,11 @@ const Minting = () => {
             <PopupContainer>민팅 완료!</PopupContainer>
           </Popup>
         )}
+        {mintingFailure && (
+          <Popup>
+            <PopupContainer>이미 민팅이 완료되었습니다!</PopupContainer>
+          </Popup>
+        )}
 
         <NFTCountDiv>
           <ImageGraphDiv>
@@ -288,25 +296,31 @@ const UnderKoYonDivText = styled.div`
 //3가지 이미지 부분
 const ThreeImageRandombox = styled.img`
   width: 100vw;
+  height: 100vw;
   margin-bottom: 62px;
   @media (min-width: 430px) {
     width: 400px;
+    height: 400px;
   }
 `;
 
 const ThreeImageBummy = styled.img`
   width: 100vw;
+  height: 100vw;
   margin-bottom: 62px;
   @media (min-width: 430px) {
     width: 400px;
+    height: 400px;
   }
 `;
 
 const ThreeImageSuri = styled.img`
   width: 100vw;
+  height: 100vw;
   margin-bottom: 62px;
   @media (min-width: 430px) {
     width: 400px;
+    height: 400px;
   }
 `;
 

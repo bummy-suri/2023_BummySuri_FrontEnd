@@ -94,7 +94,7 @@ const KlipApi = () => {
         localStorage.setItem("bummySuri", accessToken);
         console.log("accessToken", accessToken);
         let timerId = setInterval(() => {
-          navigate('/');
+          window.location.href = "/";
           clearInterval(timerId);
         }, 100);
       })

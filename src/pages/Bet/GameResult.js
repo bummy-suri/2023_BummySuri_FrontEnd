@@ -275,7 +275,7 @@ const GameResult = () => {
             for (let i = 0; i < 5; i++) {
                 try {
                     const response = await axios.get(`${API}/bettingResult/${gameTypes[i]}`, {
-                        headers: { Authorization: `bearer ${sessionStorage.getItem("bummySuri")}` }
+                        headers: { Authorization: `bearer ${localStorage.getItem("bummySuri")}` }
                     });
                     const userData = response.data; // 사용자 베팅 내용 가져오기
                     //console.log(userData, gameTypes[i]);
@@ -345,7 +345,7 @@ const GameResult = () => {
                 totalEarnedPoint: total,
             },
             headers: {
-                Authorization: `bearer ${sessionStorage.getItem("bummySuri")}`
+                Authorization: `bearer ${localStorage.getItem("bummySuri")}`
             },
         })
             .then(response => {
@@ -364,7 +364,7 @@ const GameResult = () => {
     const deleteme = () => {
         axios.delete(`${API}/users`, {
             headers: {
-                Authorization: `bearer ${sessionStorage.getItem("bummySuri")}`,
+                Authorization: `bearer ${localStorage.getItem("bummySuri")}`,
             },
         })
             .then(response => {

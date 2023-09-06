@@ -278,7 +278,7 @@ const Lending = ()=> {
     }
 
     useEffect(() => {
-      const accessToken = sessionStorage.getItem('bummySuri');
+      const accessToken = localStorage.getItem('bummySuri');
       if (accessToken) {
           setLoggedIn(true);
       }

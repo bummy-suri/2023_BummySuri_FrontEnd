@@ -155,7 +155,7 @@ const BetIntro = () => {
     //                         YonseiScore: yscore[i]
     //                     },
     //                     headers: {
-    //                         Authorization: `bearer ${sessionStorage.getItem("bummySuri")}`
+    //                         Authorization: `bearer ${localStorageStorage.getItem("bummySuri")}`
     //                     },
     //                 })
     //             } catch (error) { 
@@ -169,7 +169,7 @@ const BetIntro = () => {
     //                         YonseiScore: yscore[i]
     //                     },
     //                     headers: {
-    //                         Authorization: `bearer ${sessionStorage.getItem("bummySuri")}`
+    //                         Authorization: `bearer ${localStorageStorage.getItem("bummySuri")}`
     //                     },
     //                 })
     //             }
@@ -187,7 +187,7 @@ const BetIntro = () => {
         async function checkSelected() {
             try { // 만약 참여 이력 있으면 나의 예측 페이지로
                 const response = await axios.get(`${API}/betting/baseball`, {
-                    headers: { Authorization: `bearer ${sessionStorage.getItem("bummySuri")}` }
+                    headers: { Authorization: `bearer ${localStorage.getItem("bummySuri")}` }
                 });
                 const userData = response.data;
                 if (userData.selected === true) {
@@ -219,7 +219,7 @@ const BetIntro = () => {
         async function checkSelected() {
             try { // 참여 이력 있으면 나의 예측 페이지로
                 const response = await axios.get(`${API}/betting/baseball`, {
-                    headers: { Authorization: `bearer ${sessionStorage.getItem("bummySuri")}` }
+                    headers: { Authorization: `bearer ${localStorage.getItem("bummySuri")}` }
                 });
                 const userData = response.data;
                 if (userData.selected === true) {

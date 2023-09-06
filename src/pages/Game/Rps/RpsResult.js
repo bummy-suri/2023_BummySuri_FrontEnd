@@ -98,7 +98,7 @@ const RpsResult = () => {
   const [opponentImage, setOpponentImage] = useState(choicesMap[opponentChoice].image);
   const [opponentText, setOpponentText] = useState(choicesMap[opponentChoice].text);
   const myImage = choicesMap[selectedChoice].image;
-  const accessToken = sessionStorage.getItem("bummySuri");
+  const accessToken = localStorage.getItem("bummySuri");
 
   const gameResult = (rpsResult) => {
     axios

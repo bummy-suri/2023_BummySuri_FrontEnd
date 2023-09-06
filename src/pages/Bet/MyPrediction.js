@@ -273,7 +273,7 @@ const MyPrediction = () => {
             for (let i = 0; i < 5; i++) {
                 try {
                     const response = await axios.get(`${API}/betting/${gameTypes[i]}`, {
-                        headers: { Authorization: `bearer ${sessionStorage.getItem("bummySuri")}` }
+                        headers: { Authorization: `bearer ${localStorage.getItem("bummySuri")}` }
                     });
                     const userData = response.data;
                     point[i] = userData.bettingPoint;

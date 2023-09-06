@@ -225,7 +225,7 @@ const Ranking = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const accessToken = sessionStorage.getItem("bummySuri");
+    const accessToken = localStorage.getItem("bummySuri");
 
     // 탑10
     axios.get(`${API}/ranking/top10`, {

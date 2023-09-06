@@ -54,7 +54,7 @@ const KlipApi = () => {
       .then((response) => {
         const { request_key } = response.data;
         console.log(response.data);
-        sessionStorage.setItem("requestKey", request_key);
+        localStorage.setItem("requestKey", request_key);
 
         // Request
         if (isMobile) {
@@ -89,7 +89,7 @@ const KlipApi = () => {
       })
       .then(response => {
         const { accessToken } = response.data;
-        sessionStorage.setItem("bummySuri", accessToken);
+        localStorage.setItem("bummySuri", accessToken);
         console.log("accessToken", accessToken);
         let timerId = setInterval(() => {
           window.location.href = '/';

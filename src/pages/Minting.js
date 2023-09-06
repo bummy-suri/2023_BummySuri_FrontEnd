@@ -187,7 +187,7 @@ const SelectYu = styled.div`
  const [BummyAmount, setBummyAmount] = useState(0);
  const [SuriAmount, setSuriAmount] = useState(0);
 
- const AccessToken = sessionStorage.getItem('bummySuri');
+ const AccessToken = localStorage.getItem('bummySuri');
  const teamType = ['KOREA', 'YONSEI'] 
 
  useEffect(() => {

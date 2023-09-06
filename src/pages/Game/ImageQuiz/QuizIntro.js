@@ -119,7 +119,7 @@ const PopupContainer = styled.div`
 const QuizIntro = () => {
   const [popupOpen, setPopupOpen] = useState(false);
   const [quizTimes, setquizTimes] = useState(true);
-  const accessToken = sessionStorage.getItem("bummySuri");
+  const accessToken = localStorage.getItem("bummySuri");
 
   useEffect(() => {
     axios.get(`${API}/minigame`, {

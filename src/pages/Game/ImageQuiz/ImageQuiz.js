@@ -191,7 +191,7 @@ const ImageQuiz = () => {
   const [isAnswered, setIsAnswered] = useState(false);
   const [remainingTime, setRemainingTime] = useState(30);
 
-  const accessToken = sessionStorage.getItem("bummySuri");
+  const accessToken = localStorage.getItem("bummySuri");
 
   const gameResult = (rpsResult) => {
     axios
@@ -207,7 +207,7 @@ const ImageQuiz = () => {
         console.log(response.data);
         const { quiz } = response.data;
         console.log(quiz);
-        sessionStorage.setItem("quiz", quiz);
+        localStorage.setItem("quiz", quiz);
       })
       .catch((error) => {
         console.error("API Error:", error);

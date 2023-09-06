@@ -159,7 +159,7 @@ const Rps = () => {
   const [times, setTimes] = useState();
   const navigate = useNavigate();
 
-  const accessToken = sessionStorage.getItem("bummySuri");
+  const accessToken = localStorage.getItem("bummySuri");
 
   useEffect(() => {
     axios.get(`${API}/minigame`, {

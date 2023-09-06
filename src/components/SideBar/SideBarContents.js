@@ -116,7 +116,7 @@ const SideBarContents = ()=> {
       })
         .then(response => {
             const userData = response.data;
-            console.log(response.data);
+            //console.log(response.data);
             setUserInfo({
                 cardAddress: userData.cardAddress,
                 totalPoint: userData.totalPoint,

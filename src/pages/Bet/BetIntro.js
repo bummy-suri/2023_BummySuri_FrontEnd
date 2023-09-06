@@ -137,24 +137,50 @@ const FinishMainText = styled.div`
 
 
 const BetIntro = () => {
+    // 경기 결과 넣기
+    // const gameTypes = ["baseball", "basketball", "hockey", "rugby", "soccer"];
+    // const kscore = [5, 2, 7, 10, 2];
+    // const yscore = [3, 9, 1, 6, 7];
+
     // useEffect(() => {
-    //     axios.get(`${API}/users`, {
-    //       headers:{
-    //         Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
+    //     async function fetchGameInfo() {
+    //         for (let i = 0; i < 5; i++) {
+    //             try {
+    //                 await axios({
+    //                     url: `${API}/game/${gameTypes[i]}`,
+    //                     method: 'post',
+    //                     data: {
+    //                         playing: "경기 종료",
+    //                         KoreaScore: kscore[i],
+    //                         YonseiScore: yscore[i]
+    //                     },
+    //                     headers: {
+    //                         Authorization: `bearer ${sessionStorage.getItem("bummySuri")}`
+    //                     },
+    //                 })
+    //             } catch (error) { 
+    //                 console.log(error)
+    //                 await axios({
+    //                     url: `${API}/game/${gameTypes[i]}`,
+    //                     method: 'put',
+    //                     data: {
+    //                         playing: "경기 종료",
+    //                         KoreaScore: kscore[i],
+    //                         YonseiScore: yscore[i]
+    //                     },
+    //                     headers: {
+    //                         Authorization: `bearer ${sessionStorage.getItem("bummySuri")}`
+    //                     },
+    //                 })
+    //             }
     //         }
-    //       })
-    //         .then(response => {
-    //             const userData = response.data;
-    //             console.log(userData);
-    //         })
-    //         .catch(error => {
-    //             console.error(error);
-    //         });
+    //     }
+    //     fetchGameInfo();
     // }, []);
 
     const currentDate = new Date();
-    const cutoffDate = new Date("2023-09-08T10:00:00"); // 베팅 종료 시점
-    // const cutoffDate = new Date("2023-09-06T01:22:00"); //test
+    // const cutoffDate = new Date("2023-09-08T10:00:00"); // 베팅 종료 시점
+    const cutoffDate = new Date("2023-09-05T01:22:00"); //test
     const [redirectToBet, setRedirectToBet] = useState(false);
 
     const handleBetButtonClick = () => {
@@ -173,7 +199,7 @@ const BetIntro = () => {
                 if (time >= cutoffDate) {
                     setRedirectToBet(true);
                 }
-                else{
+                else {
                     navigate('/bet');
                 }
             }
@@ -183,8 +209,8 @@ const BetIntro = () => {
 
     const navigate = useNavigate();
 
-    const endDate = new Date("2023-09-09T20:00:00"); // 경기 종료 시점
-    // const endDate = new Date("2023-09-06T01:24:00"); // test
+    const endDate = new Date("2023-09-09T20:00:00"); // 경기 종료 시점 (베팅 결과 페이지로 로드해야)
+    // const endDate = new Date("2023-09-05T01:24:00"); // test
 
     // 종료 문구 뜬 경우의 페이지에서 나의 예측으로 가는 버튼 클릭
     const goToMyPrediction = () => {
@@ -197,12 +223,11 @@ const BetIntro = () => {
                 });
                 const userData = response.data;
                 if (userData.selected === true) {
-                    if(currentDate >= endDate)
-                    {
-                        
-                        navigate('/bet/result', { state: { permitted : true } });
+                    if (currentDate >= endDate) {
+
+                        navigate('/bet/result', { state: { permitted: true } });
                     }
-                    else{
+                    else {
                         navigate('/bet/my-prediction');
                     }
                 }
@@ -214,13 +239,12 @@ const BetIntro = () => {
     }
 
 
-    
+
     useEffect(() => {
-        if(redirectToBet)
-        {
+        if (redirectToBet) {
             navigate('/bet/intro');
         }
-    },[redirectToBet]);
+    }, [redirectToBet]);
 
 
     return (
@@ -257,7 +281,7 @@ const BetIntro = () => {
                         <FinishMainText>
                             나의 예측은 성공할 것인가 ˚✧₊( ˘ω˘ )⁎⁺˳✧༚
                         </FinishMainText>
-                        <Btn onClick={goToMyPrediction}>{(currentDate >= endDate) ? "베팅 결과 보러가기": "나의 예측 보러가기"}</Btn></>
+                        <Btn onClick={goToMyPrediction}>{(currentDate >= endDate) ? "베팅 결과 보러가기" : "나의 예측 보러가기"}</Btn></>
                 )}
             </Background>
         </div>
@@ -271,35 +295,3 @@ export default BetIntro;
 
 
 
-
-
-
-
-
-    // 테스트 
-    // const gameTypes = ["baseball", "basketball", "hockey", "rugby", "soccer"];
-
-    // useEffect(() => {
-    //     async function fetchGameInfo() {
-    //         for (let i = 0; i < 5; i++) {
-    //             try {
-    //                 await axios({
-    //                     url: `${API}/game/${gameTypes[i]}`,
-    //                     method: 'put',
-    //                     data: {
-    //                         playing: "경기 종료",
-    //                         KoreaScore: 10,
-    //                         YonseiScore: 11
-    //                     },
-    //                     headers: {
-    //                         Authorization: `bearer ${sessionStorage.getItem("accessToken")}`
-    //                     },
-    //                 })
-    //             } catch (error) {
-    //                 console.error(error);
-    //             }
-    //         }
-    //     }
-    //     fetchGameInfo();
-    // }, []);
-    //

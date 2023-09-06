@@ -166,20 +166,9 @@ const Circle = styled.div`
 
 
 const Bet = () => {
-    {/*
-        해야하는 부분들
-        1. 사용자가 입력한 데이터들을 제출하기 클릭 시 백에 전달(m 베팅저장)
-        2. 페이지 접속 시 이미 베팅 이벤트 참여했는지 여부 확인(m 베팅조회) -> 참여 : 나의 예측 페이지(m 베팅조회) or (경기종료시 경기결과페이지) / 미참여 : 예측하는페이지 or finish
-        
-        3. 무승부 선택시 점수차 선택 불가하게 만들기 (o)
-
-        4. 참여 완료 시 나의 예측 페이지 (수정하기 버튼 필요 (m 베팅 수정))
-        5. 경기결과 페이지
-
-        6. 지불포인트가 소지포인트 이내인지 확인 필요 (m 회원조회)
-    */}
     const location = useLocation();
     const isEdit = location.state?.isEdit || false;
+    
     const navigate = useNavigate();
 
     const [day, setDay] = useState("9월 8일");
@@ -327,9 +316,6 @@ const Bet = () => {
         }
     }
 
-    // useEffect(() => {
-    //     console.log(point, budget, "pointcheck");
-    // }, [point])
 
 
 

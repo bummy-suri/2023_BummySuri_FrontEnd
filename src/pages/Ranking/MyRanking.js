@@ -87,7 +87,7 @@ const MyRanking = () => {
     const [userPoint, setUserPoint] = useState("");
     const [myRank, setmyRank] = useState("");
 
-    const accessToken = sessionStorage.getItem("bummySuri");
+    const accessToken = localStorage.getItem("bummySuri");
 
   useEffect(() => {
     axios.get(`${API}/users`, {

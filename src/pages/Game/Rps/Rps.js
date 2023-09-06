@@ -4,6 +4,8 @@ import axios from "axios";
 import { useNavigate } from 'react-router-dom'; 
 import SideBar from "../../../components/SideBar/SideBar";
 import SideBarContents from "../../../components/SideBar/SideBarContents";
+import { API } from "../../../config";
+
 
 const Background = styled.div`
     max-width: 100vw;
@@ -147,14 +149,40 @@ const PopupContainer = styled.div`
 const Rps = () => {
     const [popupOpen, setPopupOpen] = useState(false);
     const [selectedChoice, setSelectedChoice] = useState("");
+    const [times, setTimes] = useState();
     const navigate = useNavigate();
+
+    const accessToken = sessionStorage.getItem("bummySuri");
+
+    useEffect(() => {
+        axios.get(`${API}/minigame`, {
+          headers:{
+            Authorization: `bearer ${accessToken}`
+            }
+          })
+            .then(response => {
+                const {times} = response.data;
+                setTimes(times);
+                console.log(times);
+            })
+            .catch(error => {
+              if (error.response) {
+                  console.error("Response Data:", error.response.data);
+                  console.error("Status Code:", error.response.status);
+              } else if (error.request) {
+                  console.error("Request:", error.request);
+              } else {
+                  console.error("Error Message:", error.message);
+              }
+            });
+    }, []); 
 
     const handleChoiceClick = (choice) => {
         setSelectedChoice(choice);
     };
     const handleConfirmClick = () => {
         if (selectedChoice) {
-            if ((3-sessionStorage.getItem("RpsTimes"))< 0) {
+            if (times === 3) {
                 setPopupOpen(true);
             } else {
                 navigate('/rock-paper-scissors/result', { state: { selectedChoice } });

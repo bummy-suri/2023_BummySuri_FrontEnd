@@ -114,7 +114,6 @@ const Rps = () => {
                 console.log(response.data);
                 const {times} = response.data;
                 setRemainingAttempts(times);
-                sessionStorage.setItem("RpsTimes", times);
             })
             .catch((error) => {
                 if (error.response) {

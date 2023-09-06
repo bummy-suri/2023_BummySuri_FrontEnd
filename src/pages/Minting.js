@@ -164,8 +164,7 @@ const Minting = () => {
     setIsLoading(true);
 
     axios
-      .post(
-         `${API}/mint`,
+      .post(`${API}/mint`,
          {
             univ: university,
          },

@@ -155,9 +155,9 @@ const Minting = () => {
 
         {selectedUniversity ? (
           selectedUniversity === '고려대학교' ? (
-            <ThreeImageBummy src={`${process.env.PUBLIC_URL}/assets/Minting/bummyquestionmark.png`} alt="버미 물음표 이미지" />
+            <ThreeImageBummy src={`${process.env.PUBLIC_URL}/assets/Minting/bummyquestionmark.PNG`} alt="버미 물음표 이미지" />
           ) : (
-            <ThreeImageSuri src={`${process.env.PUBLIC_URL}/assets/Minting/suriquestionmark.png`} alt="수리 물음표 이미지" />
+            <ThreeImageSuri src={`${process.env.PUBLIC_URL}/assets/Minting/suriquestionmark.PNG`} alt="수리 물음표 이미지" />
           )
         ) : (
           <ThreeImageRandombox

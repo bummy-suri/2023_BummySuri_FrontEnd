@@ -121,7 +121,7 @@ const MyRanking = () => {
     }, []); 
 
     const partOfAddress = walletAddress ? `${walletAddress.substring(0, 6)}...${walletAddress.substring(walletAddress.length - 6)}` : "";
-
+    
     return (
         <> 
             <div>

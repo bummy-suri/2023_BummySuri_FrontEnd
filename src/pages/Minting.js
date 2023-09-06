@@ -5,6 +5,8 @@ import axios from 'axios';
 import SideBar from '../components/SideBar/SideBar';
 import SideBarContents from '../components/SideBar/SideBarContents';
 import { API } from "../config";
+import bummy from "../assets/minting/bummyquestionmark.png";
+import suri from "../assets/minting/suriquestionmark.png";
 
 const Minting = () => {
  const Container = styled.div`
@@ -54,9 +56,8 @@ const Minting = () => {
  const ThreeImage = styled.img`
     width: 100vw;
     margin-bottom: 62px;
-    @media (min-width: 400px) {
+    @media (min-width: 430px) {
       width: 400px;
-      height: 400px;
   }
  `;
 
@@ -319,9 +320,9 @@ const SelectYu = styled.div`
 
     {selectedUniversity ? (
     selectedUniversity === '고려대학교' ? (
-    <ThreeImage src={`${process.env.PUBLIC_URL}/assets/Minting/bummyquestionmark.png`} alt="버미 물음표 이미지" />
+    <ThreeImage src={bummy} alt="버미 물음표 이미지" />
     ) : (
-    <ThreeImage src={`${process.env.PUBLIC_URL}/assets/Minting/suriquestionmark.png`} alt="수리 물음표 이미지" />
+    <ThreeImage src={suri} alt="수리 물음표 이미지" />
     )
     ) : (
     <ThreeImage src={`${process.env.PUBLIC_URL}/assets/Minting/randombox.png`} alt="랜덤박스 이미지" />

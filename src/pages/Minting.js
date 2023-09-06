@@ -33,7 +33,7 @@ const Minting = () => {
         }
       )
       .then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
         const newAccessToken = response.data.accessToken;
         localStorage.setItem('bummySuri', newAccessToken);
         setIsLoading(false);

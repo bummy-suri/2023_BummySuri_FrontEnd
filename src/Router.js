@@ -18,7 +18,6 @@ import BenefitPopup from "./components/Lending/BenefitPopup";
 import ScrollToTop from "./components/ScrollToTop";
 import Ranking from "./pages/Ranking/Ranking";
 import BetDone from "./pages/Bet/BetDone";
-import MyNFT from "./pages/MyNFT";
 
 function DefaultRouter () {
     return (
@@ -42,7 +41,6 @@ function DefaultRouter () {
           <Route path="/imageQuiz/lose" element={<QuizLose />} />
           <Route path="/hmpBenefit" element={<BenefitPopup/>}/>
           <Route path="/Ranking" element={<Ranking/>}/>
-          <Route path="/MyNFT" element={<MyNFT/>}/>
           </Routes>
     </Router>
     );

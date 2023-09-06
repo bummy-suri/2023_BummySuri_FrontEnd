@@ -45,12 +45,12 @@ const Minting = () => {
           setIsPopupOpen(true);
           setTimeout(() => {
             setIsPopupOpen(false);
-          }, 1000);
+          }, 2000);
         } else if (response.status === 202) {
           setMintingFailure(true);
           setTimeout(() => {
             setMintingFailure(false);
-          }, 1000);
+          }, 2000);
         }
       })
       .catch((error) => {

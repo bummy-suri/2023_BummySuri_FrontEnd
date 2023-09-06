@@ -6,7 +6,9 @@ import SideBar from '../components/SideBar/SideBar';
 import SideBarContents from '../components/SideBar/SideBarContents';
 import { API } from '../config';
 
+
 const Minting = () => {
+  // 대학 선택 후 민팅
   const [selectedUniversity, setSelectedUniversity] = useState(null);
 
   const handleUniversityClick = (university) => {
@@ -61,7 +63,7 @@ const Minting = () => {
         setIsLoading(false);
       });
   };
-
+  // 남은 NFT 수량
   const [BummyAmount, setBummyAmount] = useState(0);
   const [SuriAmount, setSuriAmount] = useState(0);
   const teamType = ['KOREA', 'YONSEI'];
@@ -80,7 +82,6 @@ const Minting = () => {
       .catch((error) => {
         console.error(error);
       });
-
     axios
       .get(`${API}/mint/${teamType[1]}`, {
         headers: {
@@ -94,6 +95,16 @@ const Minting = () => {
       .catch((error) => {
         console.error(error);
       });
+
+    if (BummyAmount === 0) {
+      setBummyMinting(true);
+    }
+    if (SuriAmount === 0) {
+      setSuriMinting(true);
+    }
+    if (SuriAmount === 0 && BummyAmount === 0) {
+      setBummySuriMinting(true);
+    }
   }, []);
 
   const BummyGraphHeight = (BummyAmount / 5000) * 177;
@@ -132,6 +143,12 @@ const Minting = () => {
     font-size: 12px;
     font-weight: 500;
   `;
+  // 민팅 종료시
+  const [bummyMinting, setBummyMinting] = useState(false);
+  const [suriMinting, setSuriMinting] = useState(false);
+  const [bummySuriMinting, setBummySuriMinting] = useState(false);
+
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -140,18 +157,22 @@ const Minting = () => {
         <SideBar>
           <SideBarContents />
         </SideBar>
-
-        <KoYonDiv>
-          나만의 <KoYonDivRed>버미</KoYonDivRed>와
-          <KoYonDivBlue>수리</KoYonDivBlue>
-          를 <br />
-          만나는 이 시간!
-        </KoYonDiv>
-        <UnderKoYonDivText>
-          학교를 선택하고 친구를 만나봐요!
-          <br />
-          설렘 가득한 순간이 당신을 기다립니다
-        </UnderKoYonDivText>
+        {!bummySuriMinting && (
+          <KoYonDiv>
+            나만의 <KoYonDivRed>버미</KoYonDivRed>와
+            <KoYonDivBlue>수리</KoYonDivBlue>
+            를 <br />
+            만나는 이 시간!
+          </KoYonDiv>
+        )}
+        {!bummySuriMinting && (
+          <UnderKoYonDivText>
+            학교를 선택하고 친구를 만나봐요!
+            <br />
+            설렘 가득한 순간이 당신을 기다립니다
+          </UnderKoYonDivText>
+        )}
+        {bummySuriMinting && <EndMessage>민팅이 종료되었습니다.</EndMessage>}
 
         {selectedUniversity ? (
           selectedUniversity === '고려대학교' ? (
@@ -171,32 +192,51 @@ const Minting = () => {
             학교를 선택해주세요.
           </SelectText>
           <SelectUniv>
-            <SelectKu
-              onClick={() => handleUniversityClick('고려대학교')}
-              style={{
-                backgroundColor:
-                  selectedUniversity === '고려대학교'
-                    ? 'rgba(255, 255, 255, 0.90)'
-                    : 'rgba(255, 255, 255, 0.4)',
-              }}
-            >
-              고려대학교
-            </SelectKu>
-            <SelectYu
-              onClick={() => handleUniversityClick('연세대학교')}
-              style={{
-                backgroundColor:
-                  selectedUniversity === '연세대학교'
-                    ? 'rgba(255, 255, 255, 0.90)'
-                    : 'rgba(255, 255, 255, 0.4)',
-              }}
-            >
-              연세대학교
-            </SelectYu>
+            {!bummyMinting && (
+              <SelectKu
+                onClick={() => handleUniversityClick('고려대학교')}
+                style={{
+                  backgroundColor:
+                    selectedUniversity === '고려대학교'
+                      ? 'rgba(255, 255, 255, 0.90)'
+                      : 'rgba(255, 255, 255, 0.4)',
+                }}
+              >
+                고려대학교
+              </SelectKu>
+            )}
+            {bummyMinting && (
+              <SelectKu style={{ backgroundColor: '#4d4b4b' }}>
+                고려대학교
+              </SelectKu>
+            )}
+            {!suriMinting && (
+              <SelectYu
+                onClick={() => handleUniversityClick('연세대학교')}
+                style={{
+                  backgroundColor:
+                    selectedUniversity === '연세대학교'
+                      ? 'rgba(255, 255, 255, 0.90)'
+                      : 'rgba(255, 255, 255, 0.4)',
+                }}
+              >
+                연세대학교
+              </SelectYu>
+            )}
+            {suriMinting && (
+              <SelectYu style={{ backgroundColor: '#4d4b4b' }}>
+                연세대학교
+              </SelectYu>
+            )}
           </SelectUniv>
         </SelectBox>
 
-        <MintButton onClick={handleMintButtonClick}>NFT 민팅하기</MintButton>
+        {!bummySuriMinting && (
+          <MintButton onClick={handleMintButtonClick}>NFT 민팅하기</MintButton>
+        )}
+
+        {bummySuriMinting && <DarkMintButton>NFT 민팅하기</DarkMintButton>}
+
         {isLoading && (
           <Popup>
             <PopupContainer>
@@ -215,15 +255,6 @@ const Minting = () => {
         {mintingFailure && (
           <Popup>
             <PopupContainer>이미 민팅이 완료되었습니다!</PopupContainer>
-          </Popup>
-        )}
-
-        {mintingError && (
-          <Popup>
-            <PopupContainerSmallText>
-              민팅 과정에 오류가 발생했습니다. <br />
-              (오류가 계속될 경우 인스타그램으로 문의해주세요!)
-            </PopupContainerSmallText>
           </Popup>
         )}
 
@@ -304,6 +335,26 @@ const UnderKoYonDivText = styled.div`
   font-weight: 500;
   margin-bottom: 34px;
 `;
+
+const EndMessage = styled.div`
+    width: 325px;
+    height: 67px;
+    background: linear-gradient(
+      97deg,
+      rgba(255, 255, 255, 0.4) 0%,
+      rgba(255, 255, 255, 0.15) 100%
+    );
+    border-radius: 9px;
+    border: 0.5px white solid;
+    text-align:center;
+    color;white;
+    font-size:28px;
+    font-weight:500;
+    line-height:67px;
+    margin-top:67px;
+    margin-bottom:67px;
+
+  `;
 
 //3가지 이미지 부분
 const ThreeImageRandombox = styled.img`
@@ -416,12 +467,30 @@ const MintButton = styled.button`
   width: 334px;
   height: 50px;
   background-color: #7000ff;
-  boxshadow: 0px 0px 10px 0px #0b0018;
+  box-shadow: 0px 0px 10px 0px #0b0018;
   border-radius: 8px;
   border: none;
   text-align: center;
   color: white;
   font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 50px;
+  @media (max-width: 350px) {
+    width: 90vw;
+  }
+`;
+
+const DarkMintButton = styled.div`
+  width: 334px;
+  height: 50px;
+  background-color: #431a75;
+  box-shadow: 0px 0px 10px 0px #0b0018;
+  border-radius: 8px;
+  border: none;
+  text-align: center;
+  color: #828080;
+  font-size: 16px;
+  line-height: 50px;
   font-weight: 800;
   margin-bottom: 50px;
   @media (max-width: 350px) {

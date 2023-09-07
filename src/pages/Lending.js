@@ -335,7 +335,7 @@ const Lending = ()=> {
         {popupOpen && (
           <Popup>
             <PopupContainer>
-              9월 7일 12시에 만나요!
+              9월 7일 오후 7시에 만나요!
               <button 
               onClick={() => setPopupOpen(false)}
               style={{backgroundColor:"#7000FF", color:"white", width:"65px", height:"23px", border:"none", borderRadius:"4px", marginTop: "10px"}}>

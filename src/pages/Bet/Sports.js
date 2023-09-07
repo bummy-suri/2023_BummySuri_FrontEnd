@@ -121,8 +121,6 @@ const PBTN = styled.button`
     }
 `;
 
-
-
 const Sports = ({gameType, handleData, currentschool, currentscore, currentbetpoint}) => {
     const [school, setSchool] = useState(currentschool);
     const [game, setGame] = useState("");

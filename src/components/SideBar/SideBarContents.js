@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import { API } from "../../config";
 
-
 //사이드바에 들어가는 내용
 const Total = styled.div`
     color: #FFFFFF;
@@ -60,8 +59,6 @@ const Down = styled.img`
     margin-top: 5px;
 `
 
-
-
 const Popup = styled.div`
   position: fixed;
   top: 50%;
@@ -102,49 +99,40 @@ const ClipIntegration = styled.div`
   font-size: 12px;
 `;
 
-
-
 const SideBarContents = ()=> {
     const [miniGameVisible, setMiniGameVisible] = useState(false);
     const [walletAddress, setWalletAddress] = useState("");
     const [userPoint, setUserPoint] = useState("");
+    const [isMinted, setIsMinted] = useState(false);
     const [image, setImage] = useState("bummy_badge.png");
     const [contract, setContract] = useState("asset");
+    
 
-    const [userInfo, setUserInfo] = useState({
-      cardAddress: "",
-      totalPoint: 0,
-      isMinted: false,
-  });
 
-  useEffect(() => {
-    axios.get(`${API}/users`, {
-      headers:{
-        Authorization: `bearer ${localStorage.getItem("bummySuri")}`
-        }
-      })
-        .then(response => {
-            const userData = response.data;
-            console.log(response.data);
-            setUserInfo({
-                cardAddress: userData.cardAddress,
-                totalPoint: userData.totalPoint,
-                isMinted: userData.isMinted,
-        });
-        setWalletAddress(userData.cardAddress);
-        setUserPoint(userData.totalPoint);
+    useEffect(() => {
+      axios.get(`${API}/users`, {
+        headers:{
+          Authorization: `bearer ${localStorage.getItem("bummySuri")}`
+          }
         })
-        .catch(error => {
-            console.error(error);
-        });
+          .then(response => {
+              console.log(response.data);
+              setWalletAddress(response.data.cardAddress);
+              setUserPoint(response.data.totalPoint);
+              setIsMinted(response.data.isMinted);
+              //setContract(response.data.contract);
+              //setImage(response.data.image);
+          })
+          .catch(error => {
+              console.error(error);
+          });
 }, []); 
 
     const toggleMiniGame = () => {
         setMiniGameVisible(!miniGameVisible);
     };
 
-
-    const myNFT = userInfo.isMinted
+    const myNFT = isMinted
     ? `https://static.bummysuri.com/${contract}/${image}`
     : `${process.env.PUBLIC_URL}/assets/SideBar/NoNFT.png`;
 

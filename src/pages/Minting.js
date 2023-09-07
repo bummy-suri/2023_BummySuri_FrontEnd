@@ -6,7 +6,6 @@ import SideBar from '../components/SideBar/SideBar';
 import SideBarContents from '../components/SideBar/SideBarContents';
 import { API } from '../config';
 
-
 const Minting = () => {
   // 대학 선택 후 민팅
   const [selectedUniversity, setSelectedUniversity] = useState(null);
@@ -42,7 +41,7 @@ const Minting = () => {
         setIsLoading(false);
 
         if (response.status === 200) {
-            localStorage.setItem('bummySuri', newAccessToken);
+          localStorage.setItem('bummySuri', newAccessToken);
 
           setIsPopupOpen(true);
           setTimeout(() => {
@@ -78,7 +77,7 @@ const Minting = () => {
       })
       .then((response) => {
         console.log(response.data);
-        const bummyNFTAmount = 5000-response.data.count;
+        const bummyNFTAmount = 5000 - response.data.count;
         setBummyAmount(bummyNFTAmount);
         if (bummyNFTAmount === 0) {
           setBummyMinting(true);
@@ -95,7 +94,7 @@ const Minting = () => {
       })
       .then((response) => {
         console.log(response.data);
-        const suriNFTAmount = 5000-response.data.count;
+        const suriNFTAmount = 5000 - response.data.count;
         setSuriAmount(suriNFTAmount);
         if (suriNFTAmount === 0) {
           setSuriMinting(true);
@@ -105,11 +104,9 @@ const Minting = () => {
         console.error(error);
       });
 
-
-
-      if (SuriAmount === 0 && BummyAmount === 0) {
-        setBummySuriMinting(true);
-      }
+    if (SuriAmount === 0 && BummyAmount === 0) {
+      setBummySuriMinting(true);
+    }
   }, [SuriAmount, BummyAmount]);
 
   const BummyGraphHeight = (BummyAmount / 5000) * 177;
@@ -178,12 +175,17 @@ const Minting = () => {
           </UnderKoYonDivText>
         )}
         {bummySuriMinting && <EndMessage>민팅이 종료되었습니다.</EndMessage>}
-
         {selectedUniversity ? (
           selectedUniversity === '고려대학교' ? (
-            <ThreeImageBummy src={`${process.env.PUBLIC_URL}/assets/Minting/bummyquestionmark.PNG`} alt="버미 물음표 이미지" />
+            <ThreeImageBummy
+              src={`${process.env.PUBLIC_URL}/assets/Minting/bummyquestionmark.PNG`}
+              alt="버미 물음표 이미지"
+            />
           ) : (
-            <ThreeImageSuri src={`${process.env.PUBLIC_URL}/assets/Minting/suriquestionmark.PNG`} alt="수리 물음표 이미지" />
+            <ThreeImageSuri
+              src={`${process.env.PUBLIC_URL}/assets/Minting/suriquestionmark.PNG`}
+              alt="수리 물음표 이미지"
+            />
           )
         ) : (
           <ThreeImageRandombox
@@ -191,13 +193,13 @@ const Minting = () => {
             alt="랜덤박스 이미지"
           />
         )}
-
         <SelectBox>
           <SelectText style={{ textAlign: 'left !important' }}>
             학교를 선택해주세요.
           </SelectText>
           <SelectUniv>
-            {!bummyMinting && (
+            {/* 오류 수정하는 동안 이 부분 true/false 적용 반대로 해둠 */}
+            {bummyMinting && (
               <SelectKu
                 onClick={() => handleUniversityClick('고려대학교')}
                 style={{
@@ -210,12 +212,12 @@ const Minting = () => {
                 고려대학교
               </SelectKu>
             )}
-            {bummyMinting && (
+            {!bummyMinting && (
               <SelectKu style={{ backgroundColor: '#4d4b4b' }}>
                 고려대학교
               </SelectKu>
             )}
-            {!suriMinting && (
+            {suriMinting && (
               <SelectYu
                 onClick={() => handleUniversityClick('연세대학교')}
                 style={{
@@ -228,19 +230,17 @@ const Minting = () => {
                 연세대학교
               </SelectYu>
             )}
-            {suriMinting && (
+            {!suriMinting && (
               <SelectYu style={{ backgroundColor: '#4d4b4b' }}>
                 연세대학교
               </SelectYu>
             )}
           </SelectUniv>
         </SelectBox>
-
-        {!bummySuriMinting && (
+        {bummySuriMinting && (
           <MintButton onClick={handleMintButtonClick}>NFT 민팅하기</MintButton>
         )}
-
-        {bummySuriMinting && <DarkMintButton>NFT 민팅하기</DarkMintButton>}
+        {!bummySuriMinting && <DarkMintButton>NFT 민팅하기</DarkMintButton>}
 
         {isLoading && (
           <Popup>
@@ -262,6 +262,14 @@ const Minting = () => {
             <PopupContainer>이미 민팅이 완료되었습니다!</PopupContainer>
           </Popup>
         )}
+        {/* 오류 조치 중 팝업 */}
+        <Popup>
+          <PopupContainer>
+            오류가 발생해 조치 중입니다.
+            <br />
+            서비스 이용에 불편을 드려 죄송합니다.
+          </PopupContainer>
+        </Popup>
 
         <NFTCountDiv>
           <ImageGraphDiv>

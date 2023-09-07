@@ -305,7 +305,7 @@ const Bet = () => {
                     setsportpoints((prev) => {
                         prev[i] = data[3];
                         setPoint(sportpoints[0] + sportpoints[1] + sportpoints[2] + sportpoints[3] + sportpoints[4]);
-                        
+
                         return prev;
                     });
                 }
@@ -318,6 +318,7 @@ const Bet = () => {
 
 
     const [popupOpen, setPopupOpen] = useState(false); // 소지 포인트 부족 팝업
+    const [popupOpen2, setPopupOpen2] = useState(false);
 
     // 제출하기
     const Submit = () => {
@@ -340,14 +341,14 @@ const Bet = () => {
                             data: value,
                             headers: {
                                 Authorization: `bearer ${localStorage.getItem("bummySuri")}`
-                                
+
                             },
                         })
 
                     } catch (error) {
-                        console.log(error);
+                        console.log(error, gameTypes[i]);
                         setLoading2(false);
-                        setPopupOpen(true);
+                        setPopupOpen2(true);
                         return;
 
                     }
@@ -379,6 +380,7 @@ const Bet = () => {
                 <Background>
                     <MainLogo>정기전 경기 예측</MainLogo>
                     <SideBar><SideBarContents /></SideBar>
+
 
                     <DaySelectDiv>
                         <p>날짜를 선택해주세요.</p>
@@ -418,6 +420,19 @@ const Bet = () => {
                             </PopupContainer>
                         </Popup>
                     )}
+
+                    {popupOpen2 && (
+                        <Popup>
+                            <PopupContainer>
+                                다시 시도해 주세요
+                                <button
+                                    onClick={() => setPopupOpen2(false)}
+                                    style={{ backgroundColor: "#7000FF", color: "white", width: "65px", height: "23px", border: "none", borderRadius: "4px", marginTop: "10px" }}>
+                                    닫기</button>
+                            </PopupContainer>
+                        </Popup>
+                    )}
+
 
                 </Background>}
 

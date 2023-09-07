@@ -222,7 +222,7 @@ const Circle = styled.div`
 
 const Ranking = () => {
     const [top10Rankings, setTop10Rankings] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [image, setImage] = useState("");
     const [contract, setContract] = useState("");
 

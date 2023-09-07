@@ -358,7 +358,7 @@ const Lending = ()=> {
             모두 다른 모습으로 제작되어 더욱 특별한,<br />
             <ColoredText>나만의 버미와 수리</ColoredText>를 만나보세요!<br />
           </SubContent>
-          <BTN onClick={() => setPopupOpen(true)} style={{ textDecoration: 'none', color: 'white' }}>버미와 수리 만나러 가기!<br/><span style={{fontSize:"12px", fontWeight:"100"}} >크롬으로 접속하셔야 원활합니다</span></BTN>
+          <BTN><Link to="/Minting" style={{ textDecoration: 'none', color: 'white' }}>버미와 수리 만나러 가기!<br/><span style={{fontSize:"12px", fontWeight:"100"}} >크롬으로 접속하셔야 원활합니다</span></Link></BTN>
         </SubContainer>
 
         <SubContainer>

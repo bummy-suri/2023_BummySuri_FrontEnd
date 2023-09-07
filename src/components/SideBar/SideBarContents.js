@@ -106,6 +106,7 @@ const SideBarContents = ()=> {
     const [walletAddress, setWalletAddress] = useState();
     const [userPoint, setUserPoint] = useState();
     const [isMinted, setIsMinted] = useState(false);
+
     const [image, setImage] = useState("");
     const [contract, setContract] = useState("");
     
@@ -133,8 +134,6 @@ const SideBarContents = ()=> {
             }
             })
               .then(response => {
-                  console.log(response.data);
-                  console.log(response.data.ranking);
                   if(response.data.image){
                       setImage(response.data.image);
                   }

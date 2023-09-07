@@ -226,7 +226,7 @@ const Circle = styled.div`
 const Ranking = () => {
     const navigate = useNavigate();
     const [top10Rankings, setTop10Rankings] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [image, setImage] = useState("");
     const [contract, setContract] = useState("");
 
@@ -250,9 +250,6 @@ const Ranking = () => {
             if(response.data.contract){
                 setContract(response.data.contract);
             }
-            
-            
-            
         })
         .catch(error => {
             console.error('top10 API 호출 오류', error);
@@ -260,7 +257,7 @@ const Ranking = () => {
     }, []);
 
 
-    /*민팅 이후에 랭킹 확인이 가능하다면 해당코드 추가
+    /*민팅 이후에만 랭킹 확인이 가능하다면 해당코드 추가
     useEffect(() => {
         axios.get(`${API}/users`, {
           headers:{
@@ -280,7 +277,6 @@ const Ranking = () => {
           */
 
   const userNFT = `https://static.bummysuri.com/${contract}/${image}`;
-
 
   const formatUserCardAddress = (address) => {
         const frontPart = address.substring(0, 6);

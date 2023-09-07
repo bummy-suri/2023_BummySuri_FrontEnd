@@ -353,6 +353,14 @@ const EndMessage = styled.div`
     line-height:67px;
     margin-top:67px;
     margin-bottom:67px;
+    @media (max-width: 330px) {
+      width: 90vw;
+      font-size: 24px;
+    }
+    @media (max-width: 300px) {
+      width: 90vw;
+      font-size: 20px;
+    }
 
   `;
 

@@ -226,7 +226,7 @@ const Circle = styled.div`
 const Ranking = () => {
     const navigate = useNavigate();
     const [top10Rankings, setTop10Rankings] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [image, setImage] = useState("");
     const [contract, setContract] = useState("");
 
@@ -244,15 +244,15 @@ const Ranking = () => {
             console.log(response.data);
             setTop10Rankings(response.data);
             setLoading(false);
-            if(response.data.image){
+            if(response.data.image!=null){
                 setImage(response.data.image);
             }
-            if(response.data.contract){
+            if(response.data.contract!=null){
                 setContract(response.data.contract);
             }
         })
         .catch(error => {
-            console.error('top10 API 호출 오류', error);
+            console.error('top10 오류', error);
         });
     }, []);
 

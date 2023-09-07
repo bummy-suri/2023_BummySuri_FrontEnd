@@ -77,8 +77,9 @@ const Minting = () => {
       })
       .then((response) => {
         console.log(response.data);
-        setBummyAmount(response.data.count);
-        if (response.data.count === 0) {
+        const bummyNFTAmount = 5000-response.data.count;
+        setBummyAmount(bummyNFTAmount);
+        if (bummyNFTAmount === 0) {
           setBummyMinting(true);
         }
       })
@@ -93,8 +94,9 @@ const Minting = () => {
       })
       .then((response) => {
         console.log(response.data);
-        setSuriAmount(response.data.count);
-        if (response.data.count === 0) {
+        const suriNFTAAmount = 5000-response.data.count;
+        setSuriAmount(suriNFTAAmount);
+        if (suriNFTAAmount === 0) {
           setSuriMinting(true);
         }
       })

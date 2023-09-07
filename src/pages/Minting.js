@@ -38,11 +38,12 @@ const Minting = () => {
       )
       .then((response) => {
         const newAccessToken = response.data.accessToken;
-        localStorage.setItem('bummySuri', newAccessToken);
 
         setIsLoading(false);
 
         if (response.status === 200) {
+            localStorage.setItem('bummySuri', newAccessToken);
+
           setIsPopupOpen(true);
           setTimeout(() => {
             setIsPopupOpen(false);
@@ -94,9 +95,9 @@ const Minting = () => {
       })
       .then((response) => {
         console.log(response.data);
-        const suriNFTAAmount = 5000-response.data.count;
-        setSuriAmount(suriNFTAAmount);
-        if (suriNFTAAmount === 0) {
+        const suriNFTAmount = 5000-response.data.count;
+        setSuriAmount(suriNFTAmount);
+        if (suriNFTAmount === 0) {
           setSuriMinting(true);
         }
       })
@@ -105,10 +106,11 @@ const Minting = () => {
       });
 
 
-    if (SuriAmount === 0 && BummyAmount === 0) {
-      setBummySuriMinting(true);
-    }
-  }, []);
+
+      if (SuriAmount === 0 && BummyAmount === 0) {
+        setBummySuriMinting(true);
+      }
+  }, [SuriAmount, BummyAmount]);
 
   const BummyGraphHeight = (BummyAmount / 5000) * 177;
   const SuriGraphHeight = (SuriAmount / 5000) * 177;

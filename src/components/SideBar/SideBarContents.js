@@ -94,6 +94,15 @@ const PopupContainer = styled.div`
 
 `;
 
+const ClipIntegration = styled.div`
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  color: white;
+  font-size: 12px;
+`;
+
+
 
 const SideBarContents = ()=> {
     const [miniGameVisible, setMiniGameVisible] = useState(false);
@@ -134,6 +143,7 @@ const SideBarContents = ()=> {
         setMiniGameVisible(!miniGameVisible);
     };
 
+
     const myNFT = userInfo.isMinted
     ? `https://static.bummysuri.com/${contract}/${image}`
     : `${process.env.PUBLIC_URL}/assets/SideBar/NoNFT.png`;
@@ -147,9 +157,6 @@ const SideBarContents = ()=> {
         <Point>보유 포인트</Point>
         <PointScore>{userPoint}P</PointScore>
         
-
-        
-
         <Link to="/minting"><GoAnother style={{marginTop:'52px'}}>민팅하기</GoAnother></Link>
         <Link to="/bet/intro"><GoAnother>승부예측</GoAnother></Link>
         <GoAnother onClick={toggleMiniGame}>미니게임

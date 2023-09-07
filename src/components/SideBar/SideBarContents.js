@@ -107,8 +107,8 @@ const SideBarContents = ()=> {
     const [userPoint, setUserPoint] = useState();
     const [isMinted, setIsMinted] = useState(false);
 
-    const [image, setImage] = useState("assets");
-    const [contract, setContract] = useState(null);
+    const [image, setImage] = useState("");
+    const [contract, setContract] = useState("");
     
 
 

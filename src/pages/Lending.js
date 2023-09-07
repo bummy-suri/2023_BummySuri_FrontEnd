@@ -279,10 +279,10 @@ const Lending = ()=> {
 
     useEffect(() => {
       const accessToken = localStorage.getItem('bummySuri');
-      if (accessToken) {
-          setLoggedIn(true);
+      if (accessToken !== null && accessToken !== undefined) {
+        setLoggedIn(true);
       }
-  }, []);
+    }, []);
 
 
     return (  

@@ -64,8 +64,8 @@ const Minting = () => {
       });
   };
   // 남은 NFT 수량
-  const [BummyAmount, setBummyAmount] = useState(0);
-  const [SuriAmount, setSuriAmount] = useState(0);
+  const [BummyAmount, setBummyAmount] = useState();
+  const [SuriAmount, setSuriAmount] = useState();
   const teamType = ['KOREA', 'YONSEI'];
 
   useEffect(() => {
@@ -78,6 +78,9 @@ const Minting = () => {
       .then((response) => {
         console.log(response.data);
         setBummyAmount(response.data.count);
+        if (response.data.count === 0) {
+          setBummyMinting(true);
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -91,17 +94,15 @@ const Minting = () => {
       .then((response) => {
         console.log(response.data);
         setSuriAmount(response.data.count);
+        if (response.data.count === 0) {
+          setSuriMinting(true);
+        }
       })
       .catch((error) => {
         console.error(error);
       });
 
-    if (BummyAmount === 0) {
-      setBummyMinting(true);
-    }
-    if (SuriAmount === 0) {
-      setSuriMinting(true);
-    }
+
     if (SuriAmount === 0 && BummyAmount === 0) {
       setBummySuriMinting(true);
     }

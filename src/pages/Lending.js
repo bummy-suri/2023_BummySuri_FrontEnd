@@ -328,21 +328,13 @@ const Lending = ()=> {
         </SubContainer>
 
 
-        <BTN onClick={() => setPopupOpen(true)} style={{ textDecoration: 'none', color: 'white' }}>버미와 수리 만나러 가기!</BTN>
-        {/* 버미수리 만나러가기 버튼 원래 코드!! 
-        <BTN><Link to="/Minting" style={{ textDecoration: 'none', color: 'white' }}>버미와 수리 만나러 가기!</Link></BTN>
-        */}
-        {popupOpen && (
-          <Popup>
-            <PopupContainer>
-              9월 7일 오후 7시에 만나요!
-              <button 
-              onClick={() => setPopupOpen(false)}
-              style={{backgroundColor:"#7000FF", color:"white", width:"65px", height:"23px", border:"none", borderRadius:"4px", marginTop: "10px"}}>
-              닫기</button>
-            </PopupContainer>
-          </Popup>
-        )}
+
+
+        <BTN><Link to="/Minting" style={{ textDecoration: 'none', color: 'white' }}>버미와 수리 만나러 가기!<br/><span style={{fontSize:"12px", fontWeight:"100"}} >크롬으로 접속하셔야 원활합니다</span></Link></BTN>
+        
+
+          
+
 
         
         <SubContainer>
@@ -366,7 +358,7 @@ const Lending = ()=> {
             모두 다른 모습으로 제작되어 더욱 특별한,<br />
             <ColoredText>나만의 버미와 수리</ColoredText>를 만나보세요!<br />
           </SubContent>
-          <BTN onClick={() => setPopupOpen(true)} style={{ textDecoration: 'none', color: 'white' }}>버미와 수리 만나러 가기!</BTN>
+          <BTN onClick={() => setPopupOpen(true)} style={{ textDecoration: 'none', color: 'white' }}>버미와 수리 만나러 가기!<br/><span style={{fontSize:"12px", fontWeight:"100"}} >크롬으로 접속하셔야 원활합니다</span></BTN>
         </SubContainer>
 
         <SubContainer>

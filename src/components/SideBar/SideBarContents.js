@@ -106,8 +106,8 @@ const SideBarContents = ()=> {
     const [walletAddress, setWalletAddress] = useState();
     const [userPoint, setUserPoint] = useState();
     const [isMinted, setIsMinted] = useState(false);
-    const [image, setImage] = useState("bummy_badge.png");
-    const [contract, setContract] = useState("asset");
+    const [image, setImage] = useState("");
+    const [contract, setContract] = useState("");
     
 
 
@@ -122,12 +122,9 @@ const SideBarContents = ()=> {
               setWalletAddress(response.data.cardAddress);
               setUserPoint(response.data.totalPoint);
               setIsMinted(response.data.isMinted);
-              if(response.data.image){
-                setImage(response.data.image);
-              }
-              if(response.data.contract){
-                  setContract(response.data.contract);
-              }
+              setImage(response.data.image);
+              setContract(response.data.contract);
+
             })
             .catch(error => {
               console.error(error);

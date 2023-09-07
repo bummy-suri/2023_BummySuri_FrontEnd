@@ -226,7 +226,7 @@ const Circle = styled.div`
 const Ranking = () => {
     const navigate = useNavigate();
     const [top10Rankings, setTop10Rankings] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [image, setImage] = useState("");
     const [contract, setContract] = useState("");
 

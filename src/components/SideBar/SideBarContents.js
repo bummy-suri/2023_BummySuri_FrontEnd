@@ -134,9 +134,7 @@ const SideBarContents = ()=> {
           },
         })
           .then((response) => {
-              console.log(response.data.image);
               setImage(response.data.result.image);
-              console.log(response.data.contractAddr);
               setContract(response.data.result.contractAddr);
             
           })
@@ -146,8 +144,6 @@ const SideBarContents = ()=> {
       }, []
 );
       
-
-
     const toggleMiniGame = () => {
         setMiniGameVisible(!miniGameVisible);
     };

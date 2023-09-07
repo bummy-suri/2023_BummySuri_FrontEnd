@@ -131,6 +131,30 @@ const RpsResult = () => {
   useEffect(() => {
     const delay = 1000;
 
+
+    axios.get(`${API}/minigame`, {
+      headers:{
+        Authorization: `bearer ${accessToken}`
+      }
+    })
+    .then(response => {
+      const { times } = response.data;
+      if (times >= 4){
+        alert("잘못된 접근입니다");
+        window.location.href="/";
+      }
+    })
+    .catch(error => {
+      if (error.response) {
+        console.error("Response Data:", error.response.data);
+        console.error("Status Code:", error.response.status);
+      } else if (error.request) {
+        console.error("Request:", error.request);
+      } else {
+        console.error("Error Message:", error.message);
+      }
+    });
+
     const timeoutId = setTimeout(() => {
       setShowOpponentChoice(true);
       setOpponentBoxColor("#7000FF");

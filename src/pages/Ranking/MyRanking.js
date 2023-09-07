@@ -117,6 +117,7 @@ const MyRanking = () => {
             .then(response => {
                 console.log(response.data.result.image);
                 console.log(response.data.result.contractAddr);
+                setmyRank(response.data.result.ranking);
                 setImage(response.data.result.image);
                 setContract(response.data.result.contractAddr);
             })

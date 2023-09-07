@@ -102,12 +102,6 @@ const MyRanking = () => {
             const userData = response.data;
             setWalletAddress(userData.cardAddress);
             setUserPoint(userData.totalPoint);
-            if(response.data.image){
-                setImage(response.data.image);
-            }
-            if(response.data.contract){
-                setContract(response.data.contract);
-            }
         })
         .catch(error => {
             console.error(error);
@@ -124,6 +118,12 @@ const MyRanking = () => {
                 console.log(response.data);
                 console.log(response.data.ranking);
                 setmyRank(response.data.ranking);
+                if(response.data.image){
+                    setImage(response.data.image);
+                }
+                if(response.data.contract){
+                    setContract(response.data.contract);
+                }
             })
             .catch(error => {
                 console.error(error);

@@ -61,30 +61,21 @@ const MainText = styled.div`
     }
 `
 
-const Klipbtn = styled.button`
-  width: 334px;
-  height: 50px;
-  background-color: #7000FF;
-  font-size: 16px;
-  font-weight: bold;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-top: 56px;
-  margin-bottom: 29px;
-  color: #FFFFFF;
-
-  @media (max-width: 350px) {
-    width: 230px;
-  }
-
-  @media (max-width: 235px) {
-    padding-left: 30px;
-    padding-right: 30px;
-    width: 100%;
-    font-size: 13px;
-  }
-
+const PurpleBtn = styled.button`
+    width: 334px;
+    height: 50px;
+    background-color: #7000FF;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 56px;
+    margin-bottom: 29px;
+    color: #FFFFFF;
+    @media (max-width: 350px) {
+    width: 80vw;
+    }
 `;
 
 const Btn = styled.button`
@@ -272,7 +263,7 @@ const BetIntro = () => {
                             예측에 성공하면 <br />
                             배팅한 포인트의 ✨3배✨를 얻을 수 있습니다.<br />
                         </MainText>
-                        <Klipbtn onClick={handleBetButtonClick}>경기 예측하기</Klipbtn>
+                        <PurpleBtn onClick={handleBetButtonClick}>경기 예측하기</PurpleBtn>
                     </>
                 ) : (
                     <>

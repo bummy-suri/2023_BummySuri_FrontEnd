@@ -19,6 +19,9 @@ import SponsorList from "../components/Lending/SponsorList";
 import Logo from "../components/Logo";
 
 
+import axios from "axios";
+import { API } from '../config';
+
 
 
 const Container = styled.div`
@@ -279,9 +282,20 @@ const Lending = ()=> {
 
     useEffect(() => {
       const accessToken = localStorage.getItem('bummySuri');
-      if (accessToken !== null && accessToken !== undefined) {
-        setLoggedIn(true);
-      }
+
+        axios.get(`${API}/users`, {
+          headers:{
+            Authorization: `bearer ${localStorage.getItem("bummySuri")}`
+            }
+          })
+            .then(response => {
+              if (accessToken !== null && accessToken !== undefined) {
+                setLoggedIn(true);
+              }
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }, []);
 
 

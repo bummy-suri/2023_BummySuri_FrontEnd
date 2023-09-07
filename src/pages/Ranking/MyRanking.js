@@ -115,22 +115,17 @@ const MyRanking = () => {
           }
           })
             .then(response => {
-                console.log(response.data);
-                console.log(response.data.ranking);
-                setmyRank(response.data.ranking);
-                if(response.data.image!=null){
-                    setImage(response.data.image);
-                }
-                if(response.data.contract!=null){
-                    setContract(response.data.contract);
-                }
+                console.log(response.data.result.image);
+                console.log(response.data.result.contractAddr);
+                setImage(response.data.result.image);
+                setContract(response.data.result.contractAddr);
             })
             .catch(error => {
                 console.error(error);
             });
     }, []); 
 
-    const myNFT = `https://static.bummysuri.com/${contract}/${image}`;
+    const myNFT = `https://static.bummysuri.com/asset/${contract}/${image}`;
 
     const partOfAddress = walletAddress ? `${walletAddress.substring(0, 6)}...${walletAddress.substring(walletAddress.length - 6)}` : "";
     

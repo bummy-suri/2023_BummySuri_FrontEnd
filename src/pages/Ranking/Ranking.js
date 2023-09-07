@@ -244,12 +244,7 @@ const Ranking = () => {
             console.log(response.data);
             setTop10Rankings(response.data);
             setLoading(false);
-            if(response.data.image!=null){
-                setImage(response.data.image);
-            }
-            if(response.data.contract!=null){
-                setContract(response.data.contract);
-            }
+
         })
         .catch(error => {
             console.error('top10 오류', error);
@@ -310,7 +305,7 @@ const Ranking = () => {
                     {index === 1 && <RankImage src={`${process.env.PUBLIC_URL}/assets/Ranking/silver.png`} alt="2등" />}
                     {index === 2 && <RankImage src={`${process.env.PUBLIC_URL}/assets/Ranking/bronze.png`} alt="3등" />}
                     {(index !== 0 && index !== 1 && index !== 2) && <Num>{index + 1}</Num>}
-                    <NFTImage src={userNFT} />
+                    <NFTImage src={`https://static.bummysuri.com/asset/${ranking.contractAddr}/${ranking.image}`} />
                     <div>
                     <Address>{formatUserCardAddress(ranking.userCardAddress)}</Address><br />
                     <Point>{ranking.totalPoint}P</Point>

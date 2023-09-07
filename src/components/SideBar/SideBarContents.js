@@ -128,27 +128,24 @@ const SideBarContents = ()=> {
           console.error(error);
         });
     
-      if (isMinted) {
         axios.get(`${API}/ranking/user`, {
           headers: {
             Authorization: `bearer ${localStorage.getItem("bummySuri")}`,
           },
         })
           .then((response) => {
-            if (response.data.image !== null) {
-              setImage(response.data.image);
-            }
-            if (response.data.contract !== null) {
-              setContract(response.data.contract);
-            }
+              console.log(response.data.image);
+              setImage(response.data.result.image);
+              console.log(response.data.contractAddr);
+              setContract(response.data.result.contractAddr);
+            
           })
           .catch((error) => {
             console.error(error);
           });
-      }
-    }, [isMinted]);
+      }, []
+);
       
-
 
 
     const toggleMiniGame = () => {
@@ -156,7 +153,7 @@ const SideBarContents = ()=> {
     };
 
     const myNFT = isMinted
-    ? `https://static.bummysuri.com/${contract}/${image}`
+    ? `https://static.bummysuri.com/asset/${contract}/${image}`
     : `${process.env.PUBLIC_URL}/assets/SideBar/NoNFT.png`;
 
     const partOfAddress = walletAddress ? `${walletAddress.substring(0, 9)}...${walletAddress.substring(walletAddress.length - 4)}` : "";

@@ -24,6 +24,8 @@ const Minting = () => {
 
     setIsLoading(true);
 
+    console.log(`selected university: ${university}`);
+
     axios
       .post(
         `${API}/mint/${university}`,
@@ -33,10 +35,14 @@ const Minting = () => {
           headers: {
             Authorization: `bearer ${AccessToken}`,
           },
+          timeout: 20000,
         }
       )
       .then((response) => {
         const newAccessToken = response.data.accessToken;
+
+        console.log(`data: ${response.data}`);
+        console.log(`status: ${response.status}`);
 
         setIsLoading(false);
 
@@ -56,6 +62,10 @@ const Minting = () => {
       })
       .catch((error) => {
         console.error('NFT 민팅에서 에러가 발생했습니다.', error);
+
+        console.log(`data: ${error.data}`);
+        console.log(`status: ${error.status}`);
+
         setMintingError(true);
         setTimeout(() => {
           setMintingError(false);

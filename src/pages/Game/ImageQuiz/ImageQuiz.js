@@ -83,7 +83,6 @@ const AnswerInput = styled.input`
   background-color: transparent;
   color: black;
   font-size: 24px;
-  
   @media(max-width: 250px){
     width: 70px;
     font-size: 20px;

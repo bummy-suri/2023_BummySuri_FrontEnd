@@ -106,46 +106,47 @@ const SideBarContents = ()=> {
     const [walletAddress, setWalletAddress] = useState();
     const [userPoint, setUserPoint] = useState();
     const [isMinted, setIsMinted] = useState(false);
-    const [image, setImage] = useState("");
-    const [contract, setContract] = useState("");
+
+    const [image, setImage] = useState("assets");
+    const [contract, setContract] = useState(null);
     
 
 
     useEffect(() => {
       axios.get(`${API}/users`, {
-        headers:{
-          Authorization: `bearer ${localStorage.getItem("bummySuri")}`
-          }
+        headers: {
+          Authorization: `bearer ${localStorage.getItem("bummySuri")}`,
+        },
+      })
+        .then((response) => {
+          console.log(response.data);
+          setWalletAddress(response.data.cardAddress);
+          setUserPoint(response.data.totalPoint);
+          setIsMinted(response.data.isMinted);
         })
-          .then(response => {
-              console.log(response.data);
-              setWalletAddress(response.data.cardAddress);
-              setUserPoint(response.data.totalPoint);
-              setIsMinted(response.data.isMinted);
-            })
-            .catch(error => {
-              console.error(error);
-            });
-
-          axios.get(`${API}/ranking/user`, {
-            headers:{
-              Authorization: `bearer ${localStorage.getItem("bummySuri")}`
+        .catch((error) => {
+          console.error(error);
+        });
+    
+      if (isMinted) {
+        axios.get(`${API}/ranking/user`, {
+          headers: {
+            Authorization: `bearer ${localStorage.getItem("bummySuri")}`,
+          },
+        })
+          .then((response) => {
+            if (response.data.image !== null) {
+              setImage(response.data.image);
             }
-            })
-              .then(response => {
-                  console.log(response.data);
-                  console.log(response.data.ranking);
-                  if(response.data.image){
-                      setImage(response.data.image);
-                  }
-                  if(response.data.contract){
-                      setContract(response.data.contract);
-                  }
-              })
-              .catch(error => {
-                  console.error(error);
-              });
-      }, []); 
+            if (response.data.contract !== null) {
+              setContract(response.data.contract);
+            }
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+    }, [isMinted]);
       
 
 

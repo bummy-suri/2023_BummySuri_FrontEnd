@@ -118,10 +118,10 @@ const MyRanking = () => {
                 console.log(response.data);
                 console.log(response.data.ranking);
                 setmyRank(response.data.ranking);
-                if(response.data.image){
+                if(response.data.image!=null){
                     setImage(response.data.image);
                 }
-                if(response.data.contract){
+                if(response.data.contract!=null){
                     setContract(response.data.contract);
                 }
             })

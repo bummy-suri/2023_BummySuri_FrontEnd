@@ -194,6 +194,32 @@ const ImageQuiz = () => {
 
   const accessToken = localStorage.getItem("bummySuri");
 
+  useEffect(() => {
+    axios.get(`${API}/minigame`, {
+      headers:{
+        Authorization: `bearer ${accessToken}`
+      }
+    })
+    .then(response => {
+      console.log(response.data.quiz);
+      const { quiz } = response.data;
+      if (quiz === false) {
+        alert("잘못된 접근입니다.");
+        navigate("/");
+      }
+    })
+    .catch(error => {
+      if (error.response) {
+        console.error("Response Data:", error.response.data);
+        console.error("Status Code:", error.response.status);
+      } else if (error.request) {
+        console.error("Request:", error.request);
+      } else {
+        console.error("Error Message:", error.message);
+      }
+    });
+  }, []); 
+  
   const gameResult = (rpsResult) => {
     axios
       .put(`${API}/miniGame`, { 
@@ -205,9 +231,9 @@ const ImageQuiz = () => {
         },
       })
       .then((response) => {
+        console.log(response.data);
         const { quiz } = response.data;
         console.log(quiz);
-        localStorage.setItem("quiz", quiz);
       })
       .catch((error) => {
         if (error.response) {

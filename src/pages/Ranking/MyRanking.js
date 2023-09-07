@@ -113,7 +113,7 @@ const MyRanking = () => {
         axios.get(`${API}/ranking/user`, {
           headers:{
             Authorization: `bearer ${accessToken}`
-            }
+          }
           })
             .then(response => {
                 console.log(response.data.ranking);

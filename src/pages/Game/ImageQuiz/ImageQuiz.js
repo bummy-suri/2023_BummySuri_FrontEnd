@@ -206,14 +206,11 @@ const ImageQuiz = () => {
         },
       })
       .then((response) => {
-        console.log(response.data);
         const { quiz } = response.data;
         console.log(quiz);
         localStorage.setItem("quiz", quiz);
       })
       .catch((error) => {
-        console.error("API Error:", error);
-        // 오류 메시지 출력
         if (error.response) {
           console.error("Response Data:", error.response.data);
           console.error("Status Code:", error.response.status);

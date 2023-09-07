@@ -107,11 +107,9 @@ const PopupContainer = styled.div`
   color: white;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.15) 100%);
   border: 1px solid white;
-  
   @media (max-width: 350px) {
     width: 80vw;
   }
-  
   @media (max-width: 300px) {
     font-size: 14px;
   }
@@ -130,7 +128,7 @@ const QuizIntro = () => {
       }
     })
     .then(response => {
-      console.log(response.data);
+      console.log(response.data.quiz);
       const { quiz } = response.data;
       setquizTimes(quiz);
     })
@@ -145,7 +143,6 @@ const QuizIntro = () => {
       }
     });
   }, []); 
-
   const handleQuizButtonClick = () => {
     if (quizTimes === true) {
       navigate("/imageQuiz");
@@ -153,7 +150,6 @@ const QuizIntro = () => {
       setPopupOpen(true);
     }
   };
-
   return (
     <div style={{backgroundColor:"#1D1D1D"}}>
       <Background>

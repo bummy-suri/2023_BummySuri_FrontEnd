@@ -1,4 +1,3 @@
-import Test from '../../assets/test.png';
 import styled from 'styled-components';
 import 'react-alice-carousel/lib/alice-carousel.css';
 

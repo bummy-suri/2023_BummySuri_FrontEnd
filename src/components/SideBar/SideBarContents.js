@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from "react";
 import styled from 'styled-components';
 import GameList from "./GameList";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import { API } from "../../config";
 
@@ -100,9 +100,11 @@ const ClipIntegration = styled.div`
 `;
 
 const SideBarContents = ()=> {
+    const navigate = useNavigate(); 
+    const [shouldRedirectToLogin, setShouldRedirectToLogin] = useState(false);
     const [miniGameVisible, setMiniGameVisible] = useState(false);
-    const [walletAddress, setWalletAddress] = useState("");
-    const [userPoint, setUserPoint] = useState("");
+    const [walletAddress, setWalletAddress] = useState();
+    const [userPoint, setUserPoint] = useState();
     const [isMinted, setIsMinted] = useState(false);
     const [image, setImage] = useState("bummy_badge.png");
     const [contract, setContract] = useState("asset");
@@ -120,13 +122,20 @@ const SideBarContents = ()=> {
               setWalletAddress(response.data.cardAddress);
               setUserPoint(response.data.totalPoint);
               setIsMinted(response.data.isMinted);
-              //setContract(response.data.contract);
-              //setImage(response.data.image);
-          })
-          .catch(error => {
+              if(response.data.image){
+                setImage(response.data.image);
+              }
+              if(response.data.contract){
+                  setContract(response.data.contract);
+              }
+            })
+            .catch(error => {
               console.error(error);
-          });
-}, []); 
+            });
+        }, []);
+      
+
+
 
     const toggleMiniGame = () => {
         setMiniGameVisible(!miniGameVisible);

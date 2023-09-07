@@ -94,7 +94,7 @@ const Button = styled.button`
 
 `
 
-const QuizWin = ({ title, message}) => {
+const QuizWin = () => {
 
     return (
         <PopupContainer>

@@ -287,8 +287,6 @@ const GameResult = () => {
                         scoredifference[i] = 0;
                         //console.log("draw", gameTypes[i]);
                     }
-
-
                 } catch (error) {
                     console.error(error);
                 }

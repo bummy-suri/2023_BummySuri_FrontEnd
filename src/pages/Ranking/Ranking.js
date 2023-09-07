@@ -7,6 +7,7 @@ import SideBarContents from "../../components/SideBar/SideBarContents";
 
 import { API } from "../../config";
 import MyRanking from "./MyRanking";
+import { useNavigate } from "react-router-dom";
 
 const Background = styled.div`
     max-width: 100vw;
@@ -182,6 +183,7 @@ const Popup = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center
     justify-content: center;
     @media (max-width: 350px) {
         80vw;
@@ -196,6 +198,7 @@ const PopupContainer = styled.div`
     border-radius: 9px;
     align-items: center;
     justify-content: center;
+    display: flex;
     color: white;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.40) 0%, rgba(255, 255, 255, 0.15) 100%);
     border: 1px solid white;
@@ -221,8 +224,9 @@ const Circle = styled.div`
 `;
 
 const Ranking = () => {
+    const navigate = useNavigate();
     const [top10Rankings, setTop10Rankings] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [image, setImage] = useState("");
     const [contract, setContract] = useState("");
 
@@ -230,22 +234,50 @@ const Ranking = () => {
         const accessToken = localStorage.getItem("bummySuri");
 
     // 탑10
-    axios.get(`${API}/ranking/top10`, {
-      headers: {
-            Authorization: `bearer ${accessToken}`,
-      },
-    })
-    .then(response => {
-        setTop10Rankings(response.data);
-        setLoading(false);
-        //setImage();
-        //setContract();
-        
-    })
-    .catch(error => {
-        console.error('top10 API 호출 오류', error);
-    });
-  }, []);
+        axios.get(`${API}/ranking/top10`, 
+        {
+        headers: {
+                Authorization: `bearer ${accessToken}`,
+        },
+        })
+        .then(response => {
+            console.log(response.data);
+            setTop10Rankings(response.data);
+            setLoading(false);
+            if(response.data.image){
+                setImage(response.data.image);
+            }
+            if(response.data.contract){
+                setContract(response.data.contract);
+            }
+            
+            
+            
+        })
+        .catch(error => {
+            console.error('top10 API 호출 오류', error);
+        });
+    }, []);
+
+
+    /*민팅 이후에 랭킹 확인이 가능하다면 해당코드 추가
+    useEffect(() => {
+        axios.get(`${API}/users`, {
+          headers:{
+            Authorization: `bearer ${localStorage.getItem("bummySuri")}`
+            }
+          })
+            .then(response => {
+                if(response.data.isMinted === false){
+                    alert("랭킹은 민팅 이후에 확인 가능합니다.");
+                    navigate("/minting");
+                }
+              })
+              .catch(error => {
+                console.error(error);
+              });
+          }, []);
+          */
 
   const userNFT = `https://static.bummysuri.com/${contract}/${image}`;
 

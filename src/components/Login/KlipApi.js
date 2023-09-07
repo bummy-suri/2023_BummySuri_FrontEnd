@@ -57,6 +57,7 @@ const KlipApi = () => {
         const { request_key } = response.data;
         console.log(response.data);
         localStorage.setItem("requestKey", request_key);
+
         // Request
         if (isMobile) {
           window.location.href = getKlipAccessUrl("deeplink", request_key);

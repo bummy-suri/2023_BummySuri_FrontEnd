@@ -38,11 +38,12 @@ const Minting = () => {
       )
       .then((response) => {
         const newAccessToken = response.data.accessToken;
-        localStorage.setItem('bummySuri', newAccessToken);
 
         setIsLoading(false);
 
         if (response.status === 200) {
+            localStorage.setItem('bummySuri', newAccessToken);
+
           setIsPopupOpen(true);
           setTimeout(() => {
             setIsPopupOpen(false);

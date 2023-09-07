@@ -94,14 +94,23 @@ const PopupContainer = styled.div`
 
 `;
 
+const ClipIntegration = styled.div`
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  color: white;
+  font-size: 12px;
+`;
+
+
 
 const SideBarContents = ()=> {
     const [miniGameVisible, setMiniGameVisible] = useState(false);
     const [walletAddress, setWalletAddress] = useState("");
     const [userPoint, setUserPoint] = useState("");
-    const [mintingPopupOpen, setMintingPopupOpen] = useState(false); 
+    const [image, setImage] = useState("bummy_badge.png");
+    const [contract, setContract] = useState("asset");
 
-    const [popupOpen, setPopupOpen] = useState(false);//준비중 팝업
     const [userInfo, setUserInfo] = useState({
       cardAddress: "",
       totalPoint: 0,
@@ -116,7 +125,7 @@ const SideBarContents = ()=> {
       })
         .then(response => {
             const userData = response.data;
-            //console.log(response.data);
+            console.log(response.data);
             setUserInfo({
                 cardAddress: userData.cardAddress,
                 totalPoint: userData.totalPoint,
@@ -135,21 +144,19 @@ const SideBarContents = ()=> {
     };
 
 
-
+    const myNFT = userInfo.isMinted
+    ? `https://static.bummysuri.com/${contract}/${image}`
+    : `${process.env.PUBLIC_URL}/assets/SideBar/NoNFT.png`;
 
     const partOfAddress = walletAddress ? `${walletAddress.substring(0, 9)}...${walletAddress.substring(walletAddress.length - 4)}` : "";
 
-
     return (
       <Total>
-        <NFTImage src={`${process.env.PUBLIC_URL}/assets/SideBar/NoNFT.png`}></NFTImage>
+        <NFTImage src={myNFT}></NFTImage>
         <Address>지갑주소 <p style={{ fontSize: "12px" }}>{partOfAddress}</p></Address>
         <Point>보유 포인트</Point>
         <PointScore>{userPoint}P</PointScore>
         
-
-        
-
         <Link to="/minting"><GoAnother style={{marginTop:'52px'}}>민팅하기</GoAnother></Link>
         <Link to="/bet/intro"><GoAnother>승부예측</GoAnother></Link>
         <GoAnother onClick={toggleMiniGame}>미니게임

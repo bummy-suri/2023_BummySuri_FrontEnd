@@ -1,5 +1,5 @@
 import React, { useEffect,  useState } from "react";
-import { Link} from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import styled, {keyframes} from 'styled-components';
 
 import Benefit0201 from '../assets/benefit0201.png';
@@ -18,6 +18,9 @@ import CarouselBenefit from "../components/Lending/CarouselBenefit";
 import SponsorList from "../components/Lending/SponsorList";
 import Logo from "../components/Logo";
 
+
+import axios from "axios";
+import { API } from '../config';
 
 
 
@@ -267,21 +270,33 @@ const PopupContainer = styled.div`
 const Lending = ()=> {
     const [loggedIn, setLoggedIn] = useState(false);
     const [popupOpen, setPopupOpen] = useState(false); //준비중 팝업 
+    const navigate = useNavigate();
 
     const menuClick = () => {
-      window.location.href = '/Login';
+      navigate('/Login');
     }
     
     const clickBenefitBTN = () => {
-      window.location.href = '/hmpBenefit';
+      navigate('/hmpBenefit');
     }
 
     useEffect(() => {
       const accessToken = localStorage.getItem('bummySuri');
-      if (accessToken) {
-          setLoggedIn(true);
-      }
-  }, []);
+
+        axios.get(`${API}/users`, {
+          headers:{
+            Authorization: `bearer ${localStorage.getItem("bummySuri")}`
+            }
+          })
+            .then(response => {
+              if (accessToken !== null && accessToken !== undefined) {
+                setLoggedIn(true);
+              }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, []);
 
 
     return (  

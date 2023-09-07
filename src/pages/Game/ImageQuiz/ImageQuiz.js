@@ -4,6 +4,7 @@ import SideBar from "../../../components/SideBar/SideBar";
 import SideBarContents from "../../../components/SideBar/SideBarContents";
 import axios from "axios";
 import { API } from '../../../config';
+import { useNavigate } from 'react-router-dom';
 
 const Background = styled.div`
   max-width: 100vw;
@@ -186,6 +187,7 @@ const getRandomImage = () => {
 };
 
 const ImageQuiz = () => {
+  const navigate = useNavigate();
   const [answer, setAnswer] = useState("");
   const [image, setImage] = useState(getRandomImage());
   const [isAnswered, setIsAnswered] = useState(false);
@@ -229,7 +231,7 @@ const ImageQuiz = () => {
       if (remainingTime > 0 && !isAnswered) {
         setRemainingTime((prevTime) => prevTime - 1);
       } else if (remainingTime === 0 && !isAnswered) {
-        window.location.href = '/imageQuiz/lose';
+        navigate("/imageQuiz/lose");
         setIsAnswered(true);
       }
     }, 1000);
@@ -249,12 +251,12 @@ const ImageQuiz = () => {
       if (correctAnswer.includes(trimmedAnswer)) {
         gameResult("win");
         setTimeout(function() {
-          window.location.href = '/imageQuiz/win';
+          navigate("/imageQuiz/win");
         }, 500); 
       } else {
         gameResult("lose");
         setTimeout(function() {
-          window.location.href = '/imageQuiz/win';
+          navigate("/imageQuiz/lose");
         }, 500); 
       }
       setIsAnswered(true);

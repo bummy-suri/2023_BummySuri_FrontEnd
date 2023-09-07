@@ -4,6 +4,7 @@ import SideBar from "../../../components/SideBar/SideBar";
 import SideBarContents from "../../../components/SideBar/SideBarContents";
 import { API } from "../../../config";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const Background = styled.div`
   max-width: 100vw;
@@ -117,6 +118,7 @@ const PopupContainer = styled.div`
 `;
 
 const QuizIntro = () => {
+  const navigate = useNavigate();
   const [popupOpen, setPopupOpen] = useState(false);
   const [quizTimes, setquizTimes] = useState(true);
   const accessToken = localStorage.getItem("bummySuri");
@@ -146,7 +148,7 @@ const QuizIntro = () => {
 
   const handleQuizButtonClick = () => {
     if (quizTimes === true) {
-      window.location.href = '/ImageQuiz';
+      navigate("/imageQuiz");
     } else {
       setPopupOpen(true);
     }
@@ -163,15 +165,16 @@ const QuizIntro = () => {
         
         {popupOpen &&(
           <Popup>
-            <PopupContainer>
-              아쉽지만 제한 횟수에 도달했어요.
-              <button
-                onClick={() => setPopupOpen(false)}
-                style={{backgroundColor:"#7000FF", color:"white", width:"65px", height:"23px", border:"none", borderRadius:"4px", marginTop: "10px"}}>
-                닫기
-              </button>
-            </PopupContainer>
-          </Popup>
+          <PopupContainer>
+            아쉽지만 제한 횟수에 도달했어요.<br/>
+            <span style={{fontSize:"13px", marginTop:"3px", fontWeight:"100"}}>매일 오전 9시에 제한 횟수가 초기화됩니다.</span>
+            <button
+              onClick={() => setPopupOpen(false)}
+              style={{backgroundColor:"#7000FF", color:"white", width:"65px", height:"23px", border:"none", borderRadius:"4px", marginTop: "10px"}}>
+              닫기
+            </button>
+          </PopupContainer>
+        </Popup>
         )}
         <Btn onClick={handleQuizButtonClick}>그림 퀴즈 시작!</Btn>
       </Background>

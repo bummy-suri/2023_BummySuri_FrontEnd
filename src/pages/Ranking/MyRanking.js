@@ -86,6 +86,8 @@ const MyRanking = () => {
     const [walletAddress, setWalletAddress] = useState("");
     const [userPoint, setUserPoint] = useState("");
     const [myRank, setmyRank] = useState("");
+    const [image, setImage] = useState("");
+    const [contract, setContract] = useState("");
 
     const accessToken = localStorage.getItem("bummySuri");
 
@@ -99,6 +101,8 @@ const MyRanking = () => {
             const userData = response.data;
             setWalletAddress(userData.cardAddress);
             setUserPoint(userData.totalPoint);
+            //setImage();
+            //setContrat();
         })
         .catch(error => {
             console.error(error);
@@ -112,13 +116,15 @@ const MyRanking = () => {
             }
           })
             .then(response => {
-                const checkMyRank = response.data;
-                setmyRank(checkMyRank.ranking);
+                console.log(response.data.ranking);
+                setmyRank(response.data.ranking);
             })
             .catch(error => {
                 console.error(error);
             });
     }, []); 
+
+    const myNFT = `https://static.bummysuri.com/${contract}/${image}`;
 
     const partOfAddress = walletAddress ? `${walletAddress.substring(0, 6)}...${walletAddress.substring(walletAddress.length - 6)}` : "";
     
@@ -127,7 +133,7 @@ const MyRanking = () => {
             <div>
                 <RankingBox>
                     <Num>{myRank}</Num>
-                    <NFTImage src="" />
+                    <NFTImage src={myNFT} />
                     <div>
                         <Address>{partOfAddress}</Address><br />
                         <Point>{userPoint}P</Point>

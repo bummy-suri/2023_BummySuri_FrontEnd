@@ -190,7 +190,7 @@ const Rps = () => {
 
   const handleConfirmClick = () => {
     if (selectedChoice) {
-      if (times >= 3) {
+      if (times >= 18) {
         setPopupOpen(true);
       } else {
         navigate('/rock-paper-scissors/result', { state: { selectedChoice } });

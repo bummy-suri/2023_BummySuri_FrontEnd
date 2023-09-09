@@ -78,7 +78,7 @@ const Minting = () => {
       })
       .then((response) => {
         console.log(response.data);
-        const bummyNFTAmount = 5000-response.data.count;
+        const bummyNFTAmount = 5600-response.data.count;
         setBummyAmount(bummyNFTAmount);
         if (bummyNFTAmount === 0) {
           setBummyMinting(true);
@@ -95,7 +95,7 @@ const Minting = () => {
       })
       .then((response) => {
         console.log(response.data);
-        const suriNFTAmount = 5000-response.data.count;
+        const suriNFTAmount = 5600-response.data.count;
         setSuriAmount(suriNFTAmount);
         if (suriNFTAmount === 0) {
           setSuriMinting(true);
@@ -112,8 +112,8 @@ const Minting = () => {
       }
   }, [SuriAmount, BummyAmount]);
 
-  const BummyGraphHeight = (BummyAmount / 5000) * 177;
-  const SuriGraphHeight = (SuriAmount / 5000) * 177;
+  const BummyGraphHeight = (BummyAmount / 5600) * 177;
+  const SuriGraphHeight = (SuriAmount / 5600) * 177;
 
   const BummyGraph = styled.div`
     width: 52px;

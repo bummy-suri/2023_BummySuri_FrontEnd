@@ -21,6 +21,7 @@ import Logo from "../components/Logo";
 
 import axios from "axios";
 import { API } from '../config';
+import Carousel from "../components/Lending/Carousel";
 
 
 
@@ -425,6 +426,7 @@ const Lending = ()=> {
 
 
         <SponsorList/>
+        <Carousel/>
 
 
       </Container>

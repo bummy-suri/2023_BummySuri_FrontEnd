@@ -1,12 +1,14 @@
 import styled from 'styled-components';
-import Partner01 from '../../assets/sponsor/partner01.png';
-import Partner02 from '../../assets/sponsor/partner02.png';
-import Partner03 from '../../assets/sponsor/partner03.png';
-import Partner04 from '../../assets/sponsor/partner04.png';
-import Partner05 from '../../assets/sponsor/partner05.png';
-import Partner06 from '../../assets/sponsor/partner06.png';
+
 import Management01 from '../../assets/sponsor/management01.png';
 import Management02 from '../../assets/sponsor/management02.png';
+
+import Booost from '../../assets/sponsor/booost.jpg';
+import BSDG from '../../assets/sponsor/bsdg.jpg';
+import HMP from '../../assets/sponsor/hmp.png';
+import INF from '../../assets/sponsor/inflab.png';
+import Renk from '../../assets/sponsor/renk.jpg';
+import Carousel from './Carousel';
 
 
 const SponTitle = styled.div`
@@ -53,7 +55,7 @@ const Sponsor = styled.div`
   margin: 0 auto;
   /* margin-right: 30px; */
   margin-bottom: 40px;
-  width: 300px;
+  width: 80vw;
   @media (min-width: 768px) {
     height: 600px;
     margin-bottom: 160px;
@@ -109,29 +111,36 @@ const SponsorList = () => {
                 <MImg src={Management02} alt="img" />
               </SponImg>
             </SponImgBox>
+
+
+
             <SponTitle>
               <p>Partner</p>
             </SponTitle>
-            <SponImgBox>
+
+            
+
+
+            {/* <SponImgBox>
               <SponImg>
-                <PImg src={Partner02}alt="img" />
+                <PImg src={HMP}alt="img" />
               </SponImg>
               <SponImg>
-                <PImg src={Partner06} alt="img" />
+                <PImg src={INF} alt="img" />
               </SponImg>
               <SponImg>
-                <PImg src={Partner03} alt="img" />
+                <PImg src={BSDG} alt="img" />
               </SponImg>
             </SponImgBox>
 
             <SponImgBox2>
               <SponImg>
-                <PImg src={Partner04} alt="img" />
+                <PImg src={Renk} alt="img" />
               </SponImg>
               <SponImg>
-                <PImg src={Partner05} alt="img" />
+                <PImg src={Booost} alt="img" />
               </SponImg>
-            </SponImgBox2>
+            </SponImgBox2> */}
           </Sponsor>
     );
 }

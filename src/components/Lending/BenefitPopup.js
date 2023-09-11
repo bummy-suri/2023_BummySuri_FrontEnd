@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
 
-import HMPLogo from "../../assets/sponsor/partner02.png";
+import HMPLogo from "../../assets/sponsor/hmp.png";
 
 
 const Popup = styled.div`

@@ -81,7 +81,7 @@ const Popup = ({ title, message, remainingAttempts }) => {
                 )}
                 </ModalContent>
                 <div>
-                    <Link to="/"><Button style={{border:"1px solid #7000FF", backgroundColor:"#1D1D1D"}}>그만하기</Button></Link>
+                    <Link to="/main"><Button style={{border:"1px solid #7000FF", backgroundColor:"#1D1D1D"}}>그만하기</Button></Link>
                     <Link to="/rock-paper-scissors"><Button>한번 더!</Button></Link>
                 </div>
         </PopupContainer>

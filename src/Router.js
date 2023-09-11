@@ -24,8 +24,8 @@ function DefaultRouter () {
       <Router>
         <ScrollToTop/>
         <Routes>
-          <Route path="/" element={<Lending />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/main" element={<Lending />} />
           <Route path="/Minting" element={<Minting />} />
           <Route path="/rock-paper-scissors" element={<Rps />} />
           <Route path="/rock-paper-scissors/result" element={<RpsResult />} />

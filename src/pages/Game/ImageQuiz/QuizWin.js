@@ -101,7 +101,7 @@ const QuizWin = () => {
                 <Times>남은 횟수: 0</Times>
                 </ModalContent>
                 <div>
-                    <Link to="/"><Button style={{border:"1px solid #7000FF", backgroundColor:"#1D1D1D"}}>돌아가기</Button></Link>
+                    <Link to="/main"><Button style={{border:"1px solid #7000FF", backgroundColor:"#1D1D1D"}}>돌아가기</Button></Link>
                 </div>
         </PopupContainer>
     );

@@ -141,7 +141,7 @@ const RpsResult = () => {
       const { times } = response.data;
       if (times >= 3){
         alert("잘못된 접근입니다");
-        window.location.href="/";
+        window.location.href="/main";
       }
     })
     .catch(error => {

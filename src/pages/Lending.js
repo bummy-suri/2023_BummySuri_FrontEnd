@@ -273,7 +273,7 @@ const Lending = ()=> {
     const navigate = useNavigate();
 
     const menuClick = () => {
-      navigate('/Login');
+      navigate('/');
     }
     
     const clickBenefitBTN = () => {
@@ -301,7 +301,7 @@ const Lending = ()=> {
 
     return (  
       <Container>
-        <Link to="/" style={{textDecoration:"none", color:"white"}}><Logo/></Link>
+        <Link to="/main" style={{textDecoration:"none", color:"white"}}><Logo/></Link>
 
           {loggedIn ? 
             <SideBar>

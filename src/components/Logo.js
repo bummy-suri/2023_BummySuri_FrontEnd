@@ -17,7 +17,7 @@ const MainLogo = styled.div`
 const Logo = ()=> {
     return (
       <MainLogo>
-        <Link to="/" style={{  fontSize: '16px',  color: 'white', textDecoration:'none'}}>BUMMY & SURI</Link>
+        <Link to="/main" style={{  fontSize: '16px',  color: 'white', textDecoration:'none'}}>BUMMY & SURI</Link>
       </MainLogo>
     );
   }

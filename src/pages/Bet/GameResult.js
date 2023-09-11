@@ -359,7 +359,7 @@ const GameResult = () => {
             .then(response => {
                 console.log('DELETE 요청이 성공했습니다.');
                 // 서버로부터 성공 응답을 처리할 코드를 여기에 추가
-                navigate('/');
+                navigate('/main');
             })
             .catch(error => {
                 console.error('DELETE 요청이 실패했습니다.');
@@ -434,7 +434,7 @@ const GameResult = () => {
                             </Row>
                         </Result>
                         <TotalP>총 획득 포인트 : {total}p</TotalP>
-                        {getP ? <Link to='/'><GetPointBTN>메인 페이지로 돌아가기</GetPointBTN></Link> : <GetPointBTN onClick={getPoint}>포인트 얻기!</GetPointBTN>}
+                        {getP ? <Link to='/main'><GetPointBTN>메인 페이지로 돌아가기</GetPointBTN></Link> : <GetPointBTN onClick={getPoint}>포인트 얻기!</GetPointBTN>}
                         {popupOpen && (
                             <Popup>
                                 <PopupContainer>

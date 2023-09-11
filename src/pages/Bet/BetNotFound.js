@@ -114,7 +114,7 @@ const BetNotFound = () => {
           <MainLogo>정기전 경기 예측</MainLogo>
           <SideBar><SideBarContents /></SideBar>
           <Title>잘못된 경로입니다!</Title>
-          <Link to='/'><SubmitBTN>메인 페이지로 돌아가기</SubmitBTN></Link>
+          <Link to='/main'><SubmitBTN>메인 페이지로 돌아가기</SubmitBTN></Link>
         </Background> :
         <Background>
           <MainLogo>정기전 경기 예측</MainLogo>

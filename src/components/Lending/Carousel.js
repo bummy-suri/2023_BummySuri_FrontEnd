@@ -13,6 +13,7 @@ import Renk from '../../assets/sponsor/renk.jpg';
 const Contain = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 90px;
   width: 360px;
   max-width: 98%;
@@ -30,8 +31,9 @@ const Contain = styled.div`
 
 const HMPIMG = styled.img`
   position: relative;
-  height: 70px;
+  height: 80px;
   overflow: hidden;
+  top:-5px;
 `;
 const INFIMG = styled.img`
   height: 70px;
@@ -44,14 +46,16 @@ const BDSGIMG = styled.img`
   position: relative;
 `;
 const RenkIMG = styled.img`
-  height: 70px;
+  height: 50px;
   overflow: hidden;
   position: relative;
+  top:10px;
 `;
 const BooostIMG = styled.img`
-  height: 70px;
+  height: 50px;
   overflow: hidden;
   position: relative;
+  top:10px;
 `;
 
 

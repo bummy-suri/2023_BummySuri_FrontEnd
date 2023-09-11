@@ -14,65 +14,41 @@ const Contain = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 90px;
+  height: 100px;
   width: 360px;
   max-width: 98%;
   background-color: white;
   overflow: hidden;
-  margin: 0 auto;
+  
   margin-bottom: 80px;
 
-  position: relative; /* 위치 설정을 위해 relative 사용 */
-  top: -120px; /* 이미지를 50px 높게 위치시킴 */
+  position: relative; 
+  top: -140px; 
 
 `;
 
-
-
-const HMPIMG = styled.img`
-  position: relative;
-  height: 80px;
-  overflow: hidden;
-  top:-5px;
-`;
-const INFIMG = styled.img`
-  height: 70px;
-  overflow: hidden;
-  position: relative;
-`;
-const BDSGIMG = styled.img`
-  height: 70px;
-  overflow: hidden;
-  position: relative;
-`;
-const RenkIMG = styled.img`
-  height: 50px;
-  overflow: hidden;
-  position: relative;
-  top:10px;
-`;
-const BooostIMG = styled.img`
-  height: 50px;
-  overflow: hidden;
-  position: relative;
-  top:10px;
-`;
 
 
 const ItemsContain = styled.div`
   /* width: 300px; */
   height: 100%;
   overflow: hidden;
+  display: flex;
+  align-items: center;
 `;
 
 const ItemsWrap = styled.div`
   /* width: 100%; */
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  height: 100px;
 
   img {
     overflow: hidden;
     width: 100px;
     margin: 10px;
+    position: relative;
   }
 `;
 
@@ -81,27 +57,27 @@ const ItemsWrap = styled.div`
 const benefits = [
   <ItemsContain>
     <ItemsWrap>
-      <HMPIMG src={HMP} alt="hmp img" />
+      <img src={HMP} alt="hmp img" />
     </ItemsWrap>
   </ItemsContain>,
   <ItemsContain>
     <ItemsWrap>
-      <INFIMG src={INF} alt="inf img" />
+      <img src={INF} alt="inf img" />
     </ItemsWrap>
   </ItemsContain>,
   <ItemsContain>
     <ItemsWrap>
-      <BDSGIMG src={BSDG} alt="bdsg img" />
+      <img src={BSDG} alt="bdsg img" />
     </ItemsWrap>
   </ItemsContain>,
   <ItemsContain>
     <ItemsWrap>
-      <RenkIMG src={Renk} alt="renk img" />
+      <img src={Renk} alt="renk img" />
     </ItemsWrap>
   </ItemsContain>,
   <ItemsContain>
     <ItemsWrap>
-      <BooostIMG src={Booost} alt="booost img" />
+      <img src={Booost} alt="booost img" />
     </ItemsWrap>
   </ItemsContain>,
 ]

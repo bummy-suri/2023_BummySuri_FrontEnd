@@ -1,8 +1,8 @@
-# 2023 고려대-연세대 정기전 NFT 민팅 서비스, 버미와수리 
+# 2023 고려대-연세대 정기전 NFT 민팅 서비스 버미와수리 
 
 ![image](https://github.com/FutureandKim/2023_BummySuri_FrontEnd/assets/95979743/a91f3aae-b72c-4883-9f48-1d1a493140eb)
 
-2023 고려대-연세대 정기전을 기념하여 NFT를 민팅할 수 있는 웹서비스입니다.
+2023 고려대-연세대 정기전에서 NFT를 민팅할 수 있는 웹서비스입니다.
 
 ## 배포 주소
 https://www.bummysuri.com/
